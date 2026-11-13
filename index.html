@@ -2,250 +2,257 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>زعبوله</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>زعبوله - منصة الألعاب</title>
     
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     
     <!-- خطوط وأيقونات -->
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* تصميم "الدوشة والألوان" */
+        /* --- الأساسيات والتصميم العصري --- */
         :root {
-            --c1: #ff00ff; --c2: #00ffff; --c3: #ffff00; --c4: #ff0000; --c5: #00ff00;
+            --bg-dark: #0f172a; --bg-card: #1e293b; --primary: #3b82f6; --accent: #ec4899; 
+            --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --text: #f8fafc;
         }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
+        input, select, textarea { user-select: text; }
         
-        @keyframes crazyBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            20% { transform: translate(-3px, 0px) rotate(2deg); }
-            40% { transform: translate(1px, -1px) rotate(-1deg); }
-            60% { transform: translate(-1px, 2px) rotate(1deg); }
-            80% { transform: translate(2px, -2px) rotate(-2deg); }
-            100% { transform: translate(1px, -1px) rotate(0deg); }
-        }
-        
-        /* تعديل الأنيميشن الخاص بالزراير عشان يشتغل على الآيفون بدون ما يعلق اللمس */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px var(--c1); }
-            50% { box-shadow: 0 0 30px var(--c2); }
-            100% { box-shadow: 0 0 10px var(--c1); }
-        }
-
         body {
-            font-family: 'Changa', sans-serif;
-            background: linear-gradient(45deg, #1a0033, #003300, #330000, #000033);
-            background-size: 400% 400%;
-            animation: crazyBg 10s ease infinite;
-            color: #fff;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
+            font-family: 'Changa', sans-serif; background: var(--bg-dark); color: var(--text);
+            margin: 0; padding: 10px; display: flex; justify-content: center; min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.8);
-            border: 5px solid var(--c1);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 0 40px var(--c1), inset 0 0 20px var(--c2);
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-card); width: 100%; max-width: 800px; border-radius: 20px;
+            padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;
+            display: flex; flex-direction: column; align-items: center; border: 2px solid var(--primary);
         }
 
-        h1 {
-            font-size: 50px;
-            text-transform: uppercase;
-            color: var(--c3);
-            text-shadow: 4px 4px 0 var(--c4), -2px -2px 0 var(--c2);
-            margin-bottom: 30px;
-            animation: shake 2s infinite;
-        }
+        h1.main-title { font-size: 38px; color: var(--accent); margin: 10px 0; text-shadow: 2px 2px 0 #000; text-align: center; }
+        .sub-title { font-size: 22px; color: var(--primary); display: block; margin-top: -10px; }
+        
+        .screen { display: none; width: 100%; animation: fadeIn 0.3s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .screen { display: none; }
-        .screen.active { display: block; animation: zoomIn 0.5s; }
-        @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
+        /* --- المدخلات والزراير --- */
         input, select {
-            width: 90%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 3px solid var(--c2);
-            background: #111;
-            color: var(--c3);
-            font-size: 20px;
-            font-family: 'Changa', sans-serif;
-            border-radius: 10px;
-            text-align: center;
-            outline: none;
+            width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #334155;
+            background: #0f172a; color: white; font-size: 18px; font-family: 'Changa', sans-serif;
+            border-radius: 12px; text-align: center; outline: none; transition: 0.3s;
         }
-        input:focus { border-color: var(--c1); box-shadow: 0 0 15px var(--c1); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
 
         button {
-            background: linear-gradient(90deg, var(--c4), var(--c1));
-            color: #fff;
-            border: 4px solid #fff;
-            padding: 15px 30px;
-            font-size: 24px;
-            font-family: 'Changa', sans-serif;
-            font-weight: 800;
-            cursor: pointer;
-            border-radius: 15px;
-            margin: 15px 5px;
-            text-shadow: 2px 2px 0 #000;
-            transition: 0.3s;
-            animation: pulse 2s infinite;
-            /* حل مشاكل الآيفون */
-            position: relative;
-            z-index: 100;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
+            width: 100%; background: linear-gradient(135deg, var(--primary), #2563eb); color: white;
+            border: none; padding: 15px; font-size: 20px; font-family: 'Changa', sans-serif;
+            font-weight: bold; border-radius: 12px; cursor: pointer; margin: 8px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.2s; outline: none;
         }
-        button:hover { filter: brightness(1.2); }
-        button.btn-alt { background: linear-gradient(90deg, var(--c2), #0055ff); }
+        button:active { transform: scale(0.96); filter: brightness(0.8); }
+        button.btn-accent { background: linear-gradient(135deg, var(--accent), #e11d48); }
+        button.btn-success { background: linear-gradient(135deg, var(--success), #059669); }
+        button.btn-danger { background: linear-gradient(135deg, var(--danger), #dc2626); }
+        button.btn-small { padding: 8px 15px; font-size: 16px; width: auto; }
 
-        .timer-box {
-            font-size: 60px;
-            color: var(--c4);
-            text-shadow: 0 0 20px var(--c4);
-            font-weight: bold;
-            margin: 20px 0;
-        }
+        /* --- الأفاتار --- */
+        .avatar-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 15px 0; max-height: 200px; overflow-y: auto; padding: 10px; background: #0f172a; border-radius: 12px; }
+        .avatar-item { font-size: 35px; cursor: pointer; padding: 5px; border-radius: 10px; transition: 0.2s; filter: grayscale(50%); }
+        .avatar-item.selected { filter: grayscale(0%); transform: scale(1.2); background: rgba(255,255,255,0.1); border: 2px solid var(--primary); }
 
-        .leaderboard {
-            text-align: right;
-            background: #222;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid var(--c5);
-            margin-bottom: 20px;
-        }
+        /* --- القوائم واللاعبين --- */
+        .grid-players { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; margin-top: 15px; width: 100%; max-height: 50vh; overflow-y: auto; }
+        .player-card { background: #334155; padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #475569; }
+        .player-info { display: flex; align-items: center; gap: 10px; font-size: 18px; }
+        .player-score { font-weight: bold; color: var(--success); font-size: 20px; }
+        .ans-text { display: block; font-size: 16px; color: var(--warning); margin-top: 5px; text-align: right; background: #0f172a; padding: 5px; border-radius: 5px; }
+
+        /* --- التايمر والإشعارات --- */
+        .timer { font-size: 50px; color: var(--accent); font-weight: bold; text-align: center; margin: 10px 0; }
+        #sys-toast { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); background: var(--danger); color: white; padding: 12px 25px; border-radius: 8px; font-size: 16px; z-index: 9999; display: none; font-weight: bold; text-align: center; }
+
+        /* --- المايك (Push to talk) --- */
+        #ptt-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        #ptt-btn { width: 70px; height: 70px; border-radius: 50%; background: var(--primary); color: white; font-size: 30px; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); cursor: pointer; transition: 0.2s; border: 3px solid #fff; }
+        #ptt-btn.recording { background: var(--danger); animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); box-shadow: 0 0 20px var(--danger); } 100% { transform: scale(1); } }
         
-        .player-row {
-            border-bottom: 1px dashed #555;
-            padding: 10px 0;
-        }
-        .player-row:last-child { border-bottom: none; }
+        .score-ctrl { display: flex; gap: 5px; }
+        .score-ctrl button { width: 35px; height: 35px; padding: 0; font-size: 18px; margin: 0; border-radius: 50%; }
         
-        .player-score {
-            display: flex; justify-content: space-between;
-            font-size: 20px; 
-        }
-
-        .eval-row {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #333; margin: 10px 0; padding: 10px; border-radius: 8px; border: 2px solid #555;
-        }
-        .eval-row.unique { border-color: var(--c5); box-shadow: 0 0 10px var(--c5); }
-        .eval-row.duplicate { border-color: var(--c4); box-shadow: 0 0 10px var(--c4); }
-        
-        .check-toggle { transform: scale(2); margin-left: 15px; cursor: pointer; }
-
-        .marquee {
-            background: var(--c4); color: yellow; padding: 5px; font-weight: bold; font-size: 18px;
-            white-space: nowrap; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%; z-index: 10;
-        }
+        /* Layout fixes */
+        .flex-row { display: flex; gap: 10px; width: 100%; }
     </style>
 </head>
 <body>
 
-    <div class="marquee"><marquee>🔥 مرحباً بكل الزعابيل في زعبوله! 🔥 جهز نفسك للرويال رامبل! المتشابه بيطير والمختلف بياخد 10 نقط! يلا نزعبل! 🔥</marquee></div>
+    <div id="sys-toast">رسالة خطأ</div>
+
+    <!-- زرار المايك بيظهر جوه الروم بس -->
+    <div id="ptt-container" style="display: none;">
+        <button id="ptt-btn" onpointerdown="startMic()" onpointerup="stopMic()" onpointercancel="stopMic()" title="دوس واتكلم"><i class="fa-solid fa-microphone"></i></button>
+    </div>
 
     <div class="container">
-        <h1>🚀 زعبوله 🎮<br><span style="font-size: 20px; color:var(--c2);">الرويال رامبل</span></h1>
+        <h1 class="main-title">زعبوله <br><span class="sub-title">منصة الألعاب</span></h1>
 
-        <!-- شاشة البداية -->
+        <!-- 1. شاشة البداية -->
         <div id="screen-home" class="screen active">
-            <button onclick="showScreen('screen-host-setup')">😎 أنا الهوست</button>
-            <button class="btn-alt" onclick="showScreen('screen-player-setup')">🎮 أنا زعبل عادي</button>
-        </div>
-
-        <!-- شاشة إعداد الهوست -->
-        <div id="screen-host-setup" class="screen">
-            <h2 style="color:var(--c1);">تجهيز الزعبل</h2>
-            <input type="text" id="host-name" placeholder="اسمك إيه يا زعبل؟">
-            <input type="text" id="host-room" placeholder="الرقم السري للزعبل">
-            <select id="host-q-mode">
-                <option value="text">الأسئلة هتتكتب على الشاشة</option>
-                <option value="voice">الأسئلة هقولها بصوتي (شفهي)</option>
+            <h3 style="text-align:center;">اختار اللعبة:</h3>
+            <select id="game-selector">
+                <option value="outOfBox">بره الصندوق (أو جواه عادي)</option>
+                <option value="other" disabled>زعبيلة أخرى (قيد الإنشاء 🚧)</option>
             </select>
-            <button onclick="createRoom()">افتح الزعبل 🔥</button>
-            <button class="btn-alt" onclick="showScreen('screen-home')" style="font-size: 16px; padding: 10px;">رجوع</button>
-        </div>
-
-        <!-- شاشة دخول اللاعب -->
-        <div id="screen-player-setup" class="screen">
-            <h2 style="color:var(--c2);">دخول الزعبل</h2>
-            <input type="text" id="player-name" placeholder="اكتب اسمك يا زعبل">
-            <input type="text" id="player-room" placeholder="الرقم السري للزعبل">
-            <button class="btn-alt" onclick="joinRoom()">يلا نزعبل 💥</button>
-            <button onclick="showScreen('screen-home')" style="font-size: 16px; padding: 10px; background: #555;">رجوع</button>
-        </div>
-
-        <!-- شاشة الانتظار (اللوبي) -->
-        <div id="screen-lobby" class="screen">
-            <h2 style="color:var(--c5);">الزعبل في الانتظار <span id="lobby-room-id"></span></h2>
-            <div class="leaderboard" id="lobby-players"></div>
-            <div id="host-controls-lobby" style="display:none;">
-                <button onclick="startNextRound()">ابدأ الجولة 1 🚀</button>
-            </div>
-            <h3 id="player-wait-msg" style="color:var(--c3); display:none;">مستنيين الهوست يبدأ...</h3>
-        </div>
-
-        <!-- شاشة اللعب (إرسال السؤال وإجابة اللاعبين) -->
-        <div id="screen-game" class="screen">
-            <h2 id="game-round-title" style="color:var(--c1);">الجولة</h2>
-            <div class="timer-box" id="timer-display">25</div>
+            <button type="button" onclick="showScreen('screen-setup')">😎 أعمل زعبوله (هوست)</button>
+            <button type="button" class="btn-accent" onclick="showScreen('screen-join')">🎮 أدخل زعبوله (لاعب)</button>
             
-            <div id="host-game-view" style="display:none;">
-                <input type="text" id="host-question-input" placeholder="اكتب السؤال هنا..." style="display:none;">
-                <button onclick="startTimerAndQuestion()">شغل التايمر وابعت السؤال ⏱️</button>
+            <div style="margin-top: 20px; text-align: center; color: #94a3b8; font-size: 14px;">
+                <p>لو النت فصل، ادخل بنفس اسمك ورقم الروم هترجع مكانك!</p>
+            </div>
+        </div>
+
+        <!-- 2. إعداد الهوست -->
+        <div id="screen-setup" class="screen">
+            <h2 style="color:var(--primary); text-align:center;">تجهيز الروم (الزعبل الهوست)</h2>
+            <input type="text" id="host-name" placeholder="اسمك إيه يا زعبل؟">
+            <input type="tel" id="host-room" placeholder="رقم الروم (5 أرقام بس)" maxlength="5">
+            <select id="host-mode">
+                <option value="play">هوست + لاعب منافس</option>
+                <option value="admin">هوست فقط (حكم)</option>
+            </select>
+            <h4 style="margin-bottom: 5px;">اختار أفاتار:</h4>
+            <div class="avatar-grid" id="host-avatars"></div>
+            
+            <button type="button" id="btn-create" onclick="Core.createRoom()">افتح الروم 🔥</button>
+            <button type="button" class="btn-danger" onclick="showScreen('screen-home')">رجوع</button>
+        </div>
+
+        <!-- 3. دخول اللاعب -->
+        <div id="screen-join" class="screen">
+            <h2 style="color:var(--accent); text-align:center;">دخول الروم</h2>
+            <input type="text" id="player-name" placeholder="اسمك إيه يا زعبل؟">
+            <input type="tel" id="player-room" placeholder="رقم الروم (5 أرقام)" maxlength="5">
+            <h4 style="margin-bottom: 5px;">اختار أفاتار:</h4>
+            <div class="avatar-grid" id="player-avatars"></div>
+
+            <button type="button" class="btn-accent" id="btn-join" onclick="Core.joinRoom()">يلا نزعبل 💥</button>
+            <button type="button" class="btn-danger" onclick="showScreen('screen-home')">رجوع</button>
+        </div>
+
+        <!-- 4. اللوبي (الانتظار) -->
+        <div id="screen-lobby" class="screen">
+            <h2 style="text-align:center;">رقم الروم: <span id="lobby-pin" style="color:var(--accent);"></span></h2>
+            <div id="host-controls-lobby" style="display:none; text-align:center;">
+                <button type="button" class="btn-success" onclick="GameModule.startNextRound()">🚀 ابدأ اللعب (بره الصندوق)</button>
+            </div>
+            <h3 id="player-wait-msg" style="text-align:center; color:var(--warning); display:none;">مستنيين الهوست يبدأ...</h3>
+            
+            <div class="grid-players" id="lobby-players"></div>
+        </div>
+
+        <!-- 5. شاشة عرض السؤال (لعبة بره الصندوق) -->
+        <div id="screen-reading" class="screen">
+            <h2 id="reading-round" style="color:var(--primary); text-align:center;">الجولة</h2>
+            
+            <!-- الهوست بيكتب أو بيعرض السؤال -->
+            <div id="host-reading-view" style="display:none; text-align:center;">
+                <input type="text" id="host-q-input" placeholder="اكتب السؤال هنا (أو قوله في المايك)...">
+                <div class="flex-row">
+                    <button type="button" onclick="GameModule.publishQuestion()">1. اعرض السؤال للزعابيل</button>
+                    <button type="button" class="btn-success" onclick="GameModule.startPlaying()">2. ابدأ التايمر ⏱️</button>
+                </div>
             </div>
 
-            <div id="player-game-view" style="display:none;">
-                <h3 id="player-question-display" style="color:var(--c2); background: #222; padding: 15px; border-radius:10px;"></h3>
+            <!-- اللاعب بيقرأ السؤال -->
+            <div id="player-reading-view" style="display:none; text-align:center;">
+                <h3 id="display-question" style="background:#1e293b; padding:20px; border-radius:10px; color:var(--accent);">مستنيين السؤال من الهوست...</h3>
+            </div>
+        </div>
+
+        <!-- 6. شاشة اللعب والتايمر -->
+        <div id="screen-playing" class="screen">
+            <h2 id="playing-round" style="text-align:center;">الجولة</h2>
+            <div class="timer" id="timer-display">25</div>
+            <h3 id="active-question" style="text-align:center; color:var(--warning);"></h3>
+
+            <div id="host-playing-view" style="display:none; text-align:center;">
+                <button type="button" class="btn-danger" onclick="GameModule.forceEndRound()">إنهي التايمر فوراً 🛑</button>
+                <div class="grid-players" id="host-live-status"></div>
+            </div>
+
+            <div id="player-playing-view" style="display:none; text-align:center;">
                 <input type="text" id="player-answer" placeholder="اكتب إجابتك بسرعة!">
-                <button class="btn-alt" id="btn-submit-answer" onclick="submitAnswer()">ارزع الإجابة OK ✅</button>
-                <h3 id="player-submitted-msg" style="display:none; color:var(--c5);">تم الإرسال يا زعبل! مستنيين التايمر يخلص...</h3>
+                <button type="button" class="btn-accent" id="btn-submit-ans" onclick="GameModule.submitAnswer()">ارزع الإجابة ✅</button>
+                <h3 id="player-done-msg" style="color:var(--success); display:none;">إجابتك وصلت! مستنيين الباقي...</h3>
             </div>
         </div>
 
-        <!-- شاشة التقييم (تظهر للهوست فقط بعد انتهاء التايمر) -->
+        <!-- 7. شاشة تصويت الجولة الأخيرة -->
+        <div id="screen-voting" class="screen">
+            <h2 style="text-align:center; color:var(--accent);">🔥 الجولة الأخيرة (Double or Nothing) 🔥</h2>
+            <p style="text-align:center;">تحبوا نلعب على 10 نقط عادي، ولا نخاطر بـ 30 نقطة؟ (لو غلطت هتتخصم)</p>
+            
+            <div id="voting-controls" style="display:none; text-align:center;">
+                <button type="button" onclick="GameModule.submitVote(10)">نلعب في المضمون (10 نقط)</button>
+                <button type="button" class="btn-danger" onclick="GameModule.submitVote(30)">يا صابت يا خابت (30 نقطة)</button>
+            </div>
+            
+            <div id="host-voting-controls" style="display:none; text-align:center; margin-top:20px;">
+                <h3 id="vote-results"></h3>
+                <button type="button" class="btn-success" onclick="GameModule.resolveVote()">احسم التصويت وابدأ الجولة</button>
+            </div>
+            <h3 id="voting-wait-msg" style="text-align:center; color:var(--warning); display:none;">تم التصويت.. مستنيين النتيجة</h3>
+        </div>
+
+        <!-- 8. شاشة التقييم وعرض الإجابات -->
         <div id="screen-eval" class="screen">
-            <h2 style="color:var(--c3);">وقت الحساب 🧐</h2>
-            <p>النظام حدد المتشابه، راجع براحتك (المتعلم عليه صح هياخد 10 نقط)</p>
-            <div id="eval-list" style="text-align: right; max-height: 300px; overflow-y: auto;"></div>
-            <button onclick="confirmScores()">اعتمد النتيجة 💯</button>
+            <h2 style="text-align:center; color:var(--primary);">الإجابات والتقييم 🧐</h2>
+            
+            <div id="host-eval-controls" style="display:none;">
+                <p style="text-align:center;">تقدر تعدل النقط بإيدك لو النظام ظلم حد</p>
+                <div class="grid-players" id="eval-list"></div>
+                <button type="button" class="btn-success" style="margin-top:15px;" onclick="GameModule.confirmScores()">اعتمد النتيجة 💯</button>
+            </div>
+
+            <div id="player-eval-view" style="display:none;">
+                <h3 style="text-align:center; color:var(--warning);">الهوست بيراجع وبيفقط النقط... دي إجابات الناس:</h3>
+                <div class="grid-players" id="public-answers-list"></div>
+            </div>
         </div>
 
-        <!-- شاشة نتائج الجولة -->
+        <!-- 9. شاشة النتائج النهائية / الجولة -->
         <div id="screen-results" class="screen">
-            <h2 style="color:var(--c5);">نتائج وإجابات الزعابيل</h2>
-            <div class="leaderboard" id="results-leaderboard" style="max-height: 350px; overflow-y: auto;"></div>
-            <div id="host-results-controls" style="display:none;">
-                <button onclick="startNextRound()" id="btn-next-round">الجولة اللي بعدها ⏩</button>
+            <h2 id="results-title" style="text-align:center; color:var(--success);">ترتيب الزعابيل 🏆</h2>
+            <h3 id="bidon-title" style="text-align:center; color:var(--danger); display:none;"></h3>
+            
+            <div class="grid-players" id="results-leaderboard"></div>
+            
+            <div id="host-results-controls" style="display:none; text-align:center; margin-top:20px;">
+                <button type="button" class="btn-primary" id="btn-next-round" onclick="GameModule.startNextRound()">الجولة اللي بعدها ⏩</button>
+                <button type="button" class="btn-accent" id="btn-play-again" style="display:none;" onclick="GameModule.requestPlayAgain()">إعادة الزعبله (جيم جديد) 🔄</button>
             </div>
-            <h3 id="player-results-wait" style="color:var(--c2); display:none;">الهوست بيجهز الجولة الجاية...</h3>
+            
+            <div id="player-results-controls" style="display:none; text-align:center; margin-top:20px;">
+                <h3 id="wait-next-msg" style="color:var(--warning);">مستنيين الهوست...</h3>
+                <button type="button" class="btn-success" id="btn-ready-again" style="display:none;" onclick="GameModule.setReady()">أنا مستعد للجيم الجديد 🙋‍♂️</button>
+            </div>
         </div>
 
     </div>
 
+    <!-- كود الصوت (مشغل استقبال المايك) -->
+    <audio id="audio-player" autoplay></audio>
+
     <script>
-        // 1. إعدادات Firebase
+        // ==========================================
+        // 1. الإعدادات الأساسية (Firebase Config)
+        // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyBfOqZBoIRmz_s3qLjR9DjHld7Wv_onBe0",
             authDomain: "system-chat-96932.firebaseapp.com",
@@ -255,321 +262,467 @@
             messagingSenderId: "965982067456",
             appId: "1:965982067456:web:896ef2babae15baa3eb1e5"
         };
-        firebase.initializeApp(firebaseConfig);
+        try { firebase.initializeApp(firebaseConfig); } catch(e) {}
         const db = firebase.database();
 
-        // 2. المتغيرات العامة
-        let myRole = ''; 
-        let myName = '';
-        let roomPass = '';
-        let roomRef = null;
-        let gameData = {};
-        let timerInterval = null;
-        let localRoundTracker = 0; // لتعقب رقم الجولة ومسح مربع النص
-
-        // 3. التنقل بين الشاشات
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-
-        // 4. إنشاء غرفة (الهوست)
-        function createRoom() {
-            myName = document.getElementById('host-name').value.trim();
-            roomPass = document.getElementById('host-room').value.trim();
-            const qMode = document.getElementById('host-q-mode').value;
-
-            if (!myName || !roomPass) return alert('اكتب اسمك والرقم السري يا زعبل!');
-
-            myRole = 'host';
-            roomRef = db.ref('rumble_games/' + roomPass);
-            
-            roomRef.set({
-                host: myName,
-                status: 'lobby',
-                round: 0,
-                q_mode: qMode,
-                question: '',
-                timer_end: 0,
-                players: {}
-            }).then(() => {
-                listenToRoom();
-            });
-        }
-
-        // 5. دخول لاعب
-        function joinRoom() {
-            myName = document.getElementById('player-name').value.trim();
-            roomPass = document.getElementById('player-room').value.trim();
-
-            if (!myName || !roomPass) return alert('اكتب اسمك والرقم السري يا زعبل!');
-
-            myRole = 'player';
-            roomRef = db.ref('rumble_games/' + roomPass);
-
-            roomRef.once('value').then(snap => {
-                if (!snap.exists()) return alert('مفيش زعبل بالرقم ده!');
-                
-                roomRef.child('players/' + myName).set({
-                    score: 0,
-                    answer: '',
-                    submitted: false
-                }).then(() => {
-                    listenToRoom();
-                });
-            });
-        }
-
-        // 6. الاستماع لتحديثات الزعبل اللحظية
-        function listenToRoom() {
-            roomRef.on('value', snap => {
-                gameData = snap.val();
-                if (!gameData) {
-                    alert('الهوست قفل الزعبل!');
-                    window.location.reload();
-                    return;
-                }
-                updateUI();
-            });
-        }
-
-        // 7. تحديث واجهة المستخدم
-        function updateUI() {
-            const status = gameData.status;
-            
-            // مسح مربع الإجابة تلقائياً عند بدء جولة جديدة للاعب
-            if (gameData.round > localRoundTracker) {
-                localRoundTracker = gameData.round;
-                document.getElementById('player-answer').value = '';
+        // ==========================================
+        // 2. واجهة المستخدم والمساعدات (UI Engine)
+        // ==========================================
+        const UI = {
+            showToast: (msg) => {
+                const t = document.getElementById('sys-toast');
+                t.innerText = msg; t.style.display = 'block';
+                setTimeout(() => t.style.display = 'none', 5000);
+            },
+            showScreen: (id) => {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            },
+            avatars: ['👽','🤖','👻','🤠','🤡','👹','👺','😺','🐶','🦊','🐻','🐼','🦁','🐯','🐸','🐙','🐒','🦄','🦅','🦉','🦇','🐝','🐛','🦋','🐌','🐞','🦖','🦕','🐲','🐉','🥷','🧙','🧛','🧟','🦸'],
+            renderAvatars: (containerId, varName) => {
+                const c = document.getElementById(containerId);
+                c.innerHTML = UI.avatars.map(a => `<div class="avatar-item" onclick="Core.selectAvatar('${a}', this, '${varName}')">${a}</div>`).join('');
             }
+        };
 
-            if (status === 'lobby') {
-                showScreen('screen-lobby');
-                document.getElementById('lobby-room-id').innerText = `(الرقم السري: ${roomPass})`;
-                renderPlayers('lobby-players', false, false);
-                
-                if (myRole === 'host') {
-                    document.getElementById('host-controls-lobby').style.display = 'block';
-                } else {
-                    document.getElementById('player-wait-msg').style.display = 'block';
+        // ==========================================
+        // 3. المحرك الأساسي للروم (Core Engine)
+        // ==========================================
+        const Core = {
+            myRole: '', myName: '', roomPass: '', myAvatar: '👽', isHostPlayer: false,
+            roomRef: null, gameData: {}, audioRef: null,
+            
+            init: () => {
+                UI.renderAvatars('host-avatars', 'myAvatar');
+                UI.renderAvatars('player-avatars', 'myAvatar');
+                // فحص الـ Reconnect
+                const session = JSON.parse(sessionStorage.getItem('zaboola_session'));
+                if(session) {
+                    Core.myName = session.name; Core.roomPass = session.room; 
+                    Core.myRole = session.role; Core.isHostPlayer = session.isHostPlayer;
+                    Core.roomRef = db.ref('rooms/' + Core.roomPass);
+                    Core.listenToRoom();
                 }
-            } 
-            else if (status === 'playing') {
-                showScreen('screen-game');
-                document.getElementById('game-round-title').innerText = `الجولة ${gameData.round} من 10 🔥`;
-                manageTimer();
+            },
+            selectAvatar: (av, el, varName) => {
+                Core[varName] = av;
+                let siblings = el.parentElement.children;
+                for(let s of siblings) s.classList.remove('selected');
+                el.classList.add('selected');
+            },
+            createRoom: () => {
+                let name = document.getElementById('host-name').value.trim();
+                let pin = document.getElementById('host-room').value.trim();
+                let mode = document.getElementById('host-mode').value;
+                if(!name || pin.length !== 5) return UI.showToast("اكتب اسمك والرقم السري لازم 5 أرقام!");
+                
+                Core.myName = name; Core.roomPass = pin; Core.myRole = 'host';
+                Core.isHostPlayer = (mode === 'play');
+                Core.roomRef = db.ref('rooms/' + pin);
+                
+                document.getElementById('btn-create').innerText = "جاري الإنشاء... ⏳";
+                setTimeout(()=>{ document.getElementById('host-name').blur(); document.getElementById('host-room').blur(); }, 100);
 
-                if (myRole === 'host') {
-                    document.getElementById('host-game-view').style.display = 'block';
-                    document.getElementById('player-game-view').style.display = 'none';
-                    if (gameData.q_mode === 'text' && gameData.timer_end === 0) {
-                        document.getElementById('host-question-input').style.display = 'block';
-                    } else {
-                        document.getElementById('host-question-input').style.display = 'none';
-                    }
-                } else {
-                    document.getElementById('host-game-view').style.display = 'none';
-                    document.getElementById('player-game-view').style.display = 'block';
+                let initialData = {
+                    status: 'lobby', host: name, gameModule: 'outOfBox',
+                    players: {}, lastActive: Date.now()
+                };
+                if(Core.isHostPlayer) {
+                    initialData.players[name] = { score: 0, avatar: Core.myAvatar, isHostPlayer: true, dupeCount: 0 };
+                }
+
+                Core.roomRef.set(initialData).then(() => {
+                    sessionStorage.setItem('zaboola_session', JSON.stringify({name: Core.myName, room: pin, role: 'host', isHostPlayer: Core.isHostPlayer}));
+                    Core.listenToRoom();
+                }).catch(e => UI.showToast("خطأ: " + e.message));
+            },
+            joinRoom: () => {
+                let name = document.getElementById('player-name').value.trim();
+                let pin = document.getElementById('player-room').value.trim();
+                if(!name || pin.length !== 5) return UI.showToast("اكتب اسمك والرقم السري لازم 5 أرقام!");
+                
+                Core.myName = name; Core.roomPass = pin; Core.myRole = 'player';
+                Core.roomRef = db.ref('rooms/' + pin);
+                
+                document.getElementById('btn-join').innerText = "جاري الدخول... ⏳";
+                setTimeout(()=>{ document.getElementById('player-name').blur(); document.getElementById('player-room').blur(); }, 100);
+
+                Core.roomRef.once('value').then(snap => {
+                    if(!snap.exists()) { UI.showToast("مفيش زعبوله بالرقم ده!"); document.getElementById('btn-join').innerText = "يلا نزعبل 💥"; return; }
+                    let data = snap.val();
+                    let pCount = data.players ? Object.keys(data.players).length : 0;
+                    if(pCount >= 20 && !data.players[name]) { UI.showToast("الروم مليانة (20 زعبول)!"); document.getElementById('btn-join').innerText = "يلا نزعبل 💥"; return; }
                     
-                    if (gameData.timer_end > 0) {
-                        document.getElementById('player-question-display').innerText = gameData.q_mode === 'text' ? (gameData.question || 'الهوست بيكتب السؤال...') : '🔊 ركز مع صوت الهوست واكتب الإجابة يا زعبل!';
-                        
-                        const myData = gameData.players[myName] || {};
-                        if (myData.submitted) {
-                            document.getElementById('player-answer').style.display = 'none';
-                            document.getElementById('btn-submit-answer').style.display = 'none';
-                            document.getElementById('player-submitted-msg').style.display = 'block';
-                        } else {
-                            document.getElementById('player-answer').style.display = 'inline-block';
-                            document.getElementById('btn-submit-answer').style.display = 'inline-block';
-                            document.getElementById('player-submitted-msg').style.display = 'none';
-                        }
+                    Core.roomRef.child('players/' + name).update({
+                        score: (data.players && data.players[name]) ? data.players[name].score : 0, 
+                        avatar: Core.myAvatar, dupeCount: 0
+                    }).then(() => {
+                        sessionStorage.setItem('zaboola_session', JSON.stringify({name: Core.myName, room: pin, role: 'player'}));
+                        Core.listenToRoom();
+                    });
+                });
+            },
+            listenToRoom: () => {
+                document.getElementById('ptt-container').style.display = 'block';
+                Core.audioRef = db.ref('audio/' + Core.roomPass);
+                AudioEngine.listenToVoice();
+
+                Core.roomRef.on('value', snap => {
+                    Core.gameData = snap.val();
+                    if(!Core.gameData) {
+                        UI.showToast("الروم اتقفلت أو اتلغت!"); sessionStorage.removeItem('zaboola_session');
+                        setTimeout(() => window.location.reload(), 2000); return;
+                    }
+                    // لو الموديول المختار هو بره الصندوق، نشغل محرك اللعبة بتاعه
+                    if(Core.gameData.gameModule === 'outOfBox') {
+                        GameModule.updateUI();
+                    }
+                });
+            },
+            kickPlayer: (pName) => {
+                if(confirm(`متأكد إنك عاوز تطرد الزعبول ${pName}؟`)) {
+                    Core.roomRef.child('players/' + pName).remove();
+                }
+            }
+        };
+
+        // ==========================================
+        // 4. محرك لعبة "بره الصندوق" (Game Module)
+        // ==========================================
+        let gameTimer = null;
+        const GameModule = {
+            updateUI: () => {
+                const data = Core.gameData;
+                const status = data.status;
+                const isHost = (Core.myRole === 'host');
+                
+                // تحديث النشاط عشان التنظيف التلقائي
+                if(isHost && Math.random() > 0.8) Core.roomRef.update({lastActive: Date.now()});
+
+                if(status === 'lobby') {
+                    UI.showScreen('screen-lobby');
+                    document.getElementById('lobby-pin').innerText = Core.roomPass;
+                    GameModule.renderPlayers('lobby-players', false, false, isHost);
+                    document.getElementById('host-controls-lobby').style.display = isHost ? 'block' : 'none';
+                    document.getElementById('player-wait-msg').style.display = isHost ? 'none' : 'block';
+                }
+                else if(status === 'voting') {
+                    UI.showScreen('screen-voting');
+                    let myVote = data.players[Core.myName]?.vote;
+                    if(isHost) {
+                        document.getElementById('host-voting-controls').style.display = 'block';
+                        document.getElementById('voting-controls').style.display = (Core.isHostPlayer && !myVote) ? 'block' : 'none';
+                        // عد الأصوات
+                        let v10 = 0, v30 = 0;
+                        for(let p in data.players) { if(data.players[p].vote === 10) v10++; if(data.players[p].vote === 30) v30++; }
+                        document.getElementById('vote-results').innerText = `النتيجة حالياً: (10 نقط: ${v10}) | (30 نقطة: ${v30})`;
                     } else {
-                        document.getElementById('player-question-display').innerText = 'استعد...';
-                        document.getElementById('player-answer').style.display = 'none';
-                        document.getElementById('btn-submit-answer').style.display = 'none';
+                        document.getElementById('host-voting-controls').style.display = 'none';
+                        document.getElementById('voting-controls').style.display = myVote ? 'none' : 'block';
+                        document.getElementById('voting-wait-msg').style.display = myVote ? 'block' : 'none';
                     }
                 }
-            }
-            else if (status === 'evaluating') {
-                if (myRole === 'host') {
-                    showScreen('screen-eval');
-                    renderEvalList();
-                } else {
-                    showScreen('screen-game');
-                    document.getElementById('player-answer').style.display = 'none';
-                    document.getElementById('btn-submit-answer').style.display = 'none';
-                    document.getElementById('player-question-display').innerText = '⏳ الهوست بيراجع الإجابات وبيفقط النقط...';
-                    document.getElementById('timer-display').innerText = '0';
+                else if(status === 'reading') {
+                    UI.showScreen('screen-reading');
+                    document.getElementById('reading-round').innerText = `الجولة ${data.round} من 10`;
+                    if(isHost) {
+                        document.getElementById('host-reading-view').style.display = 'block';
+                        document.getElementById('player-reading-view').style.display = 'none';
+                    } else {
+                        document.getElementById('host-reading-view').style.display = 'none';
+                        document.getElementById('player-reading-view').style.display = 'block';
+                        document.getElementById('display-question').innerText = data.question || 'الزعبل الهوست بيتكلم في المايك... ركز 🔊';
+                    }
                 }
-            }
-            else if (status === 'results' || status === 'finished') {
-                showScreen('screen-results');
-                // إظهار النتائج والإجابات للجميع
-                renderPlayers('results-leaderboard', true, true); 
-                
-                if (status === 'finished') {
-                    document.getElementById('game-round-title').innerText = '🏆 انتهت اللعبة! 🏆';
-                    document.getElementById('btn-next-round').style.display = 'none';
-                }
+                else if(status === 'playing') {
+                    UI.showScreen('screen-playing');
+                    document.getElementById('playing-round').innerText = `الجولة ${data.round} من 10 (عـ ${data.multiplier * 10} نقطة)`;
+                    document.getElementById('active-question').innerText = data.question || 'سؤال صوتي 🔊';
+                    GameModule.manageTimer();
 
-                if (myRole === 'host') {
-                    document.getElementById('host-results-controls').style.display = status === 'finished' ? 'none' : 'block';
-                } else {
-                    document.getElementById('player-results-wait').style.display = status === 'finished' ? 'none' : 'block';
+                    if(isHost) {
+                        document.getElementById('host-playing-view').style.display = 'block';
+                        document.getElementById('player-playing-view').style.display = (Core.isHostPlayer && !data.players[Core.myName].submitted) ? 'block' : 'none';
+                        GameModule.renderHostLiveStatus();
+                    } else {
+                        document.getElementById('host-playing-view').style.display = 'none';
+                        document.getElementById('player-playing-view').style.display = 'block';
+                        let isSub = data.players[Core.myName]?.submitted;
+                        document.getElementById('player-answer').style.display = isSub ? 'none' : 'inline-block';
+                        document.getElementById('btn-submit-ans').style.display = isSub ? 'none' : 'inline-block';
+                        document.getElementById('player-done-msg').style.display = isSub ? 'block' : 'none';
+                    }
                 }
-            }
-        }
+                else if(status === 'evaluating') {
+                    UI.showScreen('screen-eval');
+                    if(isHost) {
+                        document.getElementById('host-eval-controls').style.display = 'block';
+                        document.getElementById('player-eval-view').style.display = 'none';
+                        GameModule.renderEvalList();
+                    } else {
+                        document.getElementById('host-eval-controls').style.display = 'none';
+                        document.getElementById('player-eval-view').style.display = 'block';
+                        GameModule.renderPlayers('public-answers-list', false, true, false); // إظهار إجابات الجميع
+                    }
+                }
+                else if(status === 'results' || status === 'finished') {
+                    UI.showScreen('screen-results');
+                    document.getElementById('results-title').innerText = status === 'finished' ? '🏆 الترتيب النهائي 🏆' : 'نتائج الجولة';
+                    
+                    if(status === 'finished') {
+                        GameModule.calculateBidon();
+                    } else {
+                        document.getElementById('bidon-title').style.display = 'none';
+                    }
 
-        // 8. الهوست يبدأ الجولة
-        function startNextRound() {
-            if (gameData.round >= 10) return;
-            
-            let updates = {};
-            if (gameData.players) {
-                for (let p in gameData.players) {
+                    GameModule.renderPlayers('results-leaderboard', true, true, false);
+
+                    if(isHost) {
+                        document.getElementById('host-results-controls').style.display = 'block';
+                        document.getElementById('player-results-controls').style.display = 'none';
+                        document.getElementById('btn-next-round').style.display = status === 'finished' ? 'none' : 'inline-block';
+                        document.getElementById('btn-play-again').style.display = status === 'finished' ? 'inline-block' : 'none';
+                    } else {
+                        document.getElementById('host-results-controls').style.display = 'none';
+                        document.getElementById('player-results-controls').style.display = 'block';
+                        document.getElementById('wait-next-msg').style.display = status === 'finished' ? 'none' : 'block';
+                        let isReady = data.players[Core.myName]?.ready;
+                        document.getElementById('btn-ready-again').style.display = (status === 'finished' && !isReady) ? 'inline-block' : 'none';
+                    }
+                }
+            },
+            startNextRound: () => {
+                let r = (Core.gameData.round || 0) + 1;
+                if(r === 10) {
+                    Core.roomRef.update({status: 'voting'}); return;
+                }
+                GameModule.setupRound(r, 1);
+            },
+            setupRound: (roundNum, mult) => {
+                let updates = {};
+                for(let p in Core.gameData.players) {
                     updates[`players/${p}/answer`] = '';
                     updates[`players/${p}/submitted`] = false;
                 }
-            }
-            
-            updates['status'] = 'playing';
-            updates['round'] = gameData.round + 1;
-            updates['timer_end'] = 0;
-            updates['question'] = '';
-            
-            roomRef.update(updates);
-        }
-
-        // 9. الهوست يشغل التايمر (ويرسل السؤال)
-        function startTimerAndQuestion() {
-            let q = '';
-            if (gameData.q_mode === 'text') {
-                q = document.getElementById('host-question-input').value.trim();
-                if (!q) return alert('اكتب السؤال الأول يا زعبل!');
-                document.getElementById('host-question-input').value = ''; // تفريغ حقل سؤال الهوست
-            }
-            roomRef.update({
-                question: q,
-                timer_end: Date.now() + 25000 // 25 ثانية
-            });
-        }
-
-        // 10. اللاعب يرسل الإجابة
-        function submitAnswer() {
-            const ans = document.getElementById('player-answer').value.trim();
-            if (!ans) return;
-            
-            roomRef.child('players/' + myName).update({
-                answer: ans,
-                submitted: true
-            });
-        }
-
-        // 11. إدارة التايمر
-        function manageTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            
-            if (gameData.timer_end > 0 && gameData.status === 'playing') {
-                timerInterval = setInterval(() => {
-                    let remaining = Math.max(0, Math.ceil((gameData.timer_end - Date.now()) / 1000));
-                    document.getElementById('timer-display').innerText = remaining;
-                    
-                    if (remaining <= 0) {
-                        clearInterval(timerInterval);
-                        if (myRole === 'host') {
-                            roomRef.update({ status: 'evaluating' });
+                updates['status'] = 'reading';
+                updates['round'] = roundNum;
+                updates['multiplier'] = mult;
+                updates['question'] = '';
+                updates['timer_end'] = 0;
+                Core.roomRef.update(updates);
+                document.getElementById('host-q-input').value = '';
+            },
+            submitVote: (v) => { Core.roomRef.child('players/' + Core.myName).update({vote: v}); },
+            resolveVote: () => {
+                let v10 = 0, v30 = 0;
+                for(let p in Core.gameData.players) { if(Core.gameData.players[p].vote === 10) v10++; if(Core.gameData.players[p].vote === 30) v30++; }
+                let finalMult = (v30 > v10) ? 3 : 1; 
+                GameModule.setupRound(10, finalMult);
+            },
+            publishQuestion: () => {
+                let q = document.getElementById('host-q-input').value.trim();
+                Core.roomRef.update({question: q});
+                UI.showToast("السؤال ظهر للزعابيل.. ابدأ التايمر لما يبقوا جاهزين");
+            },
+            startPlaying: () => {
+                Core.roomRef.update({ status: 'playing', timer_end: Date.now() + 25000 });
+            },
+            submitAnswer: () => {
+                let ans = document.getElementById('player-answer').value.trim();
+                if(!ans) return UI.showToast("اكتب إجابة!");
+                document.getElementById('player-answer').value = ''; document.getElementById('player-answer').blur();
+                Core.roomRef.child('players/' + Core.myName).update({ answer: ans, submitted: true });
+            },
+            forceEndRound: () => {
+                Core.roomRef.update({ timer_end: 0, status: 'evaluating' });
+            },
+            manageTimer: () => {
+                if(gameTimer) clearInterval(gameTimer);
+                if(Core.gameData.status === 'playing' && Core.gameData.timer_end > 0) {
+                    gameTimer = setInterval(() => {
+                        let remain = Math.max(0, Math.ceil((Core.gameData.timer_end - Date.now())/1000));
+                        document.getElementById('timer-display').innerText = remain;
+                        
+                        // إنهاء تلقائي لو التايمر خلص أو الكل جاوب
+                        let allDone = true;
+                        for(let p in Core.gameData.players) {
+                            if(Core.gameData.players[p].isHostPlayer === false && p === Core.gameData.host) continue;
+                            if(!Core.gameData.players[p].submitted) allDone = false;
                         }
+                        
+                        if((remain <= 0 || allDone) && Core.myRole === 'host') {
+                            clearInterval(gameTimer); GameModule.forceEndRound();
+                        }
+                    }, 500);
+                }
+            },
+            renderHostLiveStatus: () => {
+                let html = '';
+                for(let p in Core.gameData.players) {
+                    if(!Core.gameData.players[p].isHostPlayer && p === Core.gameData.host) continue;
+                    let sub = Core.gameData.players[p].submitted;
+                    html += `<div class="player-card" style="border-color:${sub?'var(--success)':'var(--warning)'}">
+                        <span>${Core.gameData.players[p].avatar} ${p}</span>
+                        <span style="color:${sub?'var(--success)':'var(--warning)'}; font-size:24px;">
+                            ${sub?'<i class="fa-solid fa-check"></i>':'<i class="fa-solid fa-spinner fa-spin"></i>'}
+                        </span>
+                    </div>`;
+                }
+                document.getElementById('host-live-status').innerHTML = html;
+            },
+            renderEvalList: () => {
+                let html = '';
+                let players = Core.gameData.players || {};
+                let ansCount = {};
+                for(let p in players) { let a = (players[p].answer||'').trim().toLowerCase(); if(a) ansCount[a] = (ansCount[a]||0)+1; }
+                
+                for(let p in players) {
+                    if(!players[p].isHostPlayer && p === Core.gameData.host) continue;
+                    let ans = (players[p].answer||'').trim();
+                    let isUnique = (ans && ansCount[ans.toLowerCase()] === 1);
+                    
+                    let pts = isUnique ? (10 * Core.gameData.multiplier) : (ans && Core.gameData.multiplier===3 ? -30 : 0);
+                    
+                    html += `<div class="player-card" style="flex-direction:column; align-items:stretch;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="player-info">${players[p].avatar} ${p}</span>
+                            <div class="score-ctrl">
+                                <button type="button" class="btn-danger" onclick="GameModule.adjustScore('${p}', -10)">-</button>
+                                <span style="font-size:20px; font-weight:bold; width:40px; text-align:center;" id="pts-${p}">${pts > 0 ? '+'+pts : pts}</span>
+                                <button type="button" class="btn-success" onclick="GameModule.adjustScore('${p}', 10)">+</button>
+                            </div>
+                        </div>
+                        <span class="ans-text">${ans || 'لم يجاوب ❌'}</span>
+                    </div>`;
+                }
+                document.getElementById('eval-list').innerHTML = html;
+            },
+            adjustScore: (p, val) => {
+                let el = document.getElementById(`pts-${p}`);
+                let curr = parseInt(el.innerText) || 0;
+                curr += val; el.innerText = (curr > 0 ? '+'+curr : curr);
+            },
+            confirmScores: () => {
+                let updates = {};
+                let players = Core.gameData.players || {};
+                let ansCount = {};
+                for(let p in players) { let a = (players[p].answer||'').trim().toLowerCase(); if(a) ansCount[a] = (ansCount[a]||0)+1; }
+
+                for(let p in players) {
+                    if(!players[p].isHostPlayer && p === Core.gameData.host) continue;
+                    let ptsEl = document.getElementById(`pts-${p}`);
+                    let pts = ptsEl ? parseInt(ptsEl.innerText) : 0;
+                    updates[`players/${p}/score`] = (players[p].score || 0) + pts;
+                    
+                    // حساب المتشابهين للبيدون
+                    let ans = (players[p].answer||'').trim();
+                    if(ans && ansCount[ans.toLowerCase()] > 1) {
+                        updates[`players/${p}/dupeCount`] = (players[p].dupeCount || 0) + 1;
                     }
-                }, 500);
-            } else {
-                document.getElementById('timer-display').innerText = '25';
-            }
-        }
-
-        // 12. تجهيز شاشة التقييم
-        function renderEvalList() {
-            const listDiv = document.getElementById('eval-list');
-            listDiv.innerHTML = '';
-            
-            let players = gameData.players || {};
-            let ansCount = {};
-            
-            for (let p in players) {
-                let a = (players[p].answer || '').trim().toLowerCase();
-                if (a) {
-                    ansCount[a] = (ansCount[a] || 0) + 1;
                 }
-            }
-
-            for (let p in players) {
-                let ans = (players[p].answer || '').trim();
-                let isUnique = false;
-                if (ans) {
-                    isUnique = (ansCount[ans.toLowerCase()] === 1);
+                updates['status'] = Core.gameData.round >= 10 ? 'finished' : 'results';
+                Core.roomRef.update(updates);
+            },
+            calculateBidon: () => {
+                let players = Core.gameData.players || {};
+                if(Object.keys(players).length <= 4) return;
+                let maxDupe = 0; let bidonName = '';
+                for(let p in players) {
+                    if(players[p].dupeCount > maxDupe) { maxDupe = players[p].dupeCount; bidonName = p; }
                 }
-
-                let rowClass = isUnique ? 'unique' : 'duplicate';
-                let html = `
-                    <div class="eval-row ${rowClass}">
-                        <div style="flex:1;">
-                            <strong>الزعبل : ${p}</strong>: <span style="color:var(--c2); font-size:22px;">${ans || 'لم يجاوب ❌'}</span>
-                        </div>
-                        <div>
-                            <label style="color:#ccc; font-size:14px;">فريد (10 نقط)؟</label>
-                            <input type="checkbox" class="check-toggle" id="eval-chk-${p}" ${isUnique && ans !== '' ? 'checked' : ''} ${ans === '' ? 'disabled' : ''}>
-                        </div>
-                    </div>
-                `;
-                listDiv.innerHTML += html;
-            }
-        }
-
-        // 13. الهوست يعتمد النتيجة
-        function confirmScores() {
-            let players = gameData.players || {};
-            let updates = {};
-            
-            for (let p in players) {
-                let chk = document.getElementById(`eval-chk-${p}`);
-                if (chk && chk.checked) {
-                    updates[`players/${p}/score`] = (players[p].score || 0) + 10;
+                if(maxDupe > 0) {
+                    let el = document.getElementById('bidon-title');
+                    el.innerText = `🗑️ البيدون: ${bidonName} (وقع ناس ${maxDupe} مرات) 🗑️`;
+                    el.style.display = 'block';
                 }
-            }
-            
-            updates['status'] = gameData.round >= 10 ? 'finished' : 'results';
-            roomRef.update(updates);
-        }
+            },
+            requestPlayAgain: () => {
+                let updates = { status: 'lobby', round: 0, multiplier: 1, question: '' };
+                for(let p in Core.gameData.players) {
+                    updates[`players/${p}/score`] = 0;
+                    updates[`players/${p}/dupeCount`] = 0;
+                    updates[`players/${p}/answer`] = '';
+                    updates[`players/${p}/ready`] = false;
+                    updates[`players/${p}/vote`] = null;
+                }
+                Core.roomRef.update(updates);
+            },
+            setReady: () => { Core.roomRef.child('players/' + Core.myName).update({ready: true}); },
+            renderPlayers: (containerId, sortByScore = false, showAnswers = false, showKick = false) => {
+                const c = document.getElementById(containerId); c.innerHTML = '';
+                let players = Core.gameData.players || {};
+                let arr = Object.keys(players).map(k => ({ name: k, ...players[k] }));
+                if(sortByScore) arr.sort((a,b) => b.score - a.score);
+                
+                arr.forEach(p => {
+                    let kickHtml = (showKick && p.name !== Core.myName) ? `<button class="btn-small btn-danger" onclick="Core.kickPlayer('${p.name}')"><i class="fa-solid fa-user-slash"></i></button>` : '';
+                    let ansHtml = showAnswers ? `<span class="ans-text">${p.answer || '❌'}</span>` : '';
+                    let readyHtml = p.ready ? '🙋‍♂️' : '';
+                    let roleIcon = (p.name === Core.gameData.host) ? '<i class="fa-solid fa-crown" style="color:gold;"></i> ' : '';
 
-        // 14. مساعدة: عرض اللاعبين وإجاباتهم
-        function renderPlayers(containerId, sortByScore = false, showAnswers = false) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            let players = gameData.players || {};
-            
-            let pArray = Object.keys(players).map(k => ({ 
-                name: k, 
-                score: players[k].score,
-                answer: players[k].answer 
-            }));
-            
-            if (sortByScore) {
-                pArray.sort((a, b) => b.score - a.score);
-            }
-
-            pArray.forEach(p => {
-                let answerHtml = showAnswers ? `<div style="color:var(--c2); font-size:16px; margin-top:5px; text-align:left;">الإجابة: ${p.answer || 'لم يجاوب ❌'}</div>` : '';
-                container.innerHTML += `
-                    <div class="player-row">
-                        <div class="player-score">
-                            <span>الزعبل : ${p.name}</span>
-                            <span style="color:var(--c5); font-weight:bold;">${p.score} نقطة</span>
+                    c.innerHTML += `<div class="player-card" style="flex-direction:column; align-items:stretch;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="player-info">${p.avatar} ${roleIcon}${p.name} ${readyHtml}</span>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span class="player-score">${p.score} نقطة</span>
+                                ${kickHtml}
+                            </div>
                         </div>
-                        ${answerHtml}
-                    </div>
-                `;
-            });
+                        ${ansHtml}
+                    </div>`;
+                });
+            }
+        };
+
+        // ==========================================
+        // 5. محرك الصوت (Push-To-Talk) WebRTC/Base64
+        // ==========================================
+        let mediaRecorder; let audioChunks = [];
+        const AudioEngine = {
+            listenToVoice: () => {
+                Core.audioRef.on('child_added', snap => {
+                    let data = snap.val();
+                    if(data.sender !== Core.myName && (Date.now() - data.time < 10000)) {
+                        let audio = new Audio(data.audioUrl);
+                        audio.play().catch(e => console.log(e));
+                    }
+                    // تنظيف تلقائي للرسالة بعد سماعها
+                    snap.ref.remove();
+                });
+            }
+        };
+
+        async function startMic() {
+            if(!navigator.mediaDevices) return UI.showToast("المايك مش مدعوم في المتصفح ده");
+            document.getElementById('ptt-btn').classList.add('recording');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+                audioChunks = [];
+                mediaRecorder.addEventListener("dataavailable", event => { audioChunks.push(event.data); });
+                mediaRecorder.addEventListener("stop", () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const reader = new FileReader();
+                    reader.readAsDataURL(audioBlob);
+                    reader.onloadend = () => {
+                        let base64Audio = reader.result;
+                        Core.audioRef.push({ sender: Core.myName, audioUrl: base64Audio, time: Date.now() });
+                    };
+                    stream.getTracks().forEach(track => track.stop());
+                });
+            } catch(e) { UI.showToast("اقبل صلاحية المايك يا زعبل!"); document.getElementById('ptt-btn').classList.remove('recording'); }
         }
+
+        function stopMic() {
+            document.getElementById('ptt-btn').classList.remove('recording');
+            if(mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+        }
+
+        // تشغيل الأساسيات
+        window.onload = Core.init;
     </script>
 </body>
 </html>
