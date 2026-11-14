@@ -104,7 +104,6 @@ label:first-child{margin-top:0;}
 .avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px;max-height:230px;overflow-y:auto;padding:6px 2px;-webkit-overflow-scrolling:touch;}
 .av{aspect-ratio:1/1;border-radius:14px;font-size:24px;background:rgba(255,255,255,.06);border:2px solid transparent;padding:0;display:flex;align-items:center;justify-content:center;}
 .av.sel{border-color:#ff2e9a;background:rgba(255,46,154,.20);box-shadow:0 0 16px rgba(255,46,154,.55);}
-.av.taken{opacity:.32;filter:grayscale(1);pointer-events:none;position:relative;}
 
 .chip-row{display:flex;gap:10px;flex-wrap:wrap;}
 .chip{
@@ -132,7 +131,6 @@ label:first-child{margin-top:0;}
 #game-timer{color:#00f0ff;text-shadow:0 0 14px rgba(0,240,255,.6);min-width:74px;text-align:center;}
 #game-score{color:#22ff88;text-shadow:0 0 14px rgba(34,255,136,.5);}
 
-/* Sticky hint bar */
 .game-hint{
   position:sticky;top:56px;z-index:19;
   font-size:11px;font-weight:700;color:#c9b6ff;
@@ -154,8 +152,6 @@ label:first-child{margin-top:0;}
 .waiting{text-align:center;font-size:15px;font-weight:800;color:#a797c9;padding:18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.16);}
 .ok-box{text-align:center;font-size:15px;font-weight:800;color:#06231a;padding:16px;border-radius:16px;background:linear-gradient(135deg,#22ff88,#0ea5a4);box-shadow:0 8px 26px rgba(34,255,136,.3);word-break:break-word;}
 .answered-count{text-align:center;font-size:14px;font-weight:800;color:#c9b6ff;padding:8px;}
-
-/* Simple timer text (no bar) */
 .timer-big{text-align:center;font-size:34px;font-weight:900;color:#00f0ff;text-shadow:0 0 22px rgba(0,240,255,.65);padding:6px;letter-spacing:2px;line-height:1;}
 
 .list{display:flex;flex-direction:column;gap:9px;}
@@ -222,10 +218,10 @@ label:first-child{margin-top:0;}
 @keyframes unmaskAnim{0%{filter:blur(24px);opacity:0;transform:scale(.8)}100%{filter:blur(0);opacity:1;transform:scale(1)}}
 .unmask{animation:unmaskAnim 1.4s ease-out;}
 
-/* ====== Cartoon Track ====== */
-.bd-track-wrap{margin:10px 0 16px;padding:8px 4px 0;}
+/* ====== Cartoon Track (no periodic animation) ====== */
+.bd-track-wrap{margin:10px 0 22px;padding:8px 4px 12px;}
 .bd-track{
-  position:relative;height:76px;border-radius:20px;
+  position:relative;height:80px;border-radius:20px;
   background:
     repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 24px,transparent 24px 48px),
     linear-gradient(90deg,rgba(34,255,136,.10),rgba(0,240,255,.08) 50%,rgba(255,46,94,.12));
@@ -238,26 +234,22 @@ label:first-child{margin-top:0;}
 .bd-track .danger-line{position:absolute;top:0;bottom:0;width:2px;background:#ff2e5e;box-shadow:0 0 14px #ff2e5e;z-index:1;}
 .bd-track .danger-line::before{content:'⚠️';position:absolute;top:-14px;left:-8px;font-size:11px;}
 .bd-track .finish-line{position:absolute;top:0;bottom:0;right:0;width:10px;background:repeating-linear-gradient(0deg,#ffd166 0 8px,#0b0518 8px 16px);border-radius:0 18px 18px 0;z-index:1;}
-.bd-track .bd-num{position:absolute;top:100%;transform:translateX(-50%);font-size:10px;font-weight:800;color:#8d7fb0;margin-top:2px;}
-.bd-track .bd-num.major{color:#ffd166;font-size:12px;}
+.bd-track .bd-num{position:absolute;top:100%;transform:translateX(-50%);font-size:10px;font-weight:800;color:#8d7fb0;margin-top:3px;white-space:nowrap;}
+.bd-track .bd-num.major{color:#ffd166;font-size:12px;font-weight:900;}
 
-/* Hop-in animation for tokens */
-@keyframes hopIn{
-  0%{transform:translateY(24px) scale(.4);opacity:0;}
-  55%{transform:translateY(-10px) scale(1.15);opacity:1;}
-  100%{transform:translateY(0) scale(1);opacity:1;}
-}
+/* Token: STATIC by default. Only slides when position changes. */
 .bd-token{
-  position:absolute;transform:translateX(-50%);
+  position:absolute;
+  transform:translateX(-50%);
   font-size:22px;line-height:1;
   filter:drop-shadow(0 3px 5px rgba(0,0,0,.7));
   z-index:2;
-  animation:hopIn .55s cubic-bezier(.34,1.56,.64,1);
-  will-change:transform;
+  transition:none;
 }
 .bd-token.me{font-size:26px;filter:drop-shadow(0 0 8px rgba(255,46,154,.8)) drop-shadow(0 3px 5px rgba(0,0,0,.7));}
 .bd-token.frozen{filter:hue-rotate(180deg) brightness(1.35) drop-shadow(0 0 6px rgba(100,200,255,.9));}
 .bd-token.baiDonRevealed{font-size:26px;filter:drop-shadow(0 0 10px rgba(255,46,94,.9));}
+.bd-token.sliding{transition:left .65s cubic-bezier(.34,1.56,.64,1);}
 
 .num-chip{flex:1 1 0;min-width:52px;font-size:20px;font-weight:900;padding:14px 8px;border-radius:14px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);color:#fff;}
 .num-chip.on{background:linear-gradient(135deg,rgba(34,255,136,.35),rgba(0,240,255,.25));border-color:#22ff88;box-shadow:0 0 16px rgba(34,255,136,.5);}
@@ -281,7 +273,6 @@ label:first-child{margin-top:0;}
 .event-line.elim{background:rgba(120,120,120,.14);border-color:rgba(200,200,200,.4);}
 .event-line.vote{background:rgba(168,85,247,.16);border-color:rgba(168,85,247,.45);}
 
-/* Intro role screen */
 .intro-card{text-align:center;padding:32px 20px;border-radius:24px;position:relative;overflow:hidden;}
 .intro-card.bd{background:linear-gradient(160deg,rgba(255,46,94,.30),rgba(168,85,247,.22));border:2px solid rgba(255,46,94,.55);box-shadow:0 0 60px rgba(255,46,94,.35);}
 .intro-card.runner{background:linear-gradient(160deg,rgba(34,255,136,.25),rgba(0,240,255,.18));border:2px solid rgba(34,255,136,.55);box-shadow:0 0 60px rgba(34,255,136,.30);}
@@ -294,6 +285,32 @@ label:first-child{margin-top:0;}
 
 .force-stop{position:fixed;bottom:16px;right:16px;z-index:9100;width:44px;height:44px;border-radius:50%;font-size:16px;padding:0;background:rgba(255,46,94,.85);color:#fff;box-shadow:0 6px 20px rgba(255,46,94,.5);opacity:.55;}
 .force-stop:active{opacity:1;}
+
+/* ============================================================
+   🔥 HEAT REDUCTION — mobile + reduced-motion + hidden tab
+   ============================================================ */
+@media (max-width: 640px){
+  .orb.a{filter:blur(28px);width:170px;height:170px;opacity:.30;}
+  .orb.b{filter:blur(24px);width:150px;height:150px;opacity:.30;}
+  .orb.c{display:none;}
+  .card{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .pill, .game-hint{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+  #loading-overlay{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+  .logo{filter:drop-shadow(0 2px 14px rgba(255,46,154,.35));}
+  body{background-size:200% 200%;animation-duration:30s;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  body{animation:none !important;background-size:100% 100% !important;}
+  .bd-token{transition:none !important;}
+}
+body.tab-hidden *, body.tab-hidden *::before, body.tab-hidden *::after{
+  animation-play-state: paused !important;
+}
 </style>
 </head>
 <body>
@@ -527,7 +544,6 @@ const Core = {
       for (let i = 0; i < keys.length; i++){
         if (players[keys[i]] && players[keys[i]].name === name) throw new Error('NAME_TAKEN');
       }
-      // Avatar uniqueness check (only for new players)
       for (let i = 0; i < keys.length; i++){
         if (players[keys[i]] && players[keys[i]].avatar === avatar) throw new Error('AVATAR_TAKEN');
       }
@@ -542,7 +558,6 @@ const Core = {
       localStorage.setItem('zab_uid_' + pin, uid);
       return uid;
     }
-    // Reconnection - preserve all state
     await db.ref('rooms/' + pin + '/players/' + uid).update({ online: true, lastSeen: Date.now() });
     await db.ref('rooms/' + pin).update({ lastActivity: Date.now() });
     localStorage.setItem('zab_uid_' + pin, uid);
@@ -698,7 +713,7 @@ function countAnswered(room){
 }
 
 /* ================================================================
-   5) BoxGame (unchanged logic, minor fix for sig-related hang)
+   5) BoxGame (unchanged)
    ================================================================ */
 const BoxGame = {
   computeRound(answers, answererIds, doubleRound){
@@ -1144,9 +1159,11 @@ const BoxGame = {
 };
 
 /* ================================================================
-   6) BaiDonGame — REFACTORED
+   6) BaiDonGame — Final version
    ================================================================ */
 const BaiDonGame = {
+  _lastPositions: {},
+
   getConfig(count){
     if (count <= 3) return { target: 20, maxNum: 3, middleLine: 10, dangerZone: 15 };
     if (count <= 5) return { target: 30, maxNum: 4, middleLine: 15, dangerZone: 23 };
@@ -1165,7 +1182,6 @@ const BaiDonGame = {
     };
   },
 
-  // ------------------------------------------------------------
   async hostStart(){
     if (!App.isHost || !App.room) return;
     const players = App.room.players || {};
@@ -1176,6 +1192,8 @@ const BaiDonGame = {
     if (candidateIds.length < 2){ toast('محتاج لاعبين غير الهوست على الأقل', 'err'); return; }
     const baiDonId = candidateIds[Math.floor(Math.random() * candidateIds.length)];
     const baiDonRevealed = ids.length <= 2;
+
+    BaiDonGame._lastPositions = {};
 
     const playerState = {};
     ids.forEach(function(id){
@@ -1232,7 +1250,7 @@ const BaiDonGame = {
     } catch (e){ toast('مشكلة', 'err'); }
   },
 
-  // ------------------------------------------------------------
+  // ✅ FIX: disguise => don't set move
   async submitAction(move, attackNum, disguise){
     if (!App.room || !App.room.game) return;
     const g = App.room.game;
@@ -1246,9 +1264,10 @@ const BaiDonGame = {
 
     const action = {};
     if (amBaiDon){
-      if (!isRevealed) action.move = move;
+      const disguiseOn = disguise && myPs.hearts > 1;
+      if (!isRevealed && !disguiseOn) action.move = move;   // ← مش بنحفظ move لو مموّه
       action.attack = attackNum;
-      if (disguise && myPs.hearts > 1) action.disguise = true;
+      if (disguiseOn) action.disguise = true;
     } else {
       if (!move) return;
       action.move = move;
@@ -1258,7 +1277,6 @@ const BaiDonGame = {
     catch (e){ toast('مشكلة في الاتصال', 'err'); }
   },
 
-  // ------------------------------------------------------------
   resolveBusy: false,
   async hostResolve(){
     if (!App.room || !App.room.game) return;
@@ -1294,7 +1312,7 @@ const BaiDonGame = {
         }
       }
 
-      // 1. BaiDon attack (against runners)
+      // 1. BaiDon attack (against runners only)
       if (effectiveAttack){
         Object.keys(actions).forEach(function(uid){
           if (uid === baiDonId) return;
@@ -1318,7 +1336,7 @@ const BaiDonGame = {
         });
       }
 
-      // 2. Disguise: baiDon attacks himself (real heart loss, appears in events)
+      // 2. Disguise: baiDon attacks HIMSELF (real heart loss)
       const bdPs = ps[baiDonId];
       if (wantDisguise && bdPs && !bdPs.eliminated && bdPs.hearts > 1){
         bdPs.hearts -= 1;
@@ -1335,9 +1353,14 @@ const BaiDonGame = {
           return;
         }
         if (hitThisRound[uid]) return;
+
+        // ✅ KEY FIX: disguise = no movement for baiDon
+        if (wantDisguise && uid === baiDonId) return;
+
         if (uid === baiDonId && baiDonRevealed) return;
         const a = actions[uid];
         if (!a || !a.move) return;
+
         const prevPos = p.pos;
         p.pos = Math.min(target, p.pos + a.move);
         if (prevPos < middleLine && p.pos >= middleLine && !p.crossedMiddle){
@@ -1426,7 +1449,6 @@ const BaiDonGame = {
       await App.roomRef.update(updates);
       App.sig = '';
 
-      // Local animations
       events.forEach(function(ev){
         if (ev.uid === App.uid){
           if (ev.type === 'hit' && !ev.disguise){
@@ -1451,7 +1473,6 @@ const BaiDonGame = {
     }
   },
 
-  // ------------------------------------------------------------
   async hostNextRound(){
     if (!App.isHost || !App.room) return;
     const g = App.room.game;
@@ -1478,7 +1499,6 @@ const BaiDonGame = {
     } catch (e){ toast('مشكلة', 'err'); }
   },
 
-  // ------------------------------------------------------------
   async castVote(targetId){
     if (!App.room || !App.room.game || App.room.game.phase !== 'vote') return;
     if (targetId === App.uid){ toast('متقدرش تصوت لنفسك', 'err'); return; }
@@ -1559,7 +1579,6 @@ const BaiDonGame = {
     } catch (e){ toast('مشكلة', 'err'); }
   },
 
-  // ------------------------------------------------------------
   async submitEndGuess(targetId){
     if (!App.room || !App.room.game) return;
     const g = App.room.game;
@@ -1589,7 +1608,6 @@ const BaiDonGame = {
     catch (e){ toast('مشكلة', 'err'); }
   },
 
-  // ------------------------------------------------------------
   async hostPlayAgain(){
     if (!App.isHost) return;
     try { await setGame({ phase: 'playAgain', ready: null }); App.sig = ''; }
@@ -1614,6 +1632,7 @@ const BaiDonGame = {
       const candidateIds = room.hostMode === 'judge' ? ids.filter(id => id !== room.hostId) : ids;
       const baiDonId = candidateIds[Math.floor(Math.random() * candidateIds.length)];
       const baiDonRevealed = ids.length <= 2;
+      BaiDonGame._lastPositions = {};
       const playerState = {};
       ids.forEach(function(id){
         playerState[id] = { pos: 0, hearts: 3, frozen: 0, eliminated: false, lastHitRound: 0, crossedMiddle: false, inDanger: false };
@@ -1644,9 +1663,6 @@ const BaiDonGame = {
     finally { setTimeout(function(){ BaiDonGame.restartBusy = false; }, 1200); }
   },
 
-  // ------------------------------------------------------------
-  // BUILD UI
-  // ------------------------------------------------------------
   build(room, g, phase, round){
     const wrap = el('div', 'phase');
     const isHost = App.isHost;
@@ -1671,7 +1687,7 @@ const BaiDonGame = {
     return wrap;
   },
 
-  // ---------- TRACK ----------
+  // ---------- TRACK: static by default, slide only when position changes ----------
   buildTrack(room, g){
     const wrap = el('div', 'bd-track-wrap');
     const track = el('div', 'bd-track');
@@ -1689,42 +1705,61 @@ const BaiDonGame = {
       track.appendChild(m);
     });
 
-    // Mid line
     const midPct = ((g.middleLine || 10) / target) * 100;
     const mid = el('div', 'mid-line');
     mid.style.left = midPct + '%';
     track.appendChild(mid);
 
-    // Danger line
     const dngPct = ((g.dangerZone || 15) / target) * 100;
     const dng = el('div', 'danger-line');
     dng.style.left = dngPct + '%';
     track.appendChild(dng);
 
-    // Finish
     track.appendChild(el('div', 'finish-line'));
 
-    // Tokens (only non-eliminated)
+    // Tokens — sorted by joinedAt for stable vertical position
     const ids = Object.keys(room.players || {}).filter(function(uid){
       const p = ps[uid];
       return p && !p.eliminated;
     });
-    ids.sort(function(a, b){ return (ps[a].pos || 0) - (ps[b].pos || 0); });
+    ids.sort(function(a, b){
+      return (room.players[a].joinedAt || 0) - (room.players[b].joinedAt || 0);
+    });
 
     ids.forEach(function(uid, i){
       const p = ps[uid];
       const player = room.players[uid];
       if (!player) return;
+
       const token = el('div', 'bd-token' + (uid === App.uid ? ' me' : '') + (p.frozen > 0 ? ' frozen' : '') + (uid === g.baiDonId && g.baiDonRevealed ? ' baiDonRevealed' : ''));
-      const pct = (p.pos / target) * 100;
-      token.style.left = pct + '%';
-      token.style.top = (i % 3 === 0 ? '20%' : (i % 3 === 1 ? '45%' : '70%'));
+      token.style.top = (i % 3 === 0 ? '18%' : (i % 3 === 1 ? '44%' : '70%'));
+
       let display = player.avatar;
       if (uid === g.baiDonId && g.baiDonRevealed) display = '🎭';
       token.textContent = display;
       token.title = (player.name || '') + ' — ' + p.pos + '/' + target + ' ❤️' + p.hearts;
+
+      const newPct = (p.pos / target) * 100;
+      const prevPos = BaiDonGame._lastPositions[uid];
+
+      if (prevPos !== undefined && prevPos !== p.pos){
+        // Position changed → animate from old to new
+        const oldPct = (prevPos / target) * 100;
+        token.style.left = oldPct + '%';
+        token.style.transition = 'none';
+        // Force reflow
+        void token.offsetWidth;
+        token.classList.add('sliding');
+        token.style.left = newPct + '%';
+      } else {
+        // Static position
+        token.style.left = newPct + '%';
+      }
+
       track.appendChild(token);
+      BaiDonGame._lastPositions[uid] = p.pos;
     });
+
     wrap.appendChild(track);
     return wrap;
   },
@@ -1784,7 +1819,6 @@ const BaiDonGame = {
 
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
 
-    // Timer text (no re-render)
     const timerText = el('div', 'timer-big'); timerText.id = 'bd-timer-text';
     timerText.textContent = '--';
     wrap.appendChild(timerText);
@@ -1802,99 +1836,118 @@ const BaiDonGame = {
     } else if (submitted){
       wrap.appendChild(el('div', 'ok-box', '✅ تم إرسال حركتك -- في انتظار الباقي…'));
     } else {
-      // Move selection (hidden for revealed baiDon)
+      // Move selection
+      let selMove = null;
+      let moveRow = null;
       if (!(amBaiDon && isRevealed)){
         wrap.appendChild(el('div', 'q-label', amBaiDon ? 'حركتك (تمويه):' : 'حركتك (تقدمك):'));
-        const moveRow = el('div', 'chip-row');
-        let selMove = null;
+        moveRow = el('div', 'chip-row');
         for (let n = 1; n <= g.maxNum; n++){
           const b = el('button', 'num-chip', String(n));
           b.type = 'button'; b.dataset.move = n;
           b.onclick = function(){
+            if (b.disabled) return;
             moveRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
             b.classList.add('on'); selMove = n;
-            updateSubmitState();
+            if (window._bdUpdateSubmit) window._bdUpdateSubmit();
           };
           moveRow.appendChild(b);
         }
         wrap.appendChild(moveRow);
-        window._bdSelMove = function(){ return selMove; };
-        window._bdClearMove = function(){ selMove = null; };
       }
 
-      // Attack selection (only baiDon, or turret)
+      // Attack selection (only baiDon/turret)
       let selAttack = null;
+      let atkRow = null;
       if (amBaiDon){
         wrap.appendChild(el('div', 'q-label', 'رقم الهجوم (توقع رقم الزعبول):'));
-        const atkRow = el('div', 'chip-row');
+        atkRow = el('div', 'chip-row');
         for (let n = 1; n <= g.maxNum; n++){
           const b = el('button', 'num-chip attack', String(n));
           b.type = 'button'; b.dataset.attack = n;
           b.onclick = function(){
             atkRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
             b.classList.add('on'); selAttack = n;
-            updateSubmitState();
+            if (window._bdUpdateSubmit) window._bdUpdateSubmit();
           };
           atkRow.appendChild(b);
         }
         wrap.appendChild(atkRow);
-        window._bdSelAttack = function(){ return selAttack; };
 
-        // Disguise button (only for hidden baiDon with >1 heart)
-        if (!isRevealed){
+        // Disguise toggle
+        if (!isRevealed && canAffordDisguise){
           let disguiseOn = false;
           const disRow = el('div', 'chip-row');
-          const disBtn = el('button', 'chip disguise-chip' + (canAffordDisguise ? '' : ' hidden'), '🎭 تمويه (تفقد قلب)');
+          const disBtn = el('button', 'chip disguise-chip', '🎭 تمويه (تفقد قلب)');
           disBtn.type = 'button';
-          if (!canAffordDisguise){
-            disBtn.classList.add('hidden');
-          } else {
-            disBtn.onclick = function(){
-              disguiseOn = !disguiseOn;
-              disBtn.classList.toggle('on', disguiseOn);
-              disBtn.textContent = disguiseOn ? '🎭 تمويه مُفعّل ✓' : '🎭 تمويه (تفقد قلب)';
-            };
-          }
+          const noteEl = el('div', 'tiny hidden');
+          noteEl.id = 'bd-disguise-note';
+          noteEl.style.color = '#ffb020';
+          noteEl.style.fontWeight = '900';
+          noteEl.textContent = '🚫 التمويه شغّال — مش هتتحرك الجولة دي (لازم تبان كأنك اتضربت)';
+          disBtn.onclick = function(){
+            disguiseOn = !disguiseOn;
+            disBtn.classList.toggle('on', disguiseOn);
+            disBtn.textContent = disguiseOn ? '🎭 تمويه مُفعّل ✓' : '🎭 تمويه (تفقد قلب)';
+            noteEl.classList.toggle('hidden', !disguiseOn);
+            if (disguiseOn){
+              // Clear move selection + disable move chips
+              if (moveRow){
+                moveRow.querySelectorAll('.num-chip').forEach(function(c){
+                  c.classList.remove('on'); c.disabled = true; c.style.opacity = '0.35';
+                });
+              }
+              selMove = null;
+            } else {
+              if (moveRow){
+                moveRow.querySelectorAll('.num-chip').forEach(function(c){
+                  c.disabled = false; c.style.opacity = '1';
+                });
+              }
+            }
+            if (window._bdUpdateSubmit) window._bdUpdateSubmit();
+          };
           disRow.appendChild(disBtn);
           wrap.appendChild(disRow);
+          wrap.appendChild(noteEl);
+          wrap.appendChild(el('div', 'tiny', 'التمويه: هتظهر إنك اتضربت واسمك هيظهر في الضحايا — هتخسر قلب حقيقي. الفرصة دي بتخلي الشك بعيد عنك.'));
           window._bdSelDisguise = function(){ return disguiseOn; };
-
-          if (canAffordDisguise){
-            wrap.appendChild(el('div', 'tiny', 'تمويه: هتظهر إنك اتضربت واسمك هيظهر في الضحايا -- هتخسر قلب حقيقي. الفرصة دي بتخلي الشك بعيد عنك.'));
-          } else {
-            wrap.appendChild(el('div', 'tiny', 'التمويه مش متاح -- لازم يكون عندك أكتر من قلب.'));
-          }
+        } else {
+          window._bdSelDisguise = function(){ return false; };
         }
+
+        window._bdSelAttack = function(){ return selAttack; };
       }
 
+      // Submit
       const submitBtn = el('button', 'primary block', 'إرسال ✅');
       submitBtn.disabled = true;
       const updateSubmitState = function(){
-        const needsMove = !(amBaiDon && isRevealed);
-        const moveOk = !needsMove || (window._bdSelMove && window._bdSelMove());
-        const attackOk = !amBaiDon || (window._bdSelAttack && window._bdSelAttack());
+        const disguising = amBaiDon && !isRevealed && (window._bdSelDisguise && window._bdSelDisguise());
+        const needsMove = !(amBaiDon && isRevealed) && !disguising;
+        const moveOk = !needsMove || !!selMove;
+        const attackOk = !amBaiDon || !!selAttack;
         submitBtn.disabled = !(moveOk && attackOk);
       };
-      // Attach watchers via polling not needed -- we call updateSubmitState on each chip click
       window._bdUpdateSubmit = updateSubmitState;
+      window._bdSelMove = function(){ return selMove; };
+
       submitBtn.onclick = function(){
-        const needsMove = !(amBaiDon && isRevealed);
-        const move = needsMove ? (window._bdSelMove && window._bdSelMove()) : null;
-        const attack = amBaiDon ? (window._bdSelAttack && window._bdSelAttack()) : null;
-        const disguise = amBaiDon && !isRevealed ? (window._bdSelDisguise && window._bdSelDisguise()) : false;
+        const disguising = amBaiDon && !isRevealed && (window._bdSelDisguise && window._bdSelDisguise());
+        const needsMove = !(amBaiDon && isRevealed) && !disguising;
+        const move = needsMove ? selMove : null;
+        const attack = amBaiDon ? selAttack : null;
         if (needsMove && !move){ toast('اختار حركة الأول', 'err'); return; }
         if (amBaiDon && !attack){ toast('اختار رقم الهجوم', 'err'); return; }
-        BaiDonGame.submitAction(move, attack, disguise);
+        BaiDonGame.submitAction(move, attack, disguising);
         submitBtn.disabled = true; submitBtn.textContent = 'تم الإرسال ✅';
       };
       wrap.appendChild(submitBtn);
     }
 
-    // Counter (updated separately)
     const counter = el('div', 'answered-count'); counter.id = 'bd-action-counter';
     wrap.appendChild(counter);
 
-    // Host controls
     if (isHost && App.room.hostMode !== 'auto'){
       const endBtn = el('button', 'warn block', 'إنهاء الجولة يدوياً ⏹');
       endBtn.onclick = function(){ BaiDonGame.hostResolve(); };
@@ -1911,7 +1964,6 @@ const BaiDonGame = {
       if (fs) fs.remove();
     }
 
-    // Initial counter
     setTimeout(function(){
       if ($('bd-action-counter')){
         const ps2 = g.playerState || {};
@@ -1962,7 +2014,6 @@ const BaiDonGame = {
       wrap.appendChild(el('div', 'waiting', 'مفيش أحداث غريبة الجولة دي…'));
     }
 
-    // Player states (only non-eliminated)
     const list = el('div', 'list');
     const ps = g.playerState || {};
     const sorted = Object.keys(room.players || {}).map(function(id){ return Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }); })
@@ -2106,7 +2157,6 @@ const BaiDonGame = {
       '<div class="tiny" style="margin-top:8px;color:#fff">' + esc(finalMessage) + '</div>';
     wrap.appendChild(box);
 
-    // Standings (non-eliminated only)
     const ps = g.playerState || {};
     const list = el('div', 'list');
     const sorted = Object.keys(room.players || {}).map(function(id){ return Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }); })
@@ -2241,7 +2291,6 @@ function renderGame(){
     $('game-score').textContent = 'نقاطك: ' + (me ? (me.score || 0) : 0);
   }
 
-  // Sig - critical: don't include actions for action phase (prevents re-render / keyboard dismiss)
   let sig;
   if (room.gameType === 'baidon'){
     if (phase === 'action'){
@@ -2270,7 +2319,6 @@ function renderGame(){
   body.appendChild(gameObj.build(room, g, phase, round));
 }
 
-/* --------- Context hint (sticky top bar) --------- */
 function updateGameHint(){
   const bar = $('game-hint');
   if (!bar) return;
@@ -2385,7 +2433,7 @@ function stopRecording(){
 }
 
 /* ================================================================
-   10) Global timer (updates text only - no re-render)
+   10) Global timer
    ================================================================ */
 setInterval(function(){
   const room = App.room;
@@ -2398,7 +2446,6 @@ setInterval(function(){
     if (g.phase === 'action' && g.timerEnd){
       const leftMs = g.timerEnd - Date.now();
       const left = Math.max(0, Math.ceil(leftMs / 1000));
-      // Update pill only when second changes (avoid iOS keyboard dismiss)
       if (timerPill && timerPill.getAttribute('data-val') !== String(left)){
         timerPill.textContent = '⏱ ' + left + 'ث';
         timerPill.setAttribute('data-val', String(left));
@@ -2408,7 +2455,6 @@ setInterval(function(){
         txtEl.textContent = '⏱ ' + left + ' ثانية';
         txtEl.setAttribute('data-val', String(left));
       }
-      // Update counter
       const counter = $('bd-action-counter');
       if (counter){
         const ps = g.playerState || {};
@@ -2425,7 +2471,6 @@ setInterval(function(){
           counter.textContent = str;
           counter.setAttribute('data-val', str);
         }
-        // All acted? -> resolve early
         if (needed.length > 0 && done >= needed.length && leftMs > 800){
           BaiDonGame.hostResolve();
         }
@@ -2439,7 +2484,6 @@ setInterval(function(){
       if (txtEl && g.phase !== 'action') txtEl.textContent = '';
     }
 
-    // Auto-advance in auto mode
     if (App.isHost && room.hostMode === 'auto'){
       if (g.phase === 'intro'){
         const ready = g.introReady || {};
@@ -2468,7 +2512,6 @@ setInterval(function(){
       }
     }
 
-    // Non-auto: host can advance intro when all ready (auto too but handled above)
     if (App.isHost && g.phase === 'intro' && !BaiDonGame._introCheckTimer){
       BaiDonGame._introCheckTimer = setInterval(function(){
         if (!App.room || App.room.game.phase !== 'intro'){ clearInterval(BaiDonGame._introCheckTimer); BaiDonGame._introCheckTimer = null; return; }
@@ -2483,7 +2526,6 @@ setInterval(function(){
       }, 700);
     }
   } else {
-    // BoxGame
     if (g.phase === 'answering' && g.timerEnd){
       const leftMs = g.timerEnd - Date.now();
       const left = Math.max(0, Math.ceil(leftMs / 1000));
@@ -2655,6 +2697,11 @@ function bindEvents(){
 
   window.addEventListener('pagehide', function(){
     try { if (App.roomRef && App.uid) App.roomRef.child('players/' + App.uid).update({ online: false }); } catch(e){}
+  });
+
+  // 🔥 Heat reduction: pause all animations when tab hidden
+  document.addEventListener('visibilitychange', function(){
+    document.body.classList.toggle('tab-hidden', document.hidden);
   });
 }
 
