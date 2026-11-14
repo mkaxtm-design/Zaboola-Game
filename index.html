@@ -22,7 +22,6 @@ body{
   padding-bottom:env(safe-area-inset-bottom);
 }
 @keyframes bgmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-
 .orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.42;pointer-events:none;z-index:0;}
 .orb.a{width:250px;height:250px;background:#ff2e9a;top:-70px;right:-70px;animation:float1 15s ease-in-out infinite;}
 .orb.b{width:230px;height:230px;background:#00f0ff;bottom:-80px;left:-80px;animation:float2 18s ease-in-out infinite;}
@@ -105,6 +104,7 @@ label:first-child{margin-top:0;}
 .avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px;max-height:230px;overflow-y:auto;padding:6px 2px;-webkit-overflow-scrolling:touch;}
 .av{aspect-ratio:1/1;border-radius:14px;font-size:24px;background:rgba(255,255,255,.06);border:2px solid transparent;padding:0;display:flex;align-items:center;justify-content:center;}
 .av.sel{border-color:#ff2e9a;background:rgba(255,46,154,.20);box-shadow:0 0 16px rgba(255,46,154,.55);}
+.av.taken{opacity:.32;filter:grayscale(1);pointer-events:none;position:relative;}
 
 .chip-row{display:flex;gap:10px;flex-wrap:wrap;}
 .chip{
@@ -127,10 +127,25 @@ label:first-child{margin-top:0;}
 .pcard .off-tag{font-size:10px;font-weight:800;color:#ff6b8a;margin-top:2px;}
 .pcard .kick{position:absolute;top:-7px;left:-7px;width:24px;height:24px;min-width:24px;border-radius:50%;font-size:12px;padding:0;font-weight:900;background:linear-gradient(135deg,#ff2e5e,#ff5e3a);color:#fff;box-shadow:0 4px 12px rgba(255,46,94,.5);}
 
-.game-topbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:14px;position:sticky;top:8px;z-index:20;}
+.game-topbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:8px;position:sticky;top:8px;z-index:20;}
 .pill{background:rgba(22,10,40,.88);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:900;color:#e5d9ff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);white-space:nowrap;}
 #game-timer{color:#00f0ff;text-shadow:0 0 14px rgba(0,240,255,.6);min-width:74px;text-align:center;}
 #game-score{color:#22ff88;text-shadow:0 0 14px rgba(34,255,136,.5);}
+
+/* Sticky hint bar */
+.game-hint{
+  position:sticky;top:56px;z-index:19;
+  font-size:11px;font-weight:700;color:#c9b6ff;
+  background:rgba(22,10,40,.88);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:10px;
+  padding:6px 12px;
+  text-align:center;
+  margin-bottom:10px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  line-height:1.5;
+}
+.game-hint.hidden{display:none;}
 
 .phase{display:flex;flex-direction:column;gap:14px;}
 .phase-title{font-size:19px;font-weight:900;text-align:center;margin:0;background:linear-gradient(120deg,#ff2e9a,#00f0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 12px rgba(255,46,154,.35));}
@@ -139,9 +154,9 @@ label:first-child{margin-top:0;}
 .waiting{text-align:center;font-size:15px;font-weight:800;color:#a797c9;padding:18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.16);}
 .ok-box{text-align:center;font-size:15px;font-weight:800;color:#06231a;padding:16px;border-radius:16px;background:linear-gradient(135deg,#22ff88,#0ea5a4);box-shadow:0 8px 26px rgba(34,255,136,.3);word-break:break-word;}
 .answered-count{text-align:center;font-size:14px;font-weight:800;color:#c9b6ff;padding:8px;}
-.tbar{height:9px;border-radius:99px;background:rgba(255,255,255,.10);overflow:hidden;}
-.tbar-fill{height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#22ff88,#00f0ff 55%,#ff2e9a);transition:width .25s linear;}
-#ans-area{display:flex;flex-direction:column;gap:10px;}
+
+/* Simple timer text (no bar) */
+.timer-big{text-align:center;font-size:34px;font-weight:900;color:#00f0ff;text-shadow:0 0 22px rgba(0,240,255,.65);padding:6px;letter-spacing:2px;line-height:1;}
 
 .list{display:flex;flex-direction:column;gap:9px;}
 .row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);}
@@ -192,7 +207,7 @@ label:first-child{margin-top:0;}
 .center{text-align:center;}
 .crown{color:#ffd166;font-size:14px;}
 
-/* ====== ANIMATIONS (BaiDon) ====== */
+/* ====== BaiDon Animations ====== */
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
 .shake{animation:shake .5s ease-in-out;}
 @keyframes redflash{0%{background:rgba(255,0,0,.55)}100%{background:transparent}}
@@ -206,28 +221,57 @@ label:first-child{margin-top:0;}
 .danger-zone{animation:dangerPulse 1.8s infinite;border-color:rgba(255,46,94,.5) !important;}
 @keyframes unmaskAnim{0%{filter:blur(24px);opacity:0;transform:scale(.8)}100%{filter:blur(0);opacity:1;transform:scale(1)}}
 .unmask{animation:unmaskAnim 1.4s ease-out;}
-@keyframes posUp{0%{transform:translateY(0);color:#fff}50%{color:#22ff88}100%{transform:translateY(0);color:#fff}}
 
+/* ====== Cartoon Track ====== */
+.bd-track-wrap{margin:10px 0 16px;padding:8px 4px 0;}
 .bd-track{
-  position:relative;height:54px;border-radius:16px;
-  background:linear-gradient(90deg,rgba(34,255,136,.15),rgba(0,240,255,.10) 50%,rgba(255,46,94,.18));
-  border:1.5px solid rgba(255,255,255,.12);margin:10px 0;overflow:hidden;
+  position:relative;height:76px;border-radius:20px;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 24px,transparent 24px 48px),
+    linear-gradient(90deg,rgba(34,255,136,.10),rgba(0,240,255,.08) 50%,rgba(255,46,94,.12));
+  border:2px solid rgba(255,255,255,.14);
+  box-shadow:inset 0 2px 10px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+  overflow:visible;
 }
-.bd-track .mid-line{position:absolute;top:0;bottom:0;width:2px;background:#00f0ff;box-shadow:0 0 12px #00f0ff;}
-.bd-track .danger-line{position:absolute;top:0;bottom:0;width:2px;background:#ff2e5e;box-shadow:0 0 14px #ff2e5e;}
-.bd-track .finish-line{position:absolute;top:0;bottom:0;right:0;width:8px;background:repeating-linear-gradient(0deg,#ffd166 0 8px,#0b0518 8px 16px);}
-.bd-token{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:22px;transition:left .5s ease;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));}
-.bd-token.me{font-size:26px;}
-.bd-token.frozen{filter:hue-rotate(180deg) brightness(1.4);}
-.bd-token.baiDonRevealed{color:#ff2e5e;}
+.bd-track .mid-line{position:absolute;top:0;bottom:0;width:2px;background:#00f0ff;box-shadow:0 0 12px #00f0ff;z-index:1;}
+.bd-track .mid-line::before{content:'💫';position:absolute;top:-14px;left:-8px;font-size:11px;}
+.bd-track .danger-line{position:absolute;top:0;bottom:0;width:2px;background:#ff2e5e;box-shadow:0 0 14px #ff2e5e;z-index:1;}
+.bd-track .danger-line::before{content:'⚠️';position:absolute;top:-14px;left:-8px;font-size:11px;}
+.bd-track .finish-line{position:absolute;top:0;bottom:0;right:0;width:10px;background:repeating-linear-gradient(0deg,#ffd166 0 8px,#0b0518 8px 16px);border-radius:0 18px 18px 0;z-index:1;}
+.bd-track .bd-num{position:absolute;top:100%;transform:translateX(-50%);font-size:10px;font-weight:800;color:#8d7fb0;margin-top:2px;}
+.bd-track .bd-num.major{color:#ffd166;font-size:12px;}
+
+/* Hop-in animation for tokens */
+@keyframes hopIn{
+  0%{transform:translateY(24px) scale(.4);opacity:0;}
+  55%{transform:translateY(-10px) scale(1.15);opacity:1;}
+  100%{transform:translateY(0) scale(1);opacity:1;}
+}
+.bd-token{
+  position:absolute;transform:translateX(-50%);
+  font-size:22px;line-height:1;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.7));
+  z-index:2;
+  animation:hopIn .55s cubic-bezier(.34,1.56,.64,1);
+  will-change:transform;
+}
+.bd-token.me{font-size:26px;filter:drop-shadow(0 0 8px rgba(255,46,154,.8)) drop-shadow(0 3px 5px rgba(0,0,0,.7));}
+.bd-token.frozen{filter:hue-rotate(180deg) brightness(1.35) drop-shadow(0 0 6px rgba(100,200,255,.9));}
+.bd-token.baiDonRevealed{font-size:26px;filter:drop-shadow(0 0 10px rgba(255,46,94,.9));}
 
 .num-chip{flex:1 1 0;min-width:52px;font-size:20px;font-weight:900;padding:14px 8px;border-radius:14px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);color:#fff;}
 .num-chip.on{background:linear-gradient(135deg,rgba(34,255,136,.35),rgba(0,240,255,.25));border-color:#22ff88;box-shadow:0 0 16px rgba(34,255,136,.5);}
 .num-chip.attack.on{background:linear-gradient(135deg,rgba(255,46,94,.35),rgba(168,85,247,.25));border-color:#ff2e5e;box-shadow:0 0 16px rgba(255,46,94,.5);}
+.disguise-chip{background:linear-gradient(135deg,rgba(168,85,247,.30),rgba(255,46,154,.20));border-color:#a855f7;color:#fff;}
+.disguise-chip.on{background:linear-gradient(135deg,rgba(168,85,247,.55),rgba(255,46,154,.40));border-color:#ff2e9a;box-shadow:0 0 16px rgba(168,85,247,.6);}
 
 .hearts{font-size:13px;color:#ff4d8e;letter-spacing:1px;}
 .row.danger{background:rgba(255,46,94,.10);border-color:rgba(255,46,94,.35);}
 .row.revealed-bd{background:linear-gradient(135deg,rgba(255,46,94,.25),rgba(168,85,247,.20));border-color:rgba(255,46,94,.6);box-shadow:0 0 22px rgba(255,46,94,.3);}
+.row.eliminated{opacity:.45;filter:grayscale(.7);}
+
+.frozen-box{text-align:center;padding:16px;border-radius:16px;background:linear-gradient(135deg,rgba(100,180,255,.18),rgba(150,220,255,.12));border:1.5px solid rgba(100,180,255,.5);color:#bfe4ff;font-weight:800;}
+.spectator-box{text-align:center;padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(120,120,120,.20),rgba(80,80,80,.15));border:1.5px solid rgba(200,200,200,.3);color:#ccc;font-weight:800;}
 
 .event-line{display:flex;gap:8px;align-items:center;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.05);font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.09);}
 .event-line.hit{background:rgba(255,46,94,.14);border-color:rgba(255,46,94,.4);}
@@ -236,6 +280,17 @@ label:first-child{margin-top:0;}
 .event-line.danger{background:rgba(255,176,32,.14);border-color:rgba(255,176,32,.4);}
 .event-line.elim{background:rgba(120,120,120,.14);border-color:rgba(200,200,200,.4);}
 .event-line.vote{background:rgba(168,85,247,.16);border-color:rgba(168,85,247,.45);}
+
+/* Intro role screen */
+.intro-card{text-align:center;padding:32px 20px;border-radius:24px;position:relative;overflow:hidden;}
+.intro-card.bd{background:linear-gradient(160deg,rgba(255,46,94,.30),rgba(168,85,247,.22));border:2px solid rgba(255,46,94,.55);box-shadow:0 0 60px rgba(255,46,94,.35);}
+.intro-card.runner{background:linear-gradient(160deg,rgba(34,255,136,.25),rgba(0,240,255,.18));border:2px solid rgba(34,255,136,.55);box-shadow:0 0 60px rgba(34,255,136,.30);}
+.intro-role{font-size:34px;font-weight:900;margin:10px 0;line-height:1.2;}
+.intro-hint{font-size:14px;font-weight:700;opacity:.9;margin-top:8px;}
+@keyframes shush{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.15) rotate(-8deg)}}
+.shush-emoji{font-size:66px;display:inline-block;animation:shush 1.5s ease-in-out infinite;}
+@keyframes runAnim{0%,100%{transform:translateX(-8px)}50%{transform:translateX(8px)}}
+.runner-emoji{font-size:66px;display:inline-block;animation:runAnim 1s ease-in-out infinite;}
 
 .force-stop{position:fixed;bottom:16px;right:16px;z-index:9100;width:44px;height:44px;border-radius:50%;font-size:16px;padding:0;background:rgba(255,46,94,.85);color:#fff;box-shadow:0 6px 20px rgba(255,46,94,.5);opacity:.55;}
 .force-stop:active{opacity:1;}
@@ -312,6 +367,7 @@ label:first-child{margin-top:0;}
       <div class="pill" id="game-timer">--</div>
       <div class="pill" id="game-score">نقاطك: 0</div>
     </div>
+    <div id="game-hint" class="game-hint hidden"></div>
     <div id="game-body"></div>
   </section>
 </div>
@@ -326,13 +382,14 @@ label:first-child{margin-top:0;}
 <script>
 "use strict";
 /* ================================================================
-   0) ثوابت وأدوات
+   0) Constants + Utilities
    ================================================================ */
 const AVATARS = ['🦊','🐼','🐯','🦁','🐸','🐵','🐧','🐨','🐰','🐷','🐔','🐙','🦄','🐝','🦋','🐢','🐳','🦉','🐺','🐮','🐹','🐭','🦝','🦥','🦦','🦔','🐿️','🐊','🦖','🦕','🐬','🦈','🐲','🤖','👽'];
 const MAX_PLAYERS = 20;
 const MIN_PLAYERS = 3;
 const TOTAL_ROUNDS = 10;
 const TIMER_SECONDS = 25;
+const BAIDON_TIMER = 30;
 const ROOM_TTL_MS = 30 * 60 * 1000;
 const HOST_TIMEOUT_MS = 120 * 1000;
 
@@ -377,31 +434,26 @@ function normalizeAnswer(text){
   s = s.replace(/\s+/g, ' ').trim();
   return s;
 }
+function nameWithCrown(room, uid, name){
+  if (room.hostId === uid) return esc(name) + ' <span class="crown">👑</span>';
+  return esc(name);
+}
 
 /* ================================================================
-   1) حالة التطبيق
+   1) App state
    ================================================================ */
 const App = {
-  uid: null,
-  pin: null,
-  name: '',
-  avatar: '',
-  isHost: false,
-  flowMode: 'create',
-  gameType: 'box',
-  hostMode: 'play',  // 'play' | 'judge' | 'auto'
-  roomRef: null,
-  room: null,
-  connectedRef: null,
-  connectedCb: null,
-  sig: '',
-  lastPhaseKey: ''
+  uid: null, pin: null, name: '', avatar: '', isHost: false,
+  flowMode: 'create', gameType: 'box', hostMode: 'play',
+  roomRef: null, room: null,
+  connectedRef: null, connectedCb: null,
+  sig: '', lastPhaseKey: ''
 };
 let db = null;
 let fbReady = false;
 
 /* ================================================================
-   2) تهيئة Firebase
+   2) Firebase init
    ================================================================ */
 function initFirebase(){
   return new Promise(function(resolve, reject){
@@ -412,12 +464,8 @@ function initFirebase(){
       db = firebase.database();
       db.ref('.info/connected').once('value').then(function(){
         if (done) return; done = true; clearTimeout(timer); fbReady = true; resolve();
-      }).catch(function(err){
-        if (done) return; done = true; clearTimeout(timer); reject(err);
-      });
-    } catch (e) {
-      if (done) return; done = true; clearTimeout(timer); reject(e);
-    }
+      }).catch(function(err){ if (done) return; done = true; clearTimeout(timer); reject(err); });
+    } catch (e) { if (done) return; done = true; clearTimeout(timer); reject(e); }
   });
 }
 
@@ -479,6 +527,10 @@ const Core = {
       for (let i = 0; i < keys.length; i++){
         if (players[keys[i]] && players[keys[i]].name === name) throw new Error('NAME_TAKEN');
       }
+      // Avatar uniqueness check (only for new players)
+      for (let i = 0; i < keys.length; i++){
+        if (players[keys[i]] && players[keys[i]].avatar === avatar) throw new Error('AVATAR_TAKEN');
+      }
       if (room.status !== 'lobby') throw new Error('STARTED');
       uid = 'p' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
       const now = Date.now();
@@ -490,7 +542,7 @@ const Core = {
       localStorage.setItem('zab_uid_' + pin, uid);
       return uid;
     }
-    // Reconnection - preserve all state, just mark online
+    // Reconnection - preserve all state
     await db.ref('rooms/' + pin + '/players/' + uid).update({ online: true, lastSeen: Date.now() });
     await db.ref('rooms/' + pin).update({ lastActivity: Date.now() });
     localStorage.setItem('zab_uid_' + pin, uid);
@@ -522,18 +574,14 @@ const Core = {
 
     setupMicListener(pin);
 
-    // Heartbeat (lastSeen) - every 20s
     setInterval(function(){
       if (App.roomRef && App.uid){
         App.roomRef.child('players/' + App.uid).update({ lastSeen: Date.now() }).catch(function(){});
       }
     }, 20000);
 
-    // Host migration check - every 15s
     setInterval(function(){
-      if (App.room && App.room.players){
-        Core.checkHostMigration();
-      }
+      if (App.room && App.room.players){ Core.checkHostMigration(); }
     }, 15000);
   },
 
@@ -544,28 +592,22 @@ const Core = {
     if (!host) return;
     const lastSeen = host.lastSeen || host.joinedAt || 0;
     if (Date.now() - lastSeen < HOST_TIMEOUT_MS) return;
-
-    // Host is stale - find oldest online player
     const candidates = Object.keys(room.players)
       .filter(uid => uid !== room.hostId && room.players[uid].online)
       .map(uid => ({ uid, joinedAt: room.players[uid].joinedAt || 0 }))
       .sort((a, b) => a.joinedAt - b.joinedAt);
-
     if (candidates.length === 0) return;
-
     const oldHostId = room.hostId;
     const newHostId = candidates[0].uid;
     try {
       await db.ref('rooms/' + App.pin).transaction(function(r){
         if (!r) return r;
-        if (r.hostId !== oldHostId) return; // abort - changed
+        if (r.hostId !== oldHostId) return;
         r.hostId = newHostId;
         r.lastActivity = Date.now();
         return r;
       });
-      if (App.uid === newHostId){
-        toast('انتقلت صلاحية الهوست إليك 👑', 'ok');
-      }
+      if (App.uid === newHostId) toast('انتقلت صلاحية الهوست إليك 👑', 'ok');
     } catch (e){}
   },
 
@@ -589,8 +631,7 @@ const Core = {
     if (!room || !pin || !uid){ Core.leaveToHome(); return; }
     try {
       if (room.hostId === uid){
-        const others = Object.keys(room.players)
-          .filter(k => k !== uid)
+        const others = Object.keys(room.players).filter(k => k !== uid)
           .map(k => ({ id: k, joinedAt: room.players[k].joinedAt || 0 }))
           .sort((a, b) => a.joinedAt - b.joinedAt);
         if (others.length === 0){ await db.ref('rooms/' + pin).remove(); }
@@ -634,12 +675,6 @@ function setGame(fields){
   Object.keys(fields).forEach(function(k){ patch['game/' + k] = fields[k]; });
   return App.roomRef.update(patch);
 }
-function setGameRoot(fields){
-  if (!App.roomRef) return Promise.resolve();
-  const patch = { lastActivity: Date.now() };
-  Object.keys(fields).forEach(function(k){ patch[k] = fields[k]; });
-  return App.roomRef.update(patch);
-}
 function getAnswererIds(room){
   const players = room.players || {};
   const ids = Object.keys(players);
@@ -662,14 +697,8 @@ function countAnswered(room){
   return getAnswererIds(room).filter(function(id){ return answers[id] && answers[id].text; }).length;
 }
 
-/* Helper: mark host crown on any name */
-function nameWithCrown(room, uid, name){
-  if (room.hostId === uid) return esc(name) + ' <span class="crown">👑</span>';
-  return esc(name);
-}
-
 /* ================================================================
-   5) BoxGame (محدث - hostMode)
+   5) BoxGame (unchanged logic, minor fix for sig-related hang)
    ================================================================ */
 const BoxGame = {
   computeRound(answers, answererIds, doubleRound){
@@ -693,9 +722,8 @@ const BoxGame = {
   async hostStart(){
     if (!App.isHost || !App.room) return;
     const players = App.room.players || {};
-    const minP = App.room.hostMode === 'judge' ? MIN_PLAYERS : MIN_PLAYERS;
-    if (Object.keys(players).length < minP){
-      toast('الحد الأدنى ' + minP + ' زعابيل للبدء', 'err'); return;
+    if (Object.keys(players).length < MIN_PLAYERS){
+      toast('الحد الأدنى ' + MIN_PLAYERS + ' زعابيل للبدء', 'err'); return;
     }
     const updates = {
       status: 'playing', lastActivity: Date.now(),
@@ -913,7 +941,9 @@ const BoxGame = {
     wrap.appendChild(el('h3', 'phase-title', 'اكتب إجابتك الفريدة ✍️' + (g.doubleRound ? ' (دبل! ±30)' : '')));
     if (g.mode === 'verbal'){ wrap.appendChild(el('div', 'q-label', 'سؤال شفهي 🎤')); wrap.appendChild(el('div', 'question-box', 'اسمع الهوست 👂')); }
     else { wrap.appendChild(el('div', 'q-label', 'السؤال:')); wrap.appendChild(el('div', 'question-box', esc(g.question || ''))); }
-    const tbar = el('div', 'tbar'); const tfill = el('div', 'tbar-fill'); tfill.id = 'tbar-fill'; tbar.appendChild(tfill); wrap.appendChild(tbar);
+    const timerText = el('div', 'timer-big'); timerText.id = 'box-timer-text';
+    timerText.textContent = '--';
+    wrap.appendChild(timerText);
     const area = el('div'); area.id = 'ans-area';
     const myAnswer = (g.answers || {})[App.uid];
     if (amAnswerer){
@@ -1073,7 +1103,7 @@ const BoxGame = {
     }
     const list = el('div', 'list');
     players.forEach(function(p, i){
-      const medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : (i + 1) + ''));
+      const medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : (i + 1)));
       const row = el('div', 'row' + (p.id === App.uid ? ' me' : ''));
       row.innerHTML = '<div class="rank-medal">' + medal + '</div>' +
         '<div class="r-ava">' + esc(p.avatar) + '</div>' +
@@ -1114,10 +1144,9 @@ const BoxGame = {
 };
 
 /* ================================================================
-   6) BaiDonGame — لعبة البيدون 🎭
+   6) BaiDonGame — REFACTORED
    ================================================================ */
 const BaiDonGame = {
-  // Get config based on player count
   getConfig(count){
     if (count <= 3) return { target: 20, maxNum: 3, middleLine: 10, dangerZone: 15 };
     if (count <= 5) return { target: 30, maxNum: 4, middleLine: 15, dangerZone: 23 };
@@ -1129,48 +1158,35 @@ const BaiDonGame = {
       round: 1, phase: 'idle', timerEnd: 0,
       target: 20, maxNum: 3, middleLine: 10, dangerZone: 15,
       baiDonId: null, baiDonRevealed: false,
-      actions: {}, votes: {}, endGuessUid: null,
+      actions: null, votes: null, endGuessUid: null,
       lastResult: null, voteResult: null,
       finalMessage: '', winner: '', winnerName: '',
-      voteRound: 0, needVote: false
+      introReady: null
     };
   },
 
-  // ------------------------------------------------------------
-  // START GAME
   // ------------------------------------------------------------
   async hostStart(){
     if (!App.isHost || !App.room) return;
     const players = App.room.players || {};
     const ids = Object.keys(players);
-    const count = ids.length;
-    if (count < 2){ toast('الحد الأدنى لاعبين للبدء في البيدون', 'err'); return; }
-
-    const cfg = BaiDonGame.getConfig(count);
-    // Choose baiDon: if only 2 players -> exposed from start
-    const candidateIds = App.room.hostMode === 'judge'
-      ? ids.filter(id => id !== App.room.hostId)
-      : ids;
+    if (ids.length < 2){ toast('الحد الأدنى لاعبين للبدء في البيدون', 'err'); return; }
+    const cfg = BaiDonGame.getConfig(ids.length);
+    const candidateIds = App.room.hostMode === 'judge' ? ids.filter(id => id !== App.room.hostId) : ids;
     if (candidateIds.length < 2){ toast('محتاج لاعبين غير الهوست على الأقل', 'err'); return; }
     const baiDonId = candidateIds[Math.floor(Math.random() * candidateIds.length)];
-    const baiDonRevealed = count <= 2;
+    const baiDonRevealed = ids.length <= 2;
 
-    // Init player state
     const playerState = {};
     ids.forEach(function(id){
-      // Reset position/hearts/etc for each player
-      playerState[id] = {
-        pos: 0, hearts: 3, frozen: 0, eliminated: false,
-        lastHitRound: 0, crossedMiddle: false, inDanger: false
-      };
+      playerState[id] = { pos: 0, hearts: 3, frozen: 0, eliminated: false, lastHitRound: 0, crossedMiddle: false, inDanger: false };
     });
 
-    // Update room
     const updates = {
       status: 'playing', lastActivity: Date.now(),
       'game/round': 1,
-      'game/phase': 'action',
-      'game/timerEnd': Date.now() + TIMER_SECONDS * 1000,
+      'game/phase': 'intro',
+      'game/timerEnd': 0,
       'game/target': cfg.target,
       'game/maxNum': cfg.maxNum,
       'game/middleLine': cfg.middleLine,
@@ -1185,73 +1201,73 @@ const BaiDonGame = {
       'game/finalMessage': '',
       'game/winner': '',
       'game/winnerName': '',
-      'game/voteRound': 0,
-      'game/needVote': false,
+      'game/introReady': null,
       'game/playerState': playerState
     };
-
-    // Reset player positions/hearts in player records too (for score display)
     ids.forEach(function(pid){
       updates['players/' + pid + '/cumulative'] = players[pid].cumulative || 0;
       updates['players/' + pid + '/score'] = 0;
       updates['players/' + pid + '/hearts'] = 3;
       updates['players/' + pid + '/pos'] = 0;
     });
+    try { await App.roomRef.update(updates); App.sig = ''; }
+    catch (e){ toast('مشكلة في الاتصال', 'err'); }
+  },
 
+  async introContinue(){
+    if (!App.room || !App.room.game) return;
+    try { await setGame({ ['introReady/' + App.uid]: true }); }
+    catch (e){ toast('مشكلة', 'err'); }
+  },
+
+  async hostStartAction(){
+    if (!App.isHost) return;
     try {
-      await App.roomRef.update(updates);
+      await setGame({
+        phase: 'action',
+        timerEnd: Date.now() + BAIDON_TIMER * 1000,
+        actions: null
+      });
       App.sig = '';
-      setTimeout(function(){
-        toast('بداية الجيم! حاول متختارش نفس الرقم كتير عشان البيدون ميقفشكش وتخسر قلب!', 'ok');
-      }, 800);
-    } catch (e){ toast('مشكلة في الاتصال', 'err'); }
+    } catch (e){ toast('مشكلة', 'err'); }
   },
 
   // ------------------------------------------------------------
-  // ACTION SUBMISSION
-  // ------------------------------------------------------------
-  async submitAction(move, guessAttack, isBaiDon){
+  async submitAction(move, attackNum, disguise){
     if (!App.room || !App.room.game) return;
     const g = App.room.game;
     if (g.phase !== 'action') return;
     const baiDonId = g.baiDonId;
     const amBaiDon = (App.uid === baiDonId);
     const isRevealed = !!g.baiDonRevealed;
-
-    if (isRevealed && !amBaiDon) return; // revealed baiDon only attacks
-    if (!amBaiDon && !move) return;
-    if (amBaiDon && !guessAttack) return;
+    const ps = g.playerState || {};
+    const myPs = ps[App.uid];
+    if (!myPs || myPs.eliminated || myPs.frozen > 0) return;
 
     const action = {};
     if (amBaiDon){
-      // BaiDon: fake move (if hidden) + real attack
-      if (!isRevealed) action.move = move; // fake advancement for disguise
-      action.attack = guessAttack;
+      if (!isRevealed) action.move = move;
+      action.attack = attackNum;
+      if (disguise && myPs.hearts > 1) action.disguise = true;
     } else {
+      if (!move) return;
       action.move = move;
-      action.guess = guessAttack; // dummy guess
     }
     action.ts = Date.now();
-
-    try {
-      await setGame({ ['actions/' + App.uid]: action });
-    } catch (e){ toast('مشكلة في الاتصال', 'err'); }
+    try { await setGame({ ['actions/' + App.uid]: action }); }
+    catch (e){ toast('مشكلة في الاتصال', 'err'); }
   },
 
-  // ------------------------------------------------------------
-  // RESOLVE ROUND (auto-compute)
   // ------------------------------------------------------------
   resolveBusy: false,
   async hostResolve(){
     if (!App.room || !App.room.game) return;
     if (BaiDonGame.resolveBusy) return;
     BaiDonGame.resolveBusy = true;
-
     try {
       const room = App.room;
       const g = room.game;
       if (g.phase !== 'action') return;
-      // End-of-timer guard: small delay
       const actions = g.actions || {};
       const baiDonId = g.baiDonId;
       const baiDonRevealed = !!g.baiDonRevealed;
@@ -1264,11 +1280,10 @@ const BaiDonGame = {
       const events = [];
       const hitThisRound = {};
 
-      // 1. BaiDon attack
       const bdAction = actions[baiDonId];
       const attackNum = bdAction ? bdAction.attack : null;
+      const wantDisguise = !!(bdAction && bdAction.disguise);
 
-      // Bot: if baiDon didn't act / disconnected, pick random
       let botUsed = false;
       let effectiveAttack = attackNum;
       if (!effectiveAttack){
@@ -1279,6 +1294,7 @@ const BaiDonGame = {
         }
       }
 
+      // 1. BaiDon attack (against runners)
       if (effectiveAttack){
         Object.keys(actions).forEach(function(uid){
           if (uid === baiDonId) return;
@@ -1290,13 +1306,11 @@ const BaiDonGame = {
             hitThisRound[uid] = true;
             p.hearts = Math.max(0, p.hearts - 1);
             events.push({ type: 'hit', uid: uid, attackNum: effectiveAttack, bot: botUsed });
-
-            // Freeze check: 2 hits within 3 rounds
             const gap = p.lastHitRound ? (round - p.lastHitRound) : 999;
             if (gap <= 3){
               p.frozen = (p.frozen || 0) + 1;
               events.push({ type: 'freeze', uid: uid });
-              p.lastHitRound = 0; // reset to prevent chain freeze
+              p.lastHitRound = 0;
             } else {
               p.lastHitRound = round;
             }
@@ -1304,48 +1318,41 @@ const BaiDonGame = {
         });
       }
 
-      // 2. Apply movements
+      // 2. Disguise: baiDon attacks himself (real heart loss, appears in events)
+      const bdPs = ps[baiDonId];
+      if (wantDisguise && bdPs && !bdPs.eliminated && bdPs.hearts > 1){
+        bdPs.hearts -= 1;
+        events.push({ type: 'hit', uid: baiDonId, attackNum: effectiveAttack, disguise: true });
+      }
+
+      // 3. Apply movements
       Object.keys(actions).forEach(function(uid){
         const p = ps[uid];
         if (!p || p.eliminated) return;
-
         if (p.frozen > 0){
           p.frozen -= 1;
           if (p.frozen > 0) events.push({ type: 'stillFrozen', uid: uid });
           return;
         }
-
         if (hitThisRound[uid]) return;
-
-        // Revealed baiDon doesn't move
         if (uid === baiDonId && baiDonRevealed) return;
-
         const a = actions[uid];
         if (!a || !a.move) return;
-
         const prevPos = p.pos;
         p.pos = Math.min(target, p.pos + a.move);
-
-        // Middle line crossing (+1 heart, max 4)
         if (prevPos < middleLine && p.pos >= middleLine && !p.crossedMiddle){
           p.crossedMiddle = true;
           p.hearts = Math.min(4, p.hearts + 1);
           events.push({ type: 'middleLine', uid: uid });
         }
-
-        // Danger zone
         if (p.pos >= dangerZone && !p.inDanger){
           p.inDanger = true;
-          if (p.hearts > 2){
-            p.hearts = 2;
-            events.push({ type: 'dangerZone', uid: uid });
-          }
+          if (p.hearts > 2){ p.hearts = 2; events.push({ type: 'dangerZone', uid: uid }); }
         }
-
         events.push({ type: 'move', uid: uid, from: prevPos, to: p.pos });
       });
 
-      // 3. Eliminations
+      // 4. Eliminations
       Object.keys(ps).forEach(function(uid){
         if (ps[uid].hearts <= 0 && !ps[uid].eliminated){
           ps[uid].eliminated = true;
@@ -1353,34 +1360,27 @@ const BaiDonGame = {
         }
       });
 
-      // 4. Check end conditions
-      const bdPs = ps[baiDonId];
+      // 5. Win conditions
       const runnersAlive = Object.keys(ps).filter(function(uid){
         return uid !== baiDonId && !ps[uid].eliminated && ps[uid].hearts > 0;
       });
 
       let winner = null, winnerName = '', finalMessage = '', endGuessUid = null;
 
-      // Hidden baiDon reached target first -> baiDon wins
-      if (!baiDonRevealed && bdPs && bdPs.pos >= target && !bdPs.eliminated){
+      if (!baiDonRevealed && bdPs && !bdPs.eliminated && bdPs.pos >= target){
         winner = 'baidon';
         winnerName = room.players[baiDonId] ? room.players[baiDonId].name : '';
         finalMessage = '🎭 البيدون الحقيقي ' + (room.players[baiDonId] ? room.players[baiDonId].avatar + ' ' + room.players[baiDonId].name : '') + ' غفلكم وفاز بالسباق!';
-      }
-      // Revealed baiDon eliminates all runners -> baiDon wins
-      else if (baiDonRevealed && runnersAlive.length === 0){
+      } else if (baiDonRevealed && runnersAlive.length === 0){
         winner = 'baidon';
         winnerName = room.players[baiDonId] ? room.players[baiDonId].name : '';
         finalMessage = '🎭 البيدون الحقيقي ' + (room.players[baiDonId] ? room.players[baiDonId].avatar + ' ' + room.players[baiDonId].name : '') + ' فاز عليكم!';
-      }
-      // Runner reached target -> needs end guess
-      else {
+      } else {
         const runnersAtEnd = Object.keys(ps).filter(function(uid){
           return uid !== baiDonId && !ps[uid].eliminated && ps[uid].pos >= target;
         });
         if (runnersAtEnd.length > 0){
           if (baiDonRevealed){
-            // BaiDon known -> auto win
             winner = 'runner';
             winnerName = room.players[runnersAtEnd[0]] ? room.players[runnersAtEnd[0]].name : '';
             finalMessage = '🏆 الزعبول السالك ' + (room.players[runnersAtEnd[0]] ? room.players[runnersAtEnd[0]].avatar + ' ' + room.players[runnersAtEnd[0]].name : '') + ' فاز عليكم!';
@@ -1390,13 +1390,11 @@ const BaiDonGame = {
         }
       }
 
-      // Build update
       const updates = {
         lastActivity: Date.now(),
         'game/actions': null,
         'game/lastResult': { events: events, round: round, attackNum: effectiveAttack, bot: botUsed }
       };
-      // Update player states
       Object.keys(ps).forEach(function(uid){
         updates['game/playerState/' + uid + '/pos'] = ps[uid].pos;
         updates['game/playerState/' + uid + '/hearts'] = ps[uid].hearts;
@@ -1405,7 +1403,6 @@ const BaiDonGame = {
         updates['game/playerState/' + uid + '/lastHitRound'] = ps[uid].lastHitRound;
         updates['game/playerState/' + uid + '/crossedMiddle'] = ps[uid].crossedMiddle;
         updates['game/playerState/' + uid + '/inDanger'] = ps[uid].inDanger;
-        // Mirror to player record for UI convenience
         updates['players/' + uid + '/score'] = ps[uid].pos;
         updates['players/' + uid + '/hearts'] = ps[uid].hearts;
         updates['players/' + uid + '/pos'] = ps[uid].pos;
@@ -1416,8 +1413,9 @@ const BaiDonGame = {
         updates['game/winner'] = winner;
         updates['game/winnerName'] = winnerName;
         updates['game/finalMessage'] = finalMessage;
-        // Add cumulative
-        updates['players/' + baiDonId + '/cumulative'] = (room.players[baiDonId].cumulative || 0) + (winner === 'baidon' ? 100 : 0);
+        if (winner === 'baidon'){
+          updates['players/' + baiDonId + '/cumulative'] = (room.players[baiDonId].cumulative || 0) + 100;
+        }
       } else if (endGuessUid){
         updates['game/phase'] = 'endGuess';
         updates['game/endGuessUid'] = endGuessUid;
@@ -1428,30 +1426,21 @@ const BaiDonGame = {
       await App.roomRef.update(updates);
       App.sig = '';
 
-      // Trigger animations for me if relevant
+      // Local animations
       events.forEach(function(ev){
         if (ev.uid === App.uid){
-          if (ev.type === 'hit'){
+          if (ev.type === 'hit' && !ev.disguise){
             document.body.classList.add('red-flash');
             setTimeout(function(){ document.body.classList.remove('red-flash'); }, 800);
           }
-          if (ev.type === 'middleLine'){
-            showHeartPop();
-          }
-          if (ev.type === 'dangerZone'){
-            toast('تحذير ⚠️ دخلت منطقة الرعب! تم تنزيل قلوبك لقلبين!', 'err');
-          }
+          if (ev.type === 'middleLine') showHeartPop();
+          if (ev.type === 'dangerZone') toast('تحذير ⚠️ دخلت منطقة الرعب! تم تنزيل قلوبك لقلبين!', 'err');
         }
       });
-      // Global toasts
       events.forEach(function(ev){
         if (ev.type === 'middleLine'){
           const p = room.players[ev.uid];
           if (p) toast('عاش يا ' + p.name + '! عديت النص وخدت قلب هدية (+١)', 'ok');
-        }
-        if (ev.type === 'freeze'){
-          const p = room.players[ev.uid];
-          if (p) toast('❄️ ' + p.name + ' اتجمد! (ضربتين ورا بعض)', 'err');
         }
       });
     } catch (e){
@@ -1463,32 +1452,26 @@ const BaiDonGame = {
   },
 
   // ------------------------------------------------------------
-  // NEXT ROUND (after resolve) — host only
-  // ------------------------------------------------------------
   async hostNextRound(){
     if (!App.isHost || !App.room) return;
     const g = App.room.game;
     if (!g || g.phase !== 'resolve') return;
-
     const round = g.round || 1;
     const nextRound = round + 1;
-    // Voting every 3 rounds, if baiDon hidden, 3+ players
     const playerCount = Object.keys(App.room.players || {}).length;
     const needVote = !g.baiDonRevealed && playerCount >= 3 && nextRound % 3 === 0;
-
     if (needVote){
       try {
-        await setGame({ phase: 'vote', votes: null, voteResult: null, round: nextRound, voteRound: Math.floor(nextRound / 3) });
+        await setGame({ phase: 'vote', votes: null, voteResult: null, round: nextRound });
         App.sig = '';
         toast('وقت التصويت! صوّت بحكمة 🗳️', 'ok');
       } catch (e){ toast('مشكلة', 'err'); }
       return;
     }
-
     try {
       await setGame({
         phase: 'action', round: nextRound,
-        timerEnd: Date.now() + TIMER_SECONDS * 1000,
+        timerEnd: Date.now() + BAIDON_TIMER * 1000,
         actions: null, lastResult: null
       });
       App.sig = '';
@@ -1496,14 +1479,11 @@ const BaiDonGame = {
   },
 
   // ------------------------------------------------------------
-  // VOTING
-  // ------------------------------------------------------------
   async castVote(targetId){
     if (!App.room || !App.room.game || App.room.game.phase !== 'vote') return;
     if (targetId === App.uid){ toast('متقدرش تصوت لنفسك', 'err'); return; }
-    try {
-      await setGame({ ['votes/' + App.uid]: targetId });
-    } catch (e){ toast('مشكلة', 'err'); }
+    try { await setGame({ ['votes/' + App.uid]: targetId }); }
+    catch (e){ toast('مشكلة', 'err'); }
   },
 
   async hostResolveVote(){
@@ -1516,8 +1496,6 @@ const BaiDonGame = {
       const target = votes[voter];
       if (target) voteCounts[target] = (voteCounts[target] || 0) + 1;
     });
-
-    // Find top vote
     let topId = null, topCount = 0, tie = false;
     Object.keys(voteCounts).forEach(function(id){
       if (voteCounts[id] > topCount){ topCount = voteCounts[id]; topId = id; tie = false; }
@@ -1525,11 +1503,10 @@ const BaiDonGame = {
     });
 
     if (!topId || tie){
-      // No result
       try {
         await setGame({ phase: 'voteResult', voteResult: { tie: true, topId: null, counts: voteCounts } });
         App.sig = '';
-        toast('تعادل أو لا أصوات -- تستمر اللعبة');
+        toast('تعادل -- تستمر اللعبة');
       } catch (e){}
       return;
     }
@@ -1542,7 +1519,6 @@ const BaiDonGame = {
     };
 
     if (topId === baiDonId){
-      // Correct vote - baiDon revealed!
       updates['game/baiDonRevealed'] = true;
       if (ps[baiDonId]){
         ps[baiDonId].pos = 0;
@@ -1553,7 +1529,6 @@ const BaiDonGame = {
       updates['game/phase'] = 'voteResult';
       toast('🎭 تم كشف البيدون! ' + (App.room.players[baiDonId] ? App.room.players[baiDonId].name : '') + ' أصبح Turret!', 'ok');
     } else {
-      // Wrong vote - voters go back 2 steps
       Object.keys(votes).forEach(function(voter){
         if (votes[voter] === topId){
           if (ps[voter]){
@@ -1567,7 +1542,6 @@ const BaiDonGame = {
       updates['game/phase'] = 'voteResult';
       toast('❌ تصويت خاطئ! ' + (App.room.players[topId] ? App.room.players[topId].name : '') + ' بريء -- اللي صوّت ضده رجع خطوتين', 'err');
     }
-
     try { await App.roomRef.update(updates); App.sig = ''; }
     catch (e){ toast('مشكلة', 'err'); }
   },
@@ -1578,7 +1552,7 @@ const BaiDonGame = {
     if (!g || g.phase !== 'voteResult') return;
     try {
       await setGame({
-        phase: 'action', timerEnd: Date.now() + TIMER_SECONDS * 1000,
+        phase: 'action', timerEnd: Date.now() + BAIDON_TIMER * 1000,
         actions: null, votes: null, voteResult: null, lastResult: null
       });
       App.sig = '';
@@ -1586,25 +1560,20 @@ const BaiDonGame = {
   },
 
   // ------------------------------------------------------------
-  // END GAME GUESS (runner at finish line)
-  // ------------------------------------------------------------
   async submitEndGuess(targetId){
     if (!App.room || !App.room.game) return;
     const g = App.room.game;
     if (g.phase !== 'endGuess' || g.endGuessUid !== App.uid) return;
-
     const baiDonId = g.baiDonId;
     const ps = JSON.parse(JSON.stringify(g.playerState || {}));
     const updates = { lastActivity: Date.now() };
-
     if (targetId === baiDonId){
-      // Correct -> runner wins
       updates['game/phase'] = 'final';
       updates['game/winner'] = 'runner';
       updates['game/winnerName'] = App.room.players[App.uid] ? App.room.players[App.uid].name : '';
       updates['game/finalMessage'] = '🏆 الزعبول السالك ' + (App.room.players[App.uid] ? App.room.players[App.uid].avatar + ' ' + App.room.players[App.uid].name : '') + ' فاز عليكم!';
+      updates['players/' + App.uid + '/cumulative'] = (App.room.players[App.uid].cumulative || 0) + 100;
     } else {
-      // Wrong -> -3 steps, continue
       if (ps[App.uid]){
         ps[App.uid].pos = Math.max(0, ps[App.uid].pos - 3);
         updates['game/playerState/' + App.uid + '/pos'] = ps[App.uid].pos;
@@ -1616,13 +1585,10 @@ const BaiDonGame = {
       updates['game/lastResult'] = { events: [{ type: 'wrongGuess', uid: App.uid }], round: g.round, attackNum: null };
       toast('❌ تخمين غلط! رجعت 3 خطوات لورا', 'err');
     }
-
     try { await App.roomRef.update(updates); App.sig = ''; }
     catch (e){ toast('مشكلة', 'err'); }
   },
 
-  // ------------------------------------------------------------
-  // PLAY AGAIN
   // ------------------------------------------------------------
   async hostPlayAgain(){
     if (!App.isHost) return;
@@ -1648,26 +1614,21 @@ const BaiDonGame = {
       const candidateIds = room.hostMode === 'judge' ? ids.filter(id => id !== room.hostId) : ids;
       const baiDonId = candidateIds[Math.floor(Math.random() * candidateIds.length)];
       const baiDonRevealed = ids.length <= 2;
-
       const playerState = {};
       ids.forEach(function(id){
-        playerState[id] = {
-          pos: 0, hearts: 3, frozen: 0, eliminated: false,
-          lastHitRound: 0, crossedMiddle: false, inDanger: false
-        };
+        playerState[id] = { pos: 0, hearts: 3, frozen: 0, eliminated: false, lastHitRound: 0, crossedMiddle: false, inDanger: false };
       });
-
       const updates = {
         lastActivity: Date.now(),
-        'game/round': 1, 'game/phase': 'action',
-        'game/timerEnd': Date.now() + TIMER_SECONDS * 1000,
+        'game/round': 1, 'game/phase': 'intro',
+        'game/timerEnd': 0,
         'game/target': cfg.target, 'game/maxNum': cfg.maxNum,
         'game/middleLine': cfg.middleLine, 'game/dangerZone': cfg.dangerZone,
         'game/baiDonId': baiDonId, 'game/baiDonRevealed': baiDonRevealed,
         'game/actions': null, 'game/votes': null, 'game/endGuessUid': null,
         'game/lastResult': null, 'game/voteResult': null,
         'game/finalMessage': '', 'game/winner': '', 'game/winnerName': '',
-        'game/voteRound': 0, 'game/needVote': false,
+        'game/introReady': null,
         'game/playerState': playerState,
         'game/ready': null
       };
@@ -1691,158 +1652,288 @@ const BaiDonGame = {
     const isHost = App.isHost;
     const amBaiDon = (g.baiDonId === App.uid);
     const isRevealed = !!g.baiDonRevealed;
+    const ps = g.playerState || {};
+    const myPs = ps[App.uid];
+    const isEliminated = !!(myPs && myPs.eliminated);
+    const isFrozen = !!(myPs && myPs.frozen > 0);
 
     switch (phase){
-      case 'action':       BaiDonGame.uiAction(wrap, room, g, round, isHost, amBaiDon, isRevealed); break;
-      case 'resolve':      BaiDonGame.uiResolve(wrap, room, g, round, isHost); break;
-      case 'vote':         BaiDonGame.uiVote(wrap, room, g, isHost); break;
-      case 'voteResult':   BaiDonGame.uiVoteResult(wrap, room, g, isHost); break;
-      case 'endGuess':     BaiDonGame.uiEndGuess(wrap, room, g, isHost); break;
-      case 'final':        BaiDonGame.uiFinal(wrap, room, g, isHost); break;
-      case 'playAgain':    BaiDonGame.uiPlayAgain(wrap, room, g, isHost); break;
-      default:             wrap.appendChild(el('div', 'waiting', '…'));
+      case 'intro':      BaiDonGame.uiIntro(wrap, room, g, isHost, amBaiDon); break;
+      case 'action':     BaiDonGame.uiAction(wrap, room, g, round, isHost, amBaiDon, isRevealed, isEliminated, isFrozen); break;
+      case 'resolve':    BaiDonGame.uiResolve(wrap, room, g, round, isHost); break;
+      case 'vote':       BaiDonGame.uiVote(wrap, room, g, isHost, isEliminated); break;
+      case 'voteResult': BaiDonGame.uiVoteResult(wrap, room, g, isHost); break;
+      case 'endGuess':   BaiDonGame.uiEndGuess(wrap, room, g, isHost); break;
+      case 'final':      BaiDonGame.uiFinal(wrap, room, g, isHost); break;
+      case 'playAgain':  BaiDonGame.uiPlayAgain(wrap, room, g, isHost); break;
+      default:           wrap.appendChild(el('div', 'waiting', '…'));
     }
     return wrap;
   },
 
-  // ---------- TRACK (visual of positions) ----------
+  // ---------- TRACK ----------
   buildTrack(room, g){
-    const wrap = el('div', 'bd-track');
+    const wrap = el('div', 'bd-track-wrap');
+    const track = el('div', 'bd-track');
     const target = g.target || 20;
-    const midPct = ((g.middleLine || 10) / target) * 100;
-    const dngPct = ((g.dangerZone || 15) / target) * 100;
-
-    const mid = el('div', 'mid-line'); mid.style.left = (100 - midPct) + '%';
-    wrap.appendChild(mid);
-    const dng = el('div', 'danger-line'); dng.style.left = (100 - dngPct) + '%';
-    wrap.appendChild(dng);
-    const fin = el('div', 'finish-line'); wrap.appendChild(fin);
-
-    // Tokens (offset vertically per player)
     const ps = g.playerState || {};
-    const ids = Object.keys(room.players || {});
+
+    // Numbers
+    const marks = [0];
+    for (let i = 5; i < target; i += 5) marks.push(i);
+    marks.push(target);
+    marks.forEach(function(num){
+      const m = el('div', 'bd-num' + (num === 0 || num === target || num === g.middleLine ? ' major' : ''));
+      m.textContent = String(num);
+      m.style.left = ((num / target) * 100) + '%';
+      track.appendChild(m);
+    });
+
+    // Mid line
+    const midPct = ((g.middleLine || 10) / target) * 100;
+    const mid = el('div', 'mid-line');
+    mid.style.left = midPct + '%';
+    track.appendChild(mid);
+
+    // Danger line
+    const dngPct = ((g.dangerZone || 15) / target) * 100;
+    const dng = el('div', 'danger-line');
+    dng.style.left = dngPct + '%';
+    track.appendChild(dng);
+
+    // Finish
+    track.appendChild(el('div', 'finish-line'));
+
+    // Tokens (only non-eliminated)
+    const ids = Object.keys(room.players || {}).filter(function(uid){
+      const p = ps[uid];
+      return p && !p.eliminated;
+    });
+    ids.sort(function(a, b){ return (ps[a].pos || 0) - (ps[b].pos || 0); });
+
     ids.forEach(function(uid, i){
       const p = ps[uid];
-      if (!p) return;
-      const token = el('div', 'bd-token' + (uid === App.uid ? ' me' : '') + (p.frozen > 0 ? ' frozen' : ''));
-      const pct = (p.pos / target) * 100;
-      token.style.left = (100 - pct) + '%';
-      token.style.top = (10 + (i % 6) * 8) + '%';
       const player = room.players[uid];
-      const isBd = (uid === g.baiDonId);
-      let display = player ? player.avatar : '❓';
-      if (isBd && g.baiDonRevealed) display = '🎭';
+      if (!player) return;
+      const token = el('div', 'bd-token' + (uid === App.uid ? ' me' : '') + (p.frozen > 0 ? ' frozen' : '') + (uid === g.baiDonId && g.baiDonRevealed ? ' baiDonRevealed' : ''));
+      const pct = (p.pos / target) * 100;
+      token.style.left = pct + '%';
+      token.style.top = (i % 3 === 0 ? '20%' : (i % 3 === 1 ? '45%' : '70%'));
+      let display = player.avatar;
+      if (uid === g.baiDonId && g.baiDonRevealed) display = '🎭';
       token.textContent = display;
-      token.title = (player ? player.name : '') + ' — ' + p.pos + '/' + target + ' ❤️' + p.hearts;
-      if (isBd && g.baiDonRevealed) token.classList.add('baiDonRevealed');
-      wrap.appendChild(token);
+      token.title = (player.name || '') + ' — ' + p.pos + '/' + target + ' ❤️' + p.hearts;
+      track.appendChild(token);
     });
+    wrap.appendChild(track);
     return wrap;
   },
 
-  // ---------- ACTION PHASE ----------
-  uiAction(wrap, room, g, round, isHost, amBaiDon, isRevealed){
-    const myAction = (g.actions || {})[App.uid];
-    const submitted = myAction && myAction.ts;
-    const canAct = !submitted && !(isRevealed && !amBaiDon);
-    const amJudge = (App.uid === room.hostId && App.room.hostMode === 'judge');
+  // ---------- INTRO ----------
+  uiIntro(wrap, room, g, isHost, amBaiDon){
+    const ready = g.introReady || {};
+    const total = Object.keys(room.players || {}).length;
+    let readyCount = 0;
+    Object.keys(ready).forEach(function(k){ if (ready[k]) readyCount++; });
+    const myReady = !!ready[App.uid];
 
-    let titleText = 'الجولة ' + round + ' - اختار حركتك';
-    if (amBaiDon && !isRevealed) titleText = 'الجولة ' + round + ' - أنت البيدون! 🎭';
+    const card = el('div', 'intro-card ' + (amBaiDon ? 'bd' : 'runner'));
+    if (amBaiDon){
+      card.innerHTML =
+        '<div class="shush-emoji">🤫</div>' +
+        '<div class="intro-role">أنت البيدون!</div>' +
+        '<div class="intro-hint">لا تفصح عن هويتك. اختار أرقام هجومك بحكمة عشان تسقط الزعابيل قبل ما يوصلوا للنهاية. متقدرش تتحرك بصورة حقيقية، لكن ممكن تموّه إنك اتضرب.</div>';
+    } else {
+      card.innerHTML =
+        '<div class="runner-emoji">🏃</div>' +
+        '<div class="intro-role">أنت زعبول عادي</div>' +
+        '<div class="intro-hint">حاول توصل لخط النهاية قبل البيدون. خد بالك من اختياراتك -- لو البيدون خمّن رقمك هتخسر قلب. لو عديت النص هتاخد قلب هدية، ولو دخلت منطقة الخطر قلوبك هتنزل لـ 2.</div>';
+    }
+    wrap.appendChild(card);
+
+    wrap.appendChild(el('div', 'answered-count', 'الاستعداد: ' + readyCount + ' / ' + total + ' زعبول'));
+
+    if (myReady){
+      wrap.appendChild(el('div', 'ok-box', '✅ جاهز -- في انتظار الباقي…'));
+    } else {
+      const btn = el('button', 'primary block', 'متابعة ✓');
+      btn.onclick = function(){ BaiDonGame.introContinue(); };
+      wrap.appendChild(btn);
+    }
+
+    if (isHost){
+      const forceBtn = el('button', 'ghost block small', 'ابدأ رغم إن فيه حد ما شافش 🚀');
+      forceBtn.onclick = function(){ BaiDonGame.hostStartAction(); };
+      wrap.appendChild(forceBtn);
+    }
+  },
+
+  // ---------- ACTION ----------
+  uiAction(wrap, room, g, round, isHost, amBaiDon, isRevealed, isEliminated, isFrozen){
+    const myAction = (g.actions || {})[App.uid];
+    const submitted = !!(myAction && myAction.ts);
+    const amJudge = (App.uid === room.hostId && room.hostMode === 'judge');
+    const myPs = (g.playerState || {})[App.uid];
+    const canAffordDisguise = myPs && myPs.hearts > 1;
+
+    let titleText = 'الجولة ' + round;
+    if (isEliminated) titleText = 'أنت خارج اللعبة 👻';
     else if (amBaiDon && isRevealed) titleText = 'الجولة ' + round + ' - أنت Turret! 🎭';
+    else if (amBaiDon) titleText = 'الجولة ' + round + ' - أنت البيدون! 🎭';
     wrap.appendChild(el('h3', 'phase-title', titleText));
 
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
 
-    if (amJudge){
+    // Timer text (no re-render)
+    const timerText = el('div', 'timer-big'); timerText.id = 'bd-timer-text';
+    timerText.textContent = '--';
+    wrap.appendChild(timerText);
+
+    if (isEliminated){
+      const spec = el('div', 'spectator-box');
+      spec.innerHTML = '👻 أنت خارج اللعبة<br><span style="font-size:12px;opacity:.8">بتتفرج بس -- استنى الجولة الجاية عشان ترجع تلعب</span>';
+      wrap.appendChild(spec);
+    } else if (isFrozen){
+      const fb = el('div', 'frozen-box');
+      fb.innerHTML = '❄️ أنت متجمد الجولة دي!<br><span style="font-size:12px;opacity:.85">هتقف جولة كاملة من غير أي أكشن -- البيدون جمدك 😬</span>';
+      wrap.appendChild(fb);
+    } else if (amJudge){
       wrap.appendChild(el('div', 'waiting', 'أنت الحكم 👨‍⚖️ -- متابع فقط'));
-    } else if (canAct){
-      // Move selection
-      wrap.appendChild(el('div', 'q-label', amBaiDon && !isRevealed ? 'حركتك (تمويه):' : (amBaiDon && isRevealed ? '— لا تتحرك —' : 'حركتك (تقدمك):')));
-      const moveRow = el('div', 'chip-row');
-      let selMove = null;
+    } else if (submitted){
+      wrap.appendChild(el('div', 'ok-box', '✅ تم إرسال حركتك -- في انتظار الباقي…'));
+    } else {
+      // Move selection (hidden for revealed baiDon)
       if (!(amBaiDon && isRevealed)){
+        wrap.appendChild(el('div', 'q-label', amBaiDon ? 'حركتك (تمويه):' : 'حركتك (تقدمك):'));
+        const moveRow = el('div', 'chip-row');
+        let selMove = null;
         for (let n = 1; n <= g.maxNum; n++){
           const b = el('button', 'num-chip', String(n));
           b.type = 'button'; b.dataset.move = n;
-          if (myAction && myAction.move === n) b.classList.add('on');
           b.onclick = function(){
             moveRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
             b.classList.add('on'); selMove = n;
+            updateSubmitState();
           };
           moveRow.appendChild(b);
         }
+        wrap.appendChild(moveRow);
+        window._bdSelMove = function(){ return selMove; };
+        window._bdClearMove = function(){ selMove = null; };
       }
-      wrap.appendChild(moveRow);
 
-      // Guess/Attack selection
-      wrap.appendChild(el('div', 'q-label', amBaiDon ? 'رقم الهجوم (توقع رقم الزعبول):' : 'تخمينك هنا وهمي ملوش لازمة بس لازم تخمن:'));
-      const guessRow = el('div', 'chip-row');
-      let selGuess = null;
-      for (let n = 1; n <= g.maxNum; n++){
-        const b = el('button', 'num-chip' + (amBaiDon ? ' attack' : ''), String(n));
-        b.type = 'button'; b.dataset.guess = n;
-        if (myAction && (myAction.attack === n || myAction.guess === n)) b.classList.add('on');
-        b.onclick = function(){
-          guessRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
-          b.classList.add('on'); selGuess = n;
-        };
-        guessRow.appendChild(b);
+      // Attack selection (only baiDon, or turret)
+      let selAttack = null;
+      if (amBaiDon){
+        wrap.appendChild(el('div', 'q-label', 'رقم الهجوم (توقع رقم الزعبول):'));
+        const atkRow = el('div', 'chip-row');
+        for (let n = 1; n <= g.maxNum; n++){
+          const b = el('button', 'num-chip attack', String(n));
+          b.type = 'button'; b.dataset.attack = n;
+          b.onclick = function(){
+            atkRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
+            b.classList.add('on'); selAttack = n;
+            updateSubmitState();
+          };
+          atkRow.appendChild(b);
+        }
+        wrap.appendChild(atkRow);
+        window._bdSelAttack = function(){ return selAttack; };
+
+        // Disguise button (only for hidden baiDon with >1 heart)
+        if (!isRevealed){
+          let disguiseOn = false;
+          const disRow = el('div', 'chip-row');
+          const disBtn = el('button', 'chip disguise-chip' + (canAffordDisguise ? '' : ' hidden'), '🎭 تمويه (تفقد قلب)');
+          disBtn.type = 'button';
+          if (!canAffordDisguise){
+            disBtn.classList.add('hidden');
+          } else {
+            disBtn.onclick = function(){
+              disguiseOn = !disguiseOn;
+              disBtn.classList.toggle('on', disguiseOn);
+              disBtn.textContent = disguiseOn ? '🎭 تمويه مُفعّل ✓' : '🎭 تمويه (تفقد قلب)';
+            };
+          }
+          disRow.appendChild(disBtn);
+          wrap.appendChild(disRow);
+          window._bdSelDisguise = function(){ return disguiseOn; };
+
+          if (canAffordDisguise){
+            wrap.appendChild(el('div', 'tiny', 'تمويه: هتظهر إنك اتضربت واسمك هيظهر في الضحايا -- هتخسر قلب حقيقي. الفرصة دي بتخلي الشك بعيد عنك.'));
+          } else {
+            wrap.appendChild(el('div', 'tiny', 'التمويه مش متاح -- لازم يكون عندك أكتر من قلب.'));
+          }
+        }
       }
-      wrap.appendChild(guessRow);
 
       const submitBtn = el('button', 'primary block', 'إرسال ✅');
+      submitBtn.disabled = true;
+      const updateSubmitState = function(){
+        const needsMove = !(amBaiDon && isRevealed);
+        const moveOk = !needsMove || (window._bdSelMove && window._bdSelMove());
+        const attackOk = !amBaiDon || (window._bdSelAttack && window._bdSelAttack());
+        submitBtn.disabled = !(moveOk && attackOk);
+      };
+      // Attach watchers via polling not needed -- we call updateSubmitState on each chip click
+      window._bdUpdateSubmit = updateSubmitState;
       submitBtn.onclick = function(){
-        const needMove = !(amBaiDon && isRevealed);
-        if (needMove && !selMove && !(myAction && myAction.move)){ toast('اختار حركة الأول', 'err'); return; }
-        if (!selGuess && !(myAction && (myAction.attack || myAction.guess))){ toast('اختار رقم', 'err'); return; }
-        const finalMove = selMove || (myAction && myAction.move) || 1;
-        const finalGuess = selGuess || (myAction && (myAction.attack || myAction.guess)) || 1;
-        BaiDonGame.submitAction(finalMove, finalGuess, amBaiDon);
+        const needsMove = !(amBaiDon && isRevealed);
+        const move = needsMove ? (window._bdSelMove && window._bdSelMove()) : null;
+        const attack = amBaiDon ? (window._bdSelAttack && window._bdSelAttack()) : null;
+        const disguise = amBaiDon && !isRevealed ? (window._bdSelDisguise && window._bdSelDisguise()) : false;
+        if (needsMove && !move){ toast('اختار حركة الأول', 'err'); return; }
+        if (amBaiDon && !attack){ toast('اختار رقم الهجوم', 'err'); return; }
+        BaiDonGame.submitAction(move, attack, disguise);
         submitBtn.disabled = true; submitBtn.textContent = 'تم الإرسال ✅';
       };
       wrap.appendChild(submitBtn);
-      if (amBaiDon){
-        wrap.appendChild(el('div', 'tiny', 'اختار حركتك، واختار رقم تتوقع زعبول هيختاره عشان توقعه.'));
-      }
-    } else {
-      wrap.appendChild(el('div', 'ok-box', '✅ تم إرسال حركتك -- في انتظار الباقي…'));
     }
 
-    // Answered count
-    const actions = g.actions || {};
-    const playerCount = Object.keys(room.players || {}).length - (room.hostMode === 'judge' ? 1 : 0);
-    const answeredCount = Object.keys(actions).length;
-    wrap.appendChild(el('div', 'answered-count', answeredCount + ' / ' + playerCount + ' اختاروا'));
+    // Counter (updated separately)
+    const counter = el('div', 'answered-count'); counter.id = 'bd-action-counter';
+    wrap.appendChild(counter);
 
-    // Timer bar
-    const tbar = el('div', 'tbar'); const tfill = el('div', 'tbar-fill'); tfill.id = 'tbar-fill'; tbar.appendChild(tfill);
-    wrap.appendChild(tbar);
-
-    // Host force-resolve (in play/judge modes) or auto mode has hidden button elsewhere
+    // Host controls
     if (isHost && App.room.hostMode !== 'auto'){
       const endBtn = el('button', 'warn block', 'إنهاء الجولة يدوياً ⏹');
       endBtn.onclick = function(){ BaiDonGame.hostResolve(); };
       wrap.appendChild(endBtn);
     } else if (isHost && App.room.hostMode === 'auto'){
-      // Force stop hidden button
       let fs = document.getElementById('force-stop-btn');
       if (fs) fs.remove();
       fs = document.createElement('button');
       fs.id = 'force-stop-btn'; fs.className = 'force-stop'; fs.textContent = '⏩';
       fs.onclick = function(){ BaiDonGame.hostResolve(); };
       document.body.appendChild(fs);
+    } else if (!isHost){
+      let fs = document.getElementById('force-stop-btn');
+      if (fs) fs.remove();
     }
+
+    // Initial counter
+    setTimeout(function(){
+      if ($('bd-action-counter')){
+        const ps2 = g.playerState || {};
+        const actions2 = g.actions || {};
+        const needed = Object.keys(ps2).filter(function(uid){
+          const p = ps2[uid];
+          if (!p || p.eliminated || p.frozen > 0) return false;
+          if (room.hostMode === 'judge' && uid === room.hostId) return false;
+          return true;
+        });
+        const done = needed.filter(function(uid){ return actions2[uid] && actions2[uid].ts; }).length;
+        $('bd-action-counter').textContent = done + ' / ' + needed.length + ' اختاروا';
+      }
+    }, 50);
   },
 
-  // ---------- RESOLVE PHASE (show events) ----------
+  // ---------- RESOLVE ----------
   uiResolve(wrap, room, g, round, isHost){
     const lr = g.lastResult || {};
     wrap.appendChild(el('h3', 'phase-title', 'نتيجة الجولة ' + round));
-
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
 
-    // Show events
     const events = lr.events || [];
     if (events.length){
       const evWrap = el('div', 'list');
@@ -1850,7 +1941,12 @@ const BaiDonGame = {
         const p = room.players[ev.uid];
         if (!p) return;
         let cls = 'event-line', txt = '';
-        if (ev.type === 'hit'){ cls += ' hit'; txt = '💥 البيدون ضرب ' + p.avatar + ' ' + p.name + (ev.bot ? ' (Bot)' : '') + ' -- اختار نفس الرقم (' + ev.attackNum + ')!'; }
+        if (ev.type === 'hit'){
+          cls += ' hit';
+          txt = '💥 البيدون ضرب ' + p.avatar + ' ' + p.name;
+          if (ev.attackNum) txt += ' -- اختار نفس الرقم (' + ev.attackNum + ')!';
+          if (ev.bot) txt += ' (Bot)';
+        }
         else if (ev.type === 'freeze'){ cls += ' freeze'; txt = '❄️ ' + p.avatar + ' ' + p.name + ' اتجمد لجولة!'; }
         else if (ev.type === 'stillFrozen'){ cls += ' freeze'; txt = '❄️ ' + p.avatar + ' ' + p.name + ' لسه متجمد.'; }
         else if (ev.type === 'middleLine'){ cls += ' middle'; txt = '💖 ' + p.avatar + ' ' + p.name + ' عدّى النص وخد قلب هدية (+1)!'; }
@@ -1866,10 +1962,11 @@ const BaiDonGame = {
       wrap.appendChild(el('div', 'waiting', 'مفيش أحداث غريبة الجولة دي…'));
     }
 
-    // Player states
+    // Player states (only non-eliminated)
     const list = el('div', 'list');
     const ps = g.playerState || {};
     const sorted = Object.keys(room.players || {}).map(function(id){ return Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }); })
+      .filter(function(p){ return !p._ps.eliminated; })
       .sort(function(a, b){ return (b._ps.pos || 0) - (a._ps.pos || 0); });
     sorted.forEach(function(p){
       const pp = p._ps;
@@ -1877,15 +1974,15 @@ const BaiDonGame = {
       const heartStr = '❤️'.repeat(Math.max(0, pp.hearts || 0));
       let name = nameWithCrown(room, p.id, p.name);
       if (p.id === g.baiDonId && g.baiDonRevealed) name += ' 🎭';
+      let frozenTag = pp.frozen > 0 ? ' <span style="color:#64b5ff;font-weight:900">❄️ متجمد</span>' : '';
       row.innerHTML = '<div class="r-ava' + (pp.frozen > 0 ? ' ice-block' : '') + '">' + esc(p.avatar) + '</div>' +
-        '<div class="r-main"><div class="r-name">' + name + '</div>' +
+        '<div class="r-main"><div class="r-name">' + name + frozenTag + '</div>' +
         '<div class="hearts">' + heartStr + ' <span style="color:#8d7fb0">(' + (pp.pos || 0) + '/' + (g.target || 20) + ')</span></div></div>' +
         '<div class="r-pts pos">' + (pp.pos || 0) + '</div>';
       list.appendChild(row);
     });
     wrap.appendChild(list);
 
-    // Ready for next round
     if (isHost){
       const btn = el('button', 'primary block', 'الجولة التالية ▶️');
       btn.onclick = function(){ BaiDonGame.hostNextRound(); };
@@ -1895,30 +1992,39 @@ const BaiDonGame = {
     }
   },
 
-  // ---------- VOTE PHASE ----------
-  uiVote(wrap, room, g, isHost){
+  // ---------- VOTE ----------
+  uiVote(wrap, room, g, isHost, isEliminated){
     wrap.appendChild(el('h3', 'phase-title', 'تصويت 🗳️ -- مين البيدون؟'));
     wrap.appendChild(el('div', 'waiting', 'صوّت بحكمة! لو الأغلبية اختارت زعبول بريء.. كل اللي صوّت ضده هيرجع خطوتين لورا!'));
 
-    const myVote = (g.votes || {})[App.uid];
-    const candidates = Object.keys(room.players || {}).filter(function(id){ return id !== App.uid; });
-    const voteWrap = el('div', 'list');
-    candidates.forEach(function(id){
-      const p = room.players[id];
-      if (!p) return;
-      const row = el('button', 'row' + (myVote === id ? ' me' : ''));
-      row.type = 'button';
-      row.style.cursor = 'pointer';
-      row.innerHTML = '<div class="r-ava">' + esc(p.avatar) + '</div>' +
-        '<div class="r-main"><div class="r-name">' + nameWithCrown(room, id, p.name) + '</div></div>' +
-        (myVote === id ? '<div style="color:#22ff88;font-weight:900">✓</div>' : '');
-      row.onclick = function(){ BaiDonGame.castVote(id); };
-      voteWrap.appendChild(row);
-    });
-    wrap.appendChild(voteWrap);
-
-    const voteCount = Object.keys(g.votes || {}).length;
-    wrap.appendChild(el('div', 'answered-count', voteCount + ' / ' + Object.keys(room.players || {}).length + ' صوّتوا'));
+    if (isEliminated){
+      wrap.appendChild(el('div', 'spectator-box', '👻 أنت خارج اللعبة -- مش هتصوّت الجولة دي'));
+    } else {
+      const myVote = (g.votes || {})[App.uid];
+      const ps = g.playerState || {};
+      const candidates = Object.keys(room.players || {}).filter(function(id){
+        return id !== App.uid && ps[id] && !ps[id].eliminated;
+      });
+      const voteWrap = el('div', 'list');
+      candidates.forEach(function(id){
+        const p = room.players[id];
+        if (!p) return;
+        const row = el('button', 'row' + (myVote === id ? ' me' : ''));
+        row.type = 'button';
+        row.style.cursor = 'pointer';
+        row.innerHTML = '<div class="r-ava">' + esc(p.avatar) + '</div>' +
+          '<div class="r-main"><div class="r-name">' + nameWithCrown(room, id, p.name) + '</div></div>' +
+          (myVote === id ? '<div style="color:#22ff88;font-weight:900">✓</div>' : '');
+        row.onclick = function(){ BaiDonGame.castVote(id); };
+        voteWrap.appendChild(row);
+      });
+      wrap.appendChild(voteWrap);
+      const voteCount = Object.keys(g.votes || {}).length;
+      const eligible = Object.keys(room.players || {}).filter(function(id){
+        return ps[id] && !ps[id].eliminated;
+      }).length;
+      wrap.appendChild(el('div', 'answered-count', voteCount + ' / ' + eligible + ' صوّتوا'));
+    }
 
     if (isHost){
       const btn = el('button', 'primary block', 'احسم التصويت ✅');
@@ -1932,7 +2038,6 @@ const BaiDonGame = {
   uiVoteResult(wrap, room, g, isHost){
     const vr = g.voteResult || {};
     wrap.appendChild(el('h3', 'phase-title', 'نتيجة التصويت 🗳️'));
-
     if (vr.tie){
       wrap.appendChild(el('div', 'waiting', 'تعادل! مفيش حد اتكشف. تستمر اللعبة.'));
     } else {
@@ -1946,10 +2051,7 @@ const BaiDonGame = {
         wrap.appendChild(box);
       }
     }
-
-    // Show current positions
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
-
     if (isHost){
       const btn = el('button', 'primary block', 'استمرار اللعبة ▶️');
       btn.onclick = function(){ BaiDonGame.hostAfterVote(); };
@@ -1963,9 +2065,11 @@ const BaiDonGame = {
     const guesser = g.endGuessUid;
     wrap.appendChild(el('h3', 'phase-title', 'تخمين النهاية! 🏁'));
     wrap.appendChild(el('div', 'waiting', 'وصلت لخط النهاية! بس عشان تفوز لازم تخمن مين البيدون.. لو خمنت غلط هترجع 3 خطوات لورا!'));
-
     if (App.uid === guesser){
-      const candidates = Object.keys(room.players || {}).filter(function(id){ return id !== App.uid; });
+      const ps = g.playerState || {};
+      const candidates = Object.keys(room.players || {}).filter(function(id){
+        return id !== App.uid && ps[id] && !ps[id].eliminated;
+      });
       const list = el('div', 'list');
       candidates.forEach(function(id){
         const p = room.players[id];
@@ -1975,7 +2079,7 @@ const BaiDonGame = {
         row.innerHTML = '<div class="r-ava">' + esc(p.avatar) + '</div>' +
           '<div class="r-main"><div class="r-name">' + nameWithCrown(room, id, p.name) + '</div></div>';
         row.onclick = function(){
-          if (confirm('متأكد إن ' + p.name + ' هو البيدون؟')) {
+          if (window.confirm('متأكد إن ' + p.name + ' هو البيدون؟')) {
             BaiDonGame.submitEndGuess(id);
           }
         };
@@ -1990,12 +2094,11 @@ const BaiDonGame = {
   uiFinal(wrap, room, g, isHost){
     const finalMessage = g.finalMessage || '';
     wrap.appendChild(el('h3', 'phase-title', 'النهاية! 🏁'));
-
     const box = el('div', 'winner-box unmask');
     const winner = g.winner;
     const winnerName = g.winnerName || '';
-    const winnerPlayer = Object.keys(room.players || {}).find(function(id){ return room.players[id].name === winnerName; });
-    const winnerAvatar = winnerPlayer ? room.players[winnerPlayer].avatar : (winner === 'baidon' ? '🎭' : '🏆');
+    const winnerPlayerId = Object.keys(room.players || {}).find(function(id){ return room.players[id].name === winnerName; });
+    const winnerAvatar = winnerPlayerId ? room.players[winnerPlayerId].avatar : (winner === 'baidon' ? '🎭' : '🏆');
     box.innerHTML =
       '<div class="w-title">' + (winner === 'baidon' ? '🎭 البيدون فاز!' : '🏆 الزعبول فاز!') + '</div>' +
       '<div class="w-ava">' + winnerAvatar + '</div>' +
@@ -2003,10 +2106,11 @@ const BaiDonGame = {
       '<div class="tiny" style="margin-top:8px;color:#fff">' + esc(finalMessage) + '</div>';
     wrap.appendChild(box);
 
-    // Full standings
+    // Standings (non-eliminated only)
     const ps = g.playerState || {};
     const list = el('div', 'list');
     const sorted = Object.keys(room.players || {}).map(function(id){ return Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }); })
+      .filter(function(p){ return !p._ps.eliminated; })
       .sort(function(a, b){ return (b._ps.pos || 0) - (a._ps.pos || 0); });
     sorted.forEach(function(p, i){
       const medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : (i + 1)));
@@ -2054,7 +2158,7 @@ const BaiDonGame = {
 };
 
 /* ================================================================
-   7) Utility for heart pop animation
+   7) Heart pop
    ================================================================ */
 function showHeartPop(){
   const h = document.createElement('div');
@@ -2067,7 +2171,7 @@ function showHeartPop(){
 }
 
 /* ================================================================
-   8) RENDER
+   8) Render
    ================================================================ */
 function render(){
   const room = App.room;
@@ -2080,6 +2184,7 @@ function render(){
     renderGame();
   }
   updateMicVisibility();
+  updateGameHint();
 }
 
 function renderLobby(){
@@ -2129,30 +2234,75 @@ function renderGame(){
 
   const me = room.players[App.uid];
   if (room.gameType === 'baidon'){
-    $('game-score').textContent = 'تقدمك: ' + (me ? (me.pos || 0) : 0) + ' • ❤️' + (me ? (me.hearts || 0) : 0);
+    const myPs = (g.playerState || {})[App.uid] || {};
+    const elimTag = myPs.eliminated ? ' 👻 خارج' : '';
+    $('game-score').textContent = 'تقدمك: ' + (me ? (me.pos || 0) : 0) + ' • ❤️' + (me ? (me.hearts || 0) : 0) + elimTag;
   } else {
     $('game-score').textContent = 'نقاطك: ' + (me ? (me.score || 0) : 0);
   }
 
-  // Sig to avoid re-render
+  // Sig - critical: don't include actions for action phase (prevents re-render / keyboard dismiss)
   let sig;
-  if (phase === 'action'){
-    sig = 'baidon-action:' + round + ':' + JSON.stringify(g.actions || {});
+  if (room.gameType === 'baidon'){
+    if (phase === 'action'){
+      const myAction = (g.actions || {})[App.uid];
+      const submitted = !!(myAction && myAction.ts);
+      sig = 'bd-action:' + round + ':' + (g.baiDonRevealed ? 1 : 0) + ':' + (submitted ? 1 : 0);
+    } else if (phase === 'intro'){
+      const ready = !!(g.introReady && g.introReady[App.uid]);
+      sig = 'bd-intro:' + (ready ? 1 : 0);
+    } else {
+      sig = 'bd-' + phase + ':' + JSON.stringify(g) + ':' + JSON.stringify(room.players);
+    }
   } else {
-    sig = 'full:' + JSON.stringify(g) + ':' + JSON.stringify(room.players);
+    if (phase === 'answering'){
+      sig = 'ans:' + round + ':' + (g.mode || '') + ':' + (g.question || '');
+    } else {
+      sig = 'full:' + JSON.stringify(g) + ':' + JSON.stringify(room.players);
+    }
   }
   if (App.sig === sig) return;
   App.sig = sig;
 
   const body = $('game-body');
   body.innerHTML = '';
-  const isBaiDon = room.gameType === 'baidon';
-  const gameObj = isBaiDon ? BaiDonGame : BoxGame;
+  const gameObj = room.gameType === 'baidon' ? BaiDonGame : BoxGame;
   body.appendChild(gameObj.build(room, g, phase, round));
 }
 
+/* --------- Context hint (sticky top bar) --------- */
+function updateGameHint(){
+  const bar = $('game-hint');
+  if (!bar) return;
+  const room = App.room;
+  if (!room || room.gameType !== 'baidon' || room.status !== 'playing'){ bar.classList.add('hidden'); return; }
+  const g = room.game || {};
+  const phase = g.phase;
+  let hint = '';
+  const amBaiDon = (g.baiDonId === App.uid);
+  const isRevealed = !!g.baiDonRevealed;
+  const ps = g.playerState || {};
+  const myPs = ps[App.uid] || {};
+
+  if (myPs.eliminated){ hint = '👻 أنت خارج اللعبة -- بتتفرج بس'; }
+  else if (myPs.frozen > 0){ hint = '❄️ أنت متجمد الجولة دي -- مش هتعمل أي أكشن'; }
+  else if (phase === 'intro'){ hint = 'لا تفصح عن هويتك 🤫'; }
+  else if (phase === 'action'){
+    if (amBaiDon && !isRevealed) hint = '🎭 اختار حركتك، واختار رقم تتوقع زعبول هيختاره عشان توقعه';
+    else if (amBaiDon && isRevealed) hint = '🎭 أنت Turret! اختار رقم الهجوم كل جولة';
+    else hint = 'حاول متختارش نفس الرقم كتير عشان البيدون ميقفشكش وتخسر قلب!';
+  }
+  else if (phase === 'vote'){ hint = 'صوّت بحكمة! لو الأغلبية اختارت زعبول بريء.. كل اللي صوّت ضده هيرجع خطوتين لورا!'; }
+  else if (phase === 'endGuess'){ hint = 'وصلت لخط النهاية! لازم تخمن مين البيدون.. لو غلط هترجع 3 خطوات لورا!'; }
+  else if (phase === 'resolve'){ hint = 'تابع الأحداث -- القلوب والتحركات'; }
+  else if (phase === 'final'){ hint = 'النهاية! اضغط إعادة الزعبله عشان جولة جديدة'; }
+
+  if (hint){ bar.textContent = hint; bar.classList.remove('hidden'); }
+  else { bar.classList.add('hidden'); }
+}
+
 /* ================================================================
-   9) MIC
+   9) Mic
    ================================================================ */
 function updateMicVisibility(){
   const btn = $('mic-btn');
@@ -2235,74 +2385,124 @@ function stopRecording(){
 }
 
 /* ================================================================
-   10) GLOBAL TIMER + AUTO MODE
+   10) Global timer (updates text only - no re-render)
    ================================================================ */
 setInterval(function(){
   const room = App.room;
   if (!room || !room.game) return;
   const g = room.game;
-  const timerPill = $('game-timer');
   const isBaiDon = room.gameType === 'baidon';
+  const timerPill = $('game-timer');
 
   if (isBaiDon){
     if (g.phase === 'action' && g.timerEnd){
       const leftMs = g.timerEnd - Date.now();
       const left = Math.max(0, Math.ceil(leftMs / 1000));
-      if (timerPill) timerPill.textContent = '⏱ ' + left + 'ث';
-      const fill = $('tbar-fill');
-      if (fill){ const pct = Math.max(0, Math.min(100, (leftMs / (TIMER_SECONDS * 1000)) * 100)); fill.style.width = pct + '%'; }
-      if (leftMs <= 0){
-        // Auto-resolve: any client can trigger; last write wins but result is same
-        if (room.status === 'playing'){
+      // Update pill only when second changes (avoid iOS keyboard dismiss)
+      if (timerPill && timerPill.getAttribute('data-val') !== String(left)){
+        timerPill.textContent = '⏱ ' + left + 'ث';
+        timerPill.setAttribute('data-val', String(left));
+      }
+      const txtEl = $('bd-timer-text');
+      if (txtEl && txtEl.getAttribute('data-val') !== String(left)){
+        txtEl.textContent = '⏱ ' + left + ' ثانية';
+        txtEl.setAttribute('data-val', String(left));
+      }
+      // Update counter
+      const counter = $('bd-action-counter');
+      if (counter){
+        const ps = g.playerState || {};
+        const actions = g.actions || {};
+        const needed = Object.keys(ps).filter(function(uid){
+          const p = ps[uid];
+          if (!p || p.eliminated || p.frozen > 0) return false;
+          if (room.hostMode === 'judge' && uid === room.hostId) return false;
+          return true;
+        });
+        const done = needed.filter(function(uid){ return actions[uid] && actions[uid].ts; }).length;
+        const str = done + ' / ' + needed.length + ' اختاروا';
+        if (counter.getAttribute('data-val') !== str){
+          counter.textContent = str;
+          counter.setAttribute('data-val', str);
+        }
+        // All acted? -> resolve early
+        if (needed.length > 0 && done >= needed.length && leftMs > 800){
           BaiDonGame.hostResolve();
         }
       }
+      if (leftMs <= 0){
+        BaiDonGame.hostResolve();
+      }
     } else {
-      if (timerPill) timerPill.textContent = '--';
+      if (timerPill && g.phase !== 'action'){ timerPill.textContent = '--'; timerPill.removeAttribute('data-val'); }
+      const txtEl = $('bd-timer-text');
+      if (txtEl && g.phase !== 'action') txtEl.textContent = '';
     }
 
-    // Auto mode: auto-next after resolve
+    // Auto-advance in auto mode
     if (App.isHost && room.hostMode === 'auto'){
+      if (g.phase === 'intro'){
+        const ready = g.introReady || {};
+        const total = Object.keys(room.players || {}).length;
+        let cnt = 0;
+        Object.keys(ready).forEach(function(k){ if (ready[k]) cnt++; });
+        if (total > 0 && cnt >= total){ BaiDonGame.hostStartAction(); }
+      }
+      if (g.phase === 'intro' && !BaiDonGame._autoIntroTimer){
+        BaiDonGame._autoIntroTimer = setTimeout(function(){
+          BaiDonGame._autoIntroTimer = null;
+          if (App.room && App.room.game.phase === 'intro') BaiDonGame.hostStartAction();
+        }, 8000);
+      }
       if (g.phase === 'resolve' && !BaiDonGame._autoNextTimer){
         BaiDonGame._autoNextTimer = setTimeout(function(){
           BaiDonGame._autoNextTimer = null;
-          if (App.room && App.room.game.phase === 'resolve'){
-            BaiDonGame.hostNextRound();
-          }
+          if (App.room && App.room.game.phase === 'resolve') BaiDonGame.hostNextRound();
         }, 5000);
       }
       if (g.phase === 'voteResult' && !BaiDonGame._autoVoteTimer){
         BaiDonGame._autoVoteTimer = setTimeout(function(){
           BaiDonGame._autoVoteTimer = null;
-          if (App.room && App.room.game.phase === 'voteResult'){
-            BaiDonGame.hostAfterVote();
-          }
+          if (App.room && App.room.game.phase === 'voteResult') BaiDonGame.hostAfterVote();
         }, 4000);
       }
-      // Auto play again when ready
-      if (g.phase === 'playAgain'){
-        const ready = g.ready || {};
-        const total = Object.keys(room.players || {}).length;
+    }
+
+    // Non-auto: host can advance intro when all ready (auto too but handled above)
+    if (App.isHost && g.phase === 'intro' && !BaiDonGame._introCheckTimer){
+      BaiDonGame._introCheckTimer = setInterval(function(){
+        if (!App.room || App.room.game.phase !== 'intro'){ clearInterval(BaiDonGame._introCheckTimer); BaiDonGame._introCheckTimer = null; return; }
+        const ready = App.room.game.introReady || {};
+        const total = Object.keys(App.room.players || {}).length;
         let cnt = 0;
         Object.keys(ready).forEach(function(k){ if (ready[k]) cnt++; });
-        if (total > 0 && cnt >= total){ BaiDonGame.hostRestart(); }
-      }
+        if (total > 0 && cnt >= total){
+          clearInterval(BaiDonGame._introCheckTimer); BaiDonGame._introCheckTimer = null;
+          BaiDonGame.hostStartAction();
+        }
+      }, 700);
     }
   } else {
-    // BoxGame timer logic (unchanged)
+    // BoxGame
     if (g.phase === 'answering' && g.timerEnd){
       const leftMs = g.timerEnd - Date.now();
       const left = Math.max(0, Math.ceil(leftMs / 1000));
-      if (timerPill) timerPill.textContent = '⏱ ' + left + 'ث';
-      const fill = $('tbar-fill');
-      if (fill){ const pct = Math.max(0, Math.min(100, (leftMs / (TIMER_SECONDS * 1000)) * 100)); fill.style.width = pct + '%'; }
+      if (timerPill && timerPill.getAttribute('data-val') !== String(left)){
+        timerPill.textContent = '⏱ ' + left + 'ث';
+        timerPill.setAttribute('data-val', String(left));
+      }
+      const txtEl = $('box-timer-text');
+      if (txtEl && txtEl.getAttribute('data-val') !== String(left)){
+        txtEl.textContent = '⏱ ' + left + ' ثانية';
+        txtEl.setAttribute('data-val', String(left));
+      }
       if (App.isHost){
         const answererIds = getAnswererIds(room);
         const allAnswered = answererIds.length > 0 && answererIds.every(function(id){ return g.answers && g.answers[id] && g.answers[id].text; });
         if (leftMs <= 0 || allAnswered){ BoxGame.hostEndTimer(); }
       }
     } else {
-      if (timerPill && g.phase !== 'answering') timerPill.textContent = '--';
+      if (timerPill && g.phase !== 'answering'){ timerPill.textContent = '--'; timerPill.removeAttribute('data-val'); }
     }
     if (App.isHost && g.phase === 'playAgain'){
       const ready = g.ready || {};
@@ -2312,10 +2512,10 @@ setInterval(function(){
       if (total > 0 && cnt >= total){ BoxGame.hostRestart(); }
     }
   }
-}, 300);
+}, 500);
 
 /* ================================================================
-   11) UI BINDING
+   11) UI binding
    ================================================================ */
 let selectedAvatar = AVATARS[0];
 
@@ -2379,6 +2579,7 @@ async function submitSetup(){
     else if (code === 'NO_ROOM') toast('مفيش زعبل بالرقم ده 🤔', 'err');
     else if (code === 'FULL') toast('الزعبل مليان (20 زعبول)', 'err');
     else if (code === 'NAME_TAKEN') toast('الاسم موجود، جرّب اسم تاني', 'err');
+    else if (code === 'AVATAR_TAKEN') toast('الأفاتار ده متاخد، اختار واحد تاني', 'err');
     else if (code === 'STARTED') toast('اللعبة بدأت خلاص، استنى الجولة الجديدة', 'err');
     else if (code === 'KICKED') toast('أنت مطرود من الزعبل ده 🚪', 'err');
     else toast('مشكلة في الاتصال، جرّب تاني', 'err');
@@ -2386,7 +2587,6 @@ async function submitSetup(){
 }
 
 function bindEvents(){
-  // Home - two game cards
   $('card-box').addEventListener('click', function(){ showHomeChoice('box'); });
   $('card-baidon').addEventListener('click', function(){ showHomeChoice('baidon'); });
 
@@ -2417,7 +2617,6 @@ function bindEvents(){
   onEnter($('inp-pin'), submitSetup);
   $('inp-pin').addEventListener('input', function(){ this.value = this.value.replace(/\D/g, '').slice(0, 5); });
 
-  // Host mode chips
   const hostChips = document.querySelectorAll('#host-opts .chip');
   const hostHints = {
     play: 'هوست + لاعب: تتحكم يدوياً وتلعب كزعبول عادي.',
@@ -2448,7 +2647,6 @@ function bindEvents(){
     }
   });
 
-  // Mic
   const micBtn = $('mic-btn');
   micBtn.addEventListener('pointerdown', function(e){ e.preventDefault(); startRecording(); });
   micBtn.addEventListener('pointerup', function(e){ e.preventDefault(); stopRecording(); });
@@ -2461,7 +2659,7 @@ function bindEvents(){
 }
 
 /* ================================================================
-   12) BOOT
+   12) Boot
    ================================================================ */
 (async function boot(){
   buildAvatarGrid();
@@ -2479,4 +2677,4 @@ function bindEvents(){
 })();
 </script>
 </body>
-   </html>
+  </html>
