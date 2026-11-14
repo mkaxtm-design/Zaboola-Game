@@ -83,7 +83,7 @@ label:first-child{margin-top:0;}
   animation:shine 6s ease infinite;filter:drop-shadow(0 4px 26px rgba(255,46,154,.45));
 }
 @keyframes shine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.tag{color:#a797c9;font-size:15px;font-weight:700;margin:6px 0 0;}
+.tag{color:#a797c9;font-size:15px;font-weight:700;margin:6px 0 0;line-height:1.6;}
 
 .games{display:grid;grid-template-columns:1fr;gap:14px;margin-top:6px;}
 @media(min-width:560px){.games{grid-template-columns:1fr 1fr;}}
@@ -101,8 +101,8 @@ label:first-child{margin-top:0;}
 .game-card .game-title{font-size:20px;font-weight:900;color:#fff;}
 .game-card .game-sub{font-size:13px;color:#c9b6ff;font-weight:700;}
 
-.avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px;max-height:230px;overflow-y:auto;padding:6px 2px;-webkit-overflow-scrolling:touch;}
-.av{aspect-ratio:1/1;border-radius:14px;font-size:24px;background:rgba(255,255,255,.06);border:2px solid transparent;padding:0;display:flex;align-items:center;justify-content:center;}
+.avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;max-height:260px;overflow-y:auto;padding:6px 2px;-webkit-overflow-scrolling:touch;}
+.av{aspect-ratio:1/1;border-radius:12px;font-size:22px;background:rgba(255,255,255,.06);border:2px solid transparent;padding:0;display:flex;align-items:center;justify-content:center;}
 .av.sel{border-color:#ff2e9a;background:rgba(255,46,154,.20);box-shadow:0 0 16px rgba(255,46,154,.55);}
 
 .chip-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -203,7 +203,7 @@ label:first-child{margin-top:0;}
 .center{text-align:center;}
 .crown{color:#ffd166;font-size:14px;}
 
-/* ====== BaiDon Animations ====== */
+/* ====== BIDON ANIMATIONS ====== */
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
 .shake{animation:shake .5s ease-in-out;}
 @keyframes redflash{0%{background:rgba(255,0,0,.55)}100%{background:transparent}}
@@ -213,12 +213,20 @@ label:first-child{margin-top:0;}
 .ice-block::after{content:'❄️';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;background:linear-gradient(135deg,rgba(150,220,255,.75),rgba(100,180,255,.55));animation:iceIn .4s ease-out;pointer-events:none;}
 @keyframes heartpop{0%{transform:scale(.4) translateY(0);opacity:1}100%{transform:scale(1.8) translateY(-40px);opacity:0}}
 .heart-pop{position:fixed;z-index:9500;font-size:34px;pointer-events:none;animation:heartpop 1.2s ease-out forwards;color:#ff4d8e;}
-@keyframes dangerPulse{0%,100%{box-shadow:inset 0 0 40px rgba(255,0,0,.25)}50%{box-shadow:inset 0 0 90px rgba(255,0,0,.6)}}
-.danger-zone{animation:dangerPulse 1.8s infinite;border-color:rgba(255,46,94,.5) !important;}
 @keyframes unmaskAnim{0%{filter:blur(24px);opacity:0;transform:scale(.8)}100%{filter:blur(0);opacity:1;transform:scale(1)}}
 .unmask{animation:unmaskAnim 1.4s ease-out;}
 
-/* ====== Cartoon Track (no periodic animation) ====== */
+/* ====== SLOW ANIMATION (Resolve) ====== */
+.event-line {
+  opacity: 0;
+  animation: evSlide .55s ease forwards;
+}
+@keyframes evSlide {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ====== CARTOON TRACK ====== */
 .bd-track-wrap{margin:10px 0 22px;padding:8px 4px 12px;}
 .bd-track{
   position:relative;height:80px;border-radius:20px;
@@ -237,7 +245,6 @@ label:first-child{margin-top:0;}
 .bd-track .bd-num{position:absolute;top:100%;transform:translateX(-50%);font-size:10px;font-weight:800;color:#8d7fb0;margin-top:3px;white-space:nowrap;}
 .bd-track .bd-num.major{color:#ffd166;font-size:12px;font-weight:900;}
 
-/* Token: STATIC by default. Only slides when position changes. */
 .bd-token{
   position:absolute;
   transform:translateX(-50%);
@@ -249,7 +256,7 @@ label:first-child{margin-top:0;}
 .bd-token.me{font-size:26px;filter:drop-shadow(0 0 8px rgba(255,46,154,.8)) drop-shadow(0 3px 5px rgba(0,0,0,.7));}
 .bd-token.frozen{filter:hue-rotate(180deg) brightness(1.35) drop-shadow(0 0 6px rgba(100,200,255,.9));}
 .bd-token.baiDonRevealed{font-size:26px;filter:drop-shadow(0 0 10px rgba(255,46,94,.9));}
-.bd-token.sliding{transition:left .65s cubic-bezier(.34,1.56,.64,1);}
+.bd-token.sliding{transition:left 1.2s cubic-bezier(.34,1.3,.64,1);}
 
 .num-chip{flex:1 1 0;min-width:52px;font-size:20px;font-weight:900;padding:14px 8px;border-radius:14px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);color:#fff;}
 .num-chip.on{background:linear-gradient(135deg,rgba(34,255,136,.35),rgba(0,240,255,.25));border-color:#22ff88;box-shadow:0 0 16px rgba(34,255,136,.5);}
@@ -283,11 +290,138 @@ label:first-child{margin-top:0;}
 @keyframes runAnim{0%,100%{transform:translateX(-8px)}50%{transform:translateX(8px)}}
 .runner-emoji{font-size:66px;display:inline-block;animation:runAnim 1s ease-in-out infinite;}
 
+/* ====== BIDON HIT OVERLAY ====== */
+.bd-overlay {
+  position: fixed; inset: 0; z-index: 9800;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: radial-gradient(circle at center, rgba(255,46,94,.42), rgba(0,0,0,.9));
+  animation: ovIn .3s ease-out;
+  pointer-events: none; padding: 20px; text-align: center;
+}
+@keyframes ovIn { from { opacity: 0; transform: scale(1.15); } to { opacity: 1; transform: scale(1); } }
+.bd-overlay .ov-icon { font-size: 80px; animation: ovIconPulse .55s ease-in-out 3; filter: drop-shadow(0 0 30px rgba(255,46,94,.9)); }
+@keyframes ovIconPulse { 0%,100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.3) rotate(12deg); } }
+.bd-overlay .ov-text { font-size: 22px; font-weight: 900; color: #fff; margin-top: 12px; text-shadow: 0 2px 14px rgba(255,46,94,.9); letter-spacing: 1px; }
+.bd-overlay .ov-victims { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
+.bd-overlay .ov-victim { font-size: 20px; font-weight: 900; color: #ffd166; background: rgba(255,46,94,.25); border: 1.5px solid rgba(255,46,94,.6); padding: 8px 16px; border-radius: 14px; animation: ovNameIn .5s cubic-bezier(.34,1.56,.64,1) both; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+@keyframes ovNameIn { from { opacity: 0; transform: translateY(24px) scale(.7); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.bd-overlay .ov-sub { font-size: 13px; font-weight: 800; color: #ff8fb5; margin-top: 14px; opacity: .9; }
+
+/* ====== TOP BAR (Resolve) ====== */
+.tb-players{
+  display:flex; gap:6px; overflow-x:auto; padding:8px 4px; margin-bottom:8px;
+  background:rgba(22,10,40,.65); border:1px solid rgba(255,255,255,.10);
+  border-radius:14px; -webkit-overflow-scrolling:touch;
+}
+.tb-players::-webkit-scrollbar{height:0;}
+.tb-player{
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  min-width:64px; padding:6px 4px; border-radius:10px;
+  background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08);
+  font-size:10px; font-weight:800; color:#e5d9ff; text-align:center;
+  position:relative; transition: all .2s;
+}
+.tb-player.is-speaking{ background:rgba(34,255,136,.18); border-color:#22ff88; box-shadow:0 0 12px rgba(34,255,136,.45); }
+.tb-player.is-talking{ background:rgba(0,240,255,.18); border-color:#00f0ff; box-shadow:0 0 12px rgba(0,240,255,.5); }
+.tb-player.me{ border-color:rgba(255,46,154,.55); }
+.tb-player .tb-ava{ font-size:20px; line-height:1.1; }
+.tb-player .tb-name{ font-size:10px; max-width:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.tb-player .tb-hearts{ font-size:9px; color:#ff4d8e; }
+.tb-player .tb-score{ font-size:9px; color:#22ff88; }
+.tb-player .tb-mic{ position:absolute; top:2px; right:2px; font-size:11px; opacity:0; transition:opacity .2s; }
+.tb-player.is-speaking .tb-mic{ opacity:1; }
+.tb-player .tb-sound{ position:absolute; top:2px; left:2px; font-size:11px; opacity:0; transition:opacity .2s; }
+.tb-player.is-talking .tb-sound{ opacity:1; }
+
+/* Speech bubble */
+.tb-bubble{
+  position:fixed; z-index:9700; padding:8px 14px;
+  background:linear-gradient(135deg, rgba(255,46,154,.95), rgba(168,85,247,.9));
+  color:#fff; border-radius:16px; font-size:13px; font-weight:900;
+  box-shadow:0 8px 24px rgba(255,46,154,.5);
+  pointer-events:none;
+  animation: bubbleIn .3s cubic-bezier(.34,1.56,.64,1);
+  max-width:80vw;
+}
+.tb-bubble.bd{ background:linear-gradient(135deg, rgba(255,46,94,.95), rgba(120,30,60,.95)); }
+@keyframes bubbleIn { from { opacity:0; transform: scale(.7) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
+.tb-bubble .tb-bubble-name{ font-size:11px; opacity:.85; font-weight:800; }
+.tb-bubble .tb-bubble-text{ font-size:14px; margin-top:2px; }
+
+/* BaiDon slot in top bar */
+.tb-baidon{
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  min-width:80px; padding:6px 8px; border-radius:12px;
+  background:linear-gradient(135deg, rgba(255,46,94,.25), rgba(168,85,247,.20));
+  border:1.5px solid rgba(255,46,94,.55);
+  font-size:11px; font-weight:900; text-align:center;
+  animation: bdPulse 2.5s ease-in-out infinite;
+}
+@keyframes bdPulse { 0%,100% { box-shadow: 0 0 12px rgba(255,46,94,.3); } 50% { box-shadow: 0 0 22px rgba(255,46,94,.7); } }
+.tb-baidon.revealed{ animation:none; box-shadow:0 0 18px rgba(255,46,94,.6); }
+.tb-baidon .tb-ava{ font-size:26px; line-height:1.1; }
+.tb-baidon .tb-name{ font-size:10px; color:#fff; }
+.tb-baidon .tb-mask{ font-size:10px; color:#ff8fb5; font-weight:800; }
+
+/* ====== COMEDY PANELS ====== */
+.comedy-wrap{ display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+.comedy-panel{
+  flex:1 1 240px;
+  padding:8px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+}
+.comedy-panel.left{ border-color:rgba(255,46,94,.35); background:rgba(255,46,94,.06); }
+.comedy-panel.right{ border-color:rgba(34,255,136,.30); background:rgba(34,255,136,.05); }
+.comedy-panel .cp-label{ font-size:11px; font-weight:900; color:#c9b6ff; margin-bottom:6px; text-align:center; }
+.comedy-panel.left .cp-label{ color:#ff8fb5; }
+.comedy-panel.right .cp-label{ color:#8bffb8; }
+.comedy-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(88px, 1fr));
+  gap:5px;
+}
+.comedy-grid button{
+  font-size:11px;
+  font-weight:800;
+  padding:8px 4px;
+  border-radius:10px;
+  background:linear-gradient(135deg, rgba(255,176,32,.18), rgba(255,94,58,.12));
+  border:1.5px solid rgba(255,176,32,.35);
+  color:#fff;
+  font-family:inherit;
+  cursor:pointer;
+  transition:filter .14s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  min-height:44px;
+}
+.comedy-grid button:active{ filter:brightness(1.4); }
+.comedy-grid button:disabled{ opacity:.35; cursor:not-allowed; }
+.comedy-grid button .cg-emoji{ font-size:16px; }
+.comedy-grid button .cg-name{ font-size:10px; line-height:1.15; }
+.comedy-grid button.cooldown{ background:rgba(120,120,120,.15); border-color:rgba(120,120,120,.3); }
+
+/* ====== QUEUE INDICATOR ====== */
+.queue-bar{
+  margin-top:8px; padding:8px 12px;
+  background:rgba(0,240,255,.10);
+  border:1px solid rgba(0,240,255,.35);
+  border-radius:12px;
+  font-size:12px; font-weight:800; color:#00f0ff;
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+}
+.queue-bar .q-count{ font-size:10px; color:#a797c9; }
+
 .force-stop{position:fixed;bottom:16px;right:16px;z-index:9100;width:44px;height:44px;border-radius:50%;font-size:16px;padding:0;background:rgba(255,46,94,.85);color:#fff;box-shadow:0 6px 20px rgba(255,46,94,.5);opacity:.55;}
 .force-stop:active{opacity:1;}
 
 /* ============================================================
-   🔥 HEAT REDUCTION — mobile + reduced-motion + hidden tab
+   🔥 HEAT REDUCTION
    ============================================================ */
 @media (max-width: 640px){
   .orb.a{filter:blur(28px);width:170px;height:170px;opacity:.30;}
@@ -298,6 +432,7 @@ label:first-child{margin-top:0;}
   #loading-overlay{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
   .logo{filter:drop-shadow(0 2px 14px rgba(255,46,154,.35));}
   body{background-size:200% 200%;animation-duration:30s;}
+  .tb-baidon{animation:none; box-shadow:0 0 12px rgba(255,46,94,.4);}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{
@@ -307,6 +442,7 @@ label:first-child{margin-top:0;}
   }
   body{animation:none !important;background-size:100% 100% !important;}
   .bd-token{transition:none !important;}
+  .tb-baidon{animation:none !important;}
 }
 body.tab-hidden *, body.tab-hidden *::before, body.tab-hidden *::after{
   animation-play-state: paused !important;
@@ -320,7 +456,7 @@ body.tab-hidden *, body.tab-hidden *::before, body.tab-hidden *::after{
   <section id="screen-home" class="screen active">
     <div class="brand">
       <h1 class="logo">زعبوله</h1>
-      <p class="tag">منصة الألعاب الجماعية أونلاين 🎉</p>
+      <p class="tag">الناس فين ؟ بقالي نص ساعه على القهوة</p>
     </div>
     <div class="games">
       <button class="game-card" id="card-box">
@@ -398,10 +534,21 @@ body.tab-hidden *, body.tab-hidden *::before, body.tab-hidden *::after{
 
 <script>
 "use strict";
+
 /* ================================================================
-   0) Constants + Utilities
+   0) CONSTANTS
    ================================================================ */
-const AVATARS = ['🦊','🐼','🐯','🦁','🐸','🐵','🐧','🐨','🐰','🐷','🐔','🐙','🦄','🐝','🦋','🐢','🐳','🦉','🐺','🐮','🐹','🐭','🦝','🦥','🦦','🦔','🐿️','🐊','🦖','🦕','🐬','🦈','🐲','🤖','👽'];
+const AVATARS = [
+  // 35 حيوانات
+  '🦊','🐼','🐯','🦁','🐸','🐵','🐧','🐨','🐰','🐷',
+  '🐔','🐙','🦄','🐝','🦋','🐢','🐳','🦉','🐺','🐮',
+  '🐹','🐭','🦝','🦥','🦦','🦔','🐿️','🐊','🦖','🦕',
+  '🐬','🦈','🐲','🤖','👽',
+  // 30 أوجه متنوعة (شباب/بنات/طوائف)
+  '👦','👧','🧑','👨','👩','🧔','👱','👨‍🦰','👩‍🦱','🧕',
+  '👳','👲','🧓','👴','👵','🤵','👰','🧙','🧛','🧟',
+  '🧜','🧚','🤴','👸','🥷','🦸','🦹','👨‍🎤','👨‍💻','👨‍🍳'
+];
 const MAX_PLAYERS = 20;
 const MIN_PLAYERS = 3;
 const TOTAL_ROUNDS = 10;
@@ -409,6 +556,8 @@ const TIMER_SECONDS = 25;
 const BAIDON_TIMER = 30;
 const ROOM_TTL_MS = 30 * 60 * 1000;
 const HOST_TIMEOUT_MS = 120 * 1000;
+const COMEDY_COOLDOWN_MS = 5000;
+const COMEDY_QUEUE_TTL_MS = 8000;
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfOqZBoIRmz_s3qLjR9DjHld7Wv_onBe0",
@@ -420,6 +569,29 @@ const firebaseConfig = {
   appId: "1:965982067456:web:896ef2babae15baa3eb1e5"
 };
 
+/* ================================================================
+   1) COMEDY SOUNDS (14 مؤثر)
+   ================================================================ */
+const COMEDY_SOUNDS = [
+  { id: 'matmchish',    name: 'متمشيش',            emoji: '🚶', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680739/%D9%85%D9%8E%D8%AA%D9%85%D8%B4%D9%8A%D8%B4.mp3.mp3', category: 'runner_other_eliminated' },
+  { id: 'ah_ana_hmar',  name: 'اه انا حمار',        emoji: '🐴', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680740/%D8%A7%D9%87_%D8%A7%D9%86%D8%A7_%D8%AD%D9%85%D8%A7%D8%B1.mp3.mp3', category: 'runner_bad' },
+  { id: 'ana_hmar',     name: 'انا حمار',           emoji: '🐴', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%86%D8%A7_%D8%AD%D9%85%D8%A7%D8%B1.mp3.mp3', category: 'runner_bad' },
+  { id: 'ezay',         name: 'ازاي',               emoji: '😱', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%A7%D8%B2%D8%A7%D9%8A.mp3.mp3', category: 'runner_bad' },
+  { id: 'ya_bni_haram', name: 'يابني حرام عليك',    emoji: '😢', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D9%87%D8%AA%D9%85%D9%88%D8%AA%D9%86%D9%8A.mp3.mp3', category: 'runner_bad' },
+  { id: 'awsakh',       name: 'اوsخ من كدا مفيش',   emoji: '🤮', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%88s%D8%AE_%D9%85%D9%86_%D9%83%D8%AF%D8%A7.mp3.mp3', category: 'runner_bad' },
+  { id: 'edaah',        name: 'ايدااه',             emoji: '👏', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%8A%D8%AF%D8%A7%D8%A7%D9%87.mp3.mp3', category: 'runner_good' },
+  { id: 'enfed',        name: 'انفد بجلدك',         emoji: '🏃', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%86%D9%81%D8%AF_%D8%A8%D8%AC%D9%84%D8%AF%D9%83.mp3.mp3', category: 'runner_eliminated' },
+  { id: 'ank_lmeet',    name: 'انك لميت',           emoji: '💀', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680740/%D8%A7%D9%86%D9%83_%D9%84%D9%85%D9%8A%D8%AA.mp3.mp3', category: 'runner_early' },
+  { id: 'hatouly',      name: 'هاتولي الكلب دا',    emoji: '🐕', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D9%87%D8%A7%D8%AA%D9%88%D9%84%D9%8A.mp3.mp3', category: 'vote_correct' },
+  { id: 'bala_seyah',   name: 'بلا صياح',           emoji: '🤫', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680739/%D8%A8%D9%84%D8%A7_%D8%B5%D9%8A%D8%A7%D8%AD.mp3.mp3', category: 'baidon_hit' },
+  { id: 'salam',        name: 'سلامعليكووو',        emoji: '👋', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%B3%D9%84%D8%A7%D9%85%D8%B9%D9%83%D9%84%D9%8A%D9%88%D9%88.mp3.mp3', category: 'baidon_always' },
+  { id: 'da_anto_lakta',name: 'دا انتو لقطه',       emoji: '🤣', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%AF%D8%A7_%D8%A7%D9%86%D8%AA%D9%88%D8%A7_%D9%84%D9%82%D8%B7%D9%87.mp3.mp3', category: 'baidon_hit' },
+  { id: 'ehna_bhayem',  name: 'احنا بهايم',         emoji: '🐄', url: 'https://res.cloudinary.com/pqciyfaq/video/upload/v1794684754/WhatsApp_Video_2026-11-14_at_21.26.52.mp3', category: 'vote_wrong' },
+];
+
+/* ================================================================
+   2) UTILITIES
+   ================================================================ */
 function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; }
@@ -455,9 +627,202 @@ function nameWithCrown(room, uid, name){
   if (room.hostId === uid) return esc(name) + ' <span class="crown">👑</span>';
   return esc(name);
 }
+function getVoteInterval(n) { return n <= 3 ? 3 : (n === 4 ? 4 : 5); }
 
 /* ================================================================
-   1) App state
+   3) SFX -- Web Audio API
+   ================================================================ */
+const SFX = {
+  ctx: null,
+  _init() {
+    if (this.ctx) {
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+      return;
+    }
+    try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
+  },
+  _tone(freq, duration, type, gain, delay) {
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime + (delay || 0);
+    const osc = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.value = freq;
+    g.gain.setValueAtTime(gain || 0.1, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + duration);
+    osc.connect(g); g.connect(this.ctx.destination);
+    osc.start(t); osc.stop(t + duration + 0.05);
+  },
+  hit() { this._tone(150, 0.25, 'sawtooth', 0.15); this._tone(90, 0.35, 'square', 0.12, 0.05); this._tone(60, 0.4, 'sine', 0.1, 0.1); },
+  freeze() { this._tone(880, 0.2, 'sine', 0.08); this._tone(1320, 0.25, 'sine', 0.07, 0.08); this._tone(1760, 0.2, 'sine', 0.06, 0.18); },
+  heart() { this._tone(523, 0.15, 'sine', 0.1); this._tone(659, 0.15, 'sine', 0.1, 0.1); this._tone(784, 0.25, 'sine', 0.1, 0.2); },
+  danger() { this._tone(440, 0.15, 'square', 0.1); this._tone(330, 0.2, 'square', 0.1, 0.18); this._tone(440, 0.15, 'square', 0.1, 0.4); },
+  eliminate() { this._tone(440, 0.2, 'sawtooth', 0.1); this._tone(330, 0.25, 'sawtooth', 0.1, 0.15); this._tone(220, 0.5, 'sawtooth', 0.1, 0.35); },
+  win() { this._tone(523, 0.18, 'sine', 0.12); this._tone(659, 0.18, 'sine', 0.12, 0.15); this._tone(784, 0.18, 'sine', 0.12, 0.3); this._tone(1047, 0.5, 'sine', 0.12, 0.45); },
+  lose() { this._tone(523, 0.2, 'triangle', 0.1); this._tone(440, 0.25, 'triangle', 0.1, 0.15); this._tone(330, 0.5, 'triangle', 0.1, 0.35); },
+  unmask() { this._tone(200, 0.4, 'sawtooth', 0.12); this._tone(400, 0.3, 'square', 0.12, 0.25); this._tone(800, 0.4, 'sawtooth', 0.12, 0.5); },
+  disguise() { this._tone(300, 0.12, 'sine', 0.08); this._tone(240, 0.14, 'sine', 0.08, 0.1); this._tone(200, 0.16, 'sine', 0.08, 0.22); },
+  baiDonHit() { this._tone(80, 0.6, 'sawtooth', 0.18); this._tone(160, 0.35, 'square', 0.14, 0.2); this._tone(120, 0.6, 'sawtooth', 0.16, 0.55); this._tone(60, 0.8, 'sine', 0.12, 0.7); },
+  vote() { this._tone(660, 0.12, 'sine', 0.08); this._tone(880, 0.15, 'sine', 0.08, 0.1); },
+  click() { this._tone(600, 0.04, 'square', 0.04); }
+};
+
+/* ================================================================
+   4) IndexedDB Cache for Comedy Sounds
+   ================================================================ */
+const SoundCache = {
+  db: null,
+  async init() {
+    return new Promise((resolve) => {
+      if (!window.indexedDB) return resolve();
+      try {
+        const req = indexedDB.open('zabola_sounds_v1', 1);
+        req.onupgradeneeded = () => {
+          try { req.result.createObjectStore('blobs'); } catch(e){}
+        };
+        req.onsuccess = () => { this.db = req.result; resolve(); };
+        req.onerror = () => resolve();
+        req.onblocked = () => resolve();
+      } catch (e) { resolve(); }
+    });
+  },
+  async get(id) {
+    if (!this.db) return null;
+    return new Promise((resolve) => {
+      try {
+        const tx = this.db.transaction('blobs', 'readonly');
+        const req = tx.objectStore('blobs').get(id);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => resolve(null);
+      } catch(e) { resolve(null); }
+    });
+  },
+  async set(id, blob) {
+    if (!this.db) return;
+    return new Promise((resolve) => {
+      try {
+        const tx = this.db.transaction('blobs', 'readwrite');
+        tx.objectStore('blobs').put(blob, id);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => resolve();
+      } catch(e) { resolve(); }
+    });
+  }
+};
+
+/* ================================================================
+   5) ComedyAudio -- preload + play
+   ================================================================ */
+const ComedyAudio = {
+  audios: {},
+  currentId: null,
+  async preload() {
+    await SoundCache.init();
+    for (const snd of COMEDY_SOUNDS) {
+      try {
+        const cached = await SoundCache.get(snd.id);
+        let blobUrl = null;
+        if (cached) {
+          blobUrl = URL.createObjectURL(cached);
+        } else {
+          const resp = await fetch(snd.url);
+          if (!resp.ok) throw new Error('fetch failed');
+          const blob = await resp.blob();
+          await SoundCache.set(snd.id, blob);
+          blobUrl = URL.createObjectURL(blob);
+        }
+        const audio = new Audio(blobUrl);
+        audio.preload = 'auto';
+        this.audios[snd.id] = audio;
+      } catch(e) {
+        try {
+          const audio = new Audio(snd.url);
+          audio.preload = 'auto';
+          this.audios[snd.id] = audio;
+        } catch(e2){}
+      }
+    }
+  },
+  play(soundId, onEnd) {
+    const audio = this.audios[soundId];
+    if (!audio) { if (onEnd) onEnd(); return; }
+    try {
+      this.currentId = soundId;
+      audio.currentTime = 0;
+      let called = false;
+      const done = () => { if (called) return; called = true; this.currentId = null; if (onEnd) onEnd(); };
+      audio.onended = done;
+      audio.onerror = done;
+      const p = audio.play();
+      if (p && p.catch) p.catch(() => { setTimeout(done, 200); });
+      // safety timeout
+      setTimeout(done, 15000);
+    } catch(e) { if (onEnd) onEnd(); }
+  },
+  stop() {
+    Object.values(this.audios).forEach(a => { try { a.pause(); a.currentTime = 0; } catch(e){} });
+    this.currentId = null;
+  }
+};
+
+/* ================================================================
+   6) ComedyQueue -- FIFO playback
+   ================================================================ */
+const ComedyQueue = {
+  queue: [],
+  playing: false,
+  currentItem: null,
+  onQueueChange: null,
+  seenKeys: new Set(),
+
+  enqueue(item) {
+    if (!item || !item.soundId) return;
+    this.queue.push(item);
+    this.queue.sort((a, b) => (a.ts || 0) - (b.ts || 0));
+    this.process();
+    if (this.onQueueChange) this.onQueueChange();
+  },
+
+  process() {
+    if (this.playing || this.queue.length === 0) return;
+    const next = this.queue.shift();
+    this.playing = true;
+    this.currentItem = next;
+    if (this.onQueueChange) this.onQueueChange();
+    ComedyAudio.play(next.soundId, () => {
+      this.playing = false;
+      this.currentItem = null;
+      if (this.onQueueChange) this.onQueueChange();
+      this.process();
+    });
+  },
+
+  waitForEnd() {
+    return new Promise(resolve => {
+      if (!this.playing) return resolve();
+      const t = setInterval(() => {
+        if (!this.playing) { clearInterval(t); resolve(); }
+      }, 100);
+      setTimeout(() => { clearInterval(t); resolve(); }, 12000);
+    });
+  },
+
+  clearPending() {
+    this.queue = [];
+    if (this.onQueueChange) this.onQueueChange();
+  },
+
+  reset() {
+    this.clearPending();
+    this.currentItem = null;
+    if (this.onQueueChange) this.onQueueChange();
+  },
+
+  resetSeen() { this.seenKeys.clear(); }
+};
+/* ================================================================
+   7) APP STATE
    ================================================================ */
 const App = {
   uid: null, pin: null, name: '', avatar: '', isHost: false,
@@ -470,7 +835,7 @@ let db = null;
 let fbReady = false;
 
 /* ================================================================
-   2) Firebase init
+   8) FIREBASE INIT
    ================================================================ */
 function initFirebase(){
   return new Promise(function(resolve, reject){
@@ -487,7 +852,7 @@ function initFirebase(){
 }
 
 /* ================================================================
-   3) Core
+   9) CORE
    ================================================================ */
 const Core = {
   sweepOldRooms(){
@@ -588,6 +953,7 @@ const Core = {
     });
 
     setupMicListener(pin);
+    setupComedyListener(pin);
 
     setInterval(function(){
       if (App.roomRef && App.uid){
@@ -630,8 +996,11 @@ const Core = {
     try { if (App.roomRef) App.roomRef.off(); } catch(e){}
     try { if (App.connectedRef && App.connectedCb) App.connectedRef.off('value', App.connectedCb); } catch(e){}
     try { if (App.roomRef) App.roomRef.child('mic').off(); } catch(e){}
+    try { if (App.roomRef) App.roomRef.child('game/comedySounds').off(); } catch(e){}
     App.roomRef = null; App.room = null; App.uid = null; App.pin = null;
     App.isHost = false; App.sig = ''; App.lastPhaseKey = '';
+    ComedyQueue.reset();
+    ComedyQueue.resetSeen();
     hideMic(); hideLoading();
   },
 
@@ -682,7 +1051,7 @@ const Core = {
 };
 
 /* ================================================================
-   4) Helpers
+   10) HELPERS
    ================================================================ */
 function setGame(fields){
   if (!App.roomRef) return Promise.resolve();
@@ -713,7 +1082,7 @@ function countAnswered(room){
 }
 
 /* ================================================================
-   5) BoxGame (unchanged)
+   11) BOXGAME (unchanged from previous, with SFX additions)
    ================================================================ */
 const BoxGame = {
   computeRound(answers, answererIds, doubleRound){
@@ -824,7 +1193,7 @@ const BoxGame = {
 
   async castVote(choice){
     if (!App.room || !App.room.game || App.room.game.phase !== 'vote') return;
-    try { await setGame({ ['vote/' + App.uid]: choice }); }
+    try { await setGame({ ['vote/' + App.uid]: choice }); SFX.vote(); }
     catch (e){ toast('مشكلة في الاتصال', 'err'); }
   },
 
@@ -914,8 +1283,8 @@ const BoxGame = {
     const cVerbal  = el('button', 'chip' + (mode === 'verbal' ? ' on' : ''), 'شفهي 🎤');
     cWritten.type = 'button'; cVerbal.type = 'button';
     if (isHost){
-      cWritten.onclick = function(){ setGame({ mode: 'written' }); App.sig = ''; };
-      cVerbal.onclick  = function(){ setGame({ mode: 'verbal' }); App.sig = ''; };
+      cWritten.onclick = function(){ setGame({ mode: 'written' }); App.sig = ''; SFX.click(); };
+      cVerbal.onclick  = function(){ setGame({ mode: 'verbal' }); App.sig = ''; SFX.click(); };
     } else { cWritten.disabled = true; cVerbal.disabled = true; }
     chipRow.appendChild(cWritten); chipRow.appendChild(cVerbal);
     wrap.appendChild(chipRow);
@@ -928,7 +1297,7 @@ const BoxGame = {
           const v = inp.value.trim();
           if (!v){ toast('اكتب السؤال الأول ✍️', 'err'); return; }
           safeBlur(inp);
-          setGame({ question: v, phase: 'reading' }).then(function(){ App.sig = ''; }).catch(function(){ toast('مشكلة', 'err'); });
+          setGame({ question: v, phase: 'reading' }).then(function(){ App.sig = ''; SFX.click(); }).catch(function(){ toast('مشكلة', 'err'); });
         };
         onEnter(inp, function(){ btn.click(); });
         wrap.appendChild(inp); wrap.appendChild(btn);
@@ -997,6 +1366,7 @@ const BoxGame = {
       if (area) area.innerHTML = '<div class="ok-box">✅ تم إرسال إجابتك: ' + esc(text) + '</div>';
       const counter = $('answered-count');
       if (counter && App.room) counter.textContent = countAnswered(App.room) + ' / ' + getAnswererIds(App.room).length + ' أجابوا';
+      SFX.click();
     } catch (e){ btn.disabled = false; btn.textContent = 'إرسال الإجابة ✅'; toast('مشكلة في الاتصال', 'err'); }
   },
 
@@ -1027,7 +1397,7 @@ const BoxGame = {
     if (isHost){
       wrap.appendChild(el('div', 'tiny', 'النقاط محسوبة تلقائياً. عدّل يدوياً قبل التأكيد.'));
       const btn = el('button', 'primary block', 'تأكيد النتيجة ✅');
-      btn.onclick = function(){ BoxGame.hostConfirmScores(); };
+      btn.onclick = function(){ BoxGame.hostConfirmScores(); SFX.click(); };
       wrap.appendChild(btn);
     } else { wrap.appendChild(el('div', 'waiting', '⏳ الهوست بيراجع…')); }
   },
@@ -1054,7 +1424,7 @@ const BoxGame = {
       const isLast = (round >= TOTAL_ROUNDS);
       const label = (round === TOTAL_ROUNDS - 1) ? 'إلى التصويت 🗳️' : (isLast ? 'النتيجة النهائية 🏆' : 'الجولة التالية ▶️');
       const btn = el('button', 'primary block', label);
-      btn.onclick = function(){ BoxGame.hostNextRound(); };
+      btn.onclick = function(){ BoxGame.hostNextRound(); SFX.click(); };
       wrap.appendChild(btn);
     } else { wrap.appendChild(el('div', 'waiting', '⏳ في انتظار الهوست…')); }
   },
@@ -1105,6 +1475,7 @@ const BoxGame = {
         '<div class="w-score">' + (winner.score || 0) + ' نقطة</div>' +
         ((winner.cumulative || 0) > 0 ? '<div class="tiny" style="margin-top:6px">تراكمي: ' + winner.cumulative + ' نقطة</div>' : '');
       wrap.appendChild(wbox);
+      if (winner.id === App.uid) SFX.win(); else SFX.lose();
     }
     const totalPlayers = Object.keys(room.players || {}).length;
     if (totalPlayers > 4){
@@ -1130,7 +1501,7 @@ const BoxGame = {
     wrap.appendChild(list);
     if (isHost){
       const btn = el('button', 'primary block', 'إعادة الزعبله 🔁');
-      btn.onclick = function(){ BoxGame.hostPlayAgain(); };
+      btn.onclick = function(){ BoxGame.hostPlayAgain(); SFX.click(); };
       wrap.appendChild(btn);
     } else { wrap.appendChild(el('div', 'waiting', '⏳ في انتظار الهوست…')); }
   },
@@ -1145,24 +1516,24 @@ const BoxGame = {
       if (ready[App.uid]) wrap.appendChild(el('div', 'ok-box', '✅ أنت مستعد!'));
       else {
         const btn = el('button', 'success block', 'أنا مستعد ✋');
-        btn.onclick = function(){ BoxGame.setReady(); };
+        btn.onclick = function(){ BoxGame.setReady(); SFX.click(); };
         wrap.appendChild(btn);
       }
     } else {
       wrap.appendChild(el('div', 'tiny', 'في انتظار استعداد الجميع…'));
       const btn = el('button', 'primary block', 'ابدأ من جديد 🚀');
       btn.disabled = readyCount < total;
-      btn.onclick = function(){ BoxGame.hostRestart(); };
+      btn.onclick = function(){ BoxGame.hostRestart(); SFX.click(); };
       wrap.appendChild(btn);
     }
   }
 };
-
 /* ================================================================
-   6) BaiDonGame — Final version
+   12) BAIDONGAME -- اللعبة الرئيسية
    ================================================================ */
 const BaiDonGame = {
   _lastPositions: {},
+  _overlayShown: {},
 
   getConfig(count){
     if (count <= 3) return { target: 20, maxNum: 3, middleLine: 10, dangerZone: 15 };
@@ -1178,7 +1549,7 @@ const BaiDonGame = {
       actions: null, votes: null, endGuessUid: null,
       lastResult: null, voteResult: null,
       finalMessage: '', winner: '', winnerName: '',
-      introReady: null
+      introReady: null, comedySounds: null, comedyUsed: null
     };
   },
 
@@ -1194,6 +1565,7 @@ const BaiDonGame = {
     const baiDonRevealed = ids.length <= 2;
 
     BaiDonGame._lastPositions = {};
+    BaiDonGame._overlayShown = {};
 
     const playerState = {};
     ids.forEach(function(id){
@@ -1202,24 +1574,14 @@ const BaiDonGame = {
 
     const updates = {
       status: 'playing', lastActivity: Date.now(),
-      'game/round': 1,
-      'game/phase': 'intro',
-      'game/timerEnd': 0,
-      'game/target': cfg.target,
-      'game/maxNum': cfg.maxNum,
-      'game/middleLine': cfg.middleLine,
-      'game/dangerZone': cfg.dangerZone,
-      'game/baiDonId': baiDonId,
-      'game/baiDonRevealed': baiDonRevealed,
-      'game/actions': null,
-      'game/votes': null,
-      'game/endGuessUid': null,
-      'game/lastResult': null,
-      'game/voteResult': null,
-      'game/finalMessage': '',
-      'game/winner': '',
-      'game/winnerName': '',
-      'game/introReady': null,
+      'game/round': 1, 'game/phase': 'intro', 'game/timerEnd': 0,
+      'game/target': cfg.target, 'game/maxNum': cfg.maxNum,
+      'game/middleLine': cfg.middleLine, 'game/dangerZone': cfg.dangerZone,
+      'game/baiDonId': baiDonId, 'game/baiDonRevealed': baiDonRevealed,
+      'game/actions': null, 'game/votes': null, 'game/endGuessUid': null,
+      'game/lastResult': null, 'game/voteResult': null,
+      'game/finalMessage': '', 'game/winner': '', 'game/winnerName': '',
+      'game/introReady': null, 'game/comedySounds': null, 'game/comedyUsed': null,
       'game/playerState': playerState
     };
     ids.forEach(function(pid){
@@ -1234,23 +1596,18 @@ const BaiDonGame = {
 
   async introContinue(){
     if (!App.room || !App.room.game) return;
-    try { await setGame({ ['introReady/' + App.uid]: true }); }
+    try { await setGame({ ['introReady/' + App.uid]: true }); SFX.click(); }
     catch (e){ toast('مشكلة', 'err'); }
   },
 
   async hostStartAction(){
     if (!App.isHost) return;
     try {
-      await setGame({
-        phase: 'action',
-        timerEnd: Date.now() + BAIDON_TIMER * 1000,
-        actions: null
-      });
+      await setGame({ phase: 'action', timerEnd: Date.now() + BAIDON_TIMER * 1000, actions: null });
       App.sig = '';
     } catch (e){ toast('مشكلة', 'err'); }
   },
 
-  // ✅ FIX: disguise => don't set move
   async submitAction(move, attackNum, disguise){
     if (!App.room || !App.room.game) return;
     const g = App.room.game;
@@ -1262,18 +1619,28 @@ const BaiDonGame = {
     const myPs = ps[App.uid];
     if (!myPs || myPs.eliminated || myPs.frozen > 0) return;
 
-    const action = {};
+    const action = { ts: Date.now() };
     if (amBaiDon){
       const disguiseOn = disguise && myPs.hearts > 1;
-      if (!isRevealed && !disguiseOn) action.move = move;   // ← مش بنحفظ move لو مموّه
-      action.attack = attackNum;
-      if (disguiseOn) action.disguise = true;
+      if (disguiseOn){
+        // التمويه = A: يلغي الحركة والهجوم معاً
+        action.disguise = true;
+      } else if (isRevealed){
+        action.attack = attackNum;
+      } else {
+        // منع نفس الرقم
+        if (move === attackNum){
+          toast('رقم الحركة لازم يختلف عن رقم الهجوم!', 'err');
+          return;
+        }
+        action.move = move;
+        action.attack = attackNum;
+      }
     } else {
       if (!move) return;
       action.move = move;
     }
-    action.ts = Date.now();
-    try { await setGame({ ['actions/' + App.uid]: action }); }
+    try { await setGame({ ['actions/' + App.uid]: action }); SFX.click(); }
     catch (e){ toast('مشكلة في الاتصال', 'err'); }
   },
 
@@ -1299,51 +1666,52 @@ const BaiDonGame = {
       const hitThisRound = {};
 
       const bdAction = actions[baiDonId];
-      const attackNum = bdAction ? bdAction.attack : null;
       const wantDisguise = !!(bdAction && bdAction.disguise);
+      const bdPs = ps[baiDonId];
 
+      let effectiveAttack = null;
       let botUsed = false;
-      let effectiveAttack = attackNum;
-      if (!effectiveAttack){
-        const bdOnline = room.players[baiDonId] && room.players[baiDonId].online;
-        if (!bdOnline){
-          effectiveAttack = Math.floor(Math.random() * g.maxNum) + 1;
-          botUsed = true;
+
+      if (!wantDisguise){
+        effectiveAttack = bdAction ? bdAction.attack : null;
+        if (!effectiveAttack){
+          const bdOnline = room.players[baiDonId] && room.players[baiDonId].online;
+          if (!bdOnline){
+            effectiveAttack = Math.floor(Math.random() * g.maxNum) + 1;
+            botUsed = true;
+          }
+        }
+        if (effectiveAttack){
+          Object.keys(actions).forEach(function(uid){
+            if (uid === baiDonId) return;
+            const a = actions[uid];
+            if (!a || !a.move) return;
+            const p = ps[uid];
+            if (!p || p.eliminated) return;
+            if (a.move === effectiveAttack){
+              hitThisRound[uid] = true;
+              p.hearts = Math.max(0, p.hearts - 1);
+              events.push({ type: 'hit', uid: uid, attackNum: effectiveAttack, bot: botUsed });
+              const gap = p.lastHitRound ? (round - p.lastHitRound) : 999;
+              if (gap <= 3){
+                p.frozen = (p.frozen || 0) + 1;
+                events.push({ type: 'freeze', uid: uid });
+                p.lastHitRound = 0;
+              } else {
+                p.lastHitRound = round;
+              }
+            }
+          });
         }
       }
 
-      // 1. BaiDon attack (against runners only)
-      if (effectiveAttack){
-        Object.keys(actions).forEach(function(uid){
-          if (uid === baiDonId) return;
-          const a = actions[uid];
-          if (!a || !a.move) return;
-          const p = ps[uid];
-          if (!p || p.eliminated) return;
-          if (a.move === effectiveAttack){
-            hitThisRound[uid] = true;
-            p.hearts = Math.max(0, p.hearts - 1);
-            events.push({ type: 'hit', uid: uid, attackNum: effectiveAttack, bot: botUsed });
-            const gap = p.lastHitRound ? (round - p.lastHitRound) : 999;
-            if (gap <= 3){
-              p.frozen = (p.frozen || 0) + 1;
-              events.push({ type: 'freeze', uid: uid });
-              p.lastHitRound = 0;
-            } else {
-              p.lastHitRound = round;
-            }
-          }
-        });
-      }
-
-      // 2. Disguise: baiDon attacks HIMSELF (real heart loss)
-      const bdPs = ps[baiDonId];
+      // التمويه: البيدون يضرب نفسه
       if (wantDisguise && bdPs && !bdPs.eliminated && bdPs.hearts > 1){
         bdPs.hearts -= 1;
-        events.push({ type: 'hit', uid: baiDonId, attackNum: effectiveAttack, disguise: true });
+        events.push({ type: 'hit', uid: baiDonId, attackNum: 0, disguise: true });
       }
 
-      // 3. Apply movements
+      // تطبيق الحركة
       Object.keys(actions).forEach(function(uid){
         const p = ps[uid];
         if (!p || p.eliminated) return;
@@ -1353,14 +1721,10 @@ const BaiDonGame = {
           return;
         }
         if (hitThisRound[uid]) return;
-
-        // ✅ KEY FIX: disguise = no movement for baiDon
         if (wantDisguise && uid === baiDonId) return;
-
         if (uid === baiDonId && baiDonRevealed) return;
         const a = actions[uid];
         if (!a || !a.move) return;
-
         const prevPos = p.pos;
         p.pos = Math.min(target, p.pos + a.move);
         if (prevPos < middleLine && p.pos >= middleLine && !p.crossedMiddle){
@@ -1375,7 +1739,7 @@ const BaiDonGame = {
         events.push({ type: 'move', uid: uid, from: prevPos, to: p.pos });
       });
 
-      // 4. Eliminations
+      // الاستبعاد
       Object.keys(ps).forEach(function(uid){
         if (ps[uid].hearts <= 0 && !ps[uid].eliminated){
           ps[uid].eliminated = true;
@@ -1383,7 +1747,6 @@ const BaiDonGame = {
         }
       });
 
-      // 5. Win conditions
       const runnersAlive = Object.keys(ps).filter(function(uid){
         return uid !== baiDonId && !ps[uid].eliminated && ps[uid].hearts > 0;
       });
@@ -1416,6 +1779,7 @@ const BaiDonGame = {
       const updates = {
         lastActivity: Date.now(),
         'game/actions': null,
+        'game/comedySounds': null,
         'game/lastResult': { events: events, round: round, attackNum: effectiveAttack, bot: botUsed }
       };
       Object.keys(ps).forEach(function(uid){
@@ -1453,16 +1817,19 @@ const BaiDonGame = {
         if (ev.uid === App.uid){
           if (ev.type === 'hit' && !ev.disguise){
             document.body.classList.add('red-flash');
+            SFX.hit();
             setTimeout(function(){ document.body.classList.remove('red-flash'); }, 800);
           }
-          if (ev.type === 'middleLine') showHeartPop();
-          if (ev.type === 'dangerZone') toast('تحذير ⚠️ دخلت منطقة الرعب! تم تنزيل قلوبك لقلبين!', 'err');
+          if (ev.type === 'freeze') SFX.freeze();
+          if (ev.type === 'middleLine'){ showHeartPop(); SFX.heart(); }
+          if (ev.type === 'dangerZone'){ SFX.danger(); toast('⚠️ دخلت منطقة الرعب! قلوبك بقت 2!', 'err'); }
+          if (ev.type === 'eliminated') SFX.eliminate();
         }
       });
       events.forEach(function(ev){
         if (ev.type === 'middleLine'){
           const p = room.players[ev.uid];
-          if (p) toast('عاش يا ' + p.name + '! عديت النص وخدت قلب هدية (+١)', 'ok');
+          if (p) toast('💖 ' + p.name + ' عدّى النص وخد قلب هدية (+١)', 'ok');
         }
       });
     } catch (e){
@@ -1477,15 +1844,25 @@ const BaiDonGame = {
     if (!App.isHost || !App.room) return;
     const g = App.room.game;
     if (!g || g.phase !== 'resolve') return;
+
+    // انتظر الصوت الحالي بس (بدون الـ queue)، بحد أقصى 5 ثواني
+    await Promise.race([
+      ComedyQueue.waitForEnd(),
+      new Promise(r => setTimeout(r, 5000))
+    ]);
+    ComedyQueue.clearPending();
+
     const round = g.round || 1;
     const nextRound = round + 1;
     const playerCount = Object.keys(App.room.players || {}).length;
-    const needVote = !g.baiDonRevealed && playerCount >= 3 && nextRound % 3 === 0;
+    const voteInterval = getVoteInterval(playerCount);
+    const needVote = !g.baiDonRevealed && playerCount >= 3 && nextRound % voteInterval === 0;
+
     if (needVote){
       try {
-        await setGame({ phase: 'vote', votes: null, voteResult: null, round: nextRound });
+        await setGame({ phase: 'vote', votes: null, voteResult: null, round: nextRound, comedySounds: null });
         App.sig = '';
-        toast('وقت التصويت! صوّت بحكمة 🗳️', 'ok');
+        toast('🗳️ وقت التصويت! صوّت بحكمة', 'ok');
       } catch (e){ toast('مشكلة', 'err'); }
       return;
     }
@@ -1493,7 +1870,7 @@ const BaiDonGame = {
       await setGame({
         phase: 'action', round: nextRound,
         timerEnd: Date.now() + BAIDON_TIMER * 1000,
-        actions: null, lastResult: null
+        actions: null, lastResult: null, comedySounds: null
       });
       App.sig = '';
     } catch (e){ toast('مشكلة', 'err'); }
@@ -1502,7 +1879,7 @@ const BaiDonGame = {
   async castVote(targetId){
     if (!App.room || !App.room.game || App.room.game.phase !== 'vote') return;
     if (targetId === App.uid){ toast('متقدرش تصوت لنفسك', 'err'); return; }
-    try { await setGame({ ['votes/' + App.uid]: targetId }); }
+    try { await setGame({ ['votes/' + App.uid]: targetId }); SFX.vote(); }
     catch (e){ toast('مشكلة', 'err'); }
   },
 
@@ -1524,7 +1901,7 @@ const BaiDonGame = {
 
     if (!topId || tie){
       try {
-        await setGame({ phase: 'voteResult', voteResult: { tie: true, topId: null, counts: voteCounts } });
+        await setGame({ phase: 'voteResult', voteResult: { tie: true, topId: null, counts: voteCounts, votes: votes } });
         App.sig = '';
         toast('تعادل -- تستمر اللعبة');
       } catch (e){}
@@ -1535,7 +1912,7 @@ const BaiDonGame = {
     const ps = JSON.parse(JSON.stringify(g.playerState || {}));
     const updates = {
       lastActivity: Date.now(),
-      'game/voteResult': { tie: false, topId: topId, counts: voteCounts, wasBaiDon: topId === baiDonId }
+      'game/voteResult': { tie: false, topId: topId, counts: voteCounts, wasBaiDon: topId === baiDonId, votes: votes }
     };
 
     if (topId === baiDonId){
@@ -1547,6 +1924,7 @@ const BaiDonGame = {
         updates['players/' + baiDonId + '/score'] = 0;
       }
       updates['game/phase'] = 'voteResult';
+      SFX.unmask();
       toast('🎭 تم كشف البيدون! ' + (App.room.players[baiDonId] ? App.room.players[baiDonId].name : '') + ' أصبح Turret!', 'ok');
     } else {
       Object.keys(votes).forEach(function(voter){
@@ -1560,7 +1938,7 @@ const BaiDonGame = {
         }
       });
       updates['game/phase'] = 'voteResult';
-      toast('❌ تصويت خاطئ! ' + (App.room.players[topId] ? App.room.players[topId].name : '') + ' بريء -- اللي صوّت ضده رجع خطوتين', 'err');
+      toast('❌ تصويت خاطئ! ' + (App.room.players[topId] ? App.room.players[topId].name : '') + ' بريء', 'err');
     }
     try { await App.roomRef.update(updates); App.sig = ''; }
     catch (e){ toast('مشكلة', 'err'); }
@@ -1570,10 +1948,12 @@ const BaiDonGame = {
     if (!App.isHost || !App.room) return;
     const g = App.room.game;
     if (!g || g.phase !== 'voteResult') return;
+    await Promise.race([ComedyQueue.waitForEnd(), new Promise(r => setTimeout(r, 5000))]);
+    ComedyQueue.clearPending();
     try {
       await setGame({
         phase: 'action', timerEnd: Date.now() + BAIDON_TIMER * 1000,
-        actions: null, votes: null, voteResult: null, lastResult: null
+        actions: null, votes: null, voteResult: null, lastResult: null, comedySounds: null
       });
       App.sig = '';
     } catch (e){ toast('مشكلة', 'err'); }
@@ -1616,7 +1996,7 @@ const BaiDonGame = {
 
   async setReady(){
     if (!App.room || !App.room.game) return;
-    try { await setGame({ ['ready/' + App.uid]: true }); }
+    try { await setGame({ ['ready/' + App.uid]: true }); SFX.click(); }
     catch (e){ toast('مشكلة', 'err'); }
   },
 
@@ -1633,23 +2013,22 @@ const BaiDonGame = {
       const baiDonId = candidateIds[Math.floor(Math.random() * candidateIds.length)];
       const baiDonRevealed = ids.length <= 2;
       BaiDonGame._lastPositions = {};
+      BaiDonGame._overlayShown = {};
       const playerState = {};
       ids.forEach(function(id){
         playerState[id] = { pos: 0, hearts: 3, frozen: 0, eliminated: false, lastHitRound: 0, crossedMiddle: false, inDanger: false };
       });
       const updates = {
         lastActivity: Date.now(),
-        'game/round': 1, 'game/phase': 'intro',
-        'game/timerEnd': 0,
+        'game/round': 1, 'game/phase': 'intro', 'game/timerEnd': 0,
         'game/target': cfg.target, 'game/maxNum': cfg.maxNum,
         'game/middleLine': cfg.middleLine, 'game/dangerZone': cfg.dangerZone,
         'game/baiDonId': baiDonId, 'game/baiDonRevealed': baiDonRevealed,
         'game/actions': null, 'game/votes': null, 'game/endGuessUid': null,
         'game/lastResult': null, 'game/voteResult': null,
         'game/finalMessage': '', 'game/winner': '', 'game/winnerName': '',
-        'game/introReady': null,
-        'game/playerState': playerState,
-        'game/ready': null
+        'game/introReady': null, 'game/comedySounds': null, 'game/comedyUsed': null,
+        'game/playerState': playerState, 'game/ready': null
       };
       ids.forEach(function(pid){
         updates['players/' + pid + '/cumulative'] = (room.players[pid].cumulative || 0) + (room.players[pid].pos || 0);
@@ -1659,10 +2038,95 @@ const BaiDonGame = {
       });
       await App.roomRef.update(updates);
       App.sig = '';
+      ComedyQueue.reset();
     } catch (e){ toast('مشكلة', 'err'); }
     finally { setTimeout(function(){ BaiDonGame.restartBusy = false; }, 1200); }
   },
 
+  // ============ الأصوات المتاحة للاعب حسب الأحداث ============
+  getRunnerSoundsForUid(room, g, uid){
+    const events = (g.lastResult && g.lastResult.events) || [];
+    const ps = (g.playerState && g.playerState[uid]) || {};
+    const round = g.round || 1;
+    const vr = g.voteResult || {};
+    const result = [];
+
+    const otherEliminated = events.some(e => e.type === 'eliminated' && e.uid !== uid);
+    if (otherEliminated && !ps.eliminated) result.push({ id: 'matmchish' });
+
+    const gotHit = events.some(e => e.type === 'hit' && e.uid === uid);
+    const myVote = vr.votes && vr.votes[uid];
+    const myVoteWrong = vr && !vr.tie && myVote && myVote !== g.baiDonId;
+    if (gotHit || myVoteWrong){
+      result.push({ id: 'ah_ana_hmar' });
+      result.push({ id: 'ana_hmar' });
+      result.push({ id: 'ezay' });
+      result.push({ id: 'ya_bni_haram' });
+      result.push({ id: 'awsakh' });
+    }
+
+    const moved = events.some(e => e.type === 'move' && e.uid === uid && e.to > e.from);
+    const gotHeart = events.some(e => e.type === 'middleLine' && e.uid === uid);
+    const votedCorrect = vr && !vr.tie && vr.wasBaiDon && myVote === g.baiDonId;
+    if (moved || gotHeart || votedCorrect){
+      result.push({ id: 'edaah' });
+    }
+
+    if (ps.eliminated){
+      result.push({ id: 'enfed' });
+    }
+
+    if (round <= 3){
+      const used = (g.comedyUsed && g.comedyUsed[uid] && g.comedyUsed[uid].ank_lmeet) || false;
+      if (!used && !ps.eliminated) result.push({ id: 'ank_lmeet' });
+    }
+
+    if (vr && !vr.tie && vr.wasBaiDon && myVote === g.baiDonId){
+      result.push({ id: 'hatouly' });
+    }
+
+    if (vr && !vr.tie && !vr.wasBaiDon && myVote && myVote !== g.baiDonId){
+      result.push({ id: 'ehna_bhayem' });
+    }
+
+    return result;
+  },
+
+  getAvailableSounds(room, g, uid){
+    const ps = (g.playerState && g.playerState[uid]) || {};
+    const isBidon = (g.baiDonId === uid);
+    const isRevealed = !!g.baiDonRevealed;
+    const out = [];
+
+    if (isBidon){
+      const events = (g.lastResult && g.lastResult.events) || [];
+      const hitSomeone = events.some(e => e.type === 'hit' && !e.disguise && e.uid !== uid);
+      if (hitSomeone){
+        out.push({ id: 'bala_seyah', panel: 'left' });
+        out.push({ id: 'da_anto_lakta', panel: 'left' });
+      }
+      out.push({ id: 'salam', panel: 'left' });
+
+      if (!isRevealed){
+        const runnerSounds = BaiDonGame.getRunnerSoundsForUid(room, g, uid);
+        runnerSounds.forEach(s => out.push({ id: s.id, panel: 'right' }));
+      }
+    } else {
+      const runnerSounds = BaiDonGame.getRunnerSoundsForUid(room, g, uid);
+      runnerSounds.forEach(s => out.push({ id: s.id, panel: 'right' }));
+    }
+
+    // dedupe
+    const seen = new Set();
+    return out.filter(s => {
+      const key = s.panel + '_' + s.id;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  },
+
+  // ============ UI BUILD ============
   build(room, g, phase, round){
     const wrap = el('div', 'phase');
     const isHost = App.isHost;
@@ -1687,14 +2151,12 @@ const BaiDonGame = {
     return wrap;
   },
 
-  // ---------- TRACK: static by default, slide only when position changes ----------
   buildTrack(room, g){
     const wrap = el('div', 'bd-track-wrap');
     const track = el('div', 'bd-track');
     const target = g.target || 20;
     const ps = g.playerState || {};
 
-    // Numbers
     const marks = [0];
     for (let i = 5; i < target; i += 5) marks.push(i);
     marks.push(target);
@@ -1706,18 +2168,13 @@ const BaiDonGame = {
     });
 
     const midPct = ((g.middleLine || 10) / target) * 100;
-    const mid = el('div', 'mid-line');
-    mid.style.left = midPct + '%';
+    const mid = el('div', 'mid-line'); mid.style.left = midPct + '%';
     track.appendChild(mid);
-
     const dngPct = ((g.dangerZone || 15) / target) * 100;
-    const dng = el('div', 'danger-line');
-    dng.style.left = dngPct + '%';
+    const dng = el('div', 'danger-line'); dng.style.left = dngPct + '%';
     track.appendChild(dng);
-
     track.appendChild(el('div', 'finish-line'));
 
-    // Tokens — sorted by joinedAt for stable vertical position
     const ids = Object.keys(room.players || {}).filter(function(uid){
       const p = ps[uid];
       return p && !p.eliminated;
@@ -1730,33 +2187,28 @@ const BaiDonGame = {
       const p = ps[uid];
       const player = room.players[uid];
       if (!player) return;
-
       const token = el('div', 'bd-token' + (uid === App.uid ? ' me' : '') + (p.frozen > 0 ? ' frozen' : '') + (uid === g.baiDonId && g.baiDonRevealed ? ' baiDonRevealed' : ''));
       token.style.top = (i % 3 === 0 ? '18%' : (i % 3 === 1 ? '44%' : '70%'));
-
       let display = player.avatar;
       if (uid === g.baiDonId && g.baiDonRevealed) display = '🎭';
       token.textContent = display;
-      token.title = (player.name || '') + ' — ' + p.pos + '/' + target + ' ❤️' + p.hearts;
-
+      token.title = (player.name || '') + ' -- ' + p.pos + '/' + target + ' ❤️' + p.hearts;
       const newPct = (p.pos / target) * 100;
       const prevPos = BaiDonGame._lastPositions[uid];
 
       if (prevPos !== undefined && prevPos !== p.pos){
-        // Position changed → animate from old to new
         const oldPct = (prevPos / target) * 100;
-        token.style.left = oldPct + '%';
         token.style.transition = 'none';
-        // Force reflow
+        token.style.left = oldPct + '%';
+        track.appendChild(token);
         void token.offsetWidth;
         token.classList.add('sliding');
-        token.style.left = newPct + '%';
+        token.style.transition = '';
+        requestAnimationFrame(() => { token.style.left = newPct + '%'; });
       } else {
-        // Static position
         token.style.left = newPct + '%';
+        track.appendChild(token);
       }
-
-      track.appendChild(token);
       BaiDonGame._lastPositions[uid] = p.pos;
     });
 
@@ -1764,7 +2216,6 @@ const BaiDonGame = {
     return wrap;
   },
 
-  // ---------- INTRO ----------
   uiIntro(wrap, room, g, isHost, amBaiDon){
     const ready = g.introReady || {};
     const total = Object.keys(room.players || {}).length;
@@ -1777,15 +2228,14 @@ const BaiDonGame = {
       card.innerHTML =
         '<div class="shush-emoji">🤫</div>' +
         '<div class="intro-role">أنت البيدون!</div>' +
-        '<div class="intro-hint">لا تفصح عن هويتك. اختار أرقام هجومك بحكمة عشان تسقط الزعابيل قبل ما يوصلوا للنهاية. متقدرش تتحرك بصورة حقيقية، لكن ممكن تموّه إنك اتضرب.</div>';
+        '<div class="intro-hint">لا تفصح عن هويتك. اختار أرقام هجومك بحكمة عشان تسقط الزعابيل قبل ما يوصلوا للنهاية. متقدرش تتحرك بصورة حقيقية، لكن ممكن تموّه إنك اتضربت.</div>';
     } else {
       card.innerHTML =
         '<div class="runner-emoji">🏃</div>' +
         '<div class="intro-role">أنت زعبول عادي</div>' +
-        '<div class="intro-hint">حاول توصل لخط النهاية قبل البيدون. خد بالك من اختياراتك -- لو البيدون خمّن رقمك هتخسر قلب. لو عديت النص هتاخد قلب هدية، ولو دخلت منطقة الخطر قلوبك هتنزل لـ 2.</div>';
+        '<div class="intro-hint">حاول توصل لخط النهاية قبل البيدون. لو عديت النص هتاخد قلب هدية، ولو دخلت منطقة الخطر قلوبك هتنزل لـ 2.</div>';
     }
     wrap.appendChild(card);
-
     wrap.appendChild(el('div', 'answered-count', 'الاستعداد: ' + readyCount + ' / ' + total + ' زعبول'));
 
     if (myReady){
@@ -1803,7 +2253,6 @@ const BaiDonGame = {
     }
   },
 
-  // ---------- ACTION ----------
   uiAction(wrap, room, g, round, isHost, amBaiDon, isRevealed, isEliminated, isFrozen){
     const myAction = (g.actions || {})[App.uid];
     const submitted = !!(myAction && myAction.ts);
@@ -1816,29 +2265,24 @@ const BaiDonGame = {
     else if (amBaiDon && isRevealed) titleText = 'الجولة ' + round + ' - أنت Turret! 🎭';
     else if (amBaiDon) titleText = 'الجولة ' + round + ' - أنت البيدون! 🎭';
     wrap.appendChild(el('h3', 'phase-title', titleText));
-
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
 
-    const timerText = el('div', 'timer-big'); timerText.id = 'bd-timer-text';
-    timerText.textContent = '--';
+    const timerText = el('div', 'timer-big'); timerText.id = 'bd-timer-text'; timerText.textContent = '--';
     wrap.appendChild(timerText);
 
     if (isEliminated){
-      const spec = el('div', 'spectator-box');
-      spec.innerHTML = '👻 أنت خارج اللعبة<br><span style="font-size:12px;opacity:.8">بتتفرج بس -- استنى الجولة الجاية عشان ترجع تلعب</span>';
-      wrap.appendChild(spec);
+      wrap.appendChild(el('div', 'spectator-box', '👻 أنت خارج اللعبة<br><span style="font-size:12px;opacity:.8">بتتفرج بس</span>'));
     } else if (isFrozen){
-      const fb = el('div', 'frozen-box');
-      fb.innerHTML = '❄️ أنت متجمد الجولة دي!<br><span style="font-size:12px;opacity:.85">هتقف جولة كاملة من غير أي أكشن -- البيدون جمدك 😬</span>';
-      wrap.appendChild(fb);
+      wrap.appendChild(el('div', 'frozen-box', '❄️ أنت متجمد الجولة دي!<br><span style="font-size:12px;opacity:.85">مفيش أكشن -- البيدون جمدك 😬</span>'));
     } else if (amJudge){
-      wrap.appendChild(el('div', 'waiting', 'أنت الحكم 👨‍⚖️ -- متابع فقط'));
+      wrap.appendChild(el('div', 'waiting', 'أنت الحكم 👨‍⚖️'));
     } else if (submitted){
       wrap.appendChild(el('div', 'ok-box', '✅ تم إرسال حركتك -- في انتظار الباقي…'));
     } else {
-      // Move selection
-      let selMove = null;
-      let moveRow = null;
+      let selMove = null, selAttack = null, selDisguise = false;
+      let moveRow = null, atkRow = null;
+      let _updateSubmit = null;
+
       if (!(amBaiDon && isRevealed)){
         wrap.appendChild(el('div', 'q-label', amBaiDon ? 'حركتك (تمويه):' : 'حركتك (تقدمك):'));
         moveRow = el('div', 'chip-row');
@@ -1847,18 +2291,19 @@ const BaiDonGame = {
           b.type = 'button'; b.dataset.move = n;
           b.onclick = function(){
             if (b.disabled) return;
-            moveRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
+            if (amBaiDon && !isRevealed && !selDisguise && selAttack === n){
+              toast('رقم الحركة لازم يختلف عن رقم الهجوم', 'err');
+              return;
+            }
+            moveRow.querySelectorAll('.num-chip').forEach(c => c.classList.remove('on'));
             b.classList.add('on'); selMove = n;
-            if (window._bdUpdateSubmit) window._bdUpdateSubmit();
+            if (_updateSubmit) _updateSubmit();
           };
           moveRow.appendChild(b);
         }
         wrap.appendChild(moveRow);
       }
 
-      // Attack selection (only baiDon/turret)
-      let selAttack = null;
-      let atkRow = null;
       if (amBaiDon){
         wrap.appendChild(el('div', 'q-label', 'رقم الهجوم (توقع رقم الزعبول):'));
         atkRow = el('div', 'chip-row');
@@ -1866,80 +2311,68 @@ const BaiDonGame = {
           const b = el('button', 'num-chip attack', String(n));
           b.type = 'button'; b.dataset.attack = n;
           b.onclick = function(){
-            atkRow.querySelectorAll('.num-chip').forEach(function(c){ c.classList.remove('on'); });
+            if (b.disabled) return;
+            if (amBaiDon && !isRevealed && !selDisguise && selMove === n){
+              toast('رقم الهجوم لازم يختلف عن رقم الحركة', 'err');
+              return;
+            }
+            atkRow.querySelectorAll('.num-chip').forEach(c => c.classList.remove('on'));
             b.classList.add('on'); selAttack = n;
-            if (window._bdUpdateSubmit) window._bdUpdateSubmit();
+            if (_updateSubmit) _updateSubmit();
           };
           atkRow.appendChild(b);
         }
         wrap.appendChild(atkRow);
 
-        // Disguise toggle
         if (!isRevealed && canAffordDisguise){
-          let disguiseOn = false;
           const disRow = el('div', 'chip-row');
           const disBtn = el('button', 'chip disguise-chip', '🎭 تمويه (تفقد قلب)');
           disBtn.type = 'button';
           const noteEl = el('div', 'tiny hidden');
           noteEl.id = 'bd-disguise-note';
-          noteEl.style.color = '#ffb020';
-          noteEl.style.fontWeight = '900';
-          noteEl.textContent = '🚫 التمويه شغّال — مش هتتحرك الجولة دي (لازم تبان كأنك اتضربت)';
+          noteEl.style.color = '#ffb020'; noteEl.style.fontWeight = '900';
+          noteEl.textContent = '🚫 التمويه شغّال -- لا حركة ولا هجوم الجولة دي (بس تبان كأنك اتضربت)';
           disBtn.onclick = function(){
-            disguiseOn = !disguiseOn;
-            disBtn.classList.toggle('on', disguiseOn);
-            disBtn.textContent = disguiseOn ? '🎭 تمويه مُفعّل ✓' : '🎭 تمويه (تفقد قلب)';
-            noteEl.classList.toggle('hidden', !disguiseOn);
-            if (disguiseOn){
-              // Clear move selection + disable move chips
-              if (moveRow){
-                moveRow.querySelectorAll('.num-chip').forEach(function(c){
-                  c.classList.remove('on'); c.disabled = true; c.style.opacity = '0.35';
-                });
-              }
-              selMove = null;
+            selDisguise = !selDisguise;
+            disBtn.classList.toggle('on', selDisguise);
+            disBtn.textContent = selDisguise ? '🎭 تمويه مُفعّل ✓' : '🎭 تمويه (تفقد قلب)';
+            noteEl.classList.toggle('hidden', !selDisguise);
+            const allChips = wrap.querySelectorAll('.num-chip');
+            if (selDisguise){
+              allChips.forEach(c => { c.classList.remove('on'); c.disabled = true; c.style.opacity = '0.35'; });
+              selMove = null; selAttack = null;
             } else {
-              if (moveRow){
-                moveRow.querySelectorAll('.num-chip').forEach(function(c){
-                  c.disabled = false; c.style.opacity = '1';
-                });
-              }
+              allChips.forEach(c => { c.disabled = false; c.style.opacity = '1'; });
             }
-            if (window._bdUpdateSubmit) window._bdUpdateSubmit();
+            if (_updateSubmit) _updateSubmit();
           };
           disRow.appendChild(disBtn);
           wrap.appendChild(disRow);
           wrap.appendChild(noteEl);
-          wrap.appendChild(el('div', 'tiny', 'التمويه: هتظهر إنك اتضربت واسمك هيظهر في الضحايا — هتخسر قلب حقيقي. الفرصة دي بتخلي الشك بعيد عنك.'));
-          window._bdSelDisguise = function(){ return disguiseOn; };
-        } else {
-          window._bdSelDisguise = function(){ return false; };
+          wrap.appendChild(el('div', 'tiny', 'التمويه: هتخسر قلب حقيقي، مش هتتحرك، ومش هتضرب حد.'));
         }
-
-        window._bdSelAttack = function(){ return selAttack; };
       }
 
-      // Submit
       const submitBtn = el('button', 'primary block', 'إرسال ✅');
       submitBtn.disabled = true;
-      const updateSubmitState = function(){
-        const disguising = amBaiDon && !isRevealed && (window._bdSelDisguise && window._bdSelDisguise());
-        const needsMove = !(amBaiDon && isRevealed) && !disguising;
+      _updateSubmit = function(){
+        if (selDisguise){ submitBtn.disabled = false; return; }
+        const needsMove = !(amBaiDon && isRevealed);
         const moveOk = !needsMove || !!selMove;
         const attackOk = !amBaiDon || !!selAttack;
         submitBtn.disabled = !(moveOk && attackOk);
       };
-      window._bdUpdateSubmit = updateSubmitState;
-      window._bdSelMove = function(){ return selMove; };
-
       submitBtn.onclick = function(){
-        const disguising = amBaiDon && !isRevealed && (window._bdSelDisguise && window._bdSelDisguise());
-        const needsMove = !(amBaiDon && isRevealed) && !disguising;
-        const move = needsMove ? selMove : null;
-        const attack = amBaiDon ? selAttack : null;
-        if (needsMove && !move){ toast('اختار حركة الأول', 'err'); return; }
-        if (amBaiDon && !attack){ toast('اختار رقم الهجوم', 'err'); return; }
-        BaiDonGame.submitAction(move, attack, disguising);
+        if (selDisguise){
+          BaiDonGame.submitAction(null, null, true);
+          SFX.disguise();
+          submitBtn.disabled = true; submitBtn.textContent = 'تم إرسال التمويه 🎭';
+          return;
+        }
+        const needsMove = !(amBaiDon && isRevealed);
+        if (needsMove && !selMove){ toast('اختار حركة الأول', 'err'); return; }
+        if (amBaiDon && !selAttack){ toast('اختار رقم الهجوم', 'err'); return; }
+        BaiDonGame.submitAction(selMove, selAttack, false);
         submitBtn.disabled = true; submitBtn.textContent = 'تم الإرسال ✅';
       };
       wrap.appendChild(submitBtn);
@@ -1948,20 +2381,18 @@ const BaiDonGame = {
     const counter = el('div', 'answered-count'); counter.id = 'bd-action-counter';
     wrap.appendChild(counter);
 
-    if (isHost && App.room.hostMode !== 'auto'){
+    if (isHost && room.hostMode !== 'auto'){
       const endBtn = el('button', 'warn block', 'إنهاء الجولة يدوياً ⏹');
-      endBtn.onclick = function(){ BaiDonGame.hostResolve(); };
+      endBtn.onclick = () => BaiDonGame.hostResolve();
       wrap.appendChild(endBtn);
-    } else if (isHost && App.room.hostMode === 'auto'){
-      let fs = document.getElementById('force-stop-btn');
-      if (fs) fs.remove();
+    } else if (isHost && room.hostMode === 'auto'){
+      let fs = document.getElementById('force-stop-btn'); if (fs) fs.remove();
       fs = document.createElement('button');
       fs.id = 'force-stop-btn'; fs.className = 'force-stop'; fs.textContent = '⏩';
-      fs.onclick = function(){ BaiDonGame.hostResolve(); };
+      fs.onclick = () => BaiDonGame.hostResolve();
       document.body.appendChild(fs);
     } else if (!isHost){
-      let fs = document.getElementById('force-stop-btn');
-      if (fs) fs.remove();
+      let fs = document.getElementById('force-stop-btn'); if (fs) fs.remove();
     }
 
     setTimeout(function(){
@@ -1974,21 +2405,34 @@ const BaiDonGame = {
           if (room.hostMode === 'judge' && uid === room.hostId) return false;
           return true;
         });
-        const done = needed.filter(function(uid){ return actions2[uid] && actions2[uid].ts; }).length;
+        const done = needed.filter(uid => actions2[uid] && actions2[uid].ts).length;
         $('bd-action-counter').textContent = done + ' / ' + needed.length + ' اختاروا';
       }
     }, 50);
   },
 
-  // ---------- RESOLVE ----------
   uiResolve(wrap, room, g, round, isHost){
     const lr = g.lastResult || {};
+    const events = lr.events || [];
+
+    // Overlay
+    const realHits = events.filter(ev => ev.type === 'hit' && !ev.disguise);
+    if (realHits.length > 0){
+      const overlayKey = (room.pin || '') + '_r' + round;
+      if (!BaiDonGame._overlayShown[overlayKey]){
+        BaiDonGame._overlayShown[overlayKey] = true;
+        showBidonOverlay(realHits, room);
+      }
+    }
+
     wrap.appendChild(el('h3', 'phase-title', 'نتيجة الجولة ' + round));
+    wrap.appendChild(buildTopBar(room, g));
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
 
-    const events = lr.events || [];
+    // Events
     if (events.length){
       const evWrap = el('div', 'list');
+      let idx = 0;
       events.forEach(function(ev){
         const p = room.players[ev.uid];
         if (!p) return;
@@ -1996,60 +2440,59 @@ const BaiDonGame = {
         if (ev.type === 'hit'){
           cls += ' hit';
           txt = '💥 البيدون ضرب ' + p.avatar + ' ' + p.name;
-          if (ev.attackNum) txt += ' -- اختار نفس الرقم (' + ev.attackNum + ')!';
-          if (ev.bot) txt += ' (Bot)';
+          if (ev.attackNum) txt += ' -- نفس الرقم (' + ev.attackNum + ')!';
         }
-        else if (ev.type === 'freeze'){ cls += ' freeze'; txt = '❄️ ' + p.avatar + ' ' + p.name + ' اتجمد لجولة!'; }
-        else if (ev.type === 'stillFrozen'){ cls += ' freeze'; txt = '❄️ ' + p.avatar + ' ' + p.name + ' لسه متجمد.'; }
-        else if (ev.type === 'middleLine'){ cls += ' middle'; txt = '💖 ' + p.avatar + ' ' + p.name + ' عدّى النص وخد قلب هدية (+1)!'; }
-        else if (ev.type === 'dangerZone'){ cls += ' danger'; txt = '⚠️ ' + p.avatar + ' ' + p.name + ' دخل منطقة الخطر -- قلوبه بقت 2!'; }
-        else if (ev.type === 'eliminated'){ cls += ' elim'; txt = '💀 ' + p.avatar + ' ' + p.name + ' خرج من اللعبة!'; }
-        else if (ev.type === 'wrongGuess'){ cls += ' vote'; txt = '❌ ' + p.avatar + ' ' + p.name + ' خمّن غلط في النهاية -- رجع 3 خطوات!'; }
+        else if (ev.type === 'freeze'){ cls += ' freeze'; txt = '❄️ ' + p.avatar + ' ' + p.name + ' اتجمد!'; }
+        else if (ev.type === 'stillFrozen'){ cls += ' freeze'; txt = '❄️ ' + p.avatar + ' ' + p.name + ' لسه متجمد'; }
+        else if (ev.type === 'middleLine'){ cls += ' middle'; txt = '💖 ' + p.avatar + ' ' + p.name + ' عدى النص (+1 قلب)!'; }
+        else if (ev.type === 'dangerZone'){ cls += ' danger'; txt = '⚠️ ' + p.avatar + ' ' + p.name + ' دخل منطقة الخطر!'; }
+        else if (ev.type === 'eliminated'){ cls += ' elim'; txt = '💀 ' + p.avatar + ' ' + p.name + ' خرج!'; }
+        else if (ev.type === 'wrongGuess'){ cls += ' vote'; txt = '❌ ' + p.avatar + ' ' + p.name + ' خمّن غلط!'; }
         else if (ev.type === 'move'){ txt = '➡️ ' + p.avatar + ' ' + p.name + ' اتحرك من ' + ev.from + ' لـ ' + ev.to; }
         else return;
-        evWrap.appendChild(el('div', cls, txt));
+        const row = el('div', cls, txt);
+        row.style.animationDelay = (idx * 0.6) + 's';
+        idx++;
+        evWrap.appendChild(row);
       });
       wrap.appendChild(evWrap);
     } else {
-      wrap.appendChild(el('div', 'waiting', 'مفيش أحداث غريبة الجولة دي…'));
+      wrap.appendChild(el('div', 'waiting', 'مفيش أحداث الجولة دي'));
     }
 
-    const list = el('div', 'list');
-    const ps = g.playerState || {};
-    const sorted = Object.keys(room.players || {}).map(function(id){ return Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }); })
-      .filter(function(p){ return !p._ps.eliminated; })
-      .sort(function(a, b){ return (b._ps.pos || 0) - (a._ps.pos || 0); });
-    sorted.forEach(function(p){
-      const pp = p._ps;
-      const row = el('div', 'row' + (p.id === App.uid ? ' me' : '') + (pp.inDanger ? ' danger' : '') + (p.id === g.baiDonId && g.baiDonRevealed ? ' revealed-bd' : ''));
-      const heartStr = '❤️'.repeat(Math.max(0, pp.hearts || 0));
-      let name = nameWithCrown(room, p.id, p.name);
-      if (p.id === g.baiDonId && g.baiDonRevealed) name += ' 🎭';
-      let frozenTag = pp.frozen > 0 ? ' <span style="color:#64b5ff;font-weight:900">❄️ متجمد</span>' : '';
-      row.innerHTML = '<div class="r-ava' + (pp.frozen > 0 ? ' ice-block' : '') + '">' + esc(p.avatar) + '</div>' +
-        '<div class="r-main"><div class="r-name">' + name + frozenTag + '</div>' +
-        '<div class="hearts">' + heartStr + ' <span style="color:#8d7fb0">(' + (pp.pos || 0) + '/' + (g.target || 20) + ')</span></div></div>' +
-        '<div class="r-pts pos">' + (pp.pos || 0) + '</div>';
-      list.appendChild(row);
-    });
-    wrap.appendChild(list);
+    // Comedy panels
+    const panels = buildComedyPanels(room, g, round);
+    if (panels) wrap.appendChild(panels);
 
+    // Queue indicator
+    const qInd = el('div', 'queue-bar hidden');
+    qInd.id = 'comedy-queue-indicator';
+    wrap.appendChild(qInd);
+
+    // Next round button (delayed)
+    const delay = Math.min(events.length * 600 + 400, 4500);
     if (isHost){
       const btn = el('button', 'primary block', 'الجولة التالية ▶️');
-      btn.onclick = function(){ BaiDonGame.hostNextRound(); };
+      btn.onclick = function(){ SFX.click(); BaiDonGame.hostNextRound(); };
+      btn.style.opacity = '0'; btn.style.transition = 'opacity .5s';
+      setTimeout(() => { if (btn.parentNode) btn.style.opacity = '1'; }, delay);
       wrap.appendChild(btn);
     } else {
-      wrap.appendChild(el('div', 'waiting', '⏳ في انتظار الهوست…'));
+      const w = el('div', 'waiting', '⏳ في انتظار الهوست…');
+      w.style.opacity = '0'; w.style.transition = 'opacity .5s';
+      setTimeout(() => { if (w.parentNode) w.style.opacity = '1'; }, delay);
+      wrap.appendChild(w);
     }
+
+    setTimeout(updateQueueIndicator, 100);
   },
 
-  // ---------- VOTE ----------
   uiVote(wrap, room, g, isHost, isEliminated){
     wrap.appendChild(el('h3', 'phase-title', 'تصويت 🗳️ -- مين البيدون؟'));
     wrap.appendChild(el('div', 'waiting', 'صوّت بحكمة! لو الأغلبية اختارت زعبول بريء.. كل اللي صوّت ضده هيرجع خطوتين لورا!'));
 
     if (isEliminated){
-      wrap.appendChild(el('div', 'spectator-box', '👻 أنت خارج اللعبة -- مش هتصوّت الجولة دي'));
+      wrap.appendChild(el('div', 'spectator-box', '👻 أنت خارج اللعبة'));
     } else {
       const myVote = (g.votes || {})[App.uid];
       const ps = g.playerState || {};
@@ -2061,8 +2504,7 @@ const BaiDonGame = {
         const p = room.players[id];
         if (!p) return;
         const row = el('button', 'row' + (myVote === id ? ' me' : ''));
-        row.type = 'button';
-        row.style.cursor = 'pointer';
+        row.type = 'button'; row.style.cursor = 'pointer';
         row.innerHTML = '<div class="r-ava">' + esc(p.avatar) + '</div>' +
           '<div class="r-main"><div class="r-name">' + nameWithCrown(room, id, p.name) + '</div></div>' +
           (myVote === id ? '<div style="color:#22ff88;font-weight:900">✓</div>' : '');
@@ -2071,9 +2513,7 @@ const BaiDonGame = {
       });
       wrap.appendChild(voteWrap);
       const voteCount = Object.keys(g.votes || {}).length;
-      const eligible = Object.keys(room.players || {}).filter(function(id){
-        return ps[id] && !ps[id].eliminated;
-      }).length;
+      const eligible = Object.keys(room.players || {}).filter(id => ps[id] && !ps[id].eliminated).length;
       wrap.appendChild(el('div', 'answered-count', voteCount + ' / ' + eligible + ' صوّتوا'));
     }
 
@@ -2090,7 +2530,7 @@ const BaiDonGame = {
     const vr = g.voteResult || {};
     wrap.appendChild(el('h3', 'phase-title', 'نتيجة التصويت 🗳️'));
     if (vr.tie){
-      wrap.appendChild(el('div', 'waiting', 'تعادل! مفيش حد اتكشف. تستمر اللعبة.'));
+      wrap.appendChild(el('div', 'waiting', 'تعادل! مفيش حد اتكشف.'));
     } else {
       const target = room.players[vr.topId];
       if (target){
@@ -2098,11 +2538,12 @@ const BaiDonGame = {
         box.innerHTML = '<div class="w-title">' + (vr.wasBaiDon ? '🎭 تم كشف البيدون!' : '❌ بريء!') + '</div>' +
           '<div class="w-ava">' + esc(target.avatar) + '</div>' +
           '<div class="w-name">' + esc(target.name) + (room.hostId === vr.topId ? ' 👑' : '') + '</div>' +
-          '<div class="tiny" style="margin-top:6px">' + (vr.wasBaiDon ? 'البيدون بقى Turret ثابت -- مهمته إسقاطكم!' : 'البريء متضررش. اللي صوّت ضده رجع خطوتين.') + '</div>';
+          '<div class="tiny" style="margin-top:6px">' + (vr.wasBaiDon ? 'البيدون بقى Turret!' : 'البريء متضررش. اللي صوّت ضده رجع خطوتين.') + '</div>';
         wrap.appendChild(box);
       }
     }
     wrap.appendChild(BaiDonGame.buildTrack(room, g));
+
     if (isHost){
       const btn = el('button', 'primary block', 'استمرار اللعبة ▶️');
       btn.onclick = function(){ BaiDonGame.hostAfterVote(); };
@@ -2115,22 +2556,19 @@ const BaiDonGame = {
   uiEndGuess(wrap, room, g, isHost){
     const guesser = g.endGuessUid;
     wrap.appendChild(el('h3', 'phase-title', 'تخمين النهاية! 🏁'));
-    wrap.appendChild(el('div', 'waiting', 'وصلت لخط النهاية! بس عشان تفوز لازم تخمن مين البيدون.. لو خمنت غلط هترجع 3 خطوات لورا!'));
+    wrap.appendChild(el('div', 'waiting', 'لازم تخمن مين البيدون.. لو غلط هترجع 3 خطوات!'));
     if (App.uid === guesser){
       const ps = g.playerState || {};
-      const candidates = Object.keys(room.players || {}).filter(function(id){
-        return id !== App.uid && ps[id] && !ps[id].eliminated;
-      });
+      const candidates = Object.keys(room.players || {}).filter(id => id !== App.uid && ps[id] && !ps[id].eliminated);
       const list = el('div', 'list');
       candidates.forEach(function(id){
-        const p = room.players[id];
-        if (!p) return;
+        const p = room.players[id]; if (!p) return;
         const row = el('button', 'row');
         row.type = 'button'; row.style.cursor = 'pointer';
         row.innerHTML = '<div class="r-ava">' + esc(p.avatar) + '</div>' +
           '<div class="r-main"><div class="r-name">' + nameWithCrown(room, id, p.name) + '</div></div>';
         row.onclick = function(){
-          if (window.confirm('متأكد إن ' + p.name + ' هو البيدون؟')) {
+          if (window.confirm('متأكد إن ' + p.name + ' هو البيدون؟')){
             BaiDonGame.submitEndGuess(id);
           }
         };
@@ -2148,7 +2586,7 @@ const BaiDonGame = {
     const box = el('div', 'winner-box unmask');
     const winner = g.winner;
     const winnerName = g.winnerName || '';
-    const winnerPlayerId = Object.keys(room.players || {}).find(function(id){ return room.players[id].name === winnerName; });
+    const winnerPlayerId = Object.keys(room.players || {}).find(id => room.players[id].name === winnerName);
     const winnerAvatar = winnerPlayerId ? room.players[winnerPlayerId].avatar : (winner === 'baidon' ? '🎭' : '🏆');
     box.innerHTML =
       '<div class="w-title">' + (winner === 'baidon' ? '🎭 البيدون فاز!' : '🏆 الزعبول فاز!') + '</div>' +
@@ -2159,25 +2597,27 @@ const BaiDonGame = {
 
     const ps = g.playerState || {};
     const list = el('div', 'list');
-    const sorted = Object.keys(room.players || {}).map(function(id){ return Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }); })
-      .filter(function(p){ return !p._ps.eliminated; })
-      .sort(function(a, b){ return (b._ps.pos || 0) - (a._ps.pos || 0); });
+    const sorted = Object.keys(room.players || {}).map(id => Object.assign({ id: id }, room.players[id], { _ps: ps[id] || {} }))
+      .filter(p => !p._ps.eliminated)
+      .sort((a, b) => (b._ps.pos || 0) - (a._ps.pos || 0));
     sorted.forEach(function(p, i){
       const medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : (i + 1)));
       const bdTag = p.id === g.baiDonId ? ' 🎭' : '';
       const row = el('div', 'row' + (p.id === App.uid ? ' me' : ''));
       row.innerHTML = '<div class="rank-medal">' + medal + '</div>' +
         '<div class="r-ava">' + esc(p.avatar) + '</div>' +
-        '<div class="r-main"><div class="r-name">' + nameWithCrown(room, p.id, p.name) + bdTag + '</div>' +
-        ((p.cumulative || 0) > 0 ? '<div class="r-ans">تراكمي: ' + p.cumulative + '</div>' : '') + '</div>' +
+        '<div class="r-main"><div class="r-name">' + nameWithCrown(room, p.id, p.name) + bdTag + '</div></div>' +
         '<div class="r-pts pos">' + (p._ps.pos || 0) + '</div>';
       list.appendChild(row);
     });
     wrap.appendChild(list);
+    if (winner === 'baidon' && App.uid === g.baiDonId) SFX.win();
+    else if (winner === 'runner' && App.uid === winnerPlayerId) SFX.win();
+    else if (winner) SFX.lose();
 
     if (isHost){
       const btn = el('button', 'primary block', 'إعادة الزعبله 🔁');
-      btn.onclick = function(){ BaiDonGame.hostPlayAgain(); };
+      btn.onclick = function(){ BaiDonGame.hostPlayAgain(); SFX.click(); };
       wrap.appendChild(btn);
     } else {
       wrap.appendChild(el('div', 'waiting', '⏳ في انتظار الهوست…'));
@@ -2188,7 +2628,7 @@ const BaiDonGame = {
     wrap.appendChild(el('h3', 'phase-title', 'إعادة الزعبله 🔁'));
     const ready = g.ready || {};
     const total = Object.keys(room.players || {}).length;
-    const readyCount = Object.keys(ready).filter(function(k){ return ready[k]; }).length;
+    const readyCount = Object.keys(ready).filter(k => ready[k]).length;
     wrap.appendChild(el('div', 'waiting', 'الاستعداد: ' + readyCount + ' / ' + total + ' زعبول'));
     if (!isHost){
       if (ready[App.uid]) wrap.appendChild(el('div', 'ok-box', '✅ أنت مستعد!'));
@@ -2201,14 +2641,261 @@ const BaiDonGame = {
       wrap.appendChild(el('div', 'tiny', 'في انتظار استعداد الجميع…'));
       const btn = el('button', 'primary block', 'ابدأ من جديد 🚀');
       btn.disabled = readyCount < total;
-      btn.onclick = function(){ BaiDonGame.hostRestart(); };
+      btn.onclick = function(){ BaiDonGame.hostRestart(); SFX.click(); };
       wrap.appendChild(btn);
     }
   }
 };
 
 /* ================================================================
-   7) Heart pop
+   13) UI HELPERS -- Overlay, TopBar, ComedyPanels, Bubble, Queue
+   ================================================================ */
+function showBidonOverlay(realHits, room){
+  const victimsHtml = realHits.map((ev, i) => {
+    const v = room.players[ev.uid];
+    if (!v) return '';
+    return '<div class="ov-victim" style="animation-delay:' + (0.3 + i * 0.15) + 's">' + esc(v.avatar) + ' ' + esc(v.name) + '</div>';
+  }).join('');
+  const overlay = el('div', 'bd-overlay');
+  overlay.innerHTML =
+    '<div class="ov-icon">💥</div>' +
+    '<div class="ov-text">البيدون أوقع!</div>' +
+    '<div class="ov-victims">' + victimsHtml + '</div>' +
+    '<div class="ov-sub">ضربة قاسية! 💀</div>';
+  document.body.appendChild(overlay);
+  SFX.baiDonHit();
+  setTimeout(() => { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 2200);
+}
+
+function buildTopBar(room, g){
+  const wrap = el('div', 'tb-players');
+  const ps = g.playerState || {};
+
+  // Meta bidon card (if not revealed)
+  if (g.baiDonId && !g.baiDonRevealed){
+    const bdCard = el('div', 'tb-baidon');
+    bdCard.dataset.meta = 'bidon';
+    bdCard.innerHTML =
+      '<div class="tb-ava">🎭</div>' +
+      '<div class="tb-name">البيدون</div>' +
+      '<div class="tb-mask">(متخفي)</div>';
+    wrap.appendChild(bdCard);
+  }
+
+  // All non-eliminated players
+  const ids = Object.keys(room.players || {}).filter(id => {
+    const p = ps[id];
+    return p && !p.eliminated;
+  }).sort((a, b) => (room.players[a].joinedAt || 0) - (room.players[b].joinedAt || 0));
+
+  ids.forEach(function(uid){
+    const p = room.players[uid];
+    const pp = ps[uid] || {};
+    const card = el('div', 'tb-player' + (uid === App.uid ? ' me' : ''));
+    card.dataset.uid = uid;
+    const isBidon = (g.baiDonId === uid);
+    const isRevealed = !!g.baiDonRevealed;
+    const showBidon = isBidon && isRevealed;
+    const hearts = '❤️'.repeat(Math.max(0, pp.hearts || 0));
+    const pos = pp.pos || 0;
+    card.innerHTML =
+      '<div class="tb-ava">' + esc(p.avatar) + '</div>' +
+      '<div class="tb-name">' + esc(p.name) + (showBidon ? ' 🎭' : '') + '</div>' +
+      '<div class="tb-hearts">' + hearts + '</div>' +
+      '<div class="tb-score">' + pos + '/' + (g.target || 20) + '</div>' +
+      '<div class="tb-mic">🎤</div>';
+    wrap.appendChild(card);
+  });
+
+  return wrap;
+}
+
+function buildComedyPanels(room, g, round){
+  const uid = App.uid;
+  const myPs = (g.playerState || {})[uid] || {};
+  if (myPs.eliminated) return null;
+
+  const available = BaiDonGame.getAvailableSounds(room, g, uid);
+  if (available.length === 0) return null;
+
+  const wrap = el('div', 'comedy-wrap');
+  const isBidon = (g.baiDonId === uid);
+  const isRevealed = !!g.baiDonRevealed;
+
+  const leftSounds = available.filter(s => s.panel === 'left');
+  const rightSounds = available.filter(s => s.panel === 'right');
+
+  const inCooldown = Date.now() < (App._comedyCooldownUntil || 0);
+
+  function buildPanel(sounds, sideClass, title){
+    if (sounds.length === 0) return null;
+    const panel = el('div', 'comedy-panel ' + sideClass);
+    panel.appendChild(el('div', 'cp-label', title));
+    const grid = el('div', 'comedy-grid');
+    sounds.forEach(function(s){
+      const snd = COMEDY_SOUNDS.find(x => x.id === s.id);
+      if (!snd) return;
+      const b = el('button');
+      b.type = 'button';
+      b.dataset.soundId = s.id;
+      b.disabled = inCooldown;
+      if (inCooldown) b.classList.add('cooldown');
+      b.innerHTML = '<span class="cg-emoji">' + snd.emoji + '</span><span class="cg-name">' + esc(snd.name) + '</span>';
+      b.onclick = function(){
+        if (b.disabled) return;
+        sendComedySound(s.id, round);
+        SFX.click();
+      };
+      grid.appendChild(b);
+    });
+    panel.appendChild(grid);
+    return panel;
+  }
+
+  if (isBidon && !isRevealed){
+    const leftPanel = buildPanel(leftSounds, 'left', '🎭 مؤثرات البيدون');
+    if (leftPanel) wrap.appendChild(leftPanel);
+    const rightPanel = buildPanel(rightSounds, 'right', '🏃 مؤثرات كزعبول (تمويه)');
+    if (rightPanel) wrap.appendChild(rightPanel);
+  } else if (isBidon && isRevealed){
+    const leftPanel = buildPanel(leftSounds, 'left', '🎭 مؤثرات البيدون');
+    if (leftPanel) wrap.appendChild(leftPanel);
+  } else {
+    const rightPanel = buildPanel(rightSounds, 'right', '🎉 مؤثرات كوميدية');
+    if (rightPanel) wrap.appendChild(rightPanel);
+  }
+
+  return wrap.children.length > 0 ? wrap : null;
+}
+
+async function sendComedySound(soundId, round){
+  if (!App.room || !App.room.game) return;
+  if (Date.now() < (App._comedyCooldownUntil || 0)){
+    toast('⏳ استنى شوية قبل ما تشغّل تاني', 'err');
+    return;
+  }
+  App._comedyCooldownUntil = Date.now() + COMEDY_COOLDOWN_MS;
+  // Disable buttons
+  document.querySelectorAll('.comedy-grid button').forEach(b => {
+    b.disabled = true; b.classList.add('cooldown');
+  });
+  // Mark as used (ank_lmeet)
+  if (soundId === 'ank_lmeet'){
+    try { await setGame({ ['comedyUsed/' + App.uid + '/ank_lmeet']: true }); } catch(e){}
+  }
+  try {
+    await setGame({ ['comedySounds/' + App.uid]: { soundId: soundId, ts: Date.now(), round: round } });
+  } catch (e){ toast('مشكلة', 'err'); }
+}
+
+function setupComedyListener(pin){
+  try {
+    const comedyRef = db.ref('rooms/' + pin + '/game/comedySounds');
+    comedyRef.on('child_added', function(snap){
+      const uid = snap.key;
+      const data = snap.val();
+      if (!data || !data.soundId || !data.ts) return;
+      if (Date.now() - data.ts > 15000) return;
+      const key = uid + '_' + data.ts;
+      if (ComedyQueue.seenKeys.has(key)) return;
+      ComedyQueue.seenKeys.add(key);
+      ComedyQueue.enqueue({ uid: uid, soundId: data.soundId, ts: data.ts });
+    });
+  } catch (e){}
+}
+
+function updateQueueIndicator(){
+  const el = document.getElementById('comedy-queue-indicator');
+  if (!el) return;
+  if (!ComedyQueue.playing && ComedyQueue.queue.length === 0){
+    el.classList.add('hidden');
+    return;
+  }
+  el.classList.remove('hidden');
+  let html = '';
+  if (ComedyQueue.playing && ComedyQueue.currentItem){
+    const room = App.room;
+    const player = room && room.players && room.players[ComedyQueue.currentItem.uid];
+    const snd = COMEDY_SOUNDS.find(s => s.id === ComedyQueue.currentItem.soundId);
+    const isBidon = room && room.game && room.game.baiDonId === ComedyQueue.currentItem.uid;
+    const isRevealed = room && room.game && room.game.baiDonRevealed;
+    const isBidonSound = snd && snd.category && snd.category.startsWith('baidon');
+    let name = '?';
+    if (isBidon && isBidonSound && !isRevealed) name = '🎭 البيدون (متخفي)';
+    else if (isBidon && isRevealed) name = '🎭 ' + (player ? player.name : '');
+    else if (player) name = player.avatar + ' ' + player.name;
+    html = '<span>🔊 ' + name + ' بيقول: <b>' + (snd ? snd.name : '?') + '</b></span>';
+  }
+  if (ComedyQueue.queue.length > 0){
+    html += '<span class="q-count">في الانتظار: ' + ComedyQueue.queue.length + '</span>';
+  }
+  el.innerHTML = html;
+}
+
+let _bubbleEl = null;
+function showSpeechBubble(speakerName, soundName, isMystery){
+  hideSpeechBubble();
+  const b = el('div', 'tb-bubble' + (isMystery ? ' bd' : ''));
+  b.innerHTML =
+    '<div class="tb-bubble-name">' + esc(speakerName) + '</div>' +
+    '<div class="tb-bubble-text">💬 ' + esc(soundName) + '</div>';
+  b.style.top = '140px';
+  b.style.left = '50%';
+  b.style.transform = 'translateX(-50%)';
+  document.body.appendChild(b);
+  _bubbleEl = b;
+}
+function hideSpeechBubble(){
+  if (_bubbleEl && _bubbleEl.parentNode) _bubbleEl.parentNode.removeChild(_bubbleEl);
+  _bubbleEl = null;
+}
+
+function highlightSpeaker(uid, isMystery){
+  document.querySelectorAll('.tb-player, .tb-baidon').forEach(el => el.classList.remove('is-speaking'));
+  if (isMystery){
+    document.querySelectorAll('.tb-baidon').forEach(el => el.classList.add('is-speaking'));
+  } else {
+    const target = document.querySelector('.tb-player[data-uid="' + uid + '"]');
+    if (target) target.classList.add('is-speaking');
+  }
+}
+function clearHighlightSpeaker(){
+  document.querySelectorAll('.is-speaking').forEach(el => el.classList.remove('is-speaking'));
+}
+
+// Queue change hook
+ComedyQueue.onQueueChange = function(){
+  updateQueueIndicator();
+  if (ComedyQueue.currentItem){
+    const uid = ComedyQueue.currentItem.uid;
+    const snd = COMEDY_SOUNDS.find(s => s.id === ComedyQueue.currentItem.soundId);
+    if (snd && App.room){
+      const isBidonSound = snd.category && snd.category.startsWith('baidon');
+      const player = App.room.players[uid];
+      const isBidon = App.room.game && App.room.game.baiDonId === uid;
+      const isRevealed = App.room.game && App.room.game.baiDonRevealed;
+      let displayName, isMystery = false;
+      if (isBidon && isBidonSound && !isRevealed){
+        displayName = '🎭 البيدون (متخفي)';
+        isMystery = true;
+      } else if (isBidon && isRevealed){
+        displayName = '🎭 البيدون ' + (player ? player.name : '');
+      } else if (player){
+        displayName = player.avatar + ' ' + player.name;
+      } else {
+        displayName = '?';
+      }
+      showSpeechBubble(displayName, snd.name, isMystery);
+      highlightSpeaker(uid, isMystery);
+    }
+  } else {
+    hideSpeechBubble();
+    clearHighlightSpeaker();
+  }
+};
+
+/* ================================================================
+   14) Heart Pop
    ================================================================ */
 function showHeartPop(){
   const h = document.createElement('div');
@@ -2221,7 +2908,7 @@ function showHeartPop(){
 }
 
 /* ================================================================
-   8) Render
+   15) RENDER
    ================================================================ */
 function render(){
   const room = App.room;
@@ -2286,7 +2973,8 @@ function renderGame(){
   if (room.gameType === 'baidon'){
     const myPs = (g.playerState || {})[App.uid] || {};
     const elimTag = myPs.eliminated ? ' 👻 خارج' : '';
-    $('game-score').textContent = 'تقدمك: ' + (me ? (me.pos || 0) : 0) + ' • ❤️' + (me ? (me.hearts || 0) : 0) + elimTag;
+    const frozenTag = myPs.frozen > 0 ? ' ❄️' : '';
+    $('game-score').textContent = 'تقدمك: ' + (me ? (me.pos || 0) : 0) + ' • ❤️' + (me ? (me.hearts || 0) : 0) + elimTag + frozenTag;
   } else {
     $('game-score').textContent = 'نقاطك: ' + (me ? (me.score || 0) : 0);
   }
@@ -2300,6 +2988,11 @@ function renderGame(){
     } else if (phase === 'intro'){
       const ready = !!(g.introReady && g.introReady[App.uid]);
       sig = 'bd-intro:' + (ready ? 1 : 0);
+    } else if (phase === 'resolve'){
+      const gForSig = Object.assign({}, g);
+      delete gForSig.comedySounds;
+      delete gForSig.comedyUsed;
+      sig = 'bd-resolve:' + JSON.stringify(gForSig) + ':' + JSON.stringify(room.players);
     } else {
       sig = 'bd-' + phase + ':' + JSON.stringify(g) + ':' + JSON.stringify(room.players);
     }
@@ -2340,9 +3033,9 @@ function updateGameHint(){
     else if (amBaiDon && isRevealed) hint = '🎭 أنت Turret! اختار رقم الهجوم كل جولة';
     else hint = 'حاول متختارش نفس الرقم كتير عشان البيدون ميقفشكش وتخسر قلب!';
   }
-  else if (phase === 'vote'){ hint = 'صوّت بحكمة! لو الأغلبية اختارت زعبول بريء.. كل اللي صوّت ضده هيرجع خطوتين لورا!'; }
-  else if (phase === 'endGuess'){ hint = 'وصلت لخط النهاية! لازم تخمن مين البيدون.. لو غلط هترجع 3 خطوات لورا!'; }
-  else if (phase === 'resolve'){ hint = 'تابع الأحداث -- القلوب والتحركات'; }
+  else if (phase === 'vote'){ hint = 'صوّت بحكمة! لو الأغلبية اختارت زعزول بريء.. كل اللي صوّت ضده هيرجع خطوتين لورا!'; }
+  else if (phase === 'endGuess'){ hint = 'لازم تخمن مين البيدون.. لو غلط هترجع 3 خطوات لورا!'; }
+  else if (phase === 'resolve'){ hint = 'تابع الأحداث -- اختار مؤثر كوميدي الكل يسمعه!'; }
   else if (phase === 'final'){ hint = 'النهاية! اضغط إعادة الزعبله عشان جولة جديدة'; }
 
   if (hint){ bar.textContent = hint; bar.classList.remove('hidden'); }
@@ -2350,7 +3043,7 @@ function updateGameHint(){
 }
 
 /* ================================================================
-   9) Mic
+   16) MIC
    ================================================================ */
 function updateMicVisibility(){
   const btn = $('mic-btn');
@@ -2423,7 +3116,7 @@ async function startRecording(){
     };
     mr.start(); mediaRecorder = mr; isRecording = true;
     $('mic-btn').classList.add('rec');
-  } catch (e){ toast('لازم تسمح بالمايك من إعدادات المتصفح 🎙️', 'err'); }
+  } catch (e){ toast('لازم تسمح بالمايك 🎙️', 'err'); }
 }
 function stopRecording(){
   if (!isRecording || !mediaRecorder) return;
@@ -2433,7 +3126,7 @@ function stopRecording(){
 }
 
 /* ================================================================
-   10) Global timer
+   17) GLOBAL TIMER
    ================================================================ */
 setInterval(function(){
   const room = App.room;
@@ -2465,19 +3158,16 @@ setInterval(function(){
           if (room.hostMode === 'judge' && uid === room.hostId) return false;
           return true;
         });
-        const done = needed.filter(function(uid){ return actions[uid] && actions[uid].ts; }).length;
+        const done = needed.filter(uid => actions[uid] && actions[uid].ts).length;
         const str = done + ' / ' + needed.length + ' اختاروا';
         if (counter.getAttribute('data-val') !== str){
-          counter.textContent = str;
-          counter.setAttribute('data-val', str);
+          counter.textContent = str; counter.setAttribute('data-val', str);
         }
         if (needed.length > 0 && done >= needed.length && leftMs > 800){
           BaiDonGame.hostResolve();
         }
       }
-      if (leftMs <= 0){
-        BaiDonGame.hostResolve();
-      }
+      if (leftMs <= 0){ BaiDonGame.hostResolve(); }
     } else {
       if (timerPill && g.phase !== 'action'){ timerPill.textContent = '--'; timerPill.removeAttribute('data-val'); }
       const txtEl = $('bd-timer-text');
@@ -2485,40 +3175,30 @@ setInterval(function(){
     }
 
     if (App.isHost && room.hostMode === 'auto'){
-      if (g.phase === 'intro'){
-        const ready = g.introReady || {};
-        const total = Object.keys(room.players || {}).length;
-        let cnt = 0;
-        Object.keys(ready).forEach(function(k){ if (ready[k]) cnt++; });
-        if (total > 0 && cnt >= total){ BaiDonGame.hostStartAction(); }
-      }
       if (g.phase === 'intro' && !BaiDonGame._autoIntroTimer){
         BaiDonGame._autoIntroTimer = setTimeout(function(){
           BaiDonGame._autoIntroTimer = null;
           if (App.room && App.room.game.phase === 'intro') BaiDonGame.hostStartAction();
         }, 8000);
       }
-      if (g.phase === 'resolve' && !BaiDonGame._autoNextTimer){
-        BaiDonGame._autoNextTimer = setTimeout(function(){
-          BaiDonGame._autoNextTimer = null;
-          if (App.room && App.room.game.phase === 'resolve') BaiDonGame.hostNextRound();
-        }, 5000);
-      }
-      if (g.phase === 'voteResult' && !BaiDonGame._autoVoteTimer){
-        BaiDonGame._autoVoteTimer = setTimeout(function(){
-          BaiDonGame._autoVoteTimer = null;
-          if (App.room && App.room.game.phase === 'voteResult') BaiDonGame.hostAfterVote();
-        }, 4000);
+      if (g.phase === 'intro'){
+        const ready = g.introReady || {};
+        const total = Object.keys(room.players || {}).length;
+        let cnt = 0;
+        Object.keys(ready).forEach(k => { if (ready[k]) cnt++; });
+        if (total > 0 && cnt >= total){ BaiDonGame.hostStartAction(); }
       }
     }
 
     if (App.isHost && g.phase === 'intro' && !BaiDonGame._introCheckTimer){
       BaiDonGame._introCheckTimer = setInterval(function(){
-        if (!App.room || App.room.game.phase !== 'intro'){ clearInterval(BaiDonGame._introCheckTimer); BaiDonGame._introCheckTimer = null; return; }
+        if (!App.room || App.room.game.phase !== 'intro'){
+          clearInterval(BaiDonGame._introCheckTimer); BaiDonGame._introCheckTimer = null; return;
+        }
         const ready = App.room.game.introReady || {};
         const total = Object.keys(App.room.players || {}).length;
         let cnt = 0;
-        Object.keys(ready).forEach(function(k){ if (ready[k]) cnt++; });
+        Object.keys(ready).forEach(k => { if (ready[k]) cnt++; });
         if (total > 0 && cnt >= total){
           clearInterval(BaiDonGame._introCheckTimer); BaiDonGame._introCheckTimer = null;
           BaiDonGame.hostStartAction();
@@ -2540,7 +3220,7 @@ setInterval(function(){
       }
       if (App.isHost){
         const answererIds = getAnswererIds(room);
-        const allAnswered = answererIds.length > 0 && answererIds.every(function(id){ return g.answers && g.answers[id] && g.answers[id].text; });
+        const allAnswered = answererIds.length > 0 && answererIds.every(id => g.answers && g.answers[id] && g.answers[id].text);
         if (leftMs <= 0 || allAnswered){ BoxGame.hostEndTimer(); }
       }
     } else {
@@ -2550,14 +3230,14 @@ setInterval(function(){
       const ready = g.ready || {};
       const total = Object.keys(room.players || {}).length;
       let cnt = 0;
-      Object.keys(ready).forEach(function(k){ if (ready[k]) cnt++; });
+      Object.keys(ready).forEach(k => { if (ready[k]) cnt++; });
       if (total > 0 && cnt >= total){ BoxGame.hostRestart(); }
     }
   }
 }, 500);
 
 /* ================================================================
-   11) UI binding
+   18) UI BINDING
    ================================================================ */
 let selectedAvatar = AVATARS[0];
 
@@ -2617,20 +3297,20 @@ async function submitSetup(){
   } catch (err){
     hideLoading();
     const code = err && err.message;
-    if (code === 'PIN_TAKEN') toast('الرقم السري مستخدم، جرّب رقم تاني', 'err');
+    if (code === 'PIN_TAKEN') toast('الرقم السري مستخدم', 'err');
     else if (code === 'NO_ROOM') toast('مفيش زعبل بالرقم ده 🤔', 'err');
-    else if (code === 'FULL') toast('الزعبل مليان (20 زعبول)', 'err');
+    else if (code === 'FULL') toast('الزعبل مليان', 'err');
     else if (code === 'NAME_TAKEN') toast('الاسم موجود، جرّب اسم تاني', 'err');
-    else if (code === 'AVATAR_TAKEN') toast('الأفاتار ده متاخد، اختار واحد تاني', 'err');
-    else if (code === 'STARTED') toast('اللعبة بدأت خلاص، استنى الجولة الجديدة', 'err');
+    else if (code === 'AVATAR_TAKEN') toast('الأفاتار ده متاخد', 'err');
+    else if (code === 'STARTED') toast('اللعبة بدأت خلاص', 'err');
     else if (code === 'KICKED') toast('أنت مطرود من الزعبل ده 🚪', 'err');
-    else toast('مشكلة في الاتصال، جرّب تاني', 'err');
+    else toast('مشكلة في الاتصال', 'err');
   }
 }
 
 function bindEvents(){
-  $('card-box').addEventListener('click', function(){ showHomeChoice('box'); });
-  $('card-baidon').addEventListener('click', function(){ showHomeChoice('baidon'); });
+  $('card-box').addEventListener('click', () => showHomeChoice('box'));
+  $('card-baidon').addEventListener('click', () => showHomeChoice('baidon'));
 
   function showHomeChoice(gameType){
     const old = document.getElementById('home-choice'); if (old) old.remove();
@@ -2644,9 +3324,9 @@ function bindEvents(){
         '<button class="ghost block small" id="pick-cancel" type="button">إلغاء</button>' +
       '</div>';
     $('screen-home').appendChild(choice);
-    $('pick-create').onclick = function(){ choice.remove(); openSetup('create', gameType); };
-    $('pick-join').onclick   = function(){ choice.remove(); openSetup('join', gameType); };
-    $('pick-cancel').onclick = function(){ choice.remove(); };
+    $('pick-create').onclick = () => { choice.remove(); openSetup('create', gameType); };
+    $('pick-join').onclick = () => { choice.remove(); openSetup('join', gameType); };
+    $('pick-cancel').onclick = () => choice.remove();
   }
 
   $('btn-back').addEventListener('click', function(){
@@ -2655,7 +3335,7 @@ function bindEvents(){
   });
 
   $('btn-submit').addEventListener('click', submitSetup);
-  onEnter($('inp-name'), function(){ $('inp-pin').focus(); });
+  onEnter($('inp-name'), () => $('inp-pin').focus());
   onEnter($('inp-pin'), submitSetup);
   $('inp-pin').addEventListener('input', function(){ this.value = this.value.replace(/\D/g, '').slice(0, 5); });
 
@@ -2663,18 +3343,18 @@ function bindEvents(){
   const hostHints = {
     play: 'هوست + لاعب: تتحكم يدوياً وتلعب كزعبول عادي.',
     judge: 'هوست وحكم فقط: متلعبش، تتحكم في إيقاع اللعبة فقط.',
-    auto: 'أوتوماتيكي: اللعبة تتقدم بتايمر، وأنت تلعب عادي + زر تخطي مخفي.'
+    auto: 'أوتوماتيكي: اللعبة تتقدم بتايمر، وأنت تلعب عادي.'
   };
   hostChips.forEach(function(chip){
     chip.addEventListener('click', function(){
-      hostChips.forEach(function(c){ c.classList.remove('on'); });
+      hostChips.forEach(c => c.classList.remove('on'));
       chip.classList.add('on');
       App.hostMode = chip.getAttribute('data-host');
       $('host-hint').textContent = hostHints[App.hostMode] || '';
     });
   });
 
-  $('btn-leave').addEventListener('click', function(){ Core.leave(); });
+  $('btn-leave').addEventListener('click', () => Core.leave());
   $('btn-start-game').addEventListener('click', function(){
     if (App.room.gameType === 'baidon') BaiDonGame.hostStart();
     else BoxGame.hostStart();
@@ -2692,23 +3372,27 @@ function bindEvents(){
   const micBtn = $('mic-btn');
   micBtn.addEventListener('pointerdown', function(e){ e.preventDefault(); startRecording(); });
   micBtn.addEventListener('pointerup', function(e){ e.preventDefault(); stopRecording(); });
-  micBtn.addEventListener('pointerleave', function(){ stopRecording(); });
-  micBtn.addEventListener('pointercancel', function(){ stopRecording(); });
+  micBtn.addEventListener('pointerleave', () => stopRecording());
+  micBtn.addEventListener('pointercancel', () => stopRecording());
 
   window.addEventListener('pagehide', function(){
     try { if (App.roomRef && App.uid) App.roomRef.child('players/' + App.uid).update({ online: false }); } catch(e){}
   });
 
-  // 🔥 Heat reduction: pause all animations when tab hidden
-  document.addEventListener('visibilitychange', function(){
+  document.addEventListener('visibilitychange', () => {
     document.body.classList.toggle('tab-hidden', document.hidden);
   });
+
+  // 🔊 تهيئة الأصوات
+  document.addEventListener('pointerdown', () => SFX._init(), { once: true });
+  document.addEventListener('touchstart', () => SFX._init(), { once: true });
 }
 
 /* ================================================================
-   12) Boot
+   19) BOOT
    ================================================================ */
 (async function boot(){
+  App._comedyCooldownUntil = 0;
   buildAvatarGrid();
   bindEvents();
   showScreen('home');
@@ -2717,6 +3401,8 @@ function bindEvents(){
     await initFirebase();
     hideLoading();
     Core.sweepOldRooms();
+    // تحميل الأصوات الكوميدية (cache + preload)
+    ComedyAudio.preload().catch(() => {});
   } catch (err){
     hideLoading();
     toast('فشل الاتصال بالسيرفر. تأكد من الإنترنت ⚠️', 'err');
