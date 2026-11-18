@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
@@ -16,18 +16,25 @@ body{
   font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
   color:#f4ecff;min-height:100vh;
   background:linear-gradient(-45deg,#0b0518,#1a0b2e,#08131f,#2a0a22);
-  background-size:400% 400%;animation:bgmove 22s ease infinite;
+  background-size:400% 400%;
+  animation:bgmove 22s ease infinite;
   overflow-x:hidden;-webkit-text-size-adjust:100%;
   padding-bottom:env(safe-area-inset-bottom);
 }
-@keyframes bgmove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes bgmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.42;pointer-events:none;z-index:0;}
 .orb.a{width:250px;height:250px;background:#ff2e9a;top:-70px;right:-70px;animation:float1 15s ease-in-out infinite;}
 .orb.b{width:230px;height:230px;background:#00f0ff;bottom:-80px;left:-80px;animation:float2 18s ease-in-out infinite;}
 @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-28px,38px)}}
 @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(34px,-30px)}}
 
-button{font-family:inherit;font-size:16px;font-weight:800;color:#fff;border:none;outline:none;cursor:pointer;border-radius:16px;padding:14px 18px;transition:filter .14s,box-shadow .2s,opacity .2s;-webkit-user-select:none;user-select:none;touch-action:manipulation;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1.2;}
+button{
+  font-family:inherit;font-size:16px;font-weight:800;color:#fff;
+  border:none;outline:none;cursor:pointer;border-radius:16px;
+  padding:14px 18px;transition:filter .14s ease, box-shadow .2s ease, opacity .2s ease;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1.2;
+}
 button:active{filter:brightness(.78);}
 button:disabled{opacity:.42;filter:grayscale(.45);}
 button.primary{background:linear-gradient(135deg,#ff2e9a,#a855f7);box-shadow:0 6px 22px rgba(255,46,154,.38),0 0 0 1px rgba(255,255,255,.12) inset;}
@@ -38,7 +45,11 @@ button.ghost{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,
 button.small{font-size:13px;padding:9px 14px;border-radius:12px;}
 button.block{width:100%;}
 
-input[type=text],input[type=tel]{font-family:inherit;font-size:16px;font-weight:700;width:100%;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);color:#fff;outline:none;transition:border-color .18s,background .18s;-webkit-appearance:none;appearance:none;}
+input[type=text],input[type=tel]{
+  font-family:inherit;font-size:16px;font-weight:700;width:100%;padding:14px 16px;border-radius:14px;
+  background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);color:#fff;outline:none;
+  transition:border-color .18s, background .18s;-webkit-appearance:none;appearance:none;
+}
 input::placeholder{color:rgba(255,255,255,.35);font-weight:600;}
 input:focus{border-color:#ff2e9a;background:rgba(255,255,255,.11);}
 input[type=tel]{letter-spacing:6px;text-align:center;font-size:22px;font-weight:900;}
@@ -48,7 +59,11 @@ input[type=tel]{letter-spacing:6px;text-align:center;font-size:22px;font-weight:
 .screen.active{display:block;}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.card{background:rgba(22,10,40,.72);border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:20px 18px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 50px rgba(0,0,0,.45);margin-bottom:16px;}
+.card{
+  background:rgba(22,10,40,.72);border:1px solid rgba(255,255,255,.10);border-radius:24px;
+  padding:20px 18px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 18px 50px rgba(0,0,0,.45);margin-bottom:16px;
+}
 h1,h2,h3,h4{margin:0 0 12px;line-height:1.25;}
 h2{font-size:22px;font-weight:900;}
 h3{font-size:18px;font-weight:800;}
@@ -56,7 +71,13 @@ label{display:block;font-size:14px;font-weight:800;margin:16px 0 8px;color:#c9b6
 label:first-child{margin-top:0;}
 
 .brand{text-align:center;padding:34px 0 22px;}
-.logo{font-size:clamp(44px,15vw,76px);font-weight:900;letter-spacing:-2px;margin:0;background:linear-gradient(120deg,#ff2e9a,#00f0ff 45%,#22ff88 75%,#a855f7);background-size:300% 300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 6s ease infinite;filter:drop-shadow(0 4px 26px rgba(255,46,154,.45));}
+.logo{
+  font-size:clamp(44px,15vw,76px);font-weight:900;letter-spacing:-2px;margin:0;
+  background:linear-gradient(120deg,#ff2e9a,#00f0ff 45%,#22ff88 75%,#a855f7);
+  background-size:300% 300%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  animation:shine 6s ease infinite;filter:drop-shadow(0 4px 26px rgba(255,46,154,.45));
+}
 @keyframes shine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .tag{color:#a797c9;font-size:15px;font-weight:700;margin:6px 0 0;line-height:1.6;}
 
@@ -84,59 +105,29 @@ label:first-child{margin-top:0;}
 .pcard .off-tag{font-size:10px;font-weight:800;color:#ff6b8a;margin-top:2px;}
 .pcard .kick{position:absolute;top:-7px;left:-7px;width:24px;height:24px;min-width:24px;border-radius:50%;font-size:12px;padding:0;font-weight:900;background:linear-gradient(135deg,#ff2e5e,#ff5e3a);color:#fff;box-shadow:0 4px 12px rgba(255,46,94,.5);}
 
-.game-topbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:6px;position:sticky;top:8px;z-index:20;}
+.game-topbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:8px;position:sticky;top:8px;z-index:20;}
 .pill{background:rgba(22,10,40,.88);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:900;color:#e5d9ff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);white-space:nowrap;}
 #game-timer{color:#00f0ff;text-shadow:0 0 14px rgba(0,240,255,.6);min-width:74px;text-align:center;}
 #game-score{color:#22ff88;text-shadow:0 0 14px rgba(34,255,136,.5);}
 
-/* === TOP BAR (per player) === */
-.race-top-bar{
-  display:flex;gap:6px;overflow-x:auto;padding:6px 4px;margin-bottom:6px;
-  background:rgba(22,10,40,.65);border:1px solid rgba(255,255,255,.10);
-  border-radius:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-}
-.race-top-bar::-webkit-scrollbar{display:none;}
-.rtb-player{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  min-width:56px;padding:5px 4px;border-radius:10px;
-  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);
-  font-size:9px;font-weight:800;color:#e5d9ff;text-align:center;position:relative;
-  transition:border-color .2s,background .2s;
-}
-.rtb-player.me{border-color:rgba(255,46,154,.55);background:rgba(255,46,154,.10);}
-.rtb-player.is-speaking{background:rgba(34,255,136,.18);border-color:#22ff88;box-shadow:0 0 10px rgba(34,255,136,.5);}
-.rtb-player.revealed-bd{border-color:#ff2e5e;box-shadow:0 0 10px rgba(255,46,94,.5);}
-.rtb-ava{font-size:18px;line-height:1.1;width:20px;height:20px;display:flex;align-items:center;justify-content:center;}
-.rtb-ava img{max-width:100%;max-height:100%;object-fit:contain;}
-.rtb-name{font-size:9px;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;}
-.rtb-score{font-size:10px;color:#22ff88;font-weight:900;}
-.rtb-mic{
-  position:absolute;top:2px;right:2px;width:14px;height:14px;
-  font-size:8px;padding:0;border-radius:50%;
-  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
-  display:flex;align-items:center;justify-content:center;line-height:1;
-  min-width:14px;
-}
-.rtb-mic.on{background:rgba(34,255,136,.7);border-color:#22ff88;animation:pulse 1s infinite;}
-.rtb-mic:disabled{opacity:.4;cursor:default;}
-
-.game-hint{position:sticky;top:56px;z-index:19;font-size:11px;font-weight:700;color:#c9b6ff;background:rgba(22,10,40,.88);border:1px solid rgba(255,255,255,.10);border-radius:10px;padding:6px 12px;text-align:center;margin-bottom:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);line-height:1.5;}
+.game-hint{position:sticky;top:56px;z-index:19;font-size:11px;font-weight:700;color:#c9b6ff;background:rgba(22,10,40,.88);border:1px solid rgba(255,255,255,.10);border-radius:10px;padding:6px 12px;text-align:center;margin-bottom:10px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);line-height:1.5;}
 .game-hint.hidden{display:none;}
 
 .phase{display:flex;flex-direction:column;gap:10px;}
 .phase-title{font-size:19px;font-weight:900;text-align:center;margin:0;background:linear-gradient(120deg,#ff2e9a,#00f0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 12px rgba(255,46,154,.35));}
 .waiting{text-align:center;font-size:15px;font-weight:800;color:#a797c9;padding:18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.16);}
 .ok-box{text-align:center;font-size:15px;font-weight:800;color:#06231a;padding:16px;border-radius:16px;background:linear-gradient(135deg,#22ff88,#0ea5a4);box-shadow:0 8px 26px rgba(34,255,136,.3);word-break:break-word;}
-.answered-count{text-align:center;font-size:14px;font-weight:800;color:#c9b6ff;padding:6px;}
-.timer-big{text-align:center;font-size:28px;font-weight:900;color:#00f0ff;text-shadow:0 0 22px rgba(0,240,255,.65);padding:2px;letter-spacing:2px;line-height:1;}
+.answered-count{text-align:center;font-size:14px;font-weight:800;color:#c9b6ff;padding:8px;}
+.timer-big{text-align:center;font-size:32px;font-weight:900;color:#00f0ff;text-shadow:0 0 22px rgba(0,240,255,.65);padding:4px;letter-spacing:2px;line-height:1;}
 
-.list{display:flex;flex-direction:column;gap:8px;}
-.row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);}
+.list{display:flex;flex-direction:column;gap:9px;}
+.row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);}
 .row.me{border-color:rgba(255,46,154,.55);background:rgba(255,46,154,.10);}
-.row .r-ava{font-size:22px;line-height:1;min-width:30px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}
+.row .r-ava{font-size:24px;line-height:1;min-width:32px;text-align:center;width:32px;height:32px;display:flex;align-items:center;justify-content:center;}
 .row .r-ava img{max-width:100%;max-height:100%;object-fit:contain;}
 .row .r-main{flex:1;min-width:0;}
 .row .r-name{font-size:13px;font-weight:900;color:#efe6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.row .r-pts{font-size:17px;font-weight:900;min-width:46px;text-align:center;color:#00f0ff;}
 .rank-medal{font-size:22px;min-width:30px;text-align:center;}
 
 .winner-box{text-align:center;padding:22px 16px;border-radius:22px;background:linear-gradient(140deg,rgba(255,46,154,.22),rgba(0,240,255,.14));border:1.5px solid rgba(255,46,154,.45);box-shadow:0 0 40px rgba(255,46,154,.25);}
@@ -153,92 +144,83 @@ label:first-child{margin-top:0;}
 .toast.out{opacity:0;transition:opacity .35s;}
 @keyframes tin{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 
-#loading-overlay{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(6,2,14,.86);font-size:16px;font-weight:900;color:#fff;}
+#loading-overlay{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(6,2,14,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:16px;font-weight:900;color:#fff;}
 #loading-overlay.hidden{display:none;}
 .loader{width:52px;height:52px;border-radius:50%;border:4px solid rgba(255,255,255,.14);border-top-color:#ff2e9a;border-right-color:#00f0ff;animation:spin .85s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.hidden{display:none!important;}
+.hidden{display:none !important;}
 .tiny{font-size:12px;color:#8d7fb0;font-weight:700;text-align:center;line-height:1.7;}
 .stack{display:flex;flex-direction:column;gap:10px;}
 .center{text-align:center;}
 .crown{color:#ffd166;font-size:14px;}
 
-.intro-card{text-align:center;padding:24px 18px;border-radius:22px;position:relative;overflow:hidden;}
+.intro-card{text-align:center;padding:32px 20px;border-radius:24px;position:relative;overflow:hidden;}
 .intro-card.bd{background:linear-gradient(160deg,rgba(255,46,94,.30),rgba(168,85,247,.22));border:2px solid rgba(255,46,94,.55);box-shadow:0 0 60px rgba(255,46,94,.35);}
 .intro-card.runner{background:linear-gradient(160deg,rgba(34,255,136,.25),rgba(0,240,255,.18));border:2px solid rgba(34,255,136,.55);box-shadow:0 0 60px rgba(34,255,136,.30);}
-.intro-role{font-size:28px;font-weight:900;margin:8px 0;line-height:1.2;}
-.intro-hint{font-size:13px;font-weight:700;opacity:.9;margin-top:8px;line-height:1.6;}
+.intro-role{font-size:34px;font-weight:900;margin:10px 0;line-height:1.2;}
+.intro-hint{font-size:14px;font-weight:700;opacity:.9;margin-top:8px;}
 @keyframes shush{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.15) rotate(-8deg)}}
-.shush-emoji{font-size:56px;display:inline-block;animation:shush 1.5s ease-in-out infinite;}
+.shush-emoji{font-size:66px;display:inline-block;animation:shush 1.5s ease-in-out infinite;}
 @keyframes runAnim{0%,100%{transform:translateX(-8px)}50%{transform:translateX(8px)}}
-.runner-emoji{font-size:56px;display:inline-block;animation:runAnim 1s ease-in-out infinite;}
+.runner-emoji{font-size:66px;display:inline-block;animation:runAnim 1s ease-in-out infinite;}
 
-/* === RACE === */
-.race-wrap{position:relative;display:grid;grid-template-columns:90px 1fr 60px;gap:6px;height:62vh;min-height:420px;max-height:720px;margin-bottom:6px;}
-
-.stations-col{display:flex;flex-direction:column-reverse;gap:6px;justify-content:flex-start;padding-bottom:14px;overflow-y:auto;max-height:100%;-webkit-overflow-scrolling:touch;}
-.stations-col::-webkit-scrollbar{width:0;}
-.station{position:relative;width:100%;min-height:66px;border-radius:12px;background:linear-gradient(135deg,#1f1530,#15082a);border:2px solid rgba(255,255,255,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:4px 2px;font-size:10px;font-weight:800;color:#fff;transition:border-color .25s,box-shadow .25s,background .25s;overflow:hidden;touch-action:manipulation;}
-.station .s-head{display:flex;align-items:center;justify-content:center;gap:4px;line-height:1;}
-.station .s-ico{font-size:12px;opacity:.7;}
-.station .s-num{font-size:20px;font-weight:900;color:#ffd166;line-height:1;}
-.station .s-btns{display:flex;gap:2px;width:100%;}
-.station .st-btn{flex:1;font-family:inherit;font-size:9px;font-weight:900;padding:5px 2px;border-radius:7px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;touch-action:manipulation;line-height:1.1;transition:all .12s;}
-.station .st-btn:active{transform:scale(.94);}
-.station .st-btn:disabled{opacity:.3;pointer-events:none;}
-.station .st-btn.st-move.on{background:linear-gradient(135deg,#22ff88,#0ea5a4);border-color:#22ff88;color:#04141a;box-shadow:0 0 12px rgba(34,255,136,.6);}
-.station .st-btn.st-block.on{background:linear-gradient(135deg,#ff2e5e,#a8002e);border-color:#ff2e5e;color:#fff;box-shadow:0 0 12px rgba(255,46,94,.6);}
-.station.success{border-color:#22ff88;background:rgba(34,255,136,.18);box-shadow:0 0 22px rgba(34,255,136,.75);}
-.station.fail{border-color:#ff2e5e;background:rgba(255,46,94,.18);box-shadow:0 0 22px rgba(255,46,94,.75);animation:stationShake .5s ease;}
-@keyframes stationShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.station .st-victims{font-size:8px;color:#ff8fb5;text-align:center;line-height:1.1;margin-top:1px;}
-
-.road-scene{position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(to bottom,#1a0b2e 0%,#0a0616 60%,#05030d 100%);box-shadow:inset 0 0 40px rgba(0,0,0,.7);}
-.road-bg{position:absolute;inset:0;clip-path:polygon(0% 0%,100% 0%,72% 100%,28% 100%);background:linear-gradient(to bottom,#0d0d10 0%,#1c1c22 100%);}
-.road-shoulder-l{position:absolute;inset:0;clip-path:polygon(0% 0%,28% 100%,0% 100%);background:linear-gradient(to bottom,#15082a,#2b1a3e);opacity:.8;}
-.road-shoulder-r{position:absolute;inset:0;clip-path:polygon(100% 0%,100% 100%,72% 100%);background:linear-gradient(to bottom,#15082a,#2b1a3e);opacity:.8;}
-.road-dashes{position:absolute;inset:0;clip-path:polygon(48% 0%,52% 0%,60% 100%,40% 100%);background:repeating-linear-gradient(to bottom,transparent 0 22px,rgba(255,255,255,.35) 22px 26px);}
-.road-edge-l{position:absolute;inset:0;clip-path:polygon(28% 0%,28.5% 0%,1.5% 100%,0% 100%);background:linear-gradient(to bottom,rgba(0,240,255,.2),#00f0ff);opacity:.7;}
-.road-edge-r{position:absolute;inset:0;clip-path:polygon(71.5% 0%,72% 0%,100% 100%,98.5% 100%);background:linear-gradient(to bottom,rgba(0,240,255,.2),#00f0ff);opacity:.7;}
-
-.road-num{position:absolute;right:5%;transform:translateY(-50%);font-size:11px;font-weight:900;color:rgba(255,255,255,.65);background:rgba(22,10,40,.75);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:2px 6px;z-index:3;pointer-events:none;line-height:1.2;}
-.road-num.major{color:#ffd166;font-size:12px;right:3%;background:rgba(255,209,102,.15);border-color:rgba(255,209,102,.5);}
-
-.car-token{position:absolute;transform:translateX(-50%);transition:top 1.6s cubic-bezier(.34,1.3,.64,1),opacity .3s;z-index:5;pointer-events:none;display:flex;flex-direction:column;align-items:center;width:56px;}
-.car-token .car-body{position:relative;width:56px;height:40px;display:flex;align-items:center;justify-content:center;}
-.car-token .car-body .car-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 4px 6px rgba(0,0,0,.7));}
-.car-token .car-body .car-img img{width:100%;height:100%;object-fit:contain;}
-.car-token .car-body .car-img .car-emoji{font-size:26px;line-height:1;}
-.car-token .car-body .car-identity{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:14px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.9));background:rgba(0,0,0,.55);border-radius:50%;padding:1px;}
-.car-token .car-body .car-identity img{max-width:100%;max-height:100%;object-fit:contain;}
-.car-token .car-name{font-size:9px;font-weight:900;color:#fff;background:rgba(0,0,0,.65);padding:1px 5px;border-radius:6px;margin-top:1px;max-width:66px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;backdrop-filter:blur(4px);text-align:center;}
-.car-token.me .car-name{background:rgba(255,46,154,.75);}
-.car-token.revealed .car-body{border:2px solid #ff2e5e;border-radius:8px;box-shadow:0 0 14px rgba(255,46,94,.85);animation:bdPulse 1.8s ease-in-out infinite;}
-@keyframes bdPulse{0%,100%{box-shadow:0 0 12px rgba(255,46,94,.6)}50%{box-shadow:0 0 22px rgba(255,46,94,1)}}
+/* === TRACK SCENE (image based) === */
+.race-wrap{display:grid;grid-template-columns:1fr 54px;gap:6px;margin-bottom:6px;align-items:start;}
+.road-scene{position:relative;aspect-ratio:941/1403;width:100%;max-width:560px;margin:0 auto;border-radius:14px;overflow:hidden;background:#05030d center/100% 100% no-repeat;container-type:inline-size;}
+.car-token{position:absolute;transform:translate(-50%,-50%);transition:top 2s cubic-bezier(.3,.9,.4,1),left .4s ease,width 2s ease;z-index:5;pointer-events:none;}
+.car-body{position:relative;width:100%;aspect-ratio:1/1.25;}
+.car-img{width:100%;height:100%;transform:rotate(180deg);filter:drop-shadow(0 3px 4px rgba(0,0,0,.7));display:flex;align-items:center;justify-content:center;}
+.car-img img{width:100%;height:100%;object-fit:contain;display:block;}
+.car-emoji{font-size:5cqw;}
+.car-identity{position:absolute;left:50%;top:-8%;transform:translateX(-50%);width:62%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:4cqw;background:rgba(0,0,0,.55);border-radius:50%;z-index:2;line-height:1;}
+.car-identity img{width:100%;height:100%;object-fit:contain;}
+.car-name{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-size:2.3cqw;font-weight:900;color:#fff;background:rgba(0,0,0,.72);padding:0 1.2cqw;border-radius:6px;white-space:nowrap;max-width:220%;overflow:hidden;text-overflow:ellipsis;}
+.car-token.me .car-name{background:rgba(255,46,154,.85);}
+.car-token.revealed .car-body{outline:2px solid #ff2e5e;border-radius:8px;}
 .car-token.frozen .car-body{filter:brightness(1.4) hue-rotate(180deg);}
-.car-token.frozen::before{content:'❄️';position:absolute;top:-8px;right:-8px;font-size:14px;z-index:6;}
-.car-token.frozen::before{content:'❄️';position:absolute;top:-8px;right:-8px;font-size:14px;z-index:6;}
-
-/* === Station walker (avatar travels to station) === */
-.station-walker{
-  position:fixed;z-index:100;pointer-events:none;
-  font-size:24px;line-height:1;width:30px;height:30px;
-  display:flex;align-items:center;justify-content:center;
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.9));
-  transition:left 0.9s ease,top 0.9s ease;
-}
-.station-walker img{max-width:100%;max-height:100%;object-fit:contain;}
+.st-zone{position:absolute;height:8%;border-radius:12px;border:2px solid transparent;transition:.25s;z-index:3;pointer-events:none;}
+.st-zone.success{border-color:#22ff88;background:rgba(34,255,136,.25);box-shadow:0 0 20px #22ff88;}
+.st-zone.fail{border-color:#ff2e5e;background:rgba(255,46,94,.28);box-shadow:0 0 20px #ff2e5e;}
+.st-badge{position:absolute;z-index:3;font-size:3.2cqw;font-weight:900;color:#ffd166;background:rgba(0,0,0,.7);border-radius:8px;padding:.5cqw 1.2cqw;}
+.st-btns{position:absolute;display:flex;gap:2px;z-index:6;}
+.st-btn{flex:1;min-width:0;font-family:inherit;font-size:3.4cqw;padding:1.3cqw 0;border-radius:6px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.7);color:#fff;cursor:pointer;touch-action:manipulation;display:flex;justify-content:center;}
+.st-btn:disabled{opacity:.35;}
+.st-btn.st-move.on{background:#16c26a;border-color:#22ff88;}
+.st-btn.st-block.on{background:#d11a45;border-color:#ff2e5e;}
+.disg-btn{position:absolute;right:1.5%;top:62%;z-index:7;font-size:3.3cqw;padding:1.6cqw 2cqw;border-radius:10px;background:rgba(90,30,140,.9);border:1.5px solid #a855f7;}
+.disg-btn.on{background:linear-gradient(135deg,#ff2e9a,#a855f7);box-shadow:0 0 14px #ff2e9a;}
+.disg-btn.blink{animation:blinkA .7s ease-in-out infinite;}
+@keyframes blinkA{50%{opacity:.25;box-shadow:0 0 18px #ffd166;}}
+.walker{position:absolute;transform:translate(-50%,-50%);transition:left .6s ease-in-out,top .6s ease-in-out;z-index:8;width:6cqw;height:6cqw;font-size:5cqw;display:flex;align-items:center;justify-content:center;pointer-events:none;line-height:1;}
+.walker img{width:100%;height:100%;object-fit:contain;}
+.pstrip{display:flex;gap:6px;overflow-x:auto;padding:8px 4px 4px;margin-bottom:4px;-webkit-overflow-scrolling:touch;}
+.pchip{flex:0 0 auto;position:relative;display:flex;flex-direction:column;align-items:center;min-width:50px;padding:4px 6px;border-radius:12px;background:rgba(255,255,255,.07);border:2px solid transparent;}
+.pchip.speaking{border-color:#22ff88;box-shadow:0 0 12px #22ff88;}
+.pc-ava{font-size:22px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}
+.pc-ava img{max-width:100%;max-height:100%;object-fit:contain;}
+.pc-sc{font-size:12px;font-weight:900;color:#22ff88;}
+.pc-mic{position:absolute;top:-7px;left:-5px;width:20px;height:20px;min-width:20px;padding:0;font-size:11px;border-radius:50%;background:#3b3b8f;}
+.pc-mic.off{background:#555;opacity:.7;}
+.event-line{font-size:13px;font-weight:800;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.06);}
+.event-line.hit{background:rgba(255,46,94,.15);}
+.frozen-box{text-align:center;font-weight:800;padding:12px;border-radius:14px;background:rgba(0,240,255,.15);}
+.bd-overlay .ov-victims{font-size:var(--vs,20px);}
+.bd-overlay .ov-victim{font-size:1em;padding:.4em .8em;}
+.bd-overlay .ov-victim img{height:1.3em;vertical-align:middle;}
+body.in-game .orb{display:none;}
+body.in-game{animation:none;}
+#screen-game .pill,#screen-game .game-hint{backdrop-filter:none;-webkit-backdrop-filter:none;}
 
 .comedy-col{display:flex;flex-direction:column;gap:4px;padding-top:14px;max-height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .comedy-col::-webkit-scrollbar{width:0;}
-.comedy-btn{width:100%;min-height:42px;padding:4px 2px;border-radius:10px;background:rgba(255,176,32,.14);border:1px solid rgba(255,176,32,.35);color:#fff;font-size:9px;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;font-family:inherit;transition:filter .12s;text-align:center;line-height:1.15;overflow:hidden;}
+.comedy-btn{width:100%;min-height:44px;padding:4px 2px;border-radius:10px;background:rgba(255,176,32,.14);border:1px solid rgba(255,176,32,.35);color:#fff;font-size:9px;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;font-family:inherit;transition:filter .12s ease;text-align:center;line-height:1.15;overflow:hidden;}
 .comedy-btn:active{filter:brightness(1.4);}
 .comedy-btn:disabled{opacity:.35;cursor:not-allowed;}
-.comedy-btn .cb-emoji{font-size:14px;line-height:1;}
+.comedy-btn .cb-emoji{font-size:16px;line-height:1;}
 .comedy-btn .cb-name{font-size:8px;line-height:1.15;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-.queue-badge{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9700;font-size:11px;font-weight:800;color:#fff;background:rgba(0,240,255,.85);border-radius:12px;padding:6px 12px;box-shadow:0 6px 20px rgba(0,240,255,.45);}
+.queue-badge{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9700;font-size:11px;font-weight:800;color:#fff;background:rgba(0,240,255,.85);border-radius:12px;padding:6px 12px;box-shadow:0 6px 20px rgba(0,240,255,.45);animation:bubbleIn .3s ease;}
 .queue-badge.hidden{display:none;}
 
 .tb-bubble{position:fixed;z-index:9700;padding:8px 14px;background:linear-gradient(135deg,rgba(255,46,154,.95),rgba(168,85,247,.9));color:#fff;border-radius:16px;font-size:13px;font-weight:900;box-shadow:0 8px 24px rgba(255,46,154,.5);pointer-events:none;animation:bubbleIn .3s cubic-bezier(.34,1.56,.64,1);max-width:80vw;}
@@ -247,49 +229,32 @@ label:first-child{margin-top:0;}
 .tb-bubble .tb-bubble-text{font-size:14px;margin-top:2px;}
 @keyframes bubbleIn{from{opacity:0;transform:scale(.7) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 
-.bd-overlay{position:fixed;inset:0;z-index:9800;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(255,46,94,.42),rgba(0,0,0,.9));animation:ovIn .3s ease-out;pointer-events:none;padding:16px;text-align:center;overflow:auto;}
+.bd-overlay{position:fixed;inset:0;z-index:9800;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(255,46,94,.42),rgba(0,0,0,.9));animation:ovIn .3s ease-out;pointer-events:none;padding:20px;text-align:center;}
 @keyframes ovIn{from{opacity:0;transform:scale(1.15)}to{opacity:1;transform:scale(1)}}
-.bd-overlay .ov-icon{font-size:64px;animation:ovIconPulse .55s ease-in-out 3;filter:drop-shadow(0 0 30px rgba(255,46,94,.9));}
+.bd-overlay .ov-icon{font-size:80px;animation:ovIconPulse .55s ease-in-out 3;filter:drop-shadow(0 0 30px rgba(255,46,94,.9));}
 @keyframes ovIconPulse{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(12deg)}}
-.bd-overlay .ov-text{font-size:20px;font-weight:900;color:#fff;margin-top:10px;text-shadow:0 2px 14px rgba(255,46,94,.9);letter-spacing:1px;}
-.bd-overlay .ov-victims{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px;max-width:95vw;}
-.bd-overlay .ov-victim{font-weight:900;color:#ffd166;background:rgba(255,46,94,.25);border:1.5px solid rgba(255,46,94,.6);padding:5px 12px;border-radius:12px;animation:ovNameIn .5s cubic-bezier(.34,1.56,.64,1) both;text-shadow:0 2px 8px rgba(0,0,0,.5);white-space:nowrap;}
+.bd-overlay .ov-text{font-size:22px;font-weight:900;color:#fff;margin-top:12px;text-shadow:0 2px 14px rgba(255,46,94,.9);letter-spacing:1px;}
+.bd-overlay .ov-victims{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px;}
+.bd-overlay .ov-victim{font-size:20px;font-weight:900;color:#ffd166;background:rgba(255,46,94,.25);border:1.5px solid rgba(255,46,94,.6);padding:8px 16px;border-radius:14px;animation:ovNameIn .5s cubic-bezier(.34,1.56,.64,1) both;text-shadow:0 2px 8px rgba(0,0,0,.5);}
 @keyframes ovNameIn{from{opacity:0;transform:translateY(24px) scale(.7)}to{opacity:1;transform:translateY(0) scale(1)}}
-.bd-overlay .ov-sub{font-size:12px;font-weight:800;color:#ff8fb5;margin-top:10px;opacity:.9;}
+.bd-overlay .ov-sub{font-size:13px;font-weight:800;color:#ff8fb5;margin-top:14px;opacity:.9;}
 
-.vote-modal{position:fixed;inset:0;z-index:9750;display:flex;align-items:center;justify-content:center;background:rgba(6,2,14,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:16px;animation:fadein .3s ease;}
-.vote-modal-inner{background:rgba(22,10,40,.96);border:1.5px solid rgba(168,85,247,.55);border-radius:22px;padding:18px 14px;max-width:460px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(168,85,247,.4);}
+.vote-modal{position:fixed;inset:0;z-index:9750;display:flex;align-items:center;justify-content:center;background:rgba(6,2,14,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:20px;animation:fadein .3s ease;}
+.vote-modal-inner{background:rgba(22,10,40,.96);border:1.5px solid rgba(168,85,247,.55);border-radius:22px;padding:20px 16px;max-width:460px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(168,85,247,.4);}
 
-/* Disguise pulse button */
-.disguise-pulse{animation:disguisePulse 1.4s ease-in-out infinite;}
-@keyframes disguisePulse{
-  0%,100%{box-shadow:0 0 12px rgba(168,85,247,.5);transform:scale(1);}
-  50%{box-shadow:0 0 24px rgba(168,85,247,.9);transform:scale(1.03);}
-}
-
-@media (max-width:640px){
-  .orb.a{filter:blur(28px);width:170px;height:170px;opacity:.30;animation:none!important;}
-  .orb.b{filter:blur(24px);width:150px;height:150px;opacity:.30;animation:none!important;}
+@media (max-width: 640px){
+  .orb.a{filter:blur(28px);width:170px;height:170px;opacity:.30;animation:none !important;}
+  .orb.b{filter:blur(24px);width:150px;height:150px;opacity:.30;animation:none !important;}
   .card{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
-  .pill,.game-hint{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+  .pill, .game-hint{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
   .logo{filter:drop-shadow(0 2px 14px rgba(255,46,154,.35));}
   body{background-size:200% 200%;animation-duration:30s;}
-  .car-token{width:46px;}
-  .car-token .car-body{width:46px;height:32px;}
-  .car-token .car-name{font-size:8px;max-width:54px;}
-  .car-token .car-body .car-identity{width:18px;height:18px;font-size:12px;top:-6px;}
-  .race-wrap{grid-template-columns:76px 1fr 54px;height:58vh;}
-  .station{min-height:58px;}
-  .station .s-num{font-size:18px;}
-  .station .st-btn{font-size:8px;padding:4px 1px;}
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
-  body{animation:none!important;background-size:100% 100%!important;}
-  .car-token{transition:none!important;}
-  .station-walker{transition:none!important;}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+  body{animation:none !important;background-size:100% 100% !important;}
 }
-body.tab-hidden *,body.tab-hidden *::before,body.tab-hidden *::after{animation-play-state:paused!important;}
+body.tab-hidden *, body.tab-hidden *::before, body.tab-hidden *::after{animation-play-state:paused !important;}
 </style>
 </head>
 <body>
@@ -302,7 +267,7 @@ body.tab-hidden *,body.tab-hidden *::before,body.tab-hidden *::after{animation-p
       <p class="tag">الناس فين ؟ بقالي نص ساعه على القهوة</p>
     </div>
     <div class="stack" style="margin-top:20px">
-      <button class="primary block" id="card-baidon">🎭 البيدون — سباق وتخفي</button>
+      <button class="primary block" id="card-baidon">🎭 البيدون -- سباق وتخفي</button>
     </div>
   </section>
 
@@ -315,7 +280,7 @@ body.tab-hidden *,body.tab-hidden *::before,body.tab-hidden *::after{animation-p
       <input id="inp-pin" type="tel" inputmode="numeric" maxlength="5" placeholder="00000" autocomplete="off">
       <div id="host-opts" class="hidden">
         <label>دور الهوست 👑</label>
-        <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <div class="chip-row" style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="setup-tab on" data-host="play" type="button" style="flex:1">هوست + لاعب</button>
           <button class="setup-tab" data-host="judge" type="button" style="flex:1">حكم فقط</button>
           <button class="setup-tab" data-host="auto" type="button" style="flex:1">أوتوماتيكي ⚡</button>
@@ -349,7 +314,7 @@ body.tab-hidden *,body.tab-hidden *::before,body.tab-hidden *::after{animation-p
       <div id="lobby-players" class="players-grid"></div>
       <div class="stack">
         <button id="btn-start-game" class="primary block hidden">ابدأ اللعبة 🚀</button>
-        <div class="tiny">شارك رقم الزعبل مع أصحابك — الحد الأقصى 20 زعبول</div>
+        <div class="tiny">شارك رقم الزعبل مع أصحابك -- الحد الأقصى 20 زعبول</div>
       </div>
     </div>
   </section>
@@ -361,7 +326,6 @@ body.tab-hidden *,body.tab-hidden *::before,body.tab-hidden *::after{animation-p
       <div class="pill" id="game-score">تقدمك: 0</div>
     </div>
     <div id="game-hint" class="game-hint hidden"></div>
-    <div id="game-topbar-players"></div>
     <div id="game-body"></div>
   </section>
 </div>
@@ -376,9 +340,9 @@ body.tab-hidden *,body.tab-hidden *::before,body.tab-hidden *::after{animation-p
 "use strict";
 
 /* ============================================================
-   CONSTANTS
+   AVATARS + CARS + STICKERS + SOUNDS
    ============================================================ */
-const AVATARS=[
+const AVATARS = [
   {id:'fox',emoji:'🦊'},{id:'panda',emoji:'🐼'},{id:'tiger',emoji:'🐯'},{id:'lion',emoji:'🦁'},{id:'frog',emoji:'🐸'},
   {id:'monkey',emoji:'🐵'},{id:'penguin',emoji:'🐧'},{id:'koala',emoji:'🐨'},{id:'rabbit',emoji:'🐰'},{id:'pig',emoji:'🐷'},
   {id:'chicken',emoji:'🐔'},{id:'octopus',emoji:'🐙'},{id:'unicorn',emoji:'🦄'},{id:'bee',emoji:'🐝'},{id:'butterfly',emoji:'🦋'},
@@ -394,7 +358,7 @@ const AVATARS=[
   {id:'hero',emoji:'🦸'},{id:'villain',emoji:'🦹'},{id:'singer',emoji:'👨‍🎤'},{id:'dev',emoji:'👨‍💻'},{id:'chef',emoji:'👨‍🍳'}
 ];
 
-const CARS=[
+const CARS = [
   {id:'car01',name:'بورش',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794788342/03_porsche_911.png'},
   {id:'car02',name:'لامبورجيني',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794788342/05_lamborghini_huracan.png'},
   {id:'car03',name:'BMW',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794788342/02_bmw_black.png'},
@@ -407,7 +371,7 @@ const CARS=[
   {id:'car10',name:'رينج روفر',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794788346/07_range_rover_sport.png'}
 ];
 
-const STICKERS=[
+const STICKERS = [
   {id:'sticker01',name:'ستيكر ١',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794794200/Picsart_26-11-16_03-53-16-706.jpg'},
   {id:'sticker02',name:'ستيكر ٢',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794794205/Picsart_26-11-16_03-53-39-016.jpg'},
   {id:'sticker03',name:'ستيكر ٣',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794794207/Picsart_26-11-16_03-48-43-677.jpg'},
@@ -420,179 +384,189 @@ const STICKERS=[
   {id:'sticker10',name:'ستيكر ١٠',url:'https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_400/v1794794236/file_00000000dae08210ab474256104dc775.png'}
 ];
 
-const COMEDY_SOUNDS=[
-  {id:'matmchish',name:'متمشيش',emoji:'🚶',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680739/%D9%85%D9%8E%D8%AA%D9%85%D8%B4%D9%8A%D8%B4.mp3.mp3'},
-  {id:'ah_ana_hmar',name:'اه انا حمار',emoji:'🐴',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680740/%D8%A7%D9%87_%D8%A7%D9%86%D8%A7_%D8%AD%D9%85%D8%A7%D8%B1.mp3.mp3'},
-  {id:'ana_hmar',name:'انا حمار',emoji:'🐴',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%86%D8%A7_%D8%AD%D9%85%D8%A7%D8%B1.mp3.mp3'},
-  {id:'ezay',name:'ازاي',emoji:'😱',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%A7%D8%B2%D8%A7%D9%8A.mp3.mp3'},
-  {id:'ya_bni_haram',name:'يابني حرام عليك',emoji:'😢',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D9%87%D8%AA%D9%85%D9%88%D8%AA%D9%86%D9%8A.mp3.mp3'},
-  {id:'awsakh',name:'اوsخ من كدا مفيش',emoji:'🤮',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%88s%D8%AE_%D9%85%D9%86_%D9%83%D8%AF%D8%A7.mp3.mp3'},
-  {id:'edaah',name:'ايدااه',emoji:'👏',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%8A%D8%AF%D8%A7%D8%A7%D9%87.mp3.mp3'},
-  {id:'enfed',name:'انفد بجلدك',emoji:'🏃',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%86%D9%81%D8%AF_%D8%A8%D8%AC%D9%84%D8%AF%D9%83.mp3.mp3'},
-  {id:'ank_lmeet',name:'انك لميت',emoji:'💀',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680740/%D8%A7%D9%86%D9%83_%D9%84%D9%85%D9%8A%D8%AA.mp3.mp3'},
-  {id:'hatouly',name:'هاتولي الكلب دا',emoji:'🐕',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D9%87%D8%A7%D8%AA%D9%88%D9%84%D9%8A.mp3.mp3'},
-  {id:'bala_seyah',name:'بلا صياح',emoji:'🤫',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680739/%D8%A8%D9%84%D8%A7_%D8%B5%D9%8A%D8%A7%D8%AD.mp3.mp3'},
-  {id:'salam',name:'سلامعليكووو',emoji:'👋',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%B3%D9%84%D8%A7%D9%85%D8%B9%D9%83%D9%84%D9%8A%D9%88%D9%88.mp3.mp3'},
-  {id:'da_anto_lakta',name:'دا انتو لقطه',emoji:'🤣',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%AF%D8%A7_%D8%A7%D9%86%D8%AA%D9%88%D8%A7_%D9%84%D9%82%D8%B7%D9%87.mp3.mp3'},
-  {id:'ehna_bhayem',name:'احنا بهايم',emoji:'🐄',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794684754/WhatsApp_Video_2026-11-14_at_21.26.52.mp3'}
+const COMEDY_SOUNDS = [
+  {id:'matmchish',name:'متمشيش',emoji:'🚶',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680739/%D9%85%D9%8E%D8%AA%D9%85%D8%B4%D9%8A%D8%B4.mp3.mp3',category:'runner_bad'},
+  {id:'ah_ana_hmar',name:'اه انا حمار',emoji:'🐴',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680740/%D8%A7%D9%87_%D8%A7%D9%86%D8%A7_%D8%AD%D9%85%D8%A7%D8%B1.mp3.mp3',category:'runner_bad'},
+  {id:'ana_hmar',name:'انا حمار',emoji:'🐴',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%86%D8%A7_%D8%AD%D9%85%D8%A7%D8%B1.mp3.mp3',category:'runner_bad'},
+  {id:'ezay',name:'ازاي',emoji:'😱',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%A7%D8%B2%D8%A7%D9%8A.mp3.mp3',category:'runner_bad'},
+  {id:'ya_bni_haram',name:'يابني حرام عليك',emoji:'😢',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D9%87%D8%AA%D9%85%D9%88%D8%AA%D9%86%D9%8A.mp3.mp3',category:'runner_bad'},
+  {id:'awsakh',name:'اوsخ من كدا مفيش',emoji:'🤮',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%88s%D8%AE_%D9%85%D9%86_%D9%83%D8%AF%D8%A7.mp3.mp3',category:'runner_bad'},
+  {id:'edaah',name:'ايدااه',emoji:'👏',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%8A%D8%AF%D8%A7%D8%A7%D9%87.mp3.mp3',category:'runner_good'},
+  {id:'enfed',name:'انفد بجلدك',emoji:'🏃',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680737/%D8%A7%D9%86%D9%81%D8%AF_%D8%A8%D8%AC%D9%84%D8%AF%D9%83.mp3.mp3',category:'runner_bad'},
+  {id:'ank_lmeet',name:'انك لميت',emoji:'💀',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680740/%D8%A7%D9%86%D9%83_%D9%84%D9%85%D9%8A%D8%AA.mp3.mp3',category:'runner_early'},
+  {id:'hatouly',name:'هاتولي الكلب دا',emoji:'🐕',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D9%87%D8%A7%D8%AA%D9%88%D9%84%D9%8A.mp3.mp3',category:'vote_correct'},
+  {id:'bala_seyah',name:'بلا صياح',emoji:'🤫',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680739/%D8%A8%D9%84%D8%A7_%D8%B5%D9%8A%D8%A7%D8%AD.mp3.mp3',category:'baidon_hit'},
+  {id:'salam',name:'سلامعليكووو',emoji:'👋',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%B3%D9%84%D8%A7%D9%85%D8%B9%D9%83%D9%84%D9%8A%D9%88%D9%88.mp3.mp3',category:'baidon_always'},
+  {id:'da_anto_lakta',name:'دا انتو لقطه',emoji:'🤣',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794680738/%D8%AF%D8%A7_%D8%A7%D9%86%D8%AA%D9%88%D8%A7_%D9%84%D9%82%D8%B7%D9%87.mp3.mp3',category:'baidon_hit'},
+  {id:'ehna_bhayem',name:'احنا بهايم',emoji:'🐄',url:'https://res.cloudinary.com/pqciyfaq/video/upload/v1794684754/WhatsApp_Video_2026-11-14_at_21.26.52.mp3',category:'vote_wrong'}
 ];
 
-const MAX_PLAYERS=20;
-const MIN_PLAYERS=2;
-const BAIDON_TIMER=25;
-const ROOM_TTL_MS=30*60*1000;
-const HOST_TIMEOUT_MS=120*1000;
-const COMEDY_COOLDOWN_MS=5000;
+const MAX_PLAYERS = 20;
+const MIN_PLAYERS = 2;
+const BAIDON_TIMER = 25;
+const ROOM_TTL_MS = 30*60*1000;
+const HOST_TIMEOUT_MS = 120*1000;
+const COMEDY_COOLDOWN_MS = 5000;
 
-const firebaseConfig={
-  apiKey:"AIzaSyBfOqZBoIRmz_s3qLjR9DjHld7Wv_onBe0",
-  authDomain:"system-chat-96932.firebaseapp.com",
-  databaseURL:"https://system-chat-96932-default-rtdb.firebaseio.com",
-  projectId:"system-chat-96932",
-  storageBucket:"system-chat-96932.firebasestorage.app",
-  messagingSenderId:"965982067456",
-  appId:"1:965982067456:web:896ef2babae15baa3eb1e5"
+const firebaseConfig = {
+  apiKey: "AIzaSyBfOqZBoIRmz_s3qLjR9DjHld7Wv_onBe0",
+  authDomain: "system-chat-96932.firebaseapp.com",
+  databaseURL: "https://system-chat-96932-default-rtdb.firebaseio.com",
+  projectId: "system-chat-96932",
+  storageBucket: "system-chat-96932.firebasestorage.app",
+  messagingSenderId: "965982067456",
+  appId: "1:965982067456:web:896ef2babae15baa3eb1e5"
 };
 
 /* ============================================================
    UTILS
    ============================================================ */
-function $(id){return document.getElementById(id);}
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!==undefined)e.innerHTML=h;return e;}
-function toast(msg,type){const w=$('toast-wrap');const t=el('div','toast '+(type||''));t.textContent=msg;w.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>{if(t.parentNode)t.parentNode.removeChild(t);},400);},3200);}
-function showLoading(txt){$('loading-text').textContent=txt||'...';$('loading-overlay').classList.remove('hidden');}
-function hideLoading(){$('loading-overlay').classList.add('hidden');}
-function onEnter(inp,fn){inp.addEventListener('keydown',e=>{if(e.keyCode===13||e.key==='Enter'){e.preventDefault();fn();}});}
-function safeBlur(n){setTimeout(()=>{try{if(n&&n.blur)n.blur();}catch(e){}},60);}
-function showScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const t=$('screen-'+n);if(t)t.classList.add('active');try{window.scrollTo(0,0);}catch(e){}}
-function nameWithCrown(room,uid,name){return room.hostId===uid?esc(name)+' <span class="crown">👑</span>':esc(name);}
-function getVoteInterval(n){return n<=3?3:(n===4?4:5);}
-function delay(ms){return new Promise(r=>setTimeout(r,ms));}
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function el(tag,cls,html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html!==undefined)e.innerHTML=html; return e; }
+function toast(msg,type){ const w=$('toast-wrap'); const t=el('div','toast '+(type||'')); t.textContent=msg; w.appendChild(t); setTimeout(()=>{t.classList.add('out');setTimeout(()=>{if(t.parentNode)t.parentNode.removeChild(t);},400);},3200); }
+function showLoading(txt){ $('loading-text').textContent=txt||'...'; $('loading-overlay').classList.remove('hidden'); }
+function hideLoading(){ $('loading-overlay').classList.add('hidden'); }
+function onEnter(inp,fn){ inp.addEventListener('keydown',e=>{ if(e.keyCode===13||e.key==='Enter'){e.preventDefault();fn();} }); }
+function safeBlur(n){ setTimeout(()=>{try{if(n&&n.blur)n.blur();}catch(e){}},60); }
+function showScreen(n){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.body.classList.toggle('in-game',n==='game'); const t=$('screen-'+n); if(t)t.classList.add('active'); try{window.scrollTo(0,0);}catch(e){} }
+function nameWithCrown(room,uid,name){ return (room.hostId===uid?esc(name)+' <span class="crown">👑</span>':esc(name)); }
+function getVoteInterval(n){ return n<=3?3:(n===4?4:5); }
+function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
 function identityHtml(id,cls){
-  if(!id)return '<span class="'+(cls||'')+'">❓</span>';
+  if(!id) return '<span class="'+(cls||'')+'">❓</span>';
   if(id.startsWith('sticker_')){
-    const sId=id.replace('sticker_','');
-    const s=STICKERS.find(x=>x.id===sId);
-    if(s&&s.url)return '<img class="'+(cls||'')+'" src="'+esc(s.url)+'" alt="">';
+    const sId = id.replace('sticker_','');   /* FIX: كان 'sticker' → 'sticker' */
+    const s = STICKERS.find(x=>x.id===sId);
+    if(s&&s.url) return '<img class="'+(cls||'')+'" src="'+esc(s.url)+'" alt="">';
     return '<span class="'+(cls||'')+'">🎨</span>';
   }
-  const a=AVATARS.find(x=>x.id===id);
+  const a = AVATARS.find(x=>x.id===id);
   return '<span class="'+(cls||'')+'">'+(a?a.emoji:'❓')+'</span>';
 }
-function identityEmoji(id){const a=AVATARS.find(x=>x.id===id);return a?a.emoji:'❓';}
+function identityEmoji(id){ const a=AVATARS.find(x=>x.id===id); return a?a.emoji:'❓'; }
 function carHtml(carId,cls){
-  const c=CARS.find(x=>x.id===carId);
-  if(c&&c.url)return '<img class="'+(cls||'')+'" src="'+esc(c.url)+'" alt="">';
+  const c = CARS.find(x=>x.id===carId);
+  if(c&&c.url) return '<img class="'+(cls||'')+'" src="'+esc(c.url)+'" alt="">';
   return '<span class="car-emoji '+(cls||'')+'">🚗</span>';
 }
 
 /* ============================================================
-   SFX (Web Audio) — richer engine sounds
+   SFX (Web Audio)
    ============================================================ */
-const SFX={
+const SFX = {
   ctx:null,
-  _init(){if(this.ctx){if(this.ctx.state==='suspended')this.ctx.resume();return;}try{this.ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}},
+  _init(){ if(this.ctx){ if(this.ctx.state==='suspended')this.ctx.resume(); return; } try{ this.ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} },
   _tone(freq,dur,type,gain,delay){
-    this._init();if(!this.ctx)return;
+    this._init(); if(!this.ctx)return;
     const t=this.ctx.currentTime+(delay||0);
     const o=this.ctx.createOscillator(),g=this.ctx.createGain();
-    o.type=type||'sine';o.frequency.value=freq;
+    o.type=type||'sine'; o.frequency.value=freq;
     g.gain.setValueAtTime(gain||0.1,t);
     g.gain.exponentialRampToValueAtTime(0.001,t+dur);
-    o.connect(g);g.connect(this.ctx.destination);
-    o.start(t);o.stop(t+dur+0.05);
+    o.connect(g); g.connect(this.ctx.destination);
+    o.start(t); o.stop(t+dur+0.05);
   },
-  _engine(dur,freqStart,freqEnd,gain){
-    this._init();if(!this.ctx)return;
-    const t=this.ctx.currentTime;
-    const o=this.ctx.createOscillator(),g=this.ctx.createGain();
-    o.type='sawtooth';o.frequency.setValueAtTime(freqStart,t);
-    o.frequency.exponentialRampToValueAtTime(freqEnd,t+dur);
-    g.gain.setValueAtTime(gain,t);
-    g.gain.exponentialRampToValueAtTime(0.001,t+dur);
-    o.connect(g);g.connect(this.ctx.destination);
-    o.start(t);o.stop(t+dur+0.05);
-  },
-  click(){this._tone(600,0.04,'square',0.04);},
-  stationSuccess(){this._tone(523,0.15,'sine',0.1);this._tone(659,0.15,'sine',0.1,0.1);this._tone(784,0.3,'sine',0.1,0.22);},
-  stationFail(){this._tone(220,0.2,'sawtooth',0.12);this._tone(180,0.25,'sawtooth',0.12,0.15);this._tone(140,0.35,'square',0.1,0.35);},
-  engineMove(){this._engine(1.6,60,180,0.10);this._engine(1.4,90,240,0.06);},
-  engineReverse(){this._engine(1.6,180,50,0.10);this._engine(1.4,140,70,0.06);},
-  freeze(){this._tone(880,0.2,'sine',0.08);this._tone(1320,0.25,'sine',0.07,0.08);},
-  baiDonHit(){this._tone(80,0.6,'sawtooth',0.18);this._tone(160,0.35,'square',0.14,0.2);this._tone(120,0.6,'sawtooth',0.16,0.55);},
-  win(){this._tone(523,0.18,'sine',0.12);this._tone(659,0.18,'sine',0.12,0.15);this._tone(784,0.18,'sine',0.12,0.3);this._tone(1047,0.5,'sine',0.12,0.45);},
-  lose(){this._tone(523,0.2,'triangle',0.1);this._tone(440,0.25,'triangle',0.1,0.15);this._tone(330,0.5,'triangle',0.1,0.35);},
-  unmask(){this._tone(200,0.4,'sawtooth',0.12);this._tone(400,0.3,'square',0.12,0.25);this._tone(800,0.4,'sawtooth',0.12,0.5);},
-  vote(){this._tone(660,0.12,'sine',0.08);this._tone(880,0.15,'sine',0.08,0.1);}
+  click(){ this._tone(600,0.04,'square',0.04); },
+  stationSuccess(){ this._tone(523,0.15,'sine',0.1); this._tone(659,0.15,'sine',0.1,0.1); this._tone(784,0.3,'sine',0.1,0.22); },
+  stationFail(){ this._tone(220,0.2,'sawtooth',0.12); this._tone(180,0.25,'sawtooth',0.12,0.15); this._tone(140,0.35,'square',0.1,0.35); },
+  carMove(){ this._tone(120,0.25,'sawtooth',0.08); this._tone(180,0.15,'square',0.06,0.1); },
+  carReverse(){ this._tone(200,0.2,'square',0.08); this._tone(160,0.2,'square',0.08,0.1); this._tone(120,0.25,'sawtooth',0.08,0.25); },
+  freeze(){ this._tone(880,0.2,'sine',0.08); this._tone(1320,0.25,'sine',0.07,0.08); },
+  baiDonHit(){ this._tone(80,0.6,'sawtooth',0.18); this._tone(160,0.35,'square',0.14,0.2); this._tone(120,0.6,'sawtooth',0.16,0.55); },
+  win(){ this._tone(523,0.18,'sine',0.12); this._tone(659,0.18,'sine',0.12,0.15); this._tone(784,0.18,'sine',0.12,0.3); this._tone(1047,0.5,'sine',0.12,0.45); },
+  lose(){ this._tone(523,0.2,'triangle',0.1); this._tone(440,0.25,'triangle',0.1,0.15); this._tone(330,0.5,'triangle',0.1,0.35); },
+  unmask(){ this._tone(200,0.4,'sawtooth',0.12); this._tone(400,0.3,'square',0.12,0.25); this._tone(800,0.4,'sawtooth',0.12,0.5); },
+  step(){ this._tone(300,0.05,'triangle',0.05); },
+  engineFwd(){ this._init(); if(!this.ctx)return; const c=this.ctx,t=c.currentTime; const o=c.createOscillator(),o2=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain(); o.type='sawtooth'; o2.type='square'; o.frequency.setValueAtTime(70,t); o.frequency.exponentialRampToValueAtTime(190,t+1.8); o2.frequency.setValueAtTime(35,t); o2.frequency.exponentialRampToValueAtTime(95,t+1.8); f.type='lowpass'; f.frequency.value=700; g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.11,t+0.15); g.gain.exponentialRampToValueAtTime(0.0001,t+1.9); o.connect(f); o2.connect(f); f.connect(g); g.connect(c.destination); o.start(t); o2.start(t); o.stop(t+2); o2.stop(t+2); },
+  engineRev(){ for(let k=0;k<6;k++)this._tone(900,0.14,'square',0.06,k*0.32); this._tone(110,1.8,'triangle',0.08); },
+  vote(){ this._tone(660,0.12,'sine',0.08); this._tone(880,0.15,'sine',0.08,0.1); }
 };
 
 /* ============================================================
-   Asset Cache (IndexedDB)
+   ASSET CACHE (IndexedDB)
    ============================================================ */
-const AssetCache={
+const AssetCache = {
   db:null,
   async init(){
     return new Promise(res=>{
       if(!window.indexedDB)return res();
       try{
-        const r=indexedDB.open('zabola_assets_v4',1);
+        const r=indexedDB.open('zabola_assets_v3',1);
         r.onupgradeneeded=()=>{try{r.result.createObjectStore('blobs');}catch(e){}};
         r.onsuccess=()=>{this.db=r.result;res();};
-        r.onerror=()=>res();r.onblocked=()=>res();
+        r.onerror=()=>res();
+        r.onblocked=()=>res();
       }catch(e){res();}
     });
   },
   async get(id){
     if(!this.db)return null;
     return new Promise(res=>{
-      try{const tx=this.db.transaction('blobs','readonly');const rq=tx.objectStore('blobs').get(id);rq.onsuccess=()=>res(rq.result||null);rq.onerror=()=>res(null);}catch(e){res(null);}
+      try{
+        const tx=this.db.transaction('blobs','readonly');
+        const rq=tx.objectStore('blobs').get(id);
+        rq.onsuccess=()=>res(rq.result||null);
+        rq.onerror=()=>res(null);
+      }catch(e){res(null);}
     });
   },
   async set(id,blob){
     if(!this.db)return;
     return new Promise(res=>{
-      try{const tx=this.db.transaction('blobs','readwrite');tx.objectStore('blobs').put(blob,id);tx.oncomplete=()=>res();tx.onerror=()=>res();}catch(e){res();}
+      try{
+        const tx=this.db.transaction('blobs','readwrite');
+        tx.objectStore('blobs').put(blob,id);
+        tx.oncomplete=()=>res();
+        tx.onerror=()=>res();
+      }catch(e){res();}
     });
   }
 };
 
 /* ============================================================
-   ComedyAudio + Queue
+   COMEDY AUDIO + QUEUE
    ============================================================ */
-const ComedyAudio={
+const ComedyAudio = {
   audios:{},
   async preload(){
     await AssetCache.init();
     for(const s of COMEDY_SOUNDS){
       try{
-        const cached=await AssetCache.get('snd_'+s.id);
+        const cached = await AssetCache.get('snd_'+s.id);
         let url=null;
-        if(cached)url=URL.createObjectURL(cached);
+        if(cached) url=URL.createObjectURL(cached);
         else{
-          try{const r=await fetch(s.url);if(r.ok){const b=await r.blob();await AssetCache.set('snd_'+s.id,b);url=URL.createObjectURL(b);}}catch(e){}
+          try{
+            const r=await fetch(s.url);
+            if(r.ok){
+              const b=await r.blob();
+              await AssetCache.set('snd_'+s.id,b);
+              url=URL.createObjectURL(b);
+            }
+          }catch(e){}
         }
-        if(url){const a=new Audio(url);a.preload='auto';this.audios[s.id]=a;}
-      }catch(e){try{const a=new Audio(s.url);a.preload='auto';this.audios[s.id]=a;}catch(e2){}}
+        if(url){ const a=new Audio(url); a.preload='auto'; this.audios[s.id]=a; }
+      }catch(e){ try{ const a=new Audio(s.url); a.preload='auto'; this.audios[s.id]=a; }catch(e2){} }
     }
   },
   play(id,onEnd){
     const a=this.audios[id];
-    if(!a){if(onEnd)onEnd();return;}
+    if(!a){ if(onEnd)onEnd(); return; }
     try{
-      a.currentTime=0;let called=false;
-      const done=()=>{if(called)return;called=true;if(onEnd)onEnd();};
-      a.onended=done;a.onerror=done;
+      a.currentTime=0; let called=false;
+      const done=()=>{ if(called)return; called=true; if(onEnd)onEnd(); };
+      a.onended=done; a.onerror=done;
       const p=a.play();
       if(p&&p.catch)p.catch(()=>setTimeout(done,200));
       setTimeout(done,15000);
-    }catch(e){if(onEnd)onEnd();}
+    }catch(e){ if(onEnd)onEnd(); }
   }
 };
 
-const ComedyQueue={
-  queue:[],playing:false,currentItem:null,onQueueChange:null,seenKeys:new Set(),
+const ComedyQueue = {
+  queue:[], playing:false, currentItem:null, onQueueChange:null, seenKeys:new Set(),
   enqueue(item){
     if(!item||!item.soundId)return;
     this.queue.push(item);
@@ -603,10 +577,10 @@ const ComedyQueue={
   process(){
     if(this.playing||this.queue.length===0)return;
     const next=this.queue.shift();
-    this.playing=true;this.currentItem=next;
+    this.playing=true; this.currentItem=next;
     if(this.onQueueChange)this.onQueueChange();
     ComedyAudio.play(next.soundId,()=>{
-      this.playing=false;this.currentItem=null;
+      this.playing=false; this.currentItem=null;
       if(this.onQueueChange)this.onQueueChange();
       this.process();
     });
@@ -614,50 +588,52 @@ const ComedyQueue={
   waitForEnd(){
     return new Promise(res=>{
       if(!this.playing)return res();
-      const t=setInterval(()=>{if(!this.playing){clearInterval(t);res();}},100);
+      const t=setInterval(()=>{ if(!this.playing){clearInterval(t);res();} },100);
       setTimeout(()=>{clearInterval(t);res();},12000);
     });
   },
-  clearPending(){this.queue=[];if(this.onQueueChange)this.onQueueChange();},
-  reset(){this.clearPending();this.currentItem=null;if(this.onQueueChange)this.onQueueChange();},
-  resetSeen(){this.seenKeys.clear();}
+  clearPending(){ this.queue=[]; if(this.onQueueChange)this.onQueueChange(); },
+  reset(){ this.clearPending(); this.currentItem=null; if(this.onQueueChange)this.onQueueChange(); },
+  resetSeen(){ this.seenKeys.clear(); }
 };
 
 /* ============================================================
    APP STATE
    ============================================================ */
-const App={
-  uid:null,pin:null,name:'',
-  carId:'',identityId:'',identityType:'avatar',
-  isHost:false,flowMode:'create',hostMode:'play',
-  roomRef:null,room:null,connectedRef:null,connectedCb:null,
-  sig:'',_comedyCooldownUntil:0,_micOn:false
+const App = {
+  uid:null, pin:null, name:'',
+  carId:'', identityId:'', identityType:'avatar',
+  isHost:false, flowMode:'create', hostMode:'play',
+  roomRef:null, room:null, connectedRef:null, connectedCb:null,
+  sig:'', muted:{}, _comedyCooldownUntil:0
 };
 let db=null;
 
 function initFirebase(){
   return new Promise((res,rej)=>{
     let done=false;
-    const t=setTimeout(()=>{if(!done){done=true;rej(new Error('FB_TIMEOUT'));}},7000);
+    const t=setTimeout(()=>{ if(!done){done=true;rej(new Error('FB_TIMEOUT'));} },7000);
     try{
       firebase.initializeApp(firebaseConfig);
       db=firebase.database();
       db.ref('.info/connected').once('value').then(()=>{
-        if(done)return;done=true;clearTimeout(t);res();
-      }).catch(err=>{if(done)return;done=true;clearTimeout(t);rej(err);});
-    }catch(e){if(done)return;done=true;clearTimeout(t);rej(e);}
+        if(done)return; done=true; clearTimeout(t); res();
+      }).catch(err=>{
+        if(done)return; done=true; clearTimeout(t); rej(err);
+      });
+    }catch(e){ if(done)return; done=true; clearTimeout(t); rej(e); }
   });
 }
 
 /* ============================================================
    CORE
    ============================================================ */
-const Core={
+const Core = {
   sweepOldRooms(){
     try{
       db.ref('rooms').orderByChild('lastActivity').endAt(Date.now()-ROOM_TTL_MS).once('value').then(s=>{
-        const u={};let any=false;
-        s.forEach(c=>{u[c.key]=null;any=true;});
+        const u={}; let any=false;
+        s.forEach(c=>{u[c.key]=null; any=true;});
         if(any)db.ref('rooms').update(u).catch(()=>{});
       }).catch(()=>{});
     }catch(e){}
@@ -668,8 +644,8 @@ const Core={
     const uid='p'+Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
     const now=Date.now();
     const room={
-      pin,hostId:uid,hostMode:hostMode||'play',
-      createdAt:now,lastActivity:now,status:'lobby',players:{},
+      pin, hostId:uid, hostMode:hostMode||'play',
+      createdAt:now, lastActivity:now, status:'lobby', players:{},
       game:BaiDonGame.emptyState()
     };
     room.players[uid]={
@@ -691,15 +667,24 @@ const Core={
     if(saved&&players[saved])uid=saved;
     if(!uid){
       const keys=Object.keys(players);
-      for(let i=0;i<keys.length;i++){const p=players[keys[i]];if(p&&p.name===name&&!p.online){uid=keys[i];break;}}
+      for(let i=0;i<keys.length;i++){
+        const p=players[keys[i]];
+        if(p&&p.name===name&&!p.online){uid=keys[i];break;}
+      }
     }
     if(!uid){
       if(room.kicked&&room.kicked[name])throw new Error('KICKED');
       const keys=Object.keys(players);
       if(keys.length>=MAX_PLAYERS)throw new Error('FULL');
-      for(let i=0;i<keys.length;i++){if(players[keys[i]]&&players[keys[i]].name===name)throw new Error('NAME_TAKEN');}
-      for(let i=0;i<keys.length;i++){if(players[keys[i]]&&players[keys[i]].carId===carId)throw new Error('CAR_TAKEN');}
-      for(let i=0;i<keys.length;i++){if(players[keys[i]]&&players[keys[i]].identityId===identityId)throw new Error('IDENTITY_TAKEN');}
+      for(let i=0;i<keys.length;i++){
+        if(players[keys[i]]&&players[keys[i]].name===name)throw new Error('NAME_TAKEN');
+      }
+      for(let i=0;i<keys.length;i++){
+        if(players[keys[i]]&&players[keys[i]].carId===carId)throw new Error('CAR_TAKEN');
+      }
+      for(let i=0;i<keys.length;i++){
+        if(players[keys[i]]&&players[keys[i]].identityId===identityId)throw new Error('IDENTITY_TAKEN');
+      }
       if(room.status!=='lobby')throw new Error('STARTED');
       uid='p'+Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
       const now=Date.now();
@@ -718,7 +703,7 @@ const Core={
     return uid;
   },
   attach(pin,uid){
-    App.pin=pin;App.uid=uid;
+    App.pin=pin; App.uid=uid;
     App.roomRef=db.ref('rooms/'+pin);
     const me=App.roomRef.child('players/'+uid);
     me.onDisconnect().update({online:false,lastSeen:firebase.database.ServerValue.TIMESTAMP});
@@ -738,25 +723,8 @@ const Core={
       render();
     });
     setupComedyListener(pin);
-    setInterval(()=>{if(App.roomRef&&App.uid)App.roomRef.child('players/'+App.uid).update({lastSeen:Date.now()}).catch(()=>{});},25000);
-    setInterval(()=>{if(App.room&&App.room.players)Core.checkHostMigration();},15000);
-    /* Auto-start check */
-    setInterval(()=>{
-      if(!App.isHost||!App.room||!App.room.game)return;
-      const g=App.room.game;
-      if(g.phase!=='intro')return;
-      const ready=g.introReady||{};
-      const total=Object.keys(App.room.players||{}).length;
-      let cnt=0;Object.keys(ready).forEach(k=>{if(ready[k])cnt++;});
-      if(cnt>=total&&total>0){
-        if(!BaiDonGame._autoStartTimer){
-          BaiDonGame._autoStartTimer=setTimeout(()=>{
-            BaiDonGame._autoStartTimer=null;
-            if(App.room&&App.room.game.phase==='intro')BaiDonGame.hostStartAction();
-          },1200);
-        }
-      }else{BaiDonGame._autoStartTimer=null;}
-    },600);
+    setInterval(()=>{ if(App.roomRef&&App.uid)App.roomRef.child('players/'+App.uid).update({lastSeen:Date.now()}).catch(()=>{}); },20000);
+    setInterval(()=>{ if(App.room&&App.room.players)Core.checkHostMigration(); },15000);
   },
   async checkHostMigration(){
     if(!App.room||!App.pin)return;
@@ -767,12 +735,12 @@ const Core={
     if(Date.now()-lastSeen<HOST_TIMEOUT_MS)return;
     const cands=Object.keys(room.players).filter(u=>u!==room.hostId&&room.players[u].online).map(u=>({uid:u,joinedAt:room.players[u].joinedAt||0})).sort((a,b)=>a.joinedAt-b.joinedAt);
     if(cands.length===0)return;
-    const oldHost=room.hostId,newHost=cands[0].uid;
+    const oldHost=room.hostId, newHost=cands[0].uid;
     try{
       await db.ref('rooms/'+App.pin).transaction(r=>{
         if(!r)return r;
         if(r.hostId!==oldHost)return;
-        r.hostId=newHost;r.lastActivity=Date.now();return r;
+        r.hostId=newHost; r.lastActivity=Date.now(); return r;
       });
       if(App.uid===newHost)toast('انتقلت صلاحية الهوست إليك 👑','ok');
     }catch(e){}
@@ -781,21 +749,21 @@ const Core={
     try{if(App.roomRef)App.roomRef.off();}catch(e){}
     try{if(App.connectedRef&&App.connectedCb)App.connectedRef.off('value',App.connectedCb);}catch(e){}
     try{if(App.roomRef)App.roomRef.child('game/comedySounds').off();}catch(e){}
-    App.roomRef=null;App.room=null;App.uid=null;App.pin=null;
-    App.isHost=false;App.sig='';
-    ComedyQueue.reset();ComedyQueue.resetSeen();
+    App.roomRef=null; App.room=null; App.uid=null; App.pin=null;
+    App.isHost=false; App.sig='';
+    ComedyQueue.reset(); ComedyQueue.resetSeen();
     hideLoading();
   },
-  leaveToHome(msg){Core.detach();showScreen('home');if(msg)toast(msg,'err');},
+  leaveToHome(msg){ Core.detach(); showScreen('home'); if(msg)toast(msg,'err'); },
   async leave(){
-    const room=App.room,pin=App.pin,uid=App.uid;
+    const room=App.room, pin=App.pin, uid=App.uid;
     if(!room||!pin||!uid){Core.leaveToHome();return;}
     try{
       if(room.hostId===uid){
         const others=Object.keys(room.players).filter(k=>k!==uid).map(k=>({id:k,joinedAt:room.players[k].joinedAt||0})).sort((a,b)=>a.joinedAt-b.joinedAt);
         if(others.length===0){await db.ref('rooms/'+pin).remove();}
         else{
-          const u={};u['players/'+uid]=null;u['hostId']=others[0].id;u['lastActivity']=Date.now();
+          const u={}; u['players/'+uid]=null; u['hostId']=others[0].id; u['lastActivity']=Date.now();
           await db.ref('rooms/'+pin).update(u);
         }
       }else{
@@ -811,7 +779,7 @@ const Core={
     if(!t)return;
     if(pid===App.uid){toast('مش ممكن تطرد نفسك 😅','err');return;}
     try{
-      const u={};u['players/'+pid]=null;u['kicked/'+t.name]=true;u['lastActivity']=Date.now();
+      const u={}; u['players/'+pid]=null; u['kicked/'+t.name]=true; u['lastActivity']=Date.now();
       await App.roomRef.update(u);
       toast('تم طرد '+t.name,'ok');
     }catch(e){toast('مشكلة','err');}
@@ -823,6 +791,9 @@ function setGame(fields){
   const p={lastActivity:Date.now()};
   Object.keys(fields).forEach(k=>{p['game/'+k]=fields[k];});
   return App.roomRef.update(p);
+}
+function getSortedPlayers(room){
+  return Object.keys(room.players||{}).map(k=>Object.assign({id:k},room.players[k])).sort((a,b)=>(b.score||0)-(a.score||0)||(a.joinedAt||0)-(b.joinedAt||0));
 }
 function getJoinedPlayers(room){
   return Object.keys(room.players||{}).map(k=>Object.assign({id:k},room.players[k])).sort((a,b)=>(a.joinedAt||0)-(b.joinedAt||0));
@@ -838,6 +809,7 @@ function setupComedyListener(pin){
       const key=d.uid+'_'+d.ts;
       if(ComedyQueue.seenKeys.has(key))return;
       ComedyQueue.seenKeys.add(key);
+      if(App.muted[d.uid])return;
       ComedyQueue.enqueue({uid:d.uid,soundId:d.soundId,ts:d.ts});
     });
   }catch(e){}
@@ -849,18 +821,18 @@ ComedyQueue.onQueueChange=function(){
     const uid=ComedyQueue.currentItem.uid;
     const snd=COMEDY_SOUNDS.find(s=>s.id===ComedyQueue.currentItem.soundId);
     if(snd&&App.room){
+      const isBdSound = snd.category&&snd.category.startsWith('baidon');
+      const player=App.room.players[uid];
       const isBd=App.room.game&&App.room.game.baiDonId===uid;
       const isRev=App.room.game&&App.room.game.baiDonRevealed;
-      const player=App.room.players[uid];
-      let dispName,isMystery=false;
-      if(isBd&&!isRev){dispName='🎭 البيدون (متخفي)';isMystery=true;}
+      let dispName, isMystery=false;
+      if(isBd&&isBdSound&&!isRev){dispName='🎭 البيدون (متخفي)'; isMystery=true;}
       else if(isBd&&isRev){dispName='🎭 البيدون '+(player?player.name:'');}
       else if(player){dispName=(player.identityId?identityEmoji(player.identityId):'')+' '+player.name;}
       else{dispName='?';}
-      showSpeechBubble(dispName,snd.name,isMystery);
-      highlightSpeaker(uid);
+      showSpeechBubble(dispName,snd.name,isMystery); markSpeaking(isMystery?null:uid);
     }
-  }else{hideSpeechBubble();clearSpeakerHighlight();}
+  }else{ hideSpeechBubble(); markSpeaking(null); }
 };
 
 let _bubbleEl=null;
@@ -868,22 +840,17 @@ function showSpeechBubble(speakerName,soundName,isMystery){
   hideSpeechBubble();
   const b=el('div','tb-bubble'+(isMystery?' bd':''));
   b.innerHTML='<div class="tb-bubble-name">'+esc(speakerName)+'</div><div class="tb-bubble-text">💬 '+esc(soundName)+'</div>';
-  b.style.top='90px';b.style.left='50%';b.style.transform='translateX(-50%)';
+  b.style.top='90px'; b.style.left='50%'; b.style.transform='translateX(-50%)';
   document.body.appendChild(b);
   _bubbleEl=b;
   setTimeout(()=>hideSpeechBubble(),3500);
 }
-function hideSpeechBubble(){if(_bubbleEl&&_bubbleEl.parentNode)_bubbleEl.parentNode.removeChild(_bubbleEl);_bubbleEl=null;}
-function highlightSpeaker(uid){
-  const el2=document.querySelector('.rtb-player[data-uid="'+uid+'"]');
-  if(el2)el2.classList.add('is-speaking');
-}
-function clearSpeakerHighlight(){document.querySelectorAll('.rtb-player.is-speaking').forEach(e=>e.classList.remove('is-speaking'));}
+function hideSpeechBubble(){ if(_bubbleEl&&_bubbleEl.parentNode)_bubbleEl.parentNode.removeChild(_bubbleEl); _bubbleEl=null; }
 
 function updateQueueBadge(){
   let b=document.getElementById('queue-badge');
-  if(!ComedyQueue.playing&&ComedyQueue.queue.length===0){if(b)b.remove();return;}
-  if(!b){b=document.createElement('div');b.id='queue-badge';b.className='queue-badge';document.body.appendChild(b);}
+  if(!ComedyQueue.playing&&ComedyQueue.queue.length===0){ if(b)b.remove(); return; }
+  if(!b){ b=document.createElement('div'); b.id='queue-badge'; b.className='queue-badge'; document.body.appendChild(b); }
   let t='';
   if(ComedyQueue.playing)t='🔊 شغال...';
   if(ComedyQueue.queue.length>0)t+=' • في الانتظار: '+ComedyQueue.queue.length;
@@ -895,7 +862,11 @@ async function sendComedySound(id){
   if(Date.now()<(App._comedyCooldownUntil||0)){toast('⏳ استنى شوية','err');return;}
   App._comedyCooldownUntil=Date.now()+COMEDY_COOLDOWN_MS;
   document.querySelectorAll('.comedy-btn').forEach(b=>b.disabled=true);
-  setTimeout(()=>{if(Date.now()>=(App._comedyCooldownUntil||0)-50){document.querySelectorAll('.comedy-btn').forEach(b=>b.disabled=false);}},COMEDY_COOLDOWN_MS+100);
+  setTimeout(()=>{
+    if(Date.now()>=(App._comedyCooldownUntil||0)-50){
+      document.querySelectorAll('.comedy-btn').forEach(b=>b.disabled=false);
+    }
+  },COMEDY_COOLDOWN_MS+100);
   try{
     await App.roomRef.child('game/comedySounds').push({uid:App.uid,soundId:id,ts:Date.now()});
     await App.roomRef.update({lastActivity:Date.now()});
@@ -905,70 +876,67 @@ async function sendComedySound(id){
 /* ============================================================
    BAI DONGAME
    ============================================================ */
-const BaiDonGame={
+const IMG='https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_800/v1794954439/Picsart_26-11-18_00-19-17-698.png';
+const SY=[0,215,335,470,610,745], BY=[0,250,365,520,640,775], BX=[0,83.5,85.5,88,90,92], PD=[0,790,800,820,845,865];
+function rowY(pos,target){ return 210+Math.min(20,Math.max(0,pos)/target*20)*51; }
+function edgeL(y){ return 172-(y-165)*0.078; }
+function edgeR(y){ return 722+(y-165)*0.134; }
+function laneN(c){ return c>8?c:8; }
+function laneX(y,idx,c){ const N=laneN(c); const lane=c>8?idx:Math.round((idx+0.5)*8/c-0.5); return edgeL(y)+(lane+0.5)/N*(edgeR(y)-edgeL(y)); }
+function laneW(y,c){ return (edgeR(y)-edgeL(y))/laneN(c); }
+function PX(x){ return (x/941*100)+'%'; }
+function PY(y){ return (y/1403*100)+'%'; }
+function markSpeaking(uid){ document.querySelectorAll('.pchip').forEach(c=>c.classList.toggle('speaking',!!uid&&c.dataset.uid===uid)); }
+
+const BaiDonGame = {
   _carTokens:{},
   _animDisplayPos:{},
   _animKey:'',
-  _animPhase:0,
-  _animDone:false,
-  _blockRenders:false,
   _overlayShown:{},
-  _animSafetyTimer:null,
-  _autoStartTimer:null,
   resolveBusy:false,
   restartBusy:false,
 
   getConfig(count){
-    if(count<=3)return{target:20,maxNum:3};
-    if(count<=5)return{target:30,maxNum:4};
-    return{target:40,maxNum:5};
+    if(count<=3) return {target:20,maxNum:3,middleLine:10,dangerZone:15};
+    if(count<=5) return {target:30,maxNum:4,middleLine:15,dangerZone:23};
+    return {target:40,maxNum:5,middleLine:20,dangerZone:30};
   },
   emptyState(){
-    return{
+    return {
       round:1,phase:'idle',timerEnd:0,
-      target:20,maxNum:3,
+      target:20,maxNum:3,middleLine:10,dangerZone:15,
       baiDonId:null,baiDonRevealed:false,
-      actions:null,votes:null,lastResult:null,voteResult:null,
+      actions:null,votes:null,
+      lastResult:null,voteResult:null,
       finalMessage:'',winner:'',winnerName:'',
       introReady:null,comedySounds:null,comedyUsed:null,
       playerState:null,blockCount:1
     };
   },
-
-  /* Choose BaiDon (random, avoid same as last round) */
-  _pickBaiDon(room,prevBdId){
-    const players=room.players||{};
-    let cands=room.hostMode==='judge'?Object.keys(players).filter(id=>id!==room.hostId):Object.keys(players);
-    if(cands.length>1&&prevBdId&&cands.includes(prevBdId)){
-      const filtered=cands.filter(id=>id!==prevBdId);
-      if(filtered.length>=1)cands=filtered;
-    }
-    return cands[Math.floor(Math.random()*cands.length)];
-  },
-
   async hostStart(){
     if(!App.isHost||!App.room)return;
     const players=App.room.players||{};
     const ids=Object.keys(players);
     if(ids.length<2){toast('الحد الأدنى لاعبين','err');return;}
     const cfg=BaiDonGame.getConfig(ids.length);
-    const prevBd=App.room.game&&App.room.game.baiDonId;
-    const bdId=BaiDonGame._pickBaiDon(App.room,prevBd);
+    const cands=App.room.hostMode==='judge'?ids.filter(id=>id!==App.room.hostId):ids;
+    if(cands.length<2){toast('محتاج لاعبين غير الهوست','err');return;}
+    const bdId=BaiDonGame.pickBd(cands);
     const bdRev=ids.length<=2;
-
-    BaiDonGame._carTokens={};BaiDonGame._animDisplayPos={};BaiDonGame._animKey='';
-    BaiDonGame._animPhase=0;BaiDonGame._animDone=false;BaiDonGame._blockRenders=false;
+    BaiDonGame._carTokens={};
+    BaiDonGame._animDisplayPos={};
+    BaiDonGame._animKey='';
     BaiDonGame._overlayShown={};
-
     const ps={};
     ids.forEach(id=>{ps[id]={pos:0,frozen:0,lastHitRound:0};});
-
     const u={
       status:'playing',lastActivity:Date.now(),
       'game/round':1,'game/phase':'intro','game/timerEnd':0,
       'game/target':cfg.target,'game/maxNum':cfg.maxNum,
+      'game/middleLine':cfg.middleLine,'game/dangerZone':cfg.dangerZone,
       'game/baiDonId':bdId,'game/baiDonRevealed':bdRev,
-      'game/actions':null,'game/votes':null,'game/lastResult':null,'game/voteResult':null,
+      'game/actions':null,'game/votes':null,
+      'game/lastResult':null,'game/voteResult':null,
       'game/finalMessage':'','game/winner':'','game/winnerName':'',
       'game/introReady':null,'game/comedySounds':null,'game/comedyUsed':null,
       'game/playerState':ps,'game/blockCount':1
@@ -978,19 +946,16 @@ const BaiDonGame={
       u['players/'+pid+'/score']=0;
       u['players/'+pid+'/pos']=0;
     });
-    try{await App.roomRef.update(u);App.sig='';}catch(e){toast('مشكلة','err');}
+    try{ await App.roomRef.update(u); App.sig=''; }catch(e){toast('مشكلة','err');}
   },
-
   async introContinue(){
     if(!App.room||!App.room.game)return;
-    try{await setGame({['introReady/'+App.uid]:true});SFX.click();}catch(e){}
+    try{ await setGame({['introReady/'+App.uid]:true}); SFX.click(); }catch(e){}
   },
-
   async hostStartAction(){
     if(!App.isHost)return;
-    try{await setGame({phase:'action',timerEnd:Date.now()+BAIDON_TIMER*1000,actions:null});App.sig='';}catch(e){toast('مشكلة','err');}
+    try{ await setGame({phase:'action',timerEnd:Date.now()+BAIDON_TIMER*1000,actions:null}); App.sig=''; }catch(e){toast('مشكلة','err');}
   },
-
   async submitAction(moveStation,blockStation,disguise){
     if(!App.room||!App.room.game)return;
     const g=App.room.game;
@@ -1004,7 +969,8 @@ const BaiDonGame={
     const act={ts:Date.now()};
     if(amBd){
       if(disguise){
-        if(!blockStation){toast('اختار محطة التمويه','err');return;}
+        /* التمويه: يستخدم محطة القفل بس */
+        if(!blockStation){toast('اختار محطة القفل للتمويه','err');return;}
         act.disguise=true;
         act.moveStation=blockStation;
         act.blockStation=blockStation;
@@ -1012,41 +978,33 @@ const BaiDonGame={
         if(!blockStation){toast('اختار محطة القفل','err');return;}
         act.blockStation=blockStation;
       }else{
-        if(!moveStation||!blockStation){toast('اختار كارت الطاقة ومحطة القفل','err');return;}
-        if(moveStation===blockStation){toast('كارت الطاقة لازم يختلف عن القفل','err');return;}
+        if(!moveStation||!blockStation){toast('اختار تقدم وقفل','err');return;}
+        if(moveStation===blockStation){toast('محطة التقدم لازم تختلف عن القفل','err');return;}
         act.moveStation=moveStation;
         act.blockStation=blockStation;
       }
     }else{
-      if(!moveStation){toast('اختار كارت الطاقة','err');return;}
+      if(!moveStation){toast('اختار محطة تقدم','err');return;}
       act.moveStation=moveStation;
     }
-    try{await setGame({['actions/'+App.uid]:act});SFX.click();}catch(e){toast('مشكلة','err');}
+    try{ await setGame({['actions/'+App.uid]:act}); SFX.click(); }catch(e){toast('مشكلة','err');}
   },
-
   async hostResolve(){
-    if(!App.isHost||!App.room||!App.room.game)return;
+    if(!App.isHost||!App.room||!App.room.game)return;  /* FIX: check isHost */
     if(BaiDonGame.resolveBusy)return;
     BaiDonGame.resolveBusy=true;
     try{
-      const room=App.room,g=room.game;
+      const room=App.room, g=room.game;
       if(g.phase!=='action')return;
-      const actions=JSON.parse(JSON.stringify(g.actions||{}));
+      const actions=Object.assign({},g.actions||{});
       const bdId=g.baiDonId;
       const bdRev=!!g.baiDonRevealed;
       const ps=JSON.parse(JSON.stringify(g.playerState||{}));
       const target=g.target||20;
       const round=g.round||1;
+      Object.keys(ps).forEach(u=>{const p=ps[u]; if(!p||p.frozen>0)return; if(room.hostMode==='judge'&&u===room.hostId)return; if(actions[u]&&actions[u].ts)return; if(u===bdId&&bdRev)return; actions[u]={ts:Date.now(),moveStation:1,auto:true};});
 
-      /* Auto-select station 1 for players who didn't submit */
-      Object.keys(ps).forEach(uid=>{
-        if(ps[uid].frozen>0)return;
-        const a=actions[uid];
-        if(!a||(!a.moveStation&&!a.blockStation&&!a.disguise)){
-          actions[uid]={moveStation:1,ts:Date.now(),_auto:true};
-        }
-      });
-
+      /* Save OLD positions for animation */
       const oldPositions={};
       Object.keys(ps).forEach(uid=>{oldPositions[uid]=ps[uid].pos;});
 
@@ -1056,26 +1014,33 @@ const BaiDonGame={
       const bdAct=actions[bdId];
       const wantDisguise=!!(bdAct&&bdAct.disguise);
 
-      let effectiveBlock=null,botUsed=false;
+      /* Determine block stations */
+      let effectiveBlock=null, botUsed=false;
       if(!bdAct||(!bdAct.blockStation&&!wantDisguise)){
         const bdOnline=room.players[bdId]&&room.players[bdId].online;
-        if(!bdOnline){effectiveBlock=Math.floor(Math.random()*g.maxNum)+1;botUsed=true;}
-      }else{effectiveBlock=bdAct.blockStation;}
+        if(!bdOnline){ effectiveBlock=Math.floor(Math.random()*g.maxNum)+1; botUsed=true; }
+      }else{
+        effectiveBlock=bdAct.blockStation;
+      }
       if(effectiveBlock)blockedStations.push(effectiveBlock);
       if(bdRev&&g.blockCount===2&&bdAct){
-        for(let i=1;i<=g.maxNum;i++){
-          if(!blockedStations.includes(i)){blockedStations.push(i);break;}
-        }
+        const all=[];for(let i=1;i<=g.maxNum;i++)all.push(i);
+        const second=all.find(s=>s!==effectiveBlock);
+        if(second)blockedStations.push(second);
       }
 
-      /* Freeze decrement */
+      /* Phase 1: Decrement freeze */
       Object.keys(ps).forEach(uid=>{
         const p=ps[uid];
         if(!p)return;
-        if(p.frozen>0){p._wasFrozen=true;p.frozen-=1;if(p.frozen>0)events.push({type:'stillFrozen',uid});}
+        if(p.frozen>0){
+          p._wasFrozen=true;
+          p.frozen-=1;
+          if(p.frozen>0)events.push({type:'stillFrozen',uid});
+        }
       });
 
-      /* Hits and moves */
+      /* Phase 2: Apply hits/moves */
       Object.keys(actions).forEach(uid=>{
         const p=ps[uid];
         if(!p||p._wasFrozen)return;
@@ -1086,18 +1051,23 @@ const BaiDonGame={
         if(isHit){
           hitThisRound[uid]=true;
           p.pos=Math.max(0,p.pos-1);
-          const isBdDisguise=wantDisguise&&uid===bdId;
+          const isBdDisguise = wantDisguise && uid===bdId;
           events.push({type:'hit',uid,station:mySt,disguise:isBdDisguise});
           const gap=p.lastHitRound?(round-p.lastHitRound):999;
-          if(gap<=3){p.frozen=(p.frozen||0)+1;events.push({type:'freeze',uid});p.lastHitRound=0;}
-          else{p.lastHitRound=round;}
+          if(gap<=3){
+            p.frozen=(p.frozen||0)+1;
+            events.push({type:'freeze',uid});
+            p.lastHitRound=0;
+          }else{
+            p.lastHitRound=round;
+          }
         }else if(mySt){
           p.pos=Math.min(target,p.pos+mySt);
           events.push({type:'move',uid,station:mySt,from:p.pos-mySt,to:p.pos});
         }
       });
 
-      /* Revealed BaiDon auto +1 */
+      /* Phase 3: Revealed BaiDon auto +1 ALWAYS */
       const bdP=ps[bdId];
       if(bdRev&&bdP&&!bdP._wasFrozen){
         bdP.pos=Math.min(target,bdP.pos+1);
@@ -1106,18 +1076,22 @@ const BaiDonGame={
 
       Object.keys(ps).forEach(uid=>{if(ps[uid])delete ps[uid]._wasFrozen;});
 
+      /* Win check */
       let winner=null,winnerName='',finalMessage='';
       const winners=Object.keys(ps).filter(uid=>ps[uid].pos>=target);
       if(winners.length>0){
         if(winners.includes(bdId)){
-          winner='baidon';winnerName=room.players[bdId]?room.players[bdId].name:'';
+          winner='baidon';
+          winnerName=room.players[bdId]?room.players[bdId].name:'';
           finalMessage='🎭 البيدون '+winnerName+' وصل النهاية وفاز!';
         }else{
-          winner='runner';winnerName=room.players[winners[0]]?room.players[winners[0]].name:'';
+          winner='runner';
+          winnerName=room.players[winners[0]]?room.players[winners[0]].name:'';
           finalMessage='🏆 الزعبول السالك '+winnerName+' وصل النهاية وفاز!';
         }
       }
 
+      /* Save NEW positions */
       const newPositions={};
       Object.keys(ps).forEach(uid=>{newPositions[uid]=ps[uid].pos;});
 
@@ -1125,7 +1099,11 @@ const BaiDonGame={
         lastActivity:Date.now(),
         'game/actions':null,
         'game/comedySounds':null,
-        'game/lastResult':{events,round,blockedStations,botUsed,oldPositions,newPositions,animStartTs:Date.now()}
+        'game/lastResult':{
+          events,round,blockedStations,botUsed,
+          oldPositions,newPositions,
+          animStartTs:Date.now()
+        }
       };
       Object.keys(ps).forEach(uid=>{
         u['game/playerState/'+uid+'/pos']=ps[uid].pos;
@@ -1145,19 +1123,17 @@ const BaiDonGame={
         u['game/phase']='racing';
       }
       await App.roomRef.update(u);
-      App.sig='';
     }catch(e){
-      console.error(e);toast('مشكلة','err');
+      console.error(e);
+      toast('مشكلة','err');
     }finally{
       setTimeout(()=>{BaiDonGame.resolveBusy=false;},500);
     }
   },
-
   async hostNextRound(){
     if(!App.isHost||!App.room)return;
     const g=App.room.game;
     if(!g||g.phase!=='racing')return;
-    BaiDonGame._blockRenders=false;
     await Promise.race([ComedyQueue.waitForEnd(),delay(3000)]);
     ComedyQueue.clearPending();
     const round=g.round||1;
@@ -1165,44 +1141,54 @@ const BaiDonGame={
     const playerCount=Object.keys(App.room.players||{}).length;
     const voteInterval=getVoteInterval(playerCount);
     const needVote=!g.baiDonRevealed&&playerCount>=3&&round%voteInterval===0&&round>0;
+    /* FIX: Always reset blockCount after punished round */
     if(needVote){
       try{
         await setGame({phase:'vote',votes:null,voteResult:null,round:nextRound,comedySounds:null,blockCount:1});
-        App.sig='';toast('🗳️ وقت التصويت!','ok');
+        App.sig='';
+        toast('🗳️ وقت التصويت!','ok');
       }catch(e){toast('مشكلة','err');}
       return;
     }
     try{
-      await setGame({phase:'action',round:nextRound,timerEnd:Date.now()+BAIDON_TIMER*1000,actions:null,lastResult:null,comedySounds:null,blockCount:1});
+      await setGame({
+        phase:'action',round:nextRound,
+        timerEnd:Date.now()+BAIDON_TIMER*1000,
+        actions:null,lastResult:null,comedySounds:null,blockCount:1
+      });
       App.sig='';
     }catch(e){toast('مشكلة','err');}
   },
-
   async castVote(targetId){
     if(!App.room||!App.room.game||App.room.game.phase!=='vote')return;
     if(targetId===App.uid){toast('متقدرش تصوت لنفسك','err');return;}
-    try{await setGame({['votes/'+App.uid]:targetId});SFX.vote();}catch(e){}
+    try{ await setGame({['votes/'+App.uid]:targetId}); SFX.vote(); }catch(e){}
   },
-
   async hostResolveVote(){
     if(!App.isHost||!App.room)return;
     const g=App.room.game;
     if(!g||g.phase!=='vote')return;
     const votes=g.votes||{};
     const counts={};
-    Object.keys(votes).forEach(v=>{const t=votes[v];if(t)counts[t]=(counts[t]||0)+1;});
+    Object.keys(votes).forEach(v=>{
+      const t=votes[v];
+      if(t)counts[t]=(counts[t]||0)+1;
+    });
     let topId=null,topCount=0,tie=false;
     Object.keys(counts).forEach(id=>{
       if(counts[id]>topCount){topCount=counts[id];topId=id;tie=false;}
       else if(counts[id]===topCount&&topCount>0){tie=true;}
     });
     if(!topId||tie){
-      try{await setGame({phase:'voteResult',voteResult:{tie:true,topId:null,counts,votes}});App.sig='';toast('تعادل');}catch(e){}
+      try{ await setGame({phase:'voteResult',voteResult:{tie:true,topId:null,counts,votes}}); App.sig=''; toast('تعادل'); }catch(e){}
       return;
     }
     const bdId=g.baiDonId;
     const ps=JSON.parse(JSON.stringify(g.playerState||{}));
-    const u={lastActivity:Date.now(),'game/voteResult':{tie:false,topId,counts,wasBaiDon:topId===bdId,votes}};
+    const u={
+      lastActivity:Date.now(),
+      'game/voteResult':{tie:false,topId,counts,wasBaiDon:topId===bdId,votes}
+    };
     if(topId===bdId){
       u['game/baiDonRevealed']=true;
       u['game/blockCount']=1;
@@ -1220,9 +1206,8 @@ const BaiDonGame={
       u['game/phase']='voteResult';
       toast('❌ تصويت خاطئ! البيدون هيعطل محطتين الجاية','err');
     }
-    try{await App.roomRef.update(u);App.sig='';}catch(e){}
+    try{ await App.roomRef.update(u); App.sig=''; }catch(e){}
   },
-
   async hostAfterVote(){
     if(!App.isHost||!App.room)return;
     const g=App.room.game;
@@ -1230,18 +1215,20 @@ const BaiDonGame={
     await Promise.race([ComedyQueue.waitForEnd(),delay(3000)]);
     ComedyQueue.clearPending();
     try{
-      await setGame({phase:'action',timerEnd:Date.now()+BAIDON_TIMER*1000,actions:null,votes:null,voteResult:null,lastResult:null,comedySounds:null});
+      await setGame({
+        phase:'action',timerEnd:Date.now()+BAIDON_TIMER*1000,
+        actions:null,votes:null,voteResult:null,lastResult:null,comedySounds:null
+      });
       App.sig='';
     }catch(e){toast('مشكلة','err');}
   },
-
   async hostPlayAgain(){
     if(!App.isHost)return;
-    try{await setGame({phase:'playAgain',ready:null});App.sig='';}catch(e){}
+    try{ await setGame({phase:'playAgain',ready:null}); App.sig=''; }catch(e){}
   },
   async setReady(){
     if(!App.room||!App.room.game)return;
-    try{await setGame({['ready/'+App.uid]:true});SFX.click();}catch(e){}
+    try{ await setGame({['ready/'+App.uid]:true}); SFX.click(); }catch(e){}
   },
   async hostRestart(){
     if(!App.isHost||!App.room)return;
@@ -1251,19 +1238,23 @@ const BaiDonGame={
       const room=App.room;
       const ids=Object.keys(room.players||{});
       const cfg=BaiDonGame.getConfig(ids.length);
-      const prevBd=room.game&&room.game.baiDonId;
-      const bdId=BaiDonGame._pickBaiDon(room,prevBd);
+      const cands=room.hostMode==='judge'?ids.filter(id=>id!==room.hostId):ids;
+      const bdId=BaiDonGame.pickBd(cands);
       const bdRev=ids.length<=2;
-      BaiDonGame._carTokens={};BaiDonGame._animDisplayPos={};BaiDonGame._animKey='';
-      BaiDonGame._animPhase=0;BaiDonGame._animDone=false;BaiDonGame._blockRenders=false;
+      BaiDonGame._carTokens={};
+      BaiDonGame._animDisplayPos={};
+      BaiDonGame._animKey='';
       BaiDonGame._overlayShown={};
-      const ps={};ids.forEach(id=>{ps[id]={pos:0,frozen:0,lastHitRound:0};});
+      const ps={};
+      ids.forEach(id=>{ps[id]={pos:0,frozen:0,lastHitRound:0};});
       const u={
         lastActivity:Date.now(),
         'game/round':1,'game/phase':'intro','game/timerEnd':0,
         'game/target':cfg.target,'game/maxNum':cfg.maxNum,
+        'game/middleLine':cfg.middleLine,'game/dangerZone':cfg.dangerZone,
         'game/baiDonId':bdId,'game/baiDonRevealed':bdRev,
-        'game/actions':null,'game/votes':null,'game/lastResult':null,'game/voteResult':null,
+        'game/actions':null,'game/votes':null,
+        'game/lastResult':null,'game/voteResult':null,
         'game/finalMessage':'','game/winner':'','game/winnerName':'',
         'game/introReady':null,'game/comedySounds':null,'game/comedyUsed':null,
         'game/playerState':ps,'game/ready':null,'game/blockCount':1
@@ -1277,10 +1268,10 @@ const BaiDonGame={
       App.sig='';
       ComedyQueue.reset();
     }catch(e){toast('مشكلة','err');}
-    finally{setTimeout(()=>{BaiDonGame.restartBusy=false;},1200);}
+    finally{ setTimeout(()=>{BaiDonGame.restartBusy=false;},1200); }
   },
 
-  /* Build UI */
+  /* ===== UI BUILD ===== */
   build(room,g,phase,round){
     const wrap=el('div','phase');
     const isHost=App.isHost;
@@ -1289,391 +1280,194 @@ const BaiDonGame={
     const ps=g.playerState||{};
     const me=ps[App.uid];
     const frozen=!!(me&&me.frozen>0);
+
     switch(phase){
-      case 'intro':return BaiDonGame._uiIntro(wrap,room,g,isHost,amBd);
-      case 'action':BaiDonGame._uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,false);break;
-      case 'racing':BaiDonGame._uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,true);break;
-      case 'vote':BaiDonGame._uiVoteModal(wrap,room,g,isHost);break;
-      case 'voteResult':BaiDonGame._uiVoteResult(wrap,room,g,isHost);break;
-      case 'final':BaiDonGame._uiFinal(wrap,room,g,isHost);break;
-      case 'playAgain':BaiDonGame._uiPlayAgain(wrap,room,g,isHost);break;
+      case 'intro':BaiDonGame.uiIntro(wrap,room,g,isHost,amBd);break;
+      case 'action':BaiDonGame.uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,false);break;
+      case 'racing':BaiDonGame.uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,true);break;
+      case 'vote':BaiDonGame.uiVoteModal(wrap,room,g,isHost);break;
+      case 'voteResult':BaiDonGame.uiVoteResult(wrap,room,g,isHost);break;
+      case 'final':BaiDonGame.uiFinal(wrap,room,g,isHost);break;
+      case 'playAgain':BaiDonGame.uiPlayAgain(wrap,room,g,isHost);break;
       default:wrap.appendChild(el('div','waiting','…'));
     }
     return wrap;
   },
 
-  _uiIntro(wrap,room,g,isHost,amBd){
+  pickBd(c){ let pool=c.filter(x=>x!==App._lastBd); if(!pool.length)pool=c; const a=new Uint32Array(1); crypto.getRandomValues(a); const r=pool[a[0]%pool.length]; App._lastBd=r; return r; },
+  placeCar(t,pos,idx,n,target){ const y=rowY(pos,target); t.style.left=PX(laneX(y,idx,n)); t.style.top=PY(y); t.style.width=(laneW(y,n)*0.8/941*100)+'%'; },
+  _xy(uid,pos,room,target){ const ps=getJoinedPlayers(room); const i=ps.findIndex(p=>p.id===uid); const y=rowY(pos,target); return [laneX(y,i,ps.length),y]; },
+
+  uiIntro(wrap,room,g,isHost,amBd){
     const ready=g.introReady||{};
-    const total=Object.keys(room.players||{}).length;
-    let cnt=0;Object.keys(ready).forEach(k=>{if(ready[k])cnt++;});
-    const myReady=!!ready[App.uid];
+    const on=Object.keys(room.players||{}).filter(u=>room.players[u].online);
+    const cnt=on.filter(u=>ready[u]).length;
+    const mx=g.maxNum||3;
     const card=el('div','intro-card '+(amBd?'bd':'runner'));
-    if(amBd){
-      card.innerHTML='<div class="shush-emoji">🤫</div><div class="intro-role">أنت البيدون!</div><div class="intro-hint">متكشفش نفسك. اختار كارت طاقة (تتحرك) ومحطة قفل (توقع زعبول).<br>أو استخدم "تمويه" عشان تبان مصاب.<br><br><b>هدفك:</b> توصل النهاية قبل الزعابيل.</div>';
-    }else{
-      card.innerHTML='<div class="runner-emoji">🏎️</div><div class="intro-role">أنت زعبول</div><div class="intro-hint">اختار كارت طاقة من المحطات.<br>لو محطتك مقفولة هتترجع خطوة.<br><br><b>هدفك:</b> توصل النهاية قبل البيدون.</div>';
-    }
+    card.innerHTML=(amBd
+      ?'<div class="shush-emoji">🤫</div><div class="intro-role">أنت البيدون!</div><div class="intro-hint">اخفي هويتك واقفل محطات طاقة عشان تعطل الزعابيل.</div>'
+      :'<div class="runner-emoji">🏎️</div><div class="intro-role">أنت زعبول عادي</div><div class="intro-hint">فيه بيدون مستخبي بيقفل محطات!</div>')+
+      '<div class="tiny" style="text-align:right;margin-top:14px;color:#efe6ff;line-height:2">🏁 أول واحد يوصل خط النهاية يكسب.<br>⚡ كل جولة اختار محطة طاقة (1–'+mx+'): لو اتفتحت تتشحن كارت الطاقة وتتقدم بعدد رقمها.<br>🔒 البيدون بيقفل محطة: اللي اختارها يتخصم من كارت الطاقة (-1) ويرجع خطوة.<br>🗳️ كل كام جولة صوّتوا تكشفوا مين البيدون.</div>';
     wrap.appendChild(card);
-    wrap.appendChild(el('div','answered-count','الاستعداد: '+cnt+' / '+total));
-    if(myReady){wrap.appendChild(el('div','ok-box','✅ جاهز -- في انتظار الباقي…'));}
-    else{
-      const b=el('button','primary block','متابعة ✓');
-      b.onclick=()=>BaiDonGame.introContinue();
-      wrap.appendChild(b);
-    }
-    if(isHost){
-      const fb=el('button','ghost block small','ابدأ دلوقتي 🚀');
-      fb.onclick=()=>BaiDonGame.hostStartAction();
-      wrap.appendChild(fb);
-    }
+    wrap.appendChild(el('div','answered-count','الاستعداد: '+cnt+' / '+on.length));
+    if(ready[App.uid]){ wrap.appendChild(el('div','ok-box','✅ جاهز -- اللعبة هتبدأ أول ما الكل يجهز')); }
+    else{ const b=el('button','primary block','فهمت ✓'); b.onclick=()=>BaiDonGame.introContinue(); wrap.appendChild(b); }
+    if(isHost){ const fb=el('button','ghost block small','ابدأ دلوقتي 🚀'); fb.onclick=()=>BaiDonGame.hostStartAction(); wrap.appendChild(fb); }
   },
 
-  _uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,isResolving){
-    const ps=g.playerState||{};
-    const myAct=(g.actions||{})[App.uid];
-    const submitted=!!(myAct&&myAct.ts);
-
-    const timerText=el('div','timer-big');timerText.id='bd-timer-text';
-    timerText.textContent=isResolving?'النتيجة...':'--';
-    wrap.appendChild(timerText);
-
-    const raceWrap=el('div','race-wrap');
-    const stationsCol=el('div','stations-col');
-    const maxNum=g.maxNum||3;
-    const lr=g.lastResult||{};
-    const animPhase=BaiDonGame._animKey===room.pin+'_'+g.round?BaiDonGame._animPhase:0;
-
-    let selMove=myAct?(myAct.moveStation||null):null;
-    let selBlock=myAct?(myAct.blockStation||null):null;
-    let selDisguise=!!(myAct&&myAct.disguise);
-    const canInteract=!isResolving&&!frozen&&!submitted;
-
-    const updateSubmitBtn=()=>{
-      const sb=document.getElementById('bd-submit-btn');
-      if(!sb)return;
-      if(selDisguise)sb.disabled=!selBlock;
-      else if(amBd&&isRev)sb.disabled=!selBlock;
-      else if(amBd&&!isRev)sb.disabled=!(selMove&&selBlock);
-      else sb.disabled=!selMove;
-    };
-
-    /* Stations (column-reverse: 1 at bottom near finish) */
-    for(let i=1;i<=maxNum;i++){
-      const st=el('div','station');
-      st.dataset.station=i;
-      st.innerHTML='<div class="s-head"><span class="s-ico">⚡</span><span class="s-num">'+i+'</span></div>'+
-        '<div class="s-btns">'+
-          '<button class="st-btn st-move" type="button">⬆️ طاقة</button>'+
-          '<button class="st-btn st-block" type="button">🔒 قفل</button>'+
-        '</div>';
-      const btnMove=st.querySelector('.st-move');
-      const btnBlock=st.querySelector('.st-block');
-
-      if(!amBd){btnBlock.style.display='none';btnMove.style.flex='1';}
-      else if(isRev){btnMove.style.display='none';btnBlock.style.flex='1';}
-
-      /* Disguise effect: hide move button when disguise on */
-      if(canInteract&&amBd&&!isRev&&selDisguise){
-        btnMove.style.display='none';
-        btnBlock.style.flex='1';
+  uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,isResolving){
+    const S=BaiDonGame, ps=g.playerState||{}, myAct=(g.actions||{})[App.uid], submitted=!!(myAct&&myAct.ts);
+    const target=g.target||20, maxNum=g.maxNum||3, lr=g.lastResult||{};
+    const players=getJoinedPlayers(room);
+    const strip=el('div','pstrip');
+    players.forEach(p=>{
+      const c=el('div','pchip'); c.dataset.uid=p.id;
+      c.innerHTML='<div class="pc-ava">'+identityHtml(p.identityId,'')+'</div><div class="pc-sc">'+((ps[p.id]||{}).pos||0)+'</div>';
+      if(p.id!==App.uid){
+        const m=el('button','pc-mic'+(App.muted[p.id]?' off':''),App.muted[p.id]?'🔇':'🎤'); m.type='button';
+        m.onclick=()=>{ App.muted[p.id]=!App.muted[p.id]; m.className='pc-mic'+(App.muted[p.id]?' off':''); m.textContent=App.muted[p.id]?'🔇':'🎤'; };
+        c.appendChild(m);
       }
-
-      /* Station visual state during racing */
-      if(isResolving&&animPhase>=i+1){
-        if((lr.blockedStations||[]).includes(i)){
-          st.classList.add('fail');
-          const hits=(lr.events||[]).filter(e=>e.type==='hit'&&e.station===i);
-          if(hits.length>0){
-            const names=hits.map(e=>room.players[e.uid]?room.players[e.uid].name:'').filter(Boolean).join(', ');
-            if(names){
-              const vEl=el('div','st-victims',esc(names));
-              st.appendChild(vEl);
-            }
-          }
-        }else{st.classList.add('success');}
-      }
-
-      if(!canInteract){btnMove.disabled=true;btnBlock.disabled=true;}
-      else{
-        btnMove.onclick=(e)=>{
-          e.stopPropagation();
-          if(selDisguise)return;
-          if(selMove===i){selMove=null;btnMove.classList.remove('on');}
-          else{
-            if(selMove!==null){const prev=stationsCol.querySelector('.station[data-station="'+selMove+'"] .st-move');if(prev)prev.classList.remove('on');}
-            selMove=i;btnMove.classList.add('on');
-          }
-          updateSubmitBtn();
-        };
-        btnBlock.onclick=(e)=>{
-          e.stopPropagation();
-          if(selBlock===i){selBlock=null;btnBlock.classList.remove('on');}
-          else{
-            if(selBlock!==null){const prev=stationsCol.querySelector('.station[data-station="'+selBlock+'"] .st-block');if(prev)prev.classList.remove('on');}
-            selBlock=i;btnBlock.classList.add('on');
-          }
-          updateSubmitBtn();
-        };
-      }
-      stationsCol.appendChild(st);
-    }
-    raceWrap.appendChild(stationsCol);
-
-    /* Road (top-to-bottom, station 1 near finish at bottom) */
-    const roadScene=el('div','road-scene');
-    roadScene.innerHTML='<div class="road-bg"></div><div class="road-shoulder-l"></div><div class="road-shoulder-r"></div><div class="road-dashes"></div><div class="road-edge-l"></div><div class="road-edge-r"></div>';
-    const target=g.target||20;
-    for(let i=0;i<=target;i+=5){
-      const n=el('div','road-num'+(i===0||i===target?' major':''));
-      n.textContent=i;
-      n.style.top=(10+(i/target)*80)+'%';
-      n.style.transform='translateY(-50%)';
-      roadScene.appendChild(n);
-    }
-
-    /* Cars: fixed lanes */
-    const players=Object.keys(room.players||{}).map(id=>Object.assign({id},room.players[id]));
-    players.sort((a,b)=>(a.joinedAt||0)-(b.joinedAt||0));
-    BaiDonGame._carTokens={};
-    const count=players.length;
-
-    players.forEach((p,idx)=>{
-      const pp=ps[p.id]||{pos:0};
-      const isBd=(g.baiDonId===p.id);
-      const displayPos=(isResolving&&BaiDonGame._animDisplayPos[p.id]!==undefined)?BaiDonGame._animDisplayPos[p.id]:pp.pos;
-      const token=el('div','car-token'+(p.id===App.uid?' me':'')+(isBd&&isRev?' revealed':'')+(pp.frozen>0?' frozen':''));
-      /* Top-to-bottom: 0 at top, target at bottom */
-      const topPct=10+(displayPos/target)*80;
-      token.style.top=topPct+'%';
-      /* Fixed lane per player */
-      const lanePct=10+((idx+0.5)/Math.max(count,1))*80;
-      token.style.left=lanePct+'%';
-      token.innerHTML='<div class="car-body"><div class="car-img">'+carHtml(p.carId,'')+'</div><div class="car-identity">'+identityHtml(p.identityId,'')+'</div></div>'+
-        '<div class="car-name">'+esc(p.name)+(isBd&&isRev?' 🎭':'')+'</div>';
-      roadScene.appendChild(token);
-      BaiDonGame._carTokens[p.id]=token;
+      strip.appendChild(c);
     });
-    raceWrap.appendChild(roadScene);
+    wrap.appendChild(strip);
+    const timerText=el('div','timer-big'); timerText.id='bd-timer-text'; timerText.textContent=isResolving?'النتيجة...':'--'; wrap.appendChild(timerText);
 
-    /* Comedy column */
+    let selMove=myAct?(myAct.moveStation||null):null, selBlock=myAct?(myAct.blockStation||null):null, selDisguise=!!(myAct&&myAct.disguise);
+    const canInteract=!isResolving&&!frozen&&!submitted;
+    const raceWrap=el('div','race-wrap');
+    const scene=el('div','road-scene'); scene.style.backgroundImage='url("'+IMG+'")';
+    const refresh=()=>{
+      scene.querySelectorAll('.st-move').forEach(b=>{ b.classList.toggle('on',+b.dataset.s===selMove); b.disabled=!canInteract||selDisguise; });
+      scene.querySelectorAll('.st-block').forEach(b=>{ b.classList.toggle('on',+b.dataset.s===selBlock); b.disabled=!canInteract; });
+      const sb=$('bd-submit-btn'); if(sb)sb.disabled=(selDisguise||(amBd&&isRev))?!selBlock:(amBd?!(selMove&&selBlock):!selMove);
+    };
+    for(let i=1;i<=maxNum;i++){
+      const bx=BX[i], bw=Math.min(15.5,99-bx);
+      const z=el('div','st-zone'); z.dataset.station=i; z.style.cssText='left:'+bx+'%;top:'+PY(SY[i]-95)+';width:'+bw+'%'; scene.appendChild(z);
+      if(i>3){ const bd=el('div','st-badge','⚡'+i); bd.style.cssText='left:'+bx+'%;top:'+PY(SY[i]-40); scene.appendChild(bd); }
+      if(isResolving)continue;
+      const bs=el('div','st-btns'); bs.style.cssText='left:'+bx+'%;top:'+PY(BY[i])+';width:'+bw+'%';
+      if(!amBd||!isRev){ const m=el('button','st-btn st-move','⬆️'); m.type='button'; m.dataset.s=i; m.onclick=()=>{ if(selDisguise)return; selMove=(selMove===i?null:i); refresh(); }; bs.appendChild(m); }
+      if(amBd){ const b=el('button','st-btn st-block','🔒'); b.type='button'; b.dataset.s=i; b.onclick=()=>{ selBlock=(selBlock===i?null:i); refresh(); }; bs.appendChild(b); }
+      scene.appendChild(bs);
+    }
+    if(amBd&&!isRev&&canInteract){
+      const d=el('button','disg-btn'+(selDisguise?' on':''),'🎭 تمويه'); d.id='disg-btn'; d.type='button';
+      d.onclick=()=>{ selDisguise=!selDisguise; if(selDisguise)selMove=null; d.classList.toggle('on',selDisguise); refresh(); };
+      scene.appendChild(d);
+    }
+    const useOld=isResolving&&S._animDone!==room.pin+'_'+g.round;
+    S._carTokens={};
+    players.forEach((p,idx)=>{
+      const pp=ps[p.id]||{pos:0}, isBd=g.baiDonId===p.id;
+      const dp=(useOld&&lr.oldPositions&&lr.oldPositions[p.id]!==undefined)?lr.oldPositions[p.id]:(pp.pos||0);
+      const t=el('div','car-token'+(p.id===App.uid?' me':'')+(isBd&&isRev?' revealed':'')+(pp.frozen>0?' frozen':''));
+      t.innerHTML='<div class="car-body"><div class="car-img">'+carHtml(p.carId,'')+'</div><div class="car-identity">'+identityHtml(p.identityId,'')+'</div><div class="car-name">'+esc(p.name)+(isBd&&isRev?' 🎭':'')+'</div></div>';
+      t._idx=idx; t._n=players.length;
+      S.placeCar(t,dp,idx,players.length,target);
+      scene.appendChild(t); S._carTokens[p.id]=t;
+    });
+    raceWrap.appendChild(scene);
+
     const comedyCol=el('div','comedy-col');
-    const available=BaiDonGame.getAvailableSounds(room,g,App.uid);
     const cooldown=Date.now()<(App._comedyCooldownUntil||0);
-    available.forEach(s=>{
-      const snd=COMEDY_SOUNDS.find(x=>x.id===s.id);
-      if(!snd)return;
-      const b=el('button','comedy-btn');
-      b.disabled=cooldown;
+    S.getAvailableSounds(room,g,App.uid).forEach(s=>{
+      const snd=COMEDY_SOUNDS.find(x=>x.id===s.id); if(!snd)return;
+      const b=el('button','comedy-btn'); b.disabled=cooldown;
       b.innerHTML='<span class="cb-emoji">'+snd.emoji+'</span><span class="cb-name">'+esc(snd.name)+'</span>';
-      b.onclick=()=>{if(b.disabled)return;sendComedySound(s.id);};
+      b.onclick=()=>{ if(b.disabled)return; sendComedySound(s.id); };
       comedyCol.appendChild(b);
     });
     raceWrap.appendChild(comedyCol);
     wrap.appendChild(raceWrap);
 
-    /* Controls */
     if(!isResolving){
-      if(frozen){wrap.appendChild(el('div','frozen-box','❄️ أنت متجمد الجولة دي!'));}
-      else if(submitted){wrap.appendChild(el('div','ok-box','✅ تم إرسال اختيارك'));}
+      if(frozen){ wrap.appendChild(el('div','frozen-box','❄️ أنت متجمد الجولة دي!')); }
+      else if(submitted){ wrap.appendChild(el('div','ok-box','✅ تم إرسال اختيارك')); }
       else{
-        const controls=el('div','stack');
-        if(amBd&&!isRev){
-          const disBtn=el('button','chip disguise-chip'+(selDisguise?' on':'')+(g.timerEnd?' disguise-pulse':''),selDisguise?'🎭 تمويه مُفعّل ✓':'🎭 تمويه');
-          disBtn.onclick=()=>{
-            selDisguise=!selDisguise;
-            disBtn.className='chip disguise-chip'+(selDisguise?' on':'');
-            disBtn.textContent=selDisguise?'🎭 تمويه مُفعّل ✓':'🎭 تمويه';
-            if(selDisguise){
-              const prevMove=stationsCol.querySelector('.st-move.on');
-              if(prevMove)prevMove.classList.remove('on');
-              selMove=null;
-              /* Hide move buttons */
-              stationsCol.querySelectorAll('.st-move').forEach(b=>{b.style.display='none';});
-              stationsCol.querySelectorAll('.st-block').forEach(b=>{b.style.flex='1';});
-            }else{
-              stationsCol.querySelectorAll('.st-move').forEach(b=>{b.style.display='';b.style.flex='';});
-            }
-            updateSubmitBtn();
-          };
-          controls.appendChild(disBtn);
-        }
-        const submitBtn=el('button','primary block','إرسال الاختيار ✅');
-        submitBtn.id='bd-submit-btn';
-        controls.appendChild(submitBtn);
-        wrap.appendChild(controls);
-        updateSubmitBtn();
-        submitBtn.onclick=()=>{
-          if(selDisguise){
-            if(!selBlock){toast('اختار محطة التمويه','err');return;}
-            BaiDonGame.submitAction(null,selBlock,true);
-          }else if(amBd&&isRev){
-            if(!selBlock){toast('اختار محطة القفل','err');return;}
-            BaiDonGame.submitAction(null,selBlock,false);
-          }else if(amBd&&!isRev){
-            if(!selMove||!selBlock){toast('اختار طاقة وقفل','err');return;}
-            BaiDonGame.submitAction(selMove,selBlock,false);
-          }else{
-            if(!selMove){toast('اختار كارت الطاقة','err');return;}
-            BaiDonGame.submitAction(selMove,null,false);
-          }
-          submitBtn.disabled=true;submitBtn.textContent='تم الإرسال ✅';
+        const sb=el('button','primary block','إرسال الاختيار ✅'); sb.id='bd-submit-btn'; wrap.appendChild(sb);
+        sb.onclick=()=>{
+          if(selDisguise){ if(!selBlock)return toast('اختار محطة القفل','err'); S.submitAction(null,selBlock,true); }
+          else if(amBd&&isRev){ if(!selBlock)return toast('اختار محطة القفل','err'); S.submitAction(null,selBlock,false); }
+          else if(amBd){ if(!selMove||!selBlock)return toast('اختار تقدم وقفل','err'); S.submitAction(selMove,selBlock,false); }
+          else{ if(!selMove)return toast('اختار محطة طاقة','err'); S.submitAction(selMove,null,false); }
+          sb.disabled=true; sb.textContent='تم الإرسال ✅';
         };
+        refresh();
       }
     }
-
-    /* Host controls + start animation on racing */
-    if(isResolving&&isHost){
-      const btn=el('button','primary block','الجولة التالية ▶️');
-      btn.id='race-next-btn';
-      btn.style.display=BaiDonGame._animDone?'block':'none';
-      btn.onclick=()=>{SFX.click();BaiDonGame.hostNextRound();};
-      wrap.appendChild(btn);
-      BaiDonGame._startRaceAnimation(room,g);
-    }else if(isResolving&&!isHost){
-      wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
-      BaiDonGame._startRaceAnimation(room,g);
-    }else if(!isResolving&&isHost&&App.room.hostMode!=='auto'){
-      const btn=el('button','warn block','إنهاء الجولة يدوياً ⏹');
-      btn.onclick=()=>BaiDonGame.hostResolve();
-      wrap.appendChild(btn);
-    }
-
-    /* Event log */
     if(isResolving){
-      const events=lr.events||[];
+      if(isHost){
+        const btn=el('button','primary block','الجولة التالية ▶️'); btn.id='race-next-btn'; btn.style.display='none';
+        btn.onclick=()=>{ SFX.click(); S.hostNextRound(); }; wrap.appendChild(btn);
+      }else wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
+      S._runRaceAnimation(room,g);
+    }else if(isHost&&room.hostMode!=='auto'){
+      const btn=el('button','warn block','إنهاء الجولة يدوياً ⏹'); btn.onclick=()=>S.hostResolve(); wrap.appendChild(btn);
+    }
+    if(isResolving){
       const evWrap=el('div','list');
-      let idx=0;
-      events.forEach(ev=>{
-        const p=room.players[ev.uid];
-        if(!p)return;
+      (lr.events||[]).forEach(ev=>{
+        const p=room.players[ev.uid]; if(!p)return;
         let cls='event-line',txt='';
-        if(ev.type==='hit'){
-          cls+=' hit';
-          txt='💥 '+p.name+' اتصاب! (-1 من كارت الطاقة)';
-          if(ev.disguise)txt+=' (تمويه)';
-        }
-        else if(ev.type==='freeze'){cls+=' freeze';txt='❄️ '+p.name+' اتجمد!';}
-        else if(ev.type==='move'){txt='⚡ '+p.name+': تم شحن كارت الطاقة +'+ev.station;}
+        if(ev.type==='hit'){cls+=' hit'; txt='🔒 '+p.name+': تم الخصم من كارت الطاقة (-1)';}
+        else if(ev.type==='freeze'){txt='❄️ '+p.name+' اتجمد!';}
+        else if(ev.type==='move'){txt='⚡ '+p.name+': تم شحن كارت الطاقة بـ +'+ev.station;}
         else if(ev.type==='autoMove'){txt='🤖 '+p.name+' اتحرك +1 تلقائياً.';}
         else return;
-        const row=el('div',cls,txt);
-        row.style.animationDelay=(idx*0.4)+'s';
-        idx++;
-        evWrap.appendChild(row);
+        evWrap.appendChild(el('div',cls,esc(txt)));
       });
       if(evWrap.children.length)wrap.appendChild(evWrap);
     }
   },
 
-  _startRaceAnimation(room,g){
-    const key=room.pin+'_'+g.round;
-    if(BaiDonGame._animKey===key)return;
-    BaiDonGame._animKey=key;
-    BaiDonGame._animPhase=0;
-    BaiDonGame._animDone=false;
-    BaiDonGame._blockRenders=true;
-
-    const lr=g.lastResult||{};
-    const oldPos=lr.oldPositions||{};
-    const newPos=lr.newPositions||{};
-    const maxNum=g.maxNum||3;
-    const target=g.target||20;
-
-    Object.keys(oldPos).forEach(uid=>{BaiDonGame._animDisplayPos[uid]=oldPos[uid];});
-
-    /* Force first render at old positions */
-    Object.keys(oldPos).forEach(uid=>{
-      const t=BaiDonGame._carTokens[uid];
-      if(!t)return;
-      t.style.transition='none';
-      t.style.top=(10+(oldPos[uid]/target)*80)+'%';
-      t.offsetHeight;
-      t.style.transition='';
-    });
-
-    /* Schedule phases: slow it down */
-    const baseDelay=1200;
-    const stationDelay=900;
-    const carsStartAt=baseDelay+(maxNum+1)*stationDelay+400;
-    const doneAt=carsStartAt+1800+600;
-
-    /* Phase 1..maxNum: station check */
-    for(let i=1;i<=maxNum;i++){
-      setTimeout(()=>{
-        if(BaiDonGame._animKey!==key)return;
-        BaiDonGame._animPhase=i;
-        BaiDonGame._applyStationCheck(i,room,g);
-      },baseDelay+i*stationDelay);
-    }
-
-    /* Cars move */
-    setTimeout(()=>{
-      if(BaiDonGame._animKey!==key)return;
-      BaiDonGame._animPhase=maxNum+2;
-      Object.keys(newPos).forEach(uid=>{
-        BaiDonGame._animDisplayPos[uid]=newPos[uid];
-        const t=BaiDonGame._carTokens[uid];
-        if(!t)return;
-        const oldP=oldPos[uid]||0;
-        t.style.top=(10+(newPos[uid]/target)*80)+'%';
-      });
-      /* Play engine sounds */
-      SFX.engineMove();
-      /* Schedule overlay */
-      const hits=(g.lastResult.events||[]).filter(e=>e.type==='hit');
-      if(hits.length>0&&!BaiDonGame._overlayShown[g.round]){
-        BaiDonGame._overlayShown[g.round]=true;
-        setTimeout(()=>showBidonOverlay(hits,room),400);
-      }
-    },carsStartAt);
-
-    /* Done */
-    setTimeout(()=>{
-      if(BaiDonGame._animKey!==key)return;
-      BaiDonGame._animPhase=maxNum+3;
-      BaiDonGame._animDone=true;
-      BaiDonGame._blockRenders=false;
-      const btn=document.getElementById('race-next-btn');
-      if(btn)btn.style.display='block';
-      /* Catch-up render */
-      App.sig='';
-      /* Don't call renderGame - let natural next update do it */
-    },doneAt);
-
-    /* Safety timeout */
-    if(BaiDonGame._animSafetyTimer)clearTimeout(BaiDonGame._animSafetyTimer);
-    BaiDonGame._animSafetyTimer=setTimeout(()=>{
-      if(BaiDonGame._animKey!==key)return;
-      BaiDonGame._animDone=true;
-      BaiDonGame._blockRenders=false;
-      const btn=document.getElementById('race-next-btn');
-      if(btn)btn.style.display='block';
-    },doneAt+8000);
-  },
-
-  _applyStationCheck(i,room,g){
-    const lr=g.lastResult||{};
-    const blocked=(lr.blockedStations||[]);
-    const stEl=document.querySelector('.station[data-station="'+i+'"]');
-    if(!stEl)return;
-    if(blocked.includes(i)){
-      stEl.classList.add('fail');
-      SFX.stationFail();
-      const hits=(lr.events||[]).filter(e=>e.type==='hit'&&e.station===i);
-      if(hits.length>0){
-        const names=hits.map(e=>room.players[e.uid]?room.players[e.uid].name:'').filter(Boolean).join(', ');
-        if(names){
-          const vEl=el('div','st-victims',esc(names));
-          stEl.appendChild(vEl);
+  _runRaceAnimation(room,g){
+    const S=BaiDonGame, key=room.pin+'_'+g.round;
+    const lr=g.lastResult||{}, oldPos=lr.oldPositions||{}, newPos=lr.newPositions||{}, blocked=lr.blockedStations||[], events=lr.events||[];
+    const target=g.target||20, maxNum=g.maxNum||3;
+    const showBtn=()=>{ const b=$('race-next-btn'); if(b)b.style.display='block'; };
+    if(S._animKey===key){ if(S._animDone===key)showBtn(); return; }
+    S._animKey=key; S._animDone=null;
+    setTimeout(()=>{ if(S._animKey===key)showBtn(); },20000);
+    (async()=>{
+      try{
+        const say=t=>{ const e=$('bd-timer-text'); if(e)e.textContent=t; };
+        const acts=events.filter(e=>(e.type==='move'||e.type==='hit')&&e.station);
+        const cnt={}, dest={}, start={}, W={};
+        acts.forEach(e=>{ const j=cnt[e.station]=(cnt[e.station]||0); cnt[e.station]++; dest[e.uid]=[PD[e.station]+(j%3)*18,SY[e.station]+Math.floor(j/3)*24-10]; start[e.uid]=S._xy(e.uid,oldPos[e.uid]||0,room,target); });
+        const mk=uid=>{ const s=document.querySelector('.road-scene'); if(!s)return null; let w=W[uid]; if(w&&w.isConnected)return w; const p=room.players[uid]; if(!p)return null;
+          w=el('div','walker',identityHtml(p.identityId,'')); w.style.left=PX(start[uid][0]); w.style.top=PY(start[uid][1]); s.appendChild(w); w.offsetHeight; W[uid]=w; return w; };
+        const walk=async(fa,fb)=>{ for(let k=1;k<=3;k++){ acts.forEach(e=>{ const w=mk(e.uid); if(!w)return; const a=fa(e.uid), b=fb(e.uid); w.style.left=PX(a[0]+(b[0]-a[0])*k/3); w.style.top=PY(a[1]+(b[1]-a[1])*k/3); }); SFX.step(); await delay(650); } };
+        say('⚡ الزعابيل رايحين محطات الطاقة…');
+        await delay(900);
+        await walk(u=>start[u],u=>dest[u]);
+        await delay(500);
+        for(let i=1;i<=maxNum;i++){
+          const z=document.querySelector('.st-zone[data-station="'+i+'"]'); if(!z)continue;
+          const bad=blocked.includes(i);
+          z.classList.add(bad?'fail':'success');
+          say(bad?'🔒 محطة '+i+' مقفولة! تم الخصم من كارت الطاقة (-1)':'⚡ محطة '+i+' مفتوحة! تم شحن كارت الطاقة +'+i);
+          if(bad)SFX.stationFail(); else SFX.stationSuccess();
+          await delay(1300);
         }
-      }
-    }else{
-      stEl.classList.add('success');
-      SFX.stationSuccess();
-    }
+        say('🏎️ الرجوع للسيارات…');
+        await walk(u=>dest[u],u=>start[u]);
+        Object.keys(W).forEach(u=>{ if(W[u].parentNode)W[u].parentNode.removeChild(W[u]); });
+        say('🏁 السيارات بتتحرك…');
+        if(events.some(e=>e.type==='move'))SFX.engineFwd();
+        if(events.some(e=>e.type==='hit'))SFX.engineRev();
+        Object.keys(newPos).forEach(u=>{ S._animDisplayPos[u]=newPos[u]; const t=S._carTokens[u]; if(t)S.placeCar(t,newPos[u],t._idx,t._n,target); });
+        await delay(2200);
+        const hits=events.filter(e=>e.type==='hit'&&!e.disguise);
+        if(hits.length&&!S._overlayShown[g.round]){ S._overlayShown[g.round]=true; showBidonOverlay(hits,room); await delay(2800); }
+        say('النتيجة');
+      }catch(e){ console.error(e); }
+      S._animDone=key; showBtn();
+    })();
   },
 
-  _uiVoteModal(wrap,room,g,isHost){
+  uiVoteModal(wrap,room,g,isHost){
     const modal=el('div','vote-modal');
     const inner=el('div','vote-modal-inner');
     inner.appendChild(el('h3','phase-title','تصويت 🗳️'));
@@ -1682,9 +1476,9 @@ const BaiDonGame={
     const candidates=Object.keys(room.players||{}).filter(id=>id!==App.uid);
     const voteWrap=el('div','list');
     candidates.forEach(id=>{
-      const p=room.players[id];if(!p)return;
+      const p=room.players[id]; if(!p)return;
       const row=el('button','row'+(myVote===id?' me':''));
-      row.type='button';row.style.cursor='pointer';
+      row.type='button'; row.style.cursor='pointer';
       row.innerHTML='<div class="r-ava">'+identityHtml(p.identityId,'')+'</div>'+
         '<div class="r-main"><div class="r-name">'+nameWithCrown(room,id,p.name)+'</div></div>'+
         (myVote===id?'<div style="color:#22ff88;font-weight:900">✓</div>':'');
@@ -1698,22 +1492,25 @@ const BaiDonGame={
       const b=el('button','primary block','احسم التصويت ✅');
       b.onclick=()=>BaiDonGame.hostResolveVote();
       inner.appendChild(b);
-    }else{inner.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));}
+    }else{
+      inner.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
+    }
     modal.appendChild(inner);
     wrap.appendChild(modal);
   },
 
-  _uiVoteResult(wrap,room,g,isHost){
+  uiVoteResult(wrap,room,g,isHost){
     const vr=g.voteResult||{};
     wrap.appendChild(el('h3','phase-title','نتيجة التصويت 🗳️'));
-    if(vr.tie){wrap.appendChild(el('div','waiting','تعادل! مفيش حد اتكشف.'));}
-    else{
+    if(vr.tie){
+      wrap.appendChild(el('div','waiting','تعادل! مفيش حد اتكشف.'));
+    }else{
       const target=room.players[vr.topId];
       if(target){
         const box=el('div','winner-box unmask');
         box.innerHTML='<div class="w-title">'+(vr.wasBaiDon?'🎭 تم كشف البيدون!':'❌ تصويت خاطئ!')+'</div>'+
           (vr.wasBaiDon
-            ?'<div class="w-ava">'+identityHtml(target.identityId,'')+'</div><div class="w-name">'+esc(target.name)+'</div><div class="tiny" style="margin-top:6px">البيدون بقى مكشوف! بيتحرك +1 تلقائي كل جولة.</div>'
+            ?'<div class="w-ava">'+identityHtml(target.identityId,'')+'</div><div class="w-name">'+esc(target.name)+'</div><div class="tiny" style="margin-top:6px">البيدون بقى مكشوف! بيتحرك تلقائياً +1 كل جولة.</div>'
             :'<div class="tiny" style="margin-top:6px">مفيش حد اتكشف. البيدون هيعطل محطتين الجاية.</div>');
         wrap.appendChild(box);
       }
@@ -1722,13 +1519,15 @@ const BaiDonGame={
       const b=el('button','primary block','استمرار اللعبة ▶️');
       b.onclick=()=>BaiDonGame.hostAfterVote();
       wrap.appendChild(b);
-    }else{wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));}
+    }else{
+      wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
+    }
   },
 
-  _uiFinal(wrap,room,g,isHost){
+  uiFinal(wrap,room,g,isHost){
     wrap.appendChild(el('h3','phase-title','النهاية! 🏁'));
     const box=el('div','winner-box unmask');
-    const winner=g.winner,wName=g.winnerName||'';
+    const winner=g.winner, wName=g.winnerName||'';
     const wId=Object.keys(room.players||{}).find(id=>room.players[id].name===wName);
     box.innerHTML='<div class="w-title">'+(winner==='baidon'?'🎭 البيدون فاز!':'🏆 الزعبول فاز!')+'</div>'+
       '<div class="w-ava">'+(wId?identityHtml(room.players[wId].identityId,''):'🏆')+'</div>'+
@@ -1737,12 +1536,14 @@ const BaiDonGame={
     wrap.appendChild(box);
     if(isHost){
       const b=el('button','primary block','إعادة الزعبله 🔁');
-      b.onclick=()=>{BaiDonGame.hostPlayAgain();SFX.click();};
+      b.onclick=()=>{ BaiDonGame.hostPlayAgain(); SFX.click(); };
       wrap.appendChild(b);
-    }else{wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));}
+    }else{
+      wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
+    }
   },
 
-  _uiPlayAgain(wrap,room,g,isHost){
+  uiPlayAgain(wrap,room,g,isHost){
     wrap.appendChild(el('h3','phase-title','إعادة الزعبله 🔁'));
     const ready=g.ready||{};
     const total=Object.keys(room.players||{}).length;
@@ -1759,9 +1560,31 @@ const BaiDonGame={
       const msg=rc<total?'في انتظار استعداد '+(total-rc)+' لاعبين…':'الكل مستعد ✓';
       wrap.appendChild(el('div','tiny',msg));
       const b=el('button','primary block','ابدأ من جديد 🚀');
-      b.onclick=()=>{BaiDonGame.hostRestart();SFX.click();};
+      b.onclick=()=>{ BaiDonGame.hostRestart(); SFX.click(); };
       wrap.appendChild(b);
     }
+  },
+
+  getRunnerSoundsForUid(room,g,uid){
+    const events=(g.lastResult&&g.lastResult.events)||[];
+    const ps=(g.playerState&&g.playerState[uid])||{};
+    const round=g.round||1;
+    const vr=g.voteResult||{};
+    const result=[];
+    const gotHit=events.some(e=>e.type==='hit'&&e.uid===uid);
+    const moved=events.some(e=>e.type==='move'&&e.uid===uid);
+    const myVote=vr.votes&&vr.votes[uid];
+    const voteWrong=vr&&!vr.tie&&myVote&&myVote!==g.baiDonId;
+    const voteRight=vr&&!vr.tie&&vr.wasBaiDon;
+    if(gotHit||voteWrong){result.push({id:'ah_ana_hmar'},{id:'ana_hmar'},{id:'ezay'},{id:'ya_bni_haram'},{id:'awsakh'});}
+    if(moved||voteRight){result.push({id:'edaah'});}
+    if(round<=3){
+      const used=(g.comedyUsed&&g.comedyUsed[uid]&&g.comedyUsed[uid].ank_lmeet)||false;
+      if(!used)result.push({id:'ank_lmeet'});
+    }
+    if(vr&&!vr.tie&&vr.wasBaiDon)result.push({id:'hatouly'});
+    if(vr&&!vr.tie&&!vr.wasBaiDon)result.push({id:'ehna_bhayem'});
+    return result;
   },
 
   getAvailableSounds(room,g,uid){
@@ -1775,42 +1598,37 @@ const BaiDonGame={
       if(hitSome){out.push({id:'bala_seyah'},{id:'da_anto_lakta'});}
       out.push({id:'salam'});
     }
-    /* Runner sounds based on context */
-    const events=(g.lastResult&&g.lastResult.events)||[];
-    const round=g.round||1;
-    const vr=g.voteResult||{};
-    const gotHit=events.some(e=>e.type==='hit'&&e.uid===uid);
-    const moved=events.some(e=>e.type==='move'&&e.uid===uid);
-    const myVote=vr.votes&&vr.votes[uid];
-    const voteWrong=vr&&!vr.tie&&myVote&&myVote!==g.baiDonId;
-    const voteRight=vr&&!vr.tie&&vr.wasBaiDon;
-    if(gotHit||voteWrong){out.push({id:'ah_ana_hmar'},{id:'ana_hmar'},{id:'ezay'},{id:'ya_bni_haram'},{id:'awsakh'});}
-    if(moved||voteRight){out.push({id:'edaah'});}
-    if(round<=3){
-      const used=(g.comedyUsed&&g.comedyUsed[uid]&&g.comedyUsed[uid].ank_lmeet)||false;
-      if(!used)out.push({id:'ank_lmeet'});
-    }
-    if(vr&&!vr.tie&&vr.wasBaiDon)out.push({id:'hatouly'});
-    if(vr&&!vr.tie&&!vr.wasBaiDon)out.push({id:'ehna_bhayem'});
-    /* Dedupe */
+    BaiDonGame.getRunnerSoundsForUid(room,g,uid).forEach(s=>out.push(s));
     const seen=new Set();
-    return out.filter(s=>{if(seen.has(s.id))return false;seen.add(s.id);return true;});
+    return out.filter(s=>{if(seen.has(s.id))return false; seen.add(s.id); return true;});
   }
 };
 
 function showBidonOverlay(hits,room){
-  const count=hits.length;
-  const victimFont=count>4?14:(count>2?16:20);
   const html=hits.map((ev,i)=>{
     const v=room.players[ev.uid];
     if(!v)return '';
-    return '<div class="ov-victim" style="font-size:'+victimFont+'px;animation-delay:'+(0.2+i*0.1)+'s">'+identityHtml(v.identityId,'')+' '+esc(v.name)+'</div>';
+    return '<div class="ov-victim" style="animation-delay:'+(0.3+i*0.15)+'s">'+identityHtml(v.identityId,'')+' '+esc(v.name)+'</div>';
   }).join('');
-  const o=el('div','bd-overlay');
+  const o=el('div','bd-overlay'); o.style.setProperty('--vs',(hits.length>12?11:hits.length>8?13:hits.length>5?16:20)+'px');
   o.innerHTML='<div class="ov-icon">💥</div><div class="ov-text">البيدون أوقع!</div><div class="ov-victims">'+html+'</div><div class="ov-sub">ضربة قاسية! 💀</div>';
   document.body.appendChild(o);
   SFX.baiDonHit();
-  setTimeout(()=>{if(o.parentNode)o.parentNode.removeChild(o);},2400);
+  setTimeout(()=>{if(o.parentNode)o.parentNode.removeChild(o);},2700);
+}
+
+function buildSigGame(g){
+  const out=Object.assign({},g);
+  delete out.comedySounds;
+  return out;
+}
+function buildSigPlayers(room){
+  const out={};
+  Object.keys(room.players||{}).forEach(uid=>{
+    const p=room.players[uid];
+    out[uid]={name:p.name,carId:p.carId,identityId:p.identityId,joinedAt:p.joinedAt,cumulative:p.cumulative||0};
+  });
+  return out;
 }
 
 /* ============================================================
@@ -1820,9 +1638,9 @@ function render(){
   const room=App.room;
   if(!room)return;
   if(room.status==='lobby'||!room.game||room.game.phase==='idle'){
-    showScreen('lobby');renderLobby();
+    showScreen('lobby'); renderLobby();
   }else{
-    showScreen('game');renderGame();renderTopBar();
+    showScreen('game'); renderGame();
   }
   updateGameHint();
 }
@@ -1847,56 +1665,9 @@ function renderLobby(){
   const btn=$('btn-start-game');
   if(App.isHost){
     btn.classList.remove('hidden');
-    if(players.length<MIN_PLAYERS){btn.disabled=true;btn.textContent='محتاجين '+(MIN_PLAYERS-players.length)+' كمان…';}
-    else{btn.disabled=false;btn.textContent='ابدأ اللعبة 🚀';}
+    if(players.length<MIN_PLAYERS){btn.disabled=true; btn.textContent='محتاجين '+(MIN_PLAYERS-players.length)+' كمان…';}
+    else{btn.disabled=false; btn.textContent='ابدأ اللعبة 🚀';}
   }else{btn.classList.add('hidden');}
-}
-
-function renderTopBar(){
-  const room=App.room;
-  const container=$('game-topbar-players');
-  if(!container||!room||!room.game)return;
-  const g=room.game;
-  const ps=g.playerState||{};
-  const players=getJoinedPlayers(room);
-  if(!players.length){container.innerHTML='';return;}
-  let html='<div class="race-top-bar">';
-  players.forEach(p=>{
-    const pp=ps[p.id]||{pos:0,frozen:0};
-    const isBd=(g.baiDonId===p.id);
-    const isRev=!!g.baiDonRevealed;
-    const isMystery=isBd&&!isRev;
-    const avatar=isMystery?'🎭':identityHtml(p.identityId,'');
-    const score=isMystery?'?':(pp.pos||0);
-    const isMe=(p.id===App.uid);
-    const micIcon=isMe?(App._micOn?'🔴':'🎤'):'';
-    html+='<div class="rtb-player'+(isMe?' me':'')+(isBd&&isRev?' revealed-bd':'')+'" data-uid="'+p.id+'">';
-    if(isMe)html+='<button class="rtb-mic'+(App._micOn?' on':'')+'" data-mic-toggle="1" type="button">'+micIcon+'</button>';
-    html+='<div class="rtb-ava">'+avatar+'</div>';
-    html+='<div class="rtb-name">'+esc(p.name)+(isBd&&isRev?' 🎭':'')+'</div>';
-    html+='<div class="rtb-score">'+score+'</div>';
-    html+='</div>';
-  });
-  html+='</div>';
-  container.innerHTML=html;
-  /* Bind mic button */
-  const micBtn=container.querySelector('[data-mic-toggle="1"]');
-  if(micBtn){
-    micBtn.onclick=(e)=>{
-      e.stopPropagation();
-      App._micOn=!App._micOn;
-      micBtn.className='rtb-mic'+(App._micOn?' on':'');
-      micBtn.textContent=App._micOn?'🔴':'🎤';
-      if(App._micOn){
-        toast('🎙️ المايك شغال','ok');
-        /* Broadcast mic on state */
-        if(App.roomRef)App.roomRef.child('game/micStates/'+App.uid).set({on:true,ts:Date.now()}).catch(()=>{});
-      }else{
-        toast('🎙️ المايك مقفول','ok');
-        if(App.roomRef)App.roomRef.child('game/micStates/'+App.uid).set({on:false,ts:Date.now()}).catch(()=>{});
-      }
-    };
-  }
 }
 
 function renderGame(){
@@ -1910,16 +1681,9 @@ function renderGame(){
   const fTag=myPs.frozen>0?' ❄️':'';
   $('game-score').textContent='تقدمك: '+(me?(me.pos||0):0)+fTag;
 
-  /* Block renders during racing animation */
-  if(phase==='racing'&&BaiDonGame._blockRenders)return;
-
   let sig;
-  const sigG=Object.assign({},g);delete sigG.comedySounds;delete sigG.lastSeen;
-  const sigP={};
-  Object.keys(room.players||{}).forEach(uid=>{
-    const p=room.players[uid];
-    sigP[uid]={n:p.name,c:p.carId,i:p.identityId,j:p.joinedAt,cu:p.cumulative||0};
-  });
+  const sigG=buildSigGame(g);
+  const sigP=buildSigPlayers(room);
 
   if(phase==='action'){
     const a=(g.actions||{})[App.uid];
@@ -1927,8 +1691,9 @@ function renderGame(){
     sig='act:'+round+':'+(g.baiDonRevealed?1:0)+':'+(sub?1:0)+':'+(myPs.frozen||0);
   }else if(phase==='intro'){
     const ready=!!(g.introReady&&g.introReady[App.uid]);
-    sig='intro:'+(ready?1:0);
+    sig='intro:'+(ready?1:0)+':'+Object.keys(g.introReady||{}).length;
   }else if(phase==='racing'){
+    /* Racing uses only lastResult - don't re-render if sig same */
     sig='racing:'+round+':'+(g.lastResult&&g.lastResult.animStartTs||0);
   }else{
     sig=phase+':'+JSON.stringify(sigG)+':'+JSON.stringify(sigP);
@@ -1956,14 +1721,14 @@ function updateGameHint(){
   if(me.frozen>0){hint='❄️ أنت متجمد الجولة دي';}
   else if(phase==='intro'){hint='لا تفصح عن هويتك 🤫';}
   else if(phase==='action'){
-    if(amBd&&!isRev)hint='اختار كارت طاقة (تتحرك) ومحطة قفل (توقع زعبول) — لازم يختلفوا';
-    else if(amBd&&isRev)hint='مكشوف! بتتحرك +1 تلقائي، اختار محطة تقفلها';
-    else hint='اختار كارت طاقة — لو محطتك مقفولة، هتترجع خطوة';
+    if(amBd&&!isRev)hint='اختار محطة طاقة تتقدم بيها ومحطة تقفلها (لازم يختلفوا) -- أو فعّل التمويه';
+    else if(amBd&&isRev)hint='أنت مكشوف! بتتحرك تلقائي +1، اختار محطة تقفلها';
+    else hint='اختار محطة طاقة، وخد بالك من المحطة المقفولة! (مفتوحة = تشحن كارت الطاقة)';
   }
   else if(phase==='vote'){hint='صوّت بحكمة! لو غلط، البيدون هيعطل محطتين';}
   else if(phase==='racing'){hint='شوف النتايج.. مين اتصاب؟';}
   else if(phase==='final'){hint='النهاية!';}
-  if(hint){bar.textContent=hint;bar.classList.remove('hidden');}
+  if(hint){bar.textContent=hint; bar.classList.remove('hidden');}
   else{bar.classList.add('hidden');}
 }
 
@@ -1975,6 +1740,8 @@ setInterval(()=>{
   if(!room||!room.game)return;
   const g=room.game;
   const timerPill=$('game-timer');
+  if(App.isHost&&g.phase==='intro'){const rd=g.introReady||{};const on=Object.keys(room.players||{}).filter(u=>room.players[u].online);if(on.length&&on.every(u=>rd[u])&&!BaiDonGame._starting){BaiDonGame._starting=true;BaiDonGame.hostStartAction().finally(()=>setTimeout(()=>{BaiDonGame._starting=false;},1500));}}
+
   if(g.phase==='action'&&g.timerEnd){
     const leftMs=g.timerEnd-Date.now();
     const left=Math.max(0,Math.ceil(leftMs/1000));
@@ -1982,11 +1749,13 @@ setInterval(()=>{
       timerPill.textContent='⏱ '+left+'ث';
       timerPill.setAttribute('data-val',String(left));
     }
+    const dgb=$('disg-btn'); if(dgb)dgb.classList.toggle('blink',left<=8&&left>0);
     const txtEl=$('bd-timer-text');
     if(txtEl&&txtEl.getAttribute('data-val')!==String(left)){
       txtEl.textContent='⏱ '+left;
       txtEl.setAttribute('data-val',String(left));
     }
+    /* Early resolve - HOST ONLY */
     if(App.isHost){
       const ps=g.playerState||{};
       const actions=g.actions||{};
@@ -2001,23 +1770,23 @@ setInterval(()=>{
       if(leftMs<=0)BaiDonGame.hostResolve();
     }
   }else{
-    if(timerPill&&g.phase!=='action'){timerPill.textContent='--';timerPill.removeAttribute('data-val');}
+    if(timerPill&&g.phase!=='action'){timerPill.textContent='--'; timerPill.removeAttribute('data-val');}
   }
 },1000);
 
 /* ============================================================
-   SETUP
+   SETUP + BINDING + BOOT
    ============================================================ */
-let selectedCarId='',selectedIdentityId='',currentIdTab='avatar';
+let selectedCarId='', selectedIdentityId='', currentIdTab='avatar';
 
-function buildCarGrid(){
+function buildAssetGrids(){
   const carGrid=$('cars-grid');
   carGrid.innerHTML='';
   CARS.forEach(car=>{
     const b=document.createElement('button');
-    b.type='button';b.className='asset-tile';
-    b.dataset.carId=car.id;
-    if(selectedCarId===car.id)b.classList.add('sel');
+    b.type='button';
+    b.className='asset-tile';
+    b.dataset.carId=car.id; if(car.id===selectedCarId)b.classList.add('sel');
     if(car.url)b.innerHTML='<img src="'+esc(car.url)+'" alt="">';
     else b.textContent='🚗';
     b.onclick=()=>{
@@ -2027,17 +1796,14 @@ function buildCarGrid(){
     };
     carGrid.appendChild(b);
   });
-}
-
-function buildIdentityGrid(){
   const idGrid=$('identity-grid');
   idGrid.innerHTML='';
   if(currentIdTab==='avatar'){
     AVATARS.forEach(a=>{
       const b=document.createElement('button');
-      b.type='button';b.className='asset-tile';
-      b.dataset.idId=a.id;
-      if(selectedIdentityId===a.id)b.classList.add('sel');
+      b.type='button';
+      b.className='asset-tile';
+      b.dataset.idId=a.id; if(a.id===selectedIdentityId)b.classList.add('sel');
       b.textContent=a.emoji;
       b.onclick=()=>{
         idGrid.querySelectorAll('.asset-tile').forEach(x=>x.classList.remove('sel'));
@@ -2049,9 +1815,9 @@ function buildIdentityGrid(){
   }else{
     STICKERS.forEach(st=>{
       const b=document.createElement('button');
-      b.type='button';b.className='asset-tile';
-      b.dataset.idId='sticker_'+st.id;
-      if(selectedIdentityId==='sticker_'+st.id)b.classList.add('sel');
+      b.type='button';
+      b.className='asset-tile';
+      b.dataset.idId='sticker_'+st.id; if(('sticker_'+st.id)===selectedIdentityId)b.classList.add('sel');
       if(st.url)b.innerHTML='<img src="'+esc(st.url)+'" alt="">';
       else b.textContent='🎨';
       b.onclick=()=>{
@@ -2063,8 +1829,6 @@ function buildIdentityGrid(){
     });
   }
 }
-
-function buildAssetGrids(){buildCarGrid();buildIdentityGrid();}
 
 function openSetup(mode){
   App.flowMode=mode;
@@ -2088,8 +1852,8 @@ function showHomeChoice(){
       '<button class="ghost block small" id="pick-cancel" type="button">إلغاء</button>'+
     '</div>';
   $('screen-home').appendChild(c);
-  $('pick-create').onclick=()=>{c.remove();openSetup('create');};
-  $('pick-join').onclick=()=>{c.remove();openSetup('join');};
+  $('pick-create').onclick=()=>{c.remove(); openSetup('create');};
+  $('pick-join').onclick=()=>{c.remove(); openSetup('join');};
   $('pick-cancel').onclick=()=>c.remove();
 }
 
@@ -2100,14 +1864,14 @@ async function submitSetup(){
   if(!/^\d{5}$/.test(pin)){toast('الرقم السري لازم 5 أرقام','err');return;}
   if(!selectedCarId){toast('اختر سيارة','err');return;}
   if(!selectedIdentityId){toast('اختر أفاتار أو ستيكر','err');return;}
-  safeBlur($('inp-name'));safeBlur($('inp-pin'));
+  safeBlur($('inp-name')); safeBlur($('inp-pin'));
   showLoading('جاري الدخول... ⏳');
   try{
     let uid;
     if(App.flowMode==='create'){uid=await Core.createRoom(pin,name,selectedCarId,selectedIdentityId,currentIdTab,App.hostMode);}
     else{uid=await Core.joinRoom(pin,name,selectedCarId,selectedIdentityId,currentIdTab);}
     hideLoading();
-    App.name=name;App.carId=selectedCarId;App.identityId=selectedIdentityId;
+    App.name=name; App.carId=selectedCarId; App.identityId=selectedIdentityId;
     Core.attach(pin,uid);
     App.sig='';
   }catch(err){
@@ -2127,7 +1891,7 @@ async function submitSetup(){
 
 function bindEvents(){
   $('card-baidon').onclick=showHomeChoice;
-  $('btn-back').onclick=()=>{showScreen('home');const c=document.getElementById('home-choice');if(c)c.remove();};
+  $('btn-back').onclick=()=>{showScreen('home'); const c=document.getElementById('home-choice'); if(c)c.remove();};
   $('btn-submit').onclick=submitSetup;
   onEnter($('inp-name'),()=>$('inp-pin').focus());
   onEnter($('inp-pin'),submitSetup);
@@ -2149,12 +1913,13 @@ function bindEvents(){
       tab.classList.add('on');
       currentIdTab=tab.getAttribute('data-idtab');
       selectedIdentityId='';
-      buildIdentityGrid(); /* Only rebuild identity grid, preserve car */
+      buildAssetGrids();
     };
   });
 
   $('btn-leave').onclick=()=>Core.leave();
   $('btn-start-game').onclick=()=>BaiDonGame.hostStart();
+
   $('lobby-players').addEventListener('click',function(e){
     let node=e.target;
     while(node&&node!==this&&!(node.getAttribute&&node.getAttribute('data-kick')))node=node.parentNode;
@@ -2167,7 +1932,9 @@ function bindEvents(){
   window.addEventListener('pagehide',()=>{
     try{if(App.roomRef&&App.uid)App.roomRef.child('players/'+App.uid).update({online:false});}catch(e){}
   });
-  document.addEventListener('visibilitychange',()=>{document.body.classList.toggle('tab-hidden',document.hidden);});
+  document.addEventListener('visibilitychange',()=>{
+    document.body.classList.toggle('tab-hidden',document.hidden);
+  });
   document.addEventListener('pointerdown',()=>SFX._init(),{once:true});
   document.addEventListener('touchstart',()=>SFX._init(),{once:true});
 }
