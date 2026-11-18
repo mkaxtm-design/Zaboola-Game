@@ -169,7 +169,7 @@ label:first-child{margin-top:0;}
 .race-wrap{display:grid;grid-template-columns:1fr 54px;gap:6px;margin-bottom:6px;align-items:start;}
 .car-token{position:absolute;transform:translate(-50%,-50%);transition:top 2s cubic-bezier(.3,.9,.4,1),left .4s ease,width 2s ease;z-index:5;pointer-events:none;}
 .car-body{position:relative;width:100%;aspect-ratio:1/1.25;}
-.car-img{width:100%;height:100%;transform:rotate(180deg);filter:drop-shadow(0 3px 4px rgba(0,0,0,.7));display:flex;align-items:center;justify-content:center;}
+.car-img{width:100%;height:100%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.7));display:flex;align-items:center;justify-content:center;}
 .car-img img{width:100%;height:100%;object-fit:contain;display:block;}
 .car-emoji{font-size:5cqw;}
 .car-identity{position:absolute;left:50%;top:-8%;transform:translateX(-50%);width:62%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:4cqw;background:rgba(0,0,0,.55);border-radius:50%;z-index:2;line-height:1;}
@@ -205,8 +205,6 @@ label:first-child{margin-top:0;}
 .bd-overlay .ov-victim{font-size:1em;padding:.4em .8em;}
 .bd-overlay .ov-victim img{height:1.3em;vertical-align:middle;}
 
-.road-scene{position:relative;aspect-ratio:941/1403;width:min(100%,560px);margin:0 auto 6px;overflow:hidden;background:#05030d center/100% 100% no-repeat;container-type:inline-size;border-radius:14px;}
-@media(max-width:560px){#screen-game{overflow-x:clip;}.road-scene{width:100vw;margin-inline:calc(50% - 50vw);border-radius:0;}}
 .st-zone{position:absolute;width:3.6cqw;height:3.6cqw;border-radius:50%;transform:translate(-50%,-50%);z-index:4;opacity:0;transition:opacity .25s;pointer-events:none;}
 .st-zone.success{opacity:1;background:#22ff88;box-shadow:0 0 2.4cqw #22ff88;}
 .st-zone.fail{opacity:1;background:#ff2e5e;box-shadow:0 0 2.4cqw #ff2e5e;}
@@ -220,6 +218,27 @@ label:first-child{margin-top:0;}
 #screen-game .game-topbar{top:4px;margin-bottom:4px;gap:6px;}
 #screen-game .pill{padding:5px 11px;font-size:12px;}
 #screen-game .game-hint{position:static;font-size:10px;padding:3px 10px;margin-bottom:4px;line-height:1.4;}
+
+.road-scene{position:relative;flex:0 0 auto;width:100%;aspect-ratio:941/1403;margin:0;overflow:hidden;background:#05030d center/100% 100% no-repeat;container-type:inline-size;}
+.scene-box{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.scene-status{position:absolute;top:1%;left:50%;transform:translateX(-50%);z-index:10;font-size:3.6cqw;font-weight:900;color:#00f0ff;background:rgba(0,0,0,.62);padding:.5cqw 2.4cqw;border-radius:3cqw;white-space:nowrap;max-width:94%;overflow:hidden;text-overflow:ellipsis;}
+.rbottom{flex:0 0 auto;display:flex;gap:6px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));}
+.rbottom>*{flex:1;margin:0!important;padding:9px 12px;font-size:14px;border-radius:14px;}
+.confetti{position:absolute;top:-6%;z-index:11;font-size:5cqw;animation:cfall 2.8s linear forwards;pointer-events:none;}
+@keyframes cfall{to{top:105%;rotate:360deg;}}
+.win-banner{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);z-index:12;background:rgba(0,0,0,.78);border:.6cqw solid #ffd166;border-radius:4cqw;padding:3cqw 6cqw;font-size:6.5cqw;font-weight:900;color:#ffd166;white-space:nowrap;text-align:center;animation:popIn .3s ease;}
+body.race-fixed{overflow:hidden;height:100vh;height:100dvh;}
+body.race-fixed #app{padding:0;max-width:none;}
+body.race-fixed #screen-game{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;}
+body.race-fixed #screen-game .game-topbar{flex:0 0 auto;position:static;margin:0;padding:3px 6px 0;gap:4px;}
+body.race-fixed #screen-game .pill{padding:3px 9px;font-size:11px;}
+body.race-fixed #screen-game .game-hint{flex:0 0 auto;margin:3px 6px;padding:2px 8px;font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+body.race-fixed #game-body{flex:1;min-height:0;display:flex;flex-direction:column;}
+body.race-fixed #game-body>.phase{flex:1;min-height:0;display:flex;flex-direction:column;padding:0!important;margin:0!important;gap:0!important;}
+.sfx-row{padding:0 6px 3px;gap:4px;flex:0 0 auto;}
+.sfx-row .comedy-btn{height:22px;min-height:0!important;padding:0 7px!important;gap:3px;border-radius:8px;line-height:1;}
+.sfx-row .cb-emoji{font-size:12px;}
+.sfx-row .cb-name{font-size:9px;}
 body.in-game .orb{display:none;}
 body.in-game{animation:none;}
 #screen-game .pill,#screen-game .game-hint{backdrop-filter:none;-webkit-backdrop-filter:none;}
@@ -441,7 +460,7 @@ function showLoading(txt){ $('loading-text').textContent=txt||'...'; $('loading-
 function hideLoading(){ $('loading-overlay').classList.add('hidden'); }
 function onEnter(inp,fn){ inp.addEventListener('keydown',e=>{ if(e.keyCode===13||e.key==='Enter'){e.preventDefault();fn();} }); }
 function safeBlur(n){ setTimeout(()=>{try{if(n&&n.blur)n.blur();}catch(e){}},60); }
-function showScreen(n){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.body.classList.toggle('in-game',n==='game'); const t=$('screen-'+n); if(t)t.classList.add('active'); try{window.scrollTo(0,0);}catch(e){} }
+function showScreen(n){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.body.classList.toggle('in-game',n==='game'); if(n!=='game')document.body.classList.remove('race-fixed'); const t=$('screen-'+n); if(t)t.classList.add('active'); try{window.scrollTo(0,0);}catch(e){} }
 function nameWithCrown(room,uid,name){ return (room.hostId===uid?esc(name)+' <span class="crown">👑</span>':esc(name)); }
 function getVoteInterval(n){ return n<=3?3:(n===4?4:5); }
 function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
@@ -869,15 +888,7 @@ function showSpeechBubble(speakerName,soundName,isMystery,uid,emoji){
 function App_tok(uid){ return (BaiDonGame._carTokens||{})[uid]||null; }
 function hideSpeechBubble(){ if(_bubbleEl&&_bubbleEl.parentNode)_bubbleEl.parentNode.removeChild(_bubbleEl); _bubbleEl=null; }
 
-function updateQueueBadge(){
-  let b=document.getElementById('queue-badge');
-  if(!ComedyQueue.playing&&ComedyQueue.queue.length===0){ if(b)b.remove(); return; }
-  if(!b){ b=document.createElement('div'); b.id='queue-badge'; b.className='queue-badge'; document.body.appendChild(b); }
-  let t='';
-  if(ComedyQueue.playing)t='🔊 شغال...';
-  if(ComedyQueue.queue.length>0)t+=' • في الانتظار: '+ComedyQueue.queue.length;
-  b.textContent=t;
-}
+function updateQueueBadge(){ const b=document.getElementById('queue-badge'); if(b)b.remove(); }
 
 async function sendComedySound(id){
   if(!App.roomRef)return;
@@ -905,10 +916,13 @@ function rowY(pos,target){ return 210+Math.min(20,Math.max(0,pos)/target*20)*51;
 function edgeL(y){ return 172-(y-165)*0.078; }
 function edgeR(y){ return 722+(y-165)*0.134; }
 function laneN(c){ return c>8?c:8; }
-function laneX(y,idx,c){ const N=laneN(c); const lane=c>8?idx:Math.round((idx+0.5)*8/c-0.5); return edgeL(y)+(lane+0.5)/N*(edgeR(y)-edgeL(y)); }
+function carScale(n){ return n<=5?2:n===6?1.7:n===7?1.45:n===8?1.25:n===9?1.1:1; }
+function laneX(y,idx,c){ const N=laneN(c); const lane=c>8?idx:(idx+0.5)*8/c-0.5; return edgeL(y)+(lane+0.5)/N*(edgeR(y)-edgeL(y)); }
 function laneW(y,c){ return (edgeR(y)-edgeL(y))/laneN(c); }
 function PX(x){ return (x/941*100)+'%'; }
 function PY(y){ return (y/1403*100)+'%'; }
+function fitScene(){ const sc=document.querySelector('.road-scene'); if(!sc||!sc.parentNode)return; const b=sc.parentNode; const bw=b.clientWidth,bh=b.clientHeight; if(!bw||!bh)return; const w=Math.min(bw,bh*941/1403); sc.style.width=w+'px'; sc.style.height=(w*1403/941)+'px'; }
+window.addEventListener('resize',fitScene);
 function markSpeaking(uid){ document.querySelectorAll('.pchip').forEach(c=>c.classList.toggle('speaking',!!uid&&c.dataset.uid===uid)); }
 
 const BaiDonGame = {
@@ -1040,8 +1054,8 @@ const BaiDonGame = {
       /* Determine block stations */
       let effectiveBlock=null, botUsed=false;
       if(!bdAct||(!bdAct.blockStation&&!wantDisguise)){
-        const bdOnline=room.players[bdId]&&room.players[bdId].online;
-        if(!bdOnline){ effectiveBlock=Math.floor(Math.random()*g.maxNum)+1; botUsed=true; }
+        const cs=[]; for(let i=1;i<=g.maxNum;i++){ if(!(bdAct&&bdAct.moveStation===i))cs.push(i); }
+        effectiveBlock=cs[Math.floor(Math.random()*cs.length)]; botUsed=true;
       }else{
         effectiveBlock=bdAct.blockStation;
       }
@@ -1123,7 +1137,7 @@ const BaiDonGame = {
         'game/actions':null,
         'game/comedySounds':null,
         'game/lastResult':{
-          events,round,blockedStations,botUsed,
+          events,round,blockedStations,botUsed,winUid:(winners.length?(winners.includes(bdId)?bdId:winners[0]):null),winName:winnerName,winType:winner||null,
           oldPositions,newPositions,
           animStartTs:Date.now()
         }
@@ -1136,7 +1150,7 @@ const BaiDonGame = {
         u['players/'+uid+'/pos']=ps[uid].pos;
       });
       if(winner){
-        u['game/phase']='final';
+        u['game/phase']='racing';
         u['game/winner']=winner;
         u['game/winnerName']=winnerName;
         u['game/finalMessage']=finalMessage;
@@ -1157,6 +1171,7 @@ const BaiDonGame = {
     if(!App.isHost||!App.room)return;
     const g=App.room.game;
     if(!g||g.phase!=='racing')return;
+    if(g.winner){ try{ await setGame({phase:'final'}); App.sig=''; }catch(e){toast('مشكلة','err');} return; }
     await Promise.race([ComedyQueue.waitForEnd(),delay(3000)]);
     ComedyQueue.clearPending();
     const round=g.round||1;
@@ -1318,7 +1333,7 @@ const BaiDonGame = {
   },
 
   pickBd(c){ let pool=c.filter(x=>x!==App._lastBd); if(!pool.length)pool=c; const a=new Uint32Array(1); crypto.getRandomValues(a); const r=pool[a[0]%pool.length]; App._lastBd=r; return r; },
-  placeCar(t,pos,idx,n,target){ const y=rowY(pos,target); t.style.left=PX(laneX(y,idx,n)); t.style.top=PY(y); t.style.width=(laneW(y,n)*0.8/941*100)+'%'; },
+  placeCar(t,pos,idx,n,target,yo){ const y=(yo!==undefined?yo:rowY(pos,target)); const rw=edgeR(y)-edgeL(y); const w=Math.min(0.8*carScale(n)*rw/laneN(n),0.92*rw/n); t.style.left=PX(laneX(y,idx,n)); t.style.top=PY(y); t.style.width=(w/941*100)+'%'; },
   _xy(uid,pos,room,target){ const ps=getJoinedPlayers(room); const i=ps.findIndex(p=>p.id===uid); const y=rowY(pos,target); return [laneX(y,i,ps.length),y]; },
 
   uiIntro(wrap,room,g,isHost,amBd){
@@ -1351,12 +1366,12 @@ const BaiDonGame = {
       sfx.appendChild(bt);
     });
     wrap.appendChild(sfx);
-    const timerText=el('div','timer-big'); timerText.id='bd-timer-text'; timerText.textContent=isResolving?'النتيجة...':'--'; timerText.style.cssText='font-size:'+(isResolving?'13px':'22px')+';letter-spacing:0;padding:2px;'; wrap.appendChild(timerText);
+    const timerText=el('div','scene-status'); timerText.id='bd-timer-text'; timerText.textContent=isResolving?'النتيجة':'--'; wrap.classList.add('rwrap');
 
     let selMove=myAct?(myAct.moveStation||null):null, selBlock=myAct?(myAct.blockStation||null):null, selDisguise=!!(myAct&&myAct.disguise);
     const canInteract=!isResolving&&!frozen&&!submitted;
     const raceWrap=el('div','race-wrap');
-    const scene=el('div','road-scene'); scene.style.backgroundImage='url("'+IMG+'")';
+    const scene=el('div','road-scene'); scene.style.backgroundImage='url("'+IMG+'")'; scene.appendChild(timerText);
     const refresh=()=>{
       scene.querySelectorAll('.st-move').forEach(b=>{ b.classList.toggle('on',+b.dataset.s===selMove); b.disabled=!canInteract||selDisguise; });
       scene.querySelectorAll('.st-block').forEach(b=>{ b.classList.toggle('on',+b.dataset.s===selBlock); b.disabled=!canInteract; });
@@ -1388,13 +1403,15 @@ const BaiDonGame = {
       S.placeCar(t,dp,idx,players.length,target);
       scene.appendChild(t); S._carTokens[p.id]=t;
     });
-    wrap.appendChild(scene);
+    const box=el('div','scene-box'); box.appendChild(scene); wrap.appendChild(box);
+    requestAnimationFrame(fitScene); if(window.ResizeObserver)new ResizeObserver(fitScene).observe(box);
 
+    const bottom=el('div','rbottom');
     if(!isResolving){
-      if(frozen){ wrap.appendChild(el('div','frozen-box','❄️ أنت متجمد الجولة دي!')); }
-      else if(submitted){ wrap.appendChild(el('div','ok-box','✅ تم إرسال اختيارك')); }
+      if(frozen){ bottom.appendChild(el('div','frozen-box','❄️ أنت متجمد الجولة دي!')); }
+      else if(submitted){ bottom.appendChild(el('div','ok-box','✅ تم إرسال اختيارك')); }
       else{
-        const sb=el('button','primary block','إرسال الاختيار ✅'); sb.id='bd-submit-btn'; wrap.appendChild(sb);
+        const sb=el('button','primary block','إرسال الاختيار ✅'); sb.id='bd-submit-btn'; bottom.appendChild(sb);
         sb.onclick=()=>{
           if(selDisguise){ if(!selBlock)return toast('اختار محطة القفل','err'); S.submitAction(null,selBlock,true); }
           else if(amBd&&isRev){ if(!selBlock)return toast('اختار محطة القفل','err'); S.submitAction(null,selBlock,false); }
@@ -1407,27 +1424,14 @@ const BaiDonGame = {
     }
     if(isResolving){
       if(isHost){
-        const btn=el('button','primary block','الجولة التالية ▶️'); btn.id='race-next-btn'; btn.style.display='none';
-        btn.onclick=()=>{ SFX.click(); S.hostNextRound(); }; wrap.appendChild(btn);
-      }else wrap.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
+        const btn=el('button','primary block',g.winner?'النتيجة النهائية 🏆':'الجولة التالية ▶️'); btn.id='race-next-btn'; btn.style.display='none';
+        btn.onclick=()=>{ SFX.click(); S.hostNextRound(); }; bottom.appendChild(btn);
+      }else bottom.appendChild(el('div','waiting','⏳ في انتظار الهوست…'));
       S._runRaceAnimation(room,g);
     }else if(isHost&&room.hostMode!=='auto'){
-      const btn=el('button','warn block','إنهاء الجولة يدوياً ⏹'); btn.onclick=()=>S.hostResolve(); wrap.appendChild(btn);
+      const btn=el('button','warn block','إنهاء الجولة ⏹'); btn.onclick=()=>S.hostResolve(); bottom.appendChild(btn);
     }
-    if(isResolving){
-      const evWrap=el('div','list');
-      (lr.events||[]).forEach(ev=>{
-        const p=room.players[ev.uid]; if(!p)return;
-        let cls='event-line',txt='';
-        if(ev.type==='hit'){cls+=' hit'; txt='🔒 '+p.name+': تم الخصم من كارت الطاقة (-1)';}
-        else if(ev.type==='freeze'){txt='❄️ '+p.name+' اتجمد!';}
-        else if(ev.type==='move'){txt='⚡ '+p.name+': تم شحن كارت الطاقة بـ +'+ev.station;}
-        else if(ev.type==='autoMove'){txt='🤖 '+p.name+' اتحرك +1 تلقائياً.';}
-        else return;
-        evWrap.appendChild(el('div',cls,esc(txt)));
-      });
-      if(evWrap.children.length)wrap.appendChild(evWrap);
-    }
+    wrap.appendChild(bottom);
   },
 
   _runRaceAnimation(room,g){
@@ -1461,6 +1465,8 @@ const BaiDonGame = {
           if(bad)SFX.stationFail(); else SFX.stationSuccess();
           await delay(1300);
         }
+        const hits=events.filter(e=>e.type==='hit');
+        if(hits.length&&!S._overlayShown[g.round]){ S._overlayShown[g.round]=true; showBidonOverlay(hits,room); await delay(2800); }
         say('🏎️ الرجوع للسيارات…');
         await walk(u=>dest[u],u=>start[u]);
         Object.keys(W).forEach(u=>{ if(W[u].parentNode)W[u].parentNode.removeChild(W[u]); });
@@ -1470,8 +1476,17 @@ const BaiDonGame = {
         if(events.some(e=>e.type==='hit'))SFX.engineRev();
         Object.keys(newPos).forEach(u=>{ S._animDisplayPos[u]=newPos[u]; const t=S._carTokens[u]; if(t)S.placeCar(t,newPos[u],t._idx,t._n,target); });
         await delay(2200);
-        const hits=events.filter(e=>e.type==='hit');
-        if(hits.length&&!S._overlayShown[g.round]){ S._overlayShown[g.round]=true; showBidonOverlay(hits,room); await delay(2800); }
+        const wu=lr.winUid;
+        if(wu&&S._carTokens[wu]){
+          const t=S._carTokens[wu], sc=document.querySelector('.road-scene');
+          if(sc){
+            S.placeCar(t,target,t._idx,t._n,target,1268); await delay(2300);
+            SFX.win();
+            for(let k=0;k<28;k++){ const c=el('div','confetti',['🎉','🎊','✨','⭐'][k%4]); c.style.left=(Math.random()*94+3)+'%'; c.style.animationDelay=(Math.random()*0.8)+'s'; sc.appendChild(c); }
+            const pw=room.players[wu]; sc.appendChild(el('div','win-banner',(lr.winType==='baidon'?'🎭 البيدون ':'🏆 ')+esc(pw?pw.name:'')+' كسب!'));
+            await delay(3500);
+          }
+        }
         say('النتيجة');
       }catch(e){ console.error(e); }
       S._animDone=key; showBtn();
@@ -1715,6 +1730,7 @@ function renderGame(){
   const body=$('game-body');
   body.innerHTML='';
   body.appendChild(BaiDonGame.build(room,g,phase,round));
+  document.body.classList.toggle('race-fixed',phase==='action'||phase==='racing');
 }
 
 function updateGameHint(){
