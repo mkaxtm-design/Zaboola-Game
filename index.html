@@ -179,11 +179,6 @@ label:first-child{margin-top:0;}
 .car-token.revealed .car-body{outline:2px solid #ff2e5e;border-radius:8px;}
 .car-token.frozen .car-body{filter:brightness(1.4) hue-rotate(180deg);}
 .st-badge{position:absolute;z-index:3;font-size:3.2cqw;font-weight:900;color:#ffd166;background:rgba(0,0,0,.7);border-radius:8px;padding:.5cqw 1.2cqw;}
-.st-btns{position:absolute;display:flex;gap:2px;z-index:6;}
-.st-btn{flex:1;min-width:0;font-family:inherit;font-size:3.4cqw;padding:1.3cqw 0;border-radius:6px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.7);color:#fff;cursor:pointer;touch-action:manipulation;display:flex;justify-content:center;}
-.st-btn:disabled{opacity:.35;}
-.st-btn.st-move.on{background:#16c26a;border-color:#22ff88;}
-.st-btn.st-block.on{background:#d11a45;border-color:#ff2e5e;}
 .disg-btn{position:absolute;right:1.5%;top:62%;z-index:7;font-size:3.3cqw;padding:1.6cqw 2cqw;border-radius:10px;background:rgba(90,30,140,.9);border:1.5px solid #a855f7;}
 .disg-btn.on{background:linear-gradient(135deg,#ff2e9a,#a855f7);box-shadow:0 0 14px #ff2e9a;}
 .disg-btn.blink{animation:blinkA .7s ease-in-out infinite;}
@@ -239,6 +234,17 @@ body.race-fixed #game-body>.phase{flex:1;min-height:0;display:flex;flex-directio
 .sfx-row .comedy-btn{height:22px;min-height:0!important;padding:0 7px!important;gap:3px;border-radius:8px;line-height:1;}
 .sfx-row .cb-emoji{font-size:12px;}
 .sfx-row .cb-name{font-size:9px;}
+
+
+.st-btns{position:absolute;z-index:6;display:flex;flex-direction:column;gap:1.2cqw;}
+.st-btn{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.2);border-radius:2.6cqw;color:rgba(255,255,255,.5);font-size:3.4cqw;padding:0;align-items:center;justify-content:center;transition:background .2s,border-color .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;}
+.st-btn i{display:flex;width:30%;max-width:7cqw;font-style:normal;opacity:.55;line-height:1;}
+.st-btn svg{width:100%;height:auto;display:block;}
+.st-btn{cursor:pointer;touch-action:manipulation;}
+.st-btn:disabled{opacity:.5;}
+.st-btn.on.st-move{background:rgba(34,255,136,.14);border-color:rgba(34,255,136,.9);box-shadow:0 0 2.2cqw rgba(34,255,136,.55),inset 0 0 1.8cqw rgba(34,255,136,.28);}
+.st-btn.on.st-block{background:rgba(255,46,94,.15);border-color:rgba(255,46,94,.9);box-shadow:0 0 2.2cqw rgba(255,46,94,.55),inset 0 0 1.8cqw rgba(255,46,94,.28);}
+.st-btn.on i{opacity:1;}
 body.in-game .orb{display:none;}
 body.in-game{animation:none;}
 #screen-game .pill,#screen-game .game-hint{backdrop-filter:none;-webkit-backdrop-filter:none;}
@@ -909,7 +915,9 @@ async function sendComedySound(id){
 /* ============================================================
    BAI DONGAME
    ============================================================ */
-const LX=[0,858,880,897,914,930], LY=[0,150,262,400,570,705];
+const LX=[0,782,793,805,914,930], LY=[0,146,260,398,570,705], SX=[0,835,850,858], SC=[0,215,332,478];
+const SR=[0,[762,120,120,115],[775,238,125,120],[785,372,135,140]];
+const ICON_MOVE='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>', ICON_LOCK='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9h-2zm-8 0V7a3 3 0 0 1 6 0v2H9z"/></svg>';
 const IMG='https://res.cloudinary.com/pqciyfaq/image/upload/f_auto,q_auto,w_800/v1794954439/Picsart_26-11-18_00-19-17-698.png';
 const SY=[0,215,335,470,610,745], BY=[0,250,365,520,640,775], BX=[0,83.5,85.5,88,90,92], PD=[0,790,800,820,845,865];
 function rowY(pos,target){ return 210+Math.min(20,Math.max(0,pos)/target*20)*51; }
@@ -935,8 +943,8 @@ const BaiDonGame = {
 
   getConfig(count){
     if(count<=3) return {target:20,maxNum:3,middleLine:10,dangerZone:15};
-    if(count<=5) return {target:30,maxNum:4,middleLine:15,dangerZone:23};
-    return {target:40,maxNum:5,middleLine:20,dangerZone:30};
+    if(count<=5) return {target:30,maxNum:3,middleLine:15,dangerZone:23};
+    return {target:40,maxNum:3,middleLine:20,dangerZone:30};
   },
   emptyState(){
     return {
@@ -1054,14 +1062,14 @@ const BaiDonGame = {
       /* Determine block stations */
       let effectiveBlock=null, botUsed=false;
       if(!bdAct||(!bdAct.blockStation&&!wantDisguise)){
-        const cs=[]; for(let i=1;i<=g.maxNum;i++){ if(!(bdAct&&bdAct.moveStation===i))cs.push(i); }
+        const cs=[]; for(let i=1;i<=3;i++){ if(!(bdAct&&bdAct.moveStation===i))cs.push(i); }
         effectiveBlock=cs[Math.floor(Math.random()*cs.length)]; botUsed=true;
       }else{
         effectiveBlock=bdAct.blockStation;
       }
       if(effectiveBlock)blockedStations.push(effectiveBlock);
       if(bdRev&&g.blockCount===2&&bdAct){
-        const all=[];for(let i=1;i<=g.maxNum;i++)all.push(i);
+        const all=[];for(let i=1;i<=3;i++)all.push(i);
         const second=all.find(s=>s!==effectiveBlock);
         if(second)blockedStations.push(second);
       }
@@ -1340,7 +1348,7 @@ const BaiDonGame = {
     const ready=g.introReady||{};
     const on=Object.keys(room.players||{}).filter(u=>room.players[u].online);
     const cnt=on.filter(u=>ready[u]).length;
-    const mx=g.maxNum||3;
+    const mx=3;
     const card=el('div','intro-card '+(amBd?'bd':'runner'));
     card.innerHTML=(amBd
       ?'<div class="shush-emoji">🤫</div><div class="intro-role">أنت البيدون!</div><div class="intro-hint">اخفي هويتك واقفل محطات طاقة عشان تعطل الزعابيل.</div>'
@@ -1355,7 +1363,7 @@ const BaiDonGame = {
 
   uiRace(wrap,room,g,round,isHost,amBd,isRev,frozen,isResolving){
     const S=BaiDonGame, ps=g.playerState||{}, myAct=(g.actions||{})[App.uid], submitted=!!(myAct&&myAct.ts);
-    const target=g.target||20, maxNum=g.maxNum||3, lr=g.lastResult||{};
+    const target=g.target||20, maxNum=3, lr=g.lastResult||{};
     const players=getJoinedPlayers(room);
     const sfx=el('div','sfx-row'); const cd=Date.now()<(App._comedyCooldownUntil||0);
     S.getAvailableSounds(room,g,App.uid).forEach(x=>{
@@ -1377,14 +1385,13 @@ const BaiDonGame = {
       scene.querySelectorAll('.st-block').forEach(b=>{ b.classList.toggle('on',+b.dataset.s===selBlock); b.disabled=!canInteract; });
       const sb=$('bd-submit-btn'); if(sb)sb.disabled=(selDisguise||(amBd&&isRev))?!selBlock:(amBd?!(selMove&&selBlock):!selMove);
     };
-    for(let i=1;i<=maxNum;i++){
-      const bx=BX[i], bw=Math.min(15.5,99-bx);
+    for(let i=1;i<=3;i++){
+      const r=SR[i];
       const z=el('div','st-zone'); z.dataset.station=i; z.style.cssText='left:'+PX(LX[i])+';top:'+PY(LY[i]); scene.appendChild(z);
-      if(i>3){ const bd=el('div','st-badge','⚡'+i); bd.style.cssText='left:'+bx+'%;top:'+PY(SY[i]-40); scene.appendChild(bd); }
       if(isResolving)continue;
-      const bs=el('div','st-btns'); bs.style.cssText='left:'+bx+'%;top:'+PY(BY[i])+';width:'+bw+'%';
-      if(!amBd||!isRev){ const m=el('button','st-btn st-move','⬆️'); m.type='button'; m.dataset.s=i; m.onclick=()=>{ if(selDisguise)return; selMove=(selMove===i?null:i); refresh(); }; bs.appendChild(m); }
-      if(amBd){ const b=el('button','st-btn st-block','🔒'); b.type='button'; b.dataset.s=i; b.onclick=()=>{ selBlock=(selBlock===i?null:i); refresh(); }; bs.appendChild(b); }
+      const bs=el('div','st-btns'); bs.style.cssText='left:'+PX(r[0])+';top:'+PY(r[1])+';width:'+(r[2]/941*100)+'%;height:'+(r[3]/1403*100)+'%';
+      if(!amBd||!isRev){ const m=el('button','st-btn st-move','<i>'+ICON_MOVE+'</i>'); m.type='button'; m.dataset.s=i; m.onclick=()=>{ if(selDisguise)return; selMove=(selMove===i?null:i); refresh(); }; bs.appendChild(m); }
+      if(amBd){ const b=el('button','st-btn st-block','<i>'+ICON_LOCK+'</i>'); b.type='button'; b.dataset.s=i; b.onclick=()=>{ selBlock=(selBlock===i?null:i); refresh(); }; bs.appendChild(b); }
       scene.appendChild(bs);
     }
     if(amBd&&!isRev&&canInteract){
@@ -1437,7 +1444,7 @@ const BaiDonGame = {
   _runRaceAnimation(room,g){
     const S=BaiDonGame, key=room.pin+'_'+g.round;
     const lr=g.lastResult||{}, oldPos=lr.oldPositions||{}, newPos=lr.newPositions||{}, blocked=lr.blockedStations||[], events=lr.events||[];
-    const target=g.target||20, maxNum=g.maxNum||3;
+    const target=g.target||20, maxNum=3;
     const showBtn=()=>{ const b=$('race-next-btn'); if(b)b.style.display='block'; };
     if(S._animKey===key){ if(S._animDone===key)showBtn(); return; }
     S._animKey=key; S._animDone=null;
